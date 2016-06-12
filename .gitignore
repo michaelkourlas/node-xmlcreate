@@ -1,0 +1,11 @@
+# JetBrains
+.idea/
+
+# JavaScript
+lib/
+
+# Documentation
+docs/
+
+# Node.js
+node_modules/
