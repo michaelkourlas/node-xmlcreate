@@ -38,7 +38,6 @@ import {typeCheck} from "type-check";
  * @property {boolean} [pretty]       Whether pretty-printing is enabled. If
  *                                    left undefined, pretty-printing is
  *                                    enabled.
- *
  */
 
 const defaults = {
@@ -55,7 +54,7 @@ Object.freeze(defaults);
  *
  * @param {StringOptions} options The string options object to validate.
  *
- * @returns The updated string options object.
+ * @returns {StringOptions} The updated string options object.
  *
  * @private
  */
@@ -87,4 +86,6 @@ export function validate(options) {
     if (!typeCheck("Boolean", options.pretty)) {
         options.pretty = defaults.pretty;
     }
+
+    return options;
 }
