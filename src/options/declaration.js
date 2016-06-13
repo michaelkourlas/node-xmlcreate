@@ -52,7 +52,7 @@ Object.freeze(defaults);
  * @param {DeclarationOptions} options The XML declaration options object to
  *                                     validate.
  *
- * @returns The updated XML declaration options object.
+ * @returns {DeclarationOptions} The updated XML declaration options object.
  *
  * @private
  */
@@ -72,4 +72,6 @@ export function validate(options) {
     if (!typeCheck("String", options.version)) {
         options.version = defaults.version;
     }
+
+    return options;
 }
