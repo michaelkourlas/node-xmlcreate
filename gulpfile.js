@@ -16,17 +16,17 @@
 
 "use strict";
 
-let fs = require("fs");
+var fs = require("fs");
 
-let babel = require("gulp-babel");
-let esdoc = require("gulp-esdoc");
-let gulp = require("gulp");
-let mocha = require("gulp-mocha");
-let sourcemaps = require("gulp-sourcemaps");
+var babel = require("gulp-babel");
+var esdoc = require("gulp-esdoc");
+var gulp = require("gulp");
+var mocha = require("gulp-mocha");
+var sourcemaps = require("gulp-sourcemaps");
 
 gulp.task("default", ["prod", "test-prod", "docs"]);
 
-let test = () => {
+var test = function() {
     return gulp.src("test/**/*.js", {read: false})
         .pipe(mocha({require: ["babel-register"]}));
 };
@@ -34,18 +34,18 @@ gulp.task("test", ["prod"], test);
 gulp.task("test-prod", ["prod"], test);
 gulp.task("test-dev", ["dev"], test);
 
-gulp.task("docs", () => {
+gulp.task("docs", function() {
     return gulp.src("src")
         .pipe(esdoc());
 });
 
-gulp.task("prod", () => {
+gulp.task("prod", function() {
     return gulp.src("src/**/*.js")
         .pipe(babel())
         .pipe(gulp.dest("lib"));
 });
 
-gulp.task("dev", () => {
+gulp.task("dev", function() {
     return gulp.src("src/**/*.js")
         .pipe(sourcemaps.init())
         .pipe(babel())
