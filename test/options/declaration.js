@@ -13,3 +13,63 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+"use strict";
+
+import {assert} from "chai";
+
+import * as declaration from "../../lib/options/declaration";
+
+describe("declaration", () => {
+    describe("#validate(options)", () => {
+        it("should return the specified options object if all options are" +
+            " specified and valid", () => {
+            let options = {
+                encoding: "UTF-8",
+                standalone: "yes",
+                version: "1.0"
+            };
+            assert.strictEqual(declaration.validate(options), options);
+
+            options = {
+                encoding: "UTF-16",
+                standalone: "no",
+                version: "1.1"
+            };
+            assert.strictEqual(declaration.validate(options), options);
+
+            options = {
+                encoding: undefined,
+                standalone: undefined,
+                version: "1.0"
+            };
+            assert.strictEqual(declaration.validate(options), options);
+        });
+
+        it("should throw an error if the specified options object contains" +
+            " invalid options", () => {
+            let options = {
+                encoding: null
+            };
+            assert.throws(() => declaration.validate(options));
+
+            options = {
+                standalone: null
+            };
+            assert.throws(() => declaration.validate(options));
+
+            options = {
+                version: null
+            };
+            assert.throws(() => declaration.validate(options));
+        });
+
+        it("should return a validated version of the specified options with" +
+            " undefined values replaced with appropriate defaults if not all" +
+            " options are specified", () => {
+            let options = {};
+            assert.strictEqual(JSON.stringify(declaration.validate(options)),
+                JSON.stringify({version: "1.0"}));
+        });
+    });
+});
