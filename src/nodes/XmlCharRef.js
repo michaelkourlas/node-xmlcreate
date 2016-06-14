@@ -156,7 +156,7 @@ export default class XmlCharRef extends XmlNode {
         if (this.char.length === 1) {
             char = this.char.charCodeAt(0);
         } else {
-            char = this.char.codePointAt(0);
+            char = String.codePointAt(this.char, 0);
         }
 
         if (this.hex) {
