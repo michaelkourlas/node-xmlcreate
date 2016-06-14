@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-document">document</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">nodes</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlAttribute.js~XmlAttribute.html">XmlAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCdata.js~XmlCdata.html">XmlCdata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCharRef.js~XmlCharRef.html">XmlCharRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlComment.js~XmlComment.html">XmlComment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDecl.js~XmlDecl.html">XmlDecl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDocument.js~XmlDocument.html">XmlDocument</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtd.js~XmlDtd.html">XmlDtd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html">XmlDtdAttlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdElement.js~XmlDtdElement.html">XmlDtdElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html">XmlDtdEntity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html">XmlDtdNotation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html">XmlDtdParamEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlElement.js~XmlElement.html">XmlElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlEntityRef.js~XmlEntityRef.html">XmlEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlNode.js~XmlNode.html">XmlNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlProcInst.js~XmlProcInst.html">XmlProcInst</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlText.js~XmlText.html">XmlText</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">options</div><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DeclarationOptions">DeclarationOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StringOptions">StringOptions</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="xmlcreate">xmlcreate</h1>
+<p><a href="https://travis-ci.org/michaelkourlas/node-xmlcreate"><img src="https://travis-ci.org/michaelkourlas/node-xmlcreate.svg?branch=master" alt="Build Status"></a></p>
+<h2 id="overview">Overview</h2>
+<p>xmlcreate is a Node.js module that can be used to easily build XML using a
+simple API.</p>
+<h2 id="features">Features</h2>
+<p>xmlcreate uses a DOM-style API to build XML. Each construct in XML, including
+elements, attributes, and even the document itself, is represented as a node
+in a tree with a document node at the root.</p>
+<p>Each node has a set of properties corresponding to the node&apos;s properties in
+XML. For example, the element node has a name property, while the CDATA node
+has a character data property.</p>
+<p>Each node also has a set of children corresponding to the node&apos;s value,
+children or attributes in XML, depending on the context. For example, the XML
+declaration and document type declaration are represented as child nodes of the
+root document node, while sub-elements and element attributes are represented
+as child nodes of element nodes.</p>
+<p>xmlcreate performs some basic validation during tree building to ensure that
+the resulting XML is well-formed. Nodes can only have certain types or
+quantities of nodes as children, while node properties are checked to ensure
+that they do not contain characters disallowed in XML for that node or in
+general.</p>
+<p>However, xmlcreate does not perform comprehensive validation. For example, it
+does not match the tree structure against a schema or confirm that entity
+references are valid. You should use a XML parser for this purpose instead.</p>
+<p>Once the tree is built, the tree itself or any of its subtrees can be
+serialized to text. The formatting of the text is customizable.</p>
+<h2 id="installation">Installation</h2>
+<p>The easiest way to install xmlcreate is using npm:</p>
+<pre><code><code class="source-code prettyprint">npm install xmlcreate</code>
+</code></pre><p>You can also build xmlcreate from source using gulp: </p>
+<pre><code><code class="source-code prettyprint">git clone https://github.com/michaelkourlas/xmlcreate.git
+gulp</code>
+</code></pre><p>You can then copy the folder into your node_modules directory.</p>
+<p>The <code>default</code> target will build the production variant of xmlcreate, run all
+tests, and build the documentation.</p>
+<p>You can build the production variant without running tests using the target
+<code>prod</code>. You can also build the development version using the target <code>dev</code>. At
+the moment, the only difference between the two is that the development version
+includes source maps.</p>
+<h2 id="usage">Usage</h2>
+<p>The documentation for the current version is available <a href="https://michaelkourlas.github.io/node-xmlcreate/docs/0.1.0/">here</a>.</p>
+<p>You can also build the documentation using gulp:</p>
+<pre><code><code class="source-code prettyprint">gulp docs</code>
+</code></pre><h2 id="examples">Examples</h2>
+<p>The following example illustrates the basic usage of xmlcreate:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var xmlcreate = require(&quot;xmlcreate&quot;);
+
+var document = xmlcreate.document(&quot;html&quot;);
+document
+    .decl({encoding: &quot;UTF-8&quot;})
+        .up()
+    .dtd(&quot;html&quot;, &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;,
+         &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;)
+        .up()
+    .root()
+        .attribute(&quot;xmlns&quot;, &quot;http://www.w3.org/1999/xhtml&quot;)
+            .up()
+        .attribute(&quot;xml:lang&quot;, &quot;en&quot;)
+            .up()
+        .attribute(&quot;lang&quot;, &quot;en&quot;)
+            .up()
+        .element(&quot;head&quot;)
+            .element(&quot;title&quot;)
+                .text(&quot;My page title&quot;)
+                    .up()
+                .up()
+            .up()
+        .element(&quot;body&quot;)
+            .element(&quot;h1&quot;)
+                .text(&quot;Welcome!&quot;)
+                    .up()
+                .up()
+            .element(&quot;p&quot;)
+                .text(&quot;This is some text on my website.&quot;);
+
+console.log(document.toString({doubleQuotes: true}));</code>
+</code></pre>
+<p>This example produces the following XML:</p>
+<pre><code class="lang-xml"><code class="source-code prettyprint">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;title&gt;My page title&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Welcome!&lt;/h1&gt;
+        &lt;p&gt;This is some text on my website.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</code></pre>
+<h2 id="tests">Tests</h2>
+<p>xmlcreate includes a set of tests to verify core functionality. You can run
+the tests using gulp:</p>
+<pre><code><code class="source-code prettyprint">gulp test</code>
+</code></pre><p>The <code>test</code> target builds the production variant of xmlcreate before running
+the tests. The <code>test-prod</code> target does the same thing, while the <code>test-dev</code>
+target builds the development variant first instead.</p>
+<h2 id="license">License</h2>
+<p>xmlcreate is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>. 
+Please see the LICENSE.md file for more information.</p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

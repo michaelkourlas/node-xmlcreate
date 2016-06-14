@@ -1,0 +1,2965 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "\"use strict\"",
+        "range": [
+          619,
+          631
+        ],
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
+          },
+          "end": {
+            "line": 17,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        619,
+        632
+      ],
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 0
+        },
+        "end": {
+          "line": 17,
+          "column": 13
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+          "range": [
+            0,
+            615
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 15,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "typeCheck",
+            "range": [
+              644,
+              653
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 8
+              },
+              "end": {
+                "line": 19,
+                "column": 17
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "typeCheck",
+            "range": [
+              644,
+              653
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 8
+              },
+              "end": {
+                "line": 19,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            644,
+            653
+          ],
+          "loc": {
+            "start": {
+              "line": 19,
+              "column": 8
+            },
+            "end": {
+              "line": 19,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "type-check",
+        "raw": "\"type-check\"",
+        "range": [
+          660,
+          672
+        ],
+        "loc": {
+          "start": {
+            "line": 19,
+            "column": 24
+          },
+          "end": {
+            "line": 19,
+            "column": 36
+          }
+        }
+      },
+      "range": [
+        636,
+        673
+      ],
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 37
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportNamespaceSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "validate",
+            "range": [
+              689,
+              697
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 12
+              },
+              "end": {
+                "line": 21,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            684,
+            697
+          ],
+          "loc": {
+            "start": {
+              "line": 21,
+              "column": 7
+            },
+            "end": {
+              "line": 21,
+              "column": 20
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../utils/validate",
+        "raw": "\"../utils/validate\"",
+        "range": [
+          703,
+          722
+        ],
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 26
+          },
+          "end": {
+            "line": 21,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        677,
+        723
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 0
+        },
+        "end": {
+          "line": 21,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlNode",
+            "range": [
+              734,
+              741
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 7
+              },
+              "end": {
+                "line": 23,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            734,
+            741
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 7
+            },
+            "end": {
+              "line": 23,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./XmlNode",
+        "raw": "\"./XmlNode\"",
+        "range": [
+          747,
+          758
+        ],
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 20
+          },
+          "end": {
+            "line": 23,
+            "column": 31
+          }
+        }
+      },
+      "range": [
+        727,
+        759
+      ],
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 32
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Represents an XML notation declaration in a document type definition.\r\n *\r\n * An XML notation declaration is structured as follows, where\r\n * <code>{text}</code> is the text of the declaration:\r\n * \r\n * <code>&lt;!NOTATION {text}&gt;</code>\r\n *\r\n * The <code>{text}</code> value is a property of this node.\r\n *\r\n * XmlDtdNotation nodes cannot have any children.\r\n ",
+          "range": [
+            763,
+            1137
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 0
+            },
+            "end": {
+              "line": 36,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "XmlDtdNotation",
+          "range": [
+            1160,
+            1174
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 21
+            },
+            "end": {
+              "line": 37,
+              "column": 35
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "XmlNode",
+          "range": [
+            1183,
+            1190
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 44
+            },
+            "end": {
+              "line": 37,
+              "column": 51
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor",
+                "range": [
+                  1409,
+                  1420
+                ],
+                "loc": {
+                  "start": {
+                    "line": 44,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "text",
+                    "range": [
+                      1421,
+                      1425
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 20
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Super",
+                          "range": [
+                            1438,
+                            1443
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 45,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 13
+                            }
+                          }
+                        },
+                        "arguments": [],
+                        "range": [
+                          1438,
+                          1445
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 45,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 45,
+                            "column": 15
+                          }
+                        }
+                      },
+                      "range": [
+                        1438,
+                        1446
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 45,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 45,
+                          "column": 16
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              1456,
+                              1460
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 46,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 46,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "text",
+                            "range": [
+                              1461,
+                              1465
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 46,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 46,
+                                "column": 17
+                              }
+                            }
+                          },
+                          "range": [
+                            1456,
+                            1465
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 46,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 46,
+                              "column": 17
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "text",
+                          "range": [
+                            1468,
+                            1472
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 46,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 46,
+                              "column": 24
+                            }
+                          }
+                        },
+                        "range": [
+                          1456,
+                          1472
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 46,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 46,
+                            "column": 24
+                          }
+                        }
+                      },
+                      "range": [
+                        1456,
+                        1473
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 46,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 46,
+                          "column": 25
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1427,
+                    1480
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 44,
+                      "column": 22
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1420,
+                  1480
+                ],
+                "loc": {
+                  "start": {
+                    "line": 44,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 47,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "constructor",
+              "computed": false,
+              "range": [
+                1409,
+                1480
+              ],
+              "loc": {
+                "start": {
+                  "line": 44,
+                  "column": 4
+                },
+                "end": {
+                  "line": 47,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Initializes a new instance of the {@link XmlDtdNotation} class.\r\n     *\r\n     * @param {string} text The text associated with the XML notation\r\n     *                      declaration.\r\n     ",
+                  "range": [
+                    1198,
+                    1403
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 38,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 43,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Gets the text associated with the XML notation declaration.\r\n     *\r\n     * @return {string} The text associated with the XML notation declaration.\r\n     ",
+                  "range": [
+                    1488,
+                    1656
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 49,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "text",
+                "range": [
+                  1666,
+                  1670
+                ],
+                "loc": {
+                  "start": {
+                    "line": 54,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 54,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            1691,
+                            1695
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 55,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 55,
+                              "column": 19
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "_text",
+                          "range": [
+                            1696,
+                            1701
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 55,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 55,
+                              "column": 25
+                            }
+                          }
+                        },
+                        "range": [
+                          1691,
+                          1701
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 55,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 55,
+                            "column": 25
+                          }
+                        }
+                      },
+                      "range": [
+                        1684,
+                        1702
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 55,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 55,
+                          "column": 26
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1673,
+                    1709
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 54,
+                      "column": 15
+                    },
+                    "end": {
+                      "line": 56,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1670,
+                  1709
+                ],
+                "loc": {
+                  "start": {
+                    "line": 54,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 56,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "get",
+              "computed": false,
+              "range": [
+                1662,
+                1709
+              ],
+              "loc": {
+                "start": {
+                  "line": 54,
+                  "column": 4
+                },
+                "end": {
+                  "line": 56,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Gets the text associated with the XML notation declaration.\r\n     *\r\n     * @return {string} The text associated with the XML notation declaration.\r\n     ",
+                  "range": [
+                    1488,
+                    1656
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 49,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Sets the text associated with the XML notation declaration.\r\n     *\r\n     * @param {string} text The text associated with the XML notation\r\n     *                      declaration.\r\n     ",
+                  "range": [
+                    1717,
+                    1918
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 58,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "text",
+                "range": [
+                  1928,
+                  1932
+                ],
+                "loc": {
+                  "start": {
+                    "line": 64,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 64,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "text",
+                    "range": [
+                      1933,
+                      1937
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 64,
+                        "column": 13
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 17
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "IfStatement",
+                      "test": {
+                        "type": "UnaryExpression",
+                        "operator": "!",
+                        "argument": {
+                          "type": "CallExpression",
+                          "callee": {
+                            "type": "Identifier",
+                            "name": "typeCheck",
+                            "range": [
+                              1955,
+                              1964
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 65,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 65,
+                                "column": 22
+                              }
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "type": "Literal",
+                              "value": "String",
+                              "raw": "\"String\"",
+                              "range": [
+                                1965,
+                                1973
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 65,
+                                  "column": 23
+                                },
+                                "end": {
+                                  "line": 65,
+                                  "column": 31
+                                }
+                              }
+                            },
+                            {
+                              "type": "Identifier",
+                              "name": "text",
+                              "range": [
+                                1975,
+                                1979
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 65,
+                                  "column": 33
+                                },
+                                "end": {
+                                  "line": 65,
+                                  "column": 37
+                                }
+                              }
+                            }
+                          ],
+                          "range": [
+                            1955,
+                            1980
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 65,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 65,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "prefix": true,
+                        "range": [
+                          1954,
+                          1980
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 65,
+                            "column": 12
+                          },
+                          "end": {
+                            "line": 65,
+                            "column": 38
+                          }
+                        }
+                      },
+                      "consequent": {
+                        "type": "BlockStatement",
+                        "body": [
+                          {
+                            "type": "ThrowStatement",
+                            "argument": {
+                              "type": "NewExpression",
+                              "callee": {
+                                "type": "Identifier",
+                                "name": "TypeError",
+                                "range": [
+                                  2007,
+                                  2016
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 66,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 66,
+                                    "column": 31
+                                  }
+                                }
+                              },
+                              "arguments": [
+                                {
+                                  "type": "Literal",
+                                  "value": "text should be a string",
+                                  "raw": "\"text should be a string\"",
+                                  "range": [
+                                    2017,
+                                    2042
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 66,
+                                      "column": 32
+                                    },
+                                    "end": {
+                                      "line": 66,
+                                      "column": 57
+                                    }
+                                  }
+                                }
+                              ],
+                              "range": [
+                                2003,
+                                2043
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 66,
+                                  "column": 18
+                                },
+                                "end": {
+                                  "line": 66,
+                                  "column": 58
+                                }
+                              }
+                            },
+                            "range": [
+                              1997,
+                              2044
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 66,
+                                "column": 12
+                              },
+                              "end": {
+                                "line": 66,
+                                "column": 59
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1982,
+                          2055
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 65,
+                            "column": 40
+                          },
+                          "end": {
+                            "line": 67,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "alternate": {
+                        "type": "IfStatement",
+                        "test": {
+                          "type": "UnaryExpression",
+                          "operator": "!",
+                          "argument": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "validate",
+                                "range": [
+                                  2066,
+                                  2074
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 67,
+                                    "column": 20
+                                  },
+                                  "end": {
+                                    "line": 67,
+                                    "column": 28
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "char",
+                                "range": [
+                                  2075,
+                                  2079
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 67,
+                                    "column": 29
+                                  },
+                                  "end": {
+                                    "line": 67,
+                                    "column": 33
+                                  }
+                                }
+                              },
+                              "range": [
+                                2066,
+                                2079
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 67,
+                                  "column": 20
+                                },
+                                "end": {
+                                  "line": 67,
+                                  "column": 33
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Identifier",
+                                "name": "text",
+                                "range": [
+                                  2080,
+                                  2084
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 67,
+                                    "column": 34
+                                  },
+                                  "end": {
+                                    "line": 67,
+                                    "column": 38
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              2066,
+                              2085
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 67,
+                                "column": 20
+                              },
+                              "end": {
+                                "line": 67,
+                                "column": 39
+                              }
+                            }
+                          },
+                          "prefix": true,
+                          "range": [
+                            2065,
+                            2085
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 67,
+                              "column": 19
+                            },
+                            "end": {
+                              "line": 67,
+                              "column": 39
+                            }
+                          }
+                        },
+                        "consequent": {
+                          "type": "BlockStatement",
+                          "body": [
+                            {
+                              "type": "ThrowStatement",
+                              "argument": {
+                                "type": "NewExpression",
+                                "callee": {
+                                  "type": "Identifier",
+                                  "name": "Error",
+                                  "range": [
+                                    2112,
+                                    2117
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 68,
+                                      "column": 22
+                                    },
+                                    "end": {
+                                      "line": 68,
+                                      "column": 27
+                                    }
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "type": "BinaryExpression",
+                                    "operator": "+",
+                                    "left": {
+                                      "type": "Literal",
+                                      "value": "data should not contain characters",
+                                      "raw": "\"data should not contain characters\"",
+                                      "range": [
+                                        2118,
+                                        2154
+                                      ],
+                                      "loc": {
+                                        "start": {
+                                          "line": 68,
+                                          "column": 28
+                                        },
+                                        "end": {
+                                          "line": 68,
+                                          "column": 64
+                                        }
+                                      }
+                                    },
+                                    "right": {
+                                      "type": "Literal",
+                                      "value": " not allowed in XML",
+                                      "raw": "\" not allowed in XML\"",
+                                      "range": [
+                                        2174,
+                                        2195
+                                      ],
+                                      "loc": {
+                                        "start": {
+                                          "line": 69,
+                                          "column": 16
+                                        },
+                                        "end": {
+                                          "line": 69,
+                                          "column": 37
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      2118,
+                                      2195
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 68,
+                                        "column": 28
+                                      },
+                                      "end": {
+                                        "line": 69,
+                                        "column": 37
+                                      }
+                                    }
+                                  }
+                                ],
+                                "range": [
+                                  2108,
+                                  2196
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 68,
+                                    "column": 18
+                                  },
+                                  "end": {
+                                    "line": 69,
+                                    "column": 38
+                                  }
+                                }
+                              },
+                              "range": [
+                                2102,
+                                2197
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 68,
+                                  "column": 12
+                                },
+                                "end": {
+                                  "line": 69,
+                                  "column": 39
+                                }
+                              }
+                            }
+                          ],
+                          "range": [
+                            2087,
+                            2208
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 67,
+                              "column": 41
+                            },
+                            "end": {
+                              "line": 70,
+                              "column": 9
+                            }
+                          }
+                        },
+                        "alternate": null,
+                        "range": [
+                          2061,
+                          2208
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 67,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 70,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "range": [
+                        1950,
+                        2208
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 65,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 9
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              2218,
+                              2222
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 71,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 71,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "_text",
+                            "range": [
+                              2223,
+                              2228
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 71,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 71,
+                                "column": 18
+                              }
+                            }
+                          },
+                          "range": [
+                            2218,
+                            2228
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 71,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 71,
+                              "column": 18
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "text",
+                          "range": [
+                            2231,
+                            2235
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 71,
+                              "column": 21
+                            },
+                            "end": {
+                              "line": 71,
+                              "column": 25
+                            }
+                          }
+                        },
+                        "range": [
+                          2218,
+                          2235
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 71,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 71,
+                            "column": 25
+                          }
+                        }
+                      },
+                      "range": [
+                        2218,
+                        2236
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 71,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 71,
+                          "column": 26
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1939,
+                    2243
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 64,
+                      "column": 19
+                    },
+                    "end": {
+                      "line": 72,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1932,
+                  2243
+                ],
+                "loc": {
+                  "start": {
+                    "line": 64,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 72,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "set",
+              "computed": false,
+              "range": [
+                1924,
+                2243
+              ],
+              "loc": {
+                "start": {
+                  "line": 64,
+                  "column": 4
+                },
+                "end": {
+                  "line": 72,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Sets the text associated with the XML notation declaration.\r\n     *\r\n     * @param {string} text The text associated with the XML notation\r\n     *                      declaration.\r\n     ",
+                  "range": [
+                    1717,
+                    1918
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 58,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2251,
+                    2360
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 74,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "children",
+                "range": [
+                  2366,
+                  2374
+                ],
+                "loc": {
+                  "start": {
+                    "line": 78,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 78,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2398,
+                            2403
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 79,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 79,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlDtdNotation nodes cannot have children",
+                            "raw": "\"XmlDtdNotation nodes cannot have children\"",
+                            "range": [
+                              2404,
+                              2447
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 79,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 79,
+                                "column": 67
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2394,
+                          2448
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 79,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 79,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        2388,
+                        2449
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 79,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 79,
+                          "column": 69
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2377,
+                    2456
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 78,
+                      "column": 15
+                    },
+                    "end": {
+                      "line": 80,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2374,
+                  2456
+                ],
+                "loc": {
+                  "start": {
+                    "line": 78,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 80,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2366,
+                2456
+              ],
+              "loc": {
+                "start": {
+                  "line": 78,
+                  "column": 4
+                },
+                "end": {
+                  "line": 80,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2251,
+                    2360
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 74,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2464,
+                    2573
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 82,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 85,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "insertChild",
+                "range": [
+                  2579,
+                  2590
+                ],
+                "loc": {
+                  "start": {
+                    "line": 86,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 86,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "node",
+                    "range": [
+                      2591,
+                      2595
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 86,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 86,
+                        "column": 20
+                      }
+                    }
+                  },
+                  {
+                    "type": "Identifier",
+                    "name": "index",
+                    "range": [
+                      2597,
+                      2602
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 86,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 86,
+                        "column": 27
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2625,
+                            2630
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 87,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 87,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlDtdNotation nodes cannot have children",
+                            "raw": "\"XmlDtdNotation nodes cannot have children\"",
+                            "range": [
+                              2631,
+                              2674
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 87,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 87,
+                                "column": 67
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2621,
+                          2675
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 87,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 87,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        2615,
+                        2676
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 87,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 87,
+                          "column": 69
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2604,
+                    2683
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 86,
+                      "column": 29
+                    },
+                    "end": {
+                      "line": 88,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2590,
+                  2683
+                ],
+                "loc": {
+                  "start": {
+                    "line": 86,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 88,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2579,
+                2683
+              ],
+              "loc": {
+                "start": {
+                  "line": 86,
+                  "column": 4
+                },
+                "end": {
+                  "line": 88,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2464,
+                    2573
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 82,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 85,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2691,
+                    2800
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 90,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 93,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "removeChild",
+                "range": [
+                  2806,
+                  2817
+                ],
+                "loc": {
+                  "start": {
+                    "line": 94,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 94,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "node",
+                    "range": [
+                      2818,
+                      2822
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 94,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 94,
+                        "column": 20
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2845,
+                            2850
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 95,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 95,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlDtdNotation nodes cannot have children",
+                            "raw": "\"XmlDtdNotation nodes cannot have children\"",
+                            "range": [
+                              2851,
+                              2894
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 95,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 95,
+                                "column": 67
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2841,
+                          2895
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 95,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 95,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        2835,
+                        2896
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 95,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 95,
+                          "column": 69
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2824,
+                    2903
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 94,
+                      "column": 22
+                    },
+                    "end": {
+                      "line": 96,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2817,
+                  2903
+                ],
+                "loc": {
+                  "start": {
+                    "line": 94,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 96,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2806,
+                2903
+              ],
+              "loc": {
+                "start": {
+                  "line": 94,
+                  "column": 4
+                },
+                "end": {
+                  "line": 96,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2691,
+                    2800
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 90,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 93,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2911,
+                    3020
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 98,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 101,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "removeChildAtIndex",
+                "range": [
+                  3026,
+                  3044
+                ],
+                "loc": {
+                  "start": {
+                    "line": 102,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 22
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "index",
+                    "range": [
+                      3045,
+                      3050
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 102,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 102,
+                        "column": 28
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            3073,
+                            3078
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 103,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 103,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlDtdNotation nodes cannot have children",
+                            "raw": "\"XmlDtdNotation nodes cannot have children\"",
+                            "range": [
+                              3079,
+                              3122
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 103,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 103,
+                                "column": 67
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          3069,
+                          3123
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 103,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 103,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        3063,
+                        3124
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 103,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 103,
+                          "column": 69
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    3052,
+                    3131
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 102,
+                      "column": 30
+                    },
+                    "end": {
+                      "line": 104,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  3044,
+                  3131
+                ],
+                "loc": {
+                  "start": {
+                    "line": 102,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 104,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                3026,
+                3131
+              ],
+              "loc": {
+                "start": {
+                  "line": 102,
+                  "column": 4
+                },
+                "end": {
+                  "line": 104,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2911,
+                    3020
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 98,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 101,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+                  "range": [
+                    3139,
+                    3427
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 106,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 113,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "toString",
+                "range": [
+                  3433,
+                  3441
+                ],
+                "loc": {
+                  "start": {
+                    "line": 114,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 114,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "AssignmentPattern",
+                    "left": {
+                      "type": "Identifier",
+                      "name": "options",
+                      "range": [
+                        3442,
+                        3449
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 114,
+                          "column": 13
+                        },
+                        "end": {
+                          "line": 114,
+                          "column": 20
+                        }
+                      }
+                    },
+                    "right": {
+                      "type": "ObjectExpression",
+                      "properties": [],
+                      "range": [
+                        3452,
+                        3454
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 114,
+                          "column": 23
+                        },
+                        "end": {
+                          "line": 114,
+                          "column": 25
+                        }
+                      }
+                    },
+                    "range": [
+                      3442,
+                      3454
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 114,
+                        "column": 13
+                      },
+                      "end": {
+                        "line": 114,
+                        "column": 25
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "BinaryExpression",
+                        "operator": "+",
+                        "left": {
+                          "type": "BinaryExpression",
+                          "operator": "+",
+                          "left": {
+                            "type": "Literal",
+                            "value": "<!NOTATION ",
+                            "raw": "\"<!NOTATION \"",
+                            "range": [
+                              3474,
+                              3487
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 115,
+                                "column": 15
+                              },
+                              "end": {
+                                "line": 115,
+                                "column": 28
+                              }
+                            }
+                          },
+                          "right": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "ThisExpression",
+                              "range": [
+                                3490,
+                                3494
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 115,
+                                  "column": 31
+                                },
+                                "end": {
+                                  "line": 115,
+                                  "column": 35
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "text",
+                              "range": [
+                                3495,
+                                3499
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 115,
+                                  "column": 36
+                                },
+                                "end": {
+                                  "line": 115,
+                                  "column": 40
+                                }
+                              }
+                            },
+                            "range": [
+                              3490,
+                              3499
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 115,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 115,
+                                "column": 40
+                              }
+                            }
+                          },
+                          "range": [
+                            3474,
+                            3499
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 115,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 115,
+                              "column": 40
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": ">",
+                          "raw": "\">\"",
+                          "range": [
+                            3502,
+                            3505
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 115,
+                              "column": 43
+                            },
+                            "end": {
+                              "line": 115,
+                              "column": 46
+                            }
+                          }
+                        },
+                        "range": [
+                          3474,
+                          3505
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 115,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 115,
+                            "column": 46
+                          }
+                        }
+                      },
+                      "range": [
+                        3467,
+                        3506
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 115,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 115,
+                          "column": 47
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    3456,
+                    3513
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 114,
+                      "column": 27
+                    },
+                    "end": {
+                      "line": 116,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  3441,
+                  3513
+                ],
+                "loc": {
+                  "start": {
+                    "line": 114,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 116,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                3433,
+                3513
+              ],
+              "loc": {
+                "start": {
+                  "line": 114,
+                  "column": 4
+                },
+                "end": {
+                  "line": 116,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+                  "range": [
+                    3139,
+                    3427
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 106,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 113,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            1191,
+            3516
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 52
+            },
+            "end": {
+              "line": 117,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          1154,
+          3516
+        ],
+        "loc": {
+          "start": {
+            "line": 37,
+            "column": 15
+          },
+          "end": {
+            "line": 117,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Represents an XML notation declaration in a document type definition.\r\n *\r\n * An XML notation declaration is structured as follows, where\r\n * <code>{text}</code> is the text of the declaration:\r\n * \r\n * <code>&lt;!NOTATION {text}&gt;</code>\r\n *\r\n * The <code>{text}</code> value is a property of this node.\r\n *\r\n * XmlDtdNotation nodes cannot have any children.\r\n ",
+            "range": [
+              763,
+              1137
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 0
+              },
+              "end": {
+                "line": 36,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        1139,
+        3516
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 117,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Represents an XML notation declaration in a document type definition.\r\n *\r\n * An XML notation declaration is structured as follows, where\r\n * <code>{text}</code> is the text of the declaration:\r\n * \r\n * <code>&lt;!NOTATION {text}&gt;</code>\r\n *\r\n * The <code>{text}</code> value is a property of this node.\r\n *\r\n * XmlDtdNotation nodes cannot have any children.\r\n ",
+          "range": [
+            763,
+            1137
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 0
+            },
+            "end": {
+              "line": 36,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    619,
+    3516
+  ],
+  "loc": {
+    "start": {
+      "line": 17,
+      "column": 0
+    },
+    "end": {
+      "line": 117,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+      "range": [
+        0,
+        615
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 15,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Represents an XML notation declaration in a document type definition.\r\n *\r\n * An XML notation declaration is structured as follows, where\r\n * <code>{text}</code> is the text of the declaration:\r\n * \r\n * <code>&lt;!NOTATION {text}&gt;</code>\r\n *\r\n * The <code>{text}</code> value is a property of this node.\r\n *\r\n * XmlDtdNotation nodes cannot have any children.\r\n ",
+      "range": [
+        763,
+        1137
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Initializes a new instance of the {@link XmlDtdNotation} class.\r\n     *\r\n     * @param {string} text The text associated with the XML notation\r\n     *                      declaration.\r\n     ",
+      "range": [
+        1198,
+        1403
+      ],
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 4
+        },
+        "end": {
+          "line": 43,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Gets the text associated with the XML notation declaration.\r\n     *\r\n     * @return {string} The text associated with the XML notation declaration.\r\n     ",
+      "range": [
+        1488,
+        1656
+      ],
+      "loc": {
+        "start": {
+          "line": 49,
+          "column": 4
+        },
+        "end": {
+          "line": 53,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Sets the text associated with the XML notation declaration.\r\n     *\r\n     * @param {string} text The text associated with the XML notation\r\n     *                      declaration.\r\n     ",
+      "range": [
+        1717,
+        1918
+      ],
+      "loc": {
+        "start": {
+          "line": 58,
+          "column": 4
+        },
+        "end": {
+          "line": 63,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2251,
+        2360
+      ],
+      "loc": {
+        "start": {
+          "line": 74,
+          "column": 4
+        },
+        "end": {
+          "line": 77,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2464,
+        2573
+      ],
+      "loc": {
+        "start": {
+          "line": 82,
+          "column": 4
+        },
+        "end": {
+          "line": 85,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2691,
+        2800
+      ],
+      "loc": {
+        "start": {
+          "line": 90,
+          "column": 4
+        },
+        "end": {
+          "line": 93,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2911,
+        3020
+      ],
+      "loc": {
+        "start": {
+          "line": 98,
+          "column": 4
+        },
+        "end": {
+          "line": 101,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+      "range": [
+        3139,
+        3427
+      ],
+      "loc": {
+        "start": {
+          "line": 106,
+          "column": 4
+        },
+        "end": {
+          "line": 113,
+          "column": 7
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/main.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-document">document</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">nodes</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlAttribute.js~XmlAttribute.html">XmlAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCdata.js~XmlCdata.html">XmlCdata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCharRef.js~XmlCharRef.html">XmlCharRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlComment.js~XmlComment.html">XmlComment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDecl.js~XmlDecl.html">XmlDecl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDocument.js~XmlDocument.html">XmlDocument</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtd.js~XmlDtd.html">XmlDtd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html">XmlDtdAttlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdElement.js~XmlDtdElement.html">XmlDtdElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html">XmlDtdEntity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html">XmlDtdNotation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html">XmlDtdParamEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlElement.js~XmlElement.html">XmlElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlEntityRef.js~XmlEntityRef.html">XmlEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlNode.js~XmlNode.html">XmlNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlProcInst.js~XmlProcInst.html">XmlProcInst</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlText.js~XmlText.html">XmlText</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">options</div><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DeclarationOptions">DeclarationOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StringOptions">StringOptions</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/main.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (C) 2016 Michael Kourlas
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+&quot;use strict&quot;;
+
+import XmlAttribute from &quot;./nodes/XmlAttribute&quot;;
+import XmlCdata from &quot;./nodes/XmlCdata&quot;;
+import XmlCharRef from &quot;./nodes/XmlCharRef&quot;;
+import XmlComment from &quot;./nodes/XmlComment&quot;;
+import XmlDecl from &quot;./nodes/XmlDecl&quot;;
+import XmlDocument from &quot;./nodes/XmlDocument&quot;;
+import XmlDtd from &quot;./nodes/XmlDtd&quot;;
+import XmlDtdAttlist from &quot;./nodes/XmlDtdAttlist&quot;;
+import XmlDtdElement from &quot;./nodes/XmlDtdElement&quot;;
+import XmlDtdEntity from &quot;./nodes/XmlDtdEntity&quot;;
+import XmlDtdNotation from &quot;./nodes/XmlDtdNotation&quot;;
+import XmlDtdParamEntityRef from &quot;./nodes/XmlDtdParamEntityRef&quot;;
+import XmlElement from &quot;./nodes/XmlElement&quot;;
+import XmlEntityRef from &quot;./nodes/XmlEntityRef&quot;;
+import XmlNode from &quot;./nodes/XmlNode&quot;;
+import XmlProcInst from &quot;./nodes/XmlProcInst&quot;;
+import XmlText from &quot;./nodes/XmlText&quot;;
+
+export {XmlAttribute, XmlCdata, XmlCharRef, XmlComment, XmlDecl, XmlDocument,
+    XmlDtd, XmlDtdAttlist, XmlDtdElement, XmlDtdEntity, XmlDtdNotation,
+    XmlDtdParamEntityRef, XmlElement, XmlEntityRef, XmlNode, XmlProcInst,
+    XmlText};
+
+/**
+ * Creates a new XML document.
+ *
+ * @param {string} root The name of the root element of the document.
+ *
+ * @returns {XmlDocument} The new XML document.
+ */
+export function document(root) {
+    return new XmlDocument(root);
+}</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

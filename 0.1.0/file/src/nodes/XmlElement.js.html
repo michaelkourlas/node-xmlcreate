@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/nodes/XmlElement.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-document">document</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">nodes</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlAttribute.js~XmlAttribute.html">XmlAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCdata.js~XmlCdata.html">XmlCdata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCharRef.js~XmlCharRef.html">XmlCharRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlComment.js~XmlComment.html">XmlComment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDecl.js~XmlDecl.html">XmlDecl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDocument.js~XmlDocument.html">XmlDocument</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtd.js~XmlDtd.html">XmlDtd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html">XmlDtdAttlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdElement.js~XmlDtdElement.html">XmlDtdElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html">XmlDtdEntity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html">XmlDtdNotation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html">XmlDtdParamEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlElement.js~XmlElement.html">XmlElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlEntityRef.js~XmlEntityRef.html">XmlEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlNode.js~XmlNode.html">XmlNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlProcInst.js~XmlProcInst.html">XmlProcInst</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlText.js~XmlText.html">XmlText</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">options</div><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DeclarationOptions">DeclarationOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StringOptions">StringOptions</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/nodes/XmlElement.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (C) 2016 Michael Kourlas
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+&quot;use strict&quot;;
+
+import {typeCheck} from &quot;type-check&quot;;
+
+import * as stringOptions from &quot;../options/string&quot;;
+import * as validate from &quot;../utils/validate&quot;;
+
+import XmlAttribute from &quot;./XmlAttribute&quot;;
+import XmlCdata from &quot;./XmlCdata&quot;;
+import XmlCharRef from &quot;./XmlCharRef&quot;;
+import XmlComment from &quot;./XmlComment&quot;;
+import XmlEntityRef from &quot;./XmlEntityRef&quot;;
+import XmlNode from &quot;./XmlNode&quot;;
+import XmlProcInst from &quot;./XmlProcInst&quot;;
+import XmlText from &quot;./XmlText&quot;;
+
+/**
+ * Represents an XML element.
+ *
+ * A sample XML element is structured as follows, where &lt;code&gt;{name}&lt;/code&gt; is
+ * the name of the element:
+ * &lt;code&gt;&lt;pre&gt;&amp;lt;{name} attname=&quot;attvalue&quot;&amp;gt;
+ *     &amp;lt;subelem/&amp;gt;
+ *     &amp;lt;?pitarget picontent?&amp;gt;
+ *     text
+ * &amp;lt;/{name}&amp;gt;&lt;/pre&gt;&lt;/code&gt;
+ *
+ * The &lt;code&gt;{name}&lt;/code&gt; value is a property of the node, while the
+ * attributes and children of the element (such as other elements, processing
+ * instructions, and text) are children of this node.
+ *
+ * XmlElement nodes can have an unlimited number of {@link XmlAttribute},
+ * {@link XmlCdata}, {@link XmlCharRef}, {@link XmlComment},
+ * {@link XmlElement}, {@link XmlEntityRef}, {@link XmlProcInst}, or
+ * {@link XmlText} nodes as children.
+ */
+export default class XmlElement extends XmlNode {
+    /**
+     * Initializes a new instance of the {@link XmlElement} class.
+     *
+     * @param name The name of the element.
+     */
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+
+    /**
+     * Gets the name of the element.
+     *
+     * @returns {string} The name of the element.
+     */
+    get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of the element.
+     *
+     * @param {string} name The name of the element.
+     */
+    set name(name) {
+        if (!typeCheck(&quot;String&quot;, name)) {
+            throw new TypeError(&quot;name should be a string&quot;);
+        } else if (!validate.name(name)) {
+            throw new Error(&quot;name should not contain characters not&quot; +
+                &quot; allowed in XML names&quot;);
+        }
+        this._name = name;
+    }
+
+    /**
+     * Inserts an new attribute at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} name
+     *        The name of the attribute.
+     * @param {string|XmlNode|Array.&lt;string|XmlNode&gt;} value
+     *        The value of the attribute. Strings are converted to XmlText
+     *        nodes.
+     * @param {number} [index]
+     *        The index at which the node should be inserted. If no index is
+     *        specified, the node is inserted at the end of this node&apos;s
+     *        children.
+     *
+     * @returns {XmlAttribute} The newly created attribute.
+     */
+    attribute(name, value, index) {
+        if (typeCheck(&quot;String&quot;, value)) {
+            value = new XmlText(value);
+        } else if (typeCheck(&quot;Array&quot;, value)) {
+            for (let i = 0; i &lt; value.length; i++) {
+                if (typeCheck(&quot;String&quot;, value[i])) {
+                    value[i] = new XmlText(value[i]);
+                }
+            }
+        }
+
+        let attribute = new XmlAttribute(name, value);
+        this.insertChild(attribute, index);
+        return attribute;
+    }
+
+    /**
+     * Inserts a new CDATA section at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} content The data of the CDATA section.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlCdata} The newly created CDATA section.
+     */
+    cdata(content, index) {
+        let cdata = new XmlCdata(content);
+        this.insertChild(cdata, index);
+        return cdata;
+    }
+
+    /**
+     * Inserts a new character reference at the specified index. If no index
+     * is specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} char    The character to represent using the reference.
+     * @param {boolean} [hex]  Whether to use the hexadecimal or decimal
+     *                         representation for the reference. If left
+     *                         undefined, decimal is the default.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlCharRef} The newly created character reference.
+     */
+    charRef(char, hex, index) {
+        let charRef = new XmlCharRef(char, hex);
+        this.insertChild(charRef, index);
+        return charRef;
+    }
+
+    /**
+     * Inserts a new element at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} name    The name of the element.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlElement} The newly created element.
+     */
+    element(name, index) {
+        let element = new XmlElement(name);
+        this.insertChild(element, index);
+        return element;
+    }
+
+    /**
+     * Inserts a new comment at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} content The data of the comment.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlComment} The newly created comment.
+     */
+    comment(content, index) {
+        let comment = new XmlComment(content);
+        this.insertChild(comment, index);
+        return comment;
+    }
+
+    /**
+     * Inserts a new entity reference at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} entity  The entity to be referenced.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlEntityRef} The newly created entity reference.
+     */
+    entityRef(entity, index) {
+        let entityRef = new XmlEntityRef(entity);
+        this.insertChild(entityRef, index);
+        return entityRef;
+    }
+
+    /**
+     * Inserts a new processing instruction at the specified index. If no index
+     * is specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} target    The target of the processing instruction.
+     * @param {string} [content] The data of the processing instruction, or
+     *                           undefined if there is no target.
+     * @param {number} [index]   The index at which the node should be inserted.
+     *                           If no index is specified, the node is inserted
+     *                           at the end of this node&apos;s children.
+     *
+     * @returns {XmlProcInst} The newly created processing instruction.
+     */
+    procInst(target, content, index) {
+        let procInst = new XmlProcInst(target, content);
+        this.insertChild(procInst, index);
+        return procInst;
+    }
+
+    /**
+     * Inserts some new text at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} text    Arbitrary character data.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlText} The newly created text node.
+     */
+    text(text, index) {
+        let txt = new XmlText(text);
+        this.insertChild(txt, index);
+        return txt;
+    }
+
+    /**
+     * Inserts the specified node into this node&apos;s children at the specified
+     * index. The node is not inserted if it is already present. If this node
+     * already has a parent, it is removed from that parent.
+     *
+     * Note that only {@link XmlAttribute}, {@link XmlCdata},
+     * {@link XmlCharRef}, {@link XmlComment}, {@link XmlElement},
+     * {@link XmlEntityRef}, {@link XmlProcInst}, or {@link XmlText} nodes can
+     * be inserted; otherwise, an exception will be thrown.
+     *
+     * @param {XmlNode} node   The node to insert.
+     * @param {number} [index] The index at which to insert the node. Nodes at
+     *                         or after the index are shifted to the right. If
+     *                         no index is specified, the node is inserted at
+     *                         the end.
+     *
+     * @returns {XmlNode} The node inserted into this node&apos;s children, or
+     *                    undefined if no node was inserted.
+     */
+    insertChild(node, index) {
+        if (!(node instanceof XmlAttribute ||
+            node instanceof XmlCdata ||
+            node instanceof XmlCharRef ||
+            node instanceof XmlComment ||
+            node instanceof XmlElement ||
+            node instanceof XmlEntityRef ||
+            node instanceof XmlProcInst ||
+            node instanceof XmlText)) {
+            throw new TypeError(&quot;node should be an instance of&quot; +
+                &quot; XmlAttribute, XmlCdata, XmlCharRef, XmlComment,&quot; +
+                &quot; XmlElement, XmlEntityRef, XmlProcInst, or XmlText&quot;);
+        }
+
+        if (node instanceof XmlAttribute) {
+            let attributes = this._children.filter(
+                node =&gt; node instanceof XmlAttribute);
+            for (let attribute of attributes) {
+                if (attribute.name === node.name) {
+                    throw new Error(&quot;element already contains an&quot; +
+                        &quot; XmlAttribute object with name &quot; + node.name);
+                }
+            }
+        }
+
+        return super.insertChild(node, index);
+    }
+
+    /**
+     * Returns an array containing all of the children of this node that are
+     * instances of {@link XmlAttribute}.
+     *
+     * @returns {XmlAttribute[]} An array containing all of the children of
+     *                           this node that are instances of
+     *                           {@link XmlAttribute}.
+     */
+    attributes() {
+        return this._children.filter(node =&gt; node instanceof XmlAttribute);
+    }
+
+    /**
+     * Returns an XML string representation of this node.
+     *
+     * @param {StringOptions} [options] Formatting options for the string
+     *                                  representation.
+     *
+     * @returns {string} An XML string representation of this node.
+     */
+    toString(options = {}) {
+        stringOptions.validate(options);
+
+        let attributes = this.attributes();
+        let nodes = this._children.filter(node =&gt; {
+            return attributes.indexOf(node) === -1;
+        });
+
+        // Element tag start
+        var str = &quot;&lt;&quot; + this._name;
+
+        // Attributes
+        for (let attribute of attributes) {
+            str += &quot; &quot; + attribute.toString(options);
+        }
+
+        // Child nodes
+        if (nodes.length &gt; 0) {
+            // Element non-empty tag end
+            str += &quot;&gt;&quot;;
+
+            let indenter = line =&gt; options.indent + line;
+            for (let i = 0; i &lt; nodes.length; i++) {
+                let next = nodes[i];
+                let nextStr = next.toString(options);
+                let prev = i &gt; 0 ? nodes[i - 1] : undefined;
+
+                // Line break before child nodes unless all nodes, or at least
+                // the most recent two, are of type XmlCharacterReference,
+                // XmlEntityReference, or XmlText
+                if (options.pretty) {
+                    if (!allSameLineNodes(nodes)) {
+                        if (!(i &gt; 0 &amp;&amp; onSameLine(next, prev))) {
+                            str += options.newline;
+                            nextStr = nextStr.split(options.newline)
+                                .map(indenter)
+                                .join(options.newline);
+                        }
+                    }
+                }
+
+                str += nextStr;
+            }
+
+            // Line break before end tag unless all nodes are of type
+            // XmlCharacterReference, XmlEntityReference, or XmlText
+            if (options.pretty) {
+                if (!allSameLineNodes(nodes)) {
+                    str += options.newline;
+                }
+            }
+
+            // Element end tag
+            str += &quot;&lt;/&quot; + this._name + &quot;&gt;&quot;;
+        } else {
+            // Element empty tag end
+            str += &quot;/&gt;&quot;;
+        }
+
+        return str;
+    }
+}
+
+/**
+ * Returns true if the specified nodes are all of type {@link XmlCharRef},
+ * {@link XmlEntityRef}, or {@link XmlText}.
+ *
+ * @param {XmlNode[]} nodes The specified nodes.
+ *
+ * @returns {boolean} Whether or not the specified nodes are all of type
+ *                    {@link XmlCharRef}, {@link XmlEntityRef}, or
+ *                    {@link XmlText}.
+ */
+function allSameLineNodes(nodes) {
+    for (let node of nodes) {
+        if (!((node instanceof XmlCharRef ||
+            node instanceof XmlEntityRef ||
+            node instanceof XmlText))) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Returns true if the specified nodes are all of type {@link XmlCharRef},
+ * {@link XmlEntityRef}, or {@link XmlText}.
+ *
+ * @param {XmlNode} prev The first specified node.
+ * @param {XmlNode} next The second specified node.
+ *
+ * @returns {boolean} Whether or not the specified nodes are all of type
+ *                    {@link XmlCharRef}, {@link XmlEntityRef}, or
+ *                    {@link XmlText}.
+ */
+function onSameLine(prev, next) {
+    return (prev instanceof XmlCharRef ||
+        prev instanceof XmlEntityRef ||
+        prev instanceof XmlText) &amp;&amp;
+        (next instanceof XmlCharRef ||
+        next instanceof XmlEntityRef ||
+        next instanceof XmlText);
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

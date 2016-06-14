@@ -1,0 +1,2965 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "\"use strict\"",
+        "range": [
+          619,
+          631
+        ],
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
+          },
+          "end": {
+            "line": 17,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        619,
+        632
+      ],
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 0
+        },
+        "end": {
+          "line": 17,
+          "column": 13
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+          "range": [
+            0,
+            615
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 15,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "typeCheck",
+            "range": [
+              644,
+              653
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 8
+              },
+              "end": {
+                "line": 19,
+                "column": 17
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "typeCheck",
+            "range": [
+              644,
+              653
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 8
+              },
+              "end": {
+                "line": 19,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            644,
+            653
+          ],
+          "loc": {
+            "start": {
+              "line": 19,
+              "column": 8
+            },
+            "end": {
+              "line": 19,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "type-check",
+        "raw": "\"type-check\"",
+        "range": [
+          660,
+          672
+        ],
+        "loc": {
+          "start": {
+            "line": 19,
+            "column": 24
+          },
+          "end": {
+            "line": 19,
+            "column": 36
+          }
+        }
+      },
+      "range": [
+        636,
+        673
+      ],
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 37
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportNamespaceSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "validate",
+            "range": [
+              689,
+              697
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 12
+              },
+              "end": {
+                "line": 21,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            684,
+            697
+          ],
+          "loc": {
+            "start": {
+              "line": 21,
+              "column": 7
+            },
+            "end": {
+              "line": 21,
+              "column": 20
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../utils/validate",
+        "raw": "\"../utils/validate\"",
+        "range": [
+          703,
+          722
+        ],
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 26
+          },
+          "end": {
+            "line": 21,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        677,
+        723
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 0
+        },
+        "end": {
+          "line": 21,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlNode",
+            "range": [
+              734,
+              741
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 7
+              },
+              "end": {
+                "line": 23,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            734,
+            741
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 7
+            },
+            "end": {
+              "line": 23,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./XmlNode",
+        "raw": "\"./XmlNode\"",
+        "range": [
+          747,
+          758
+        ],
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 20
+          },
+          "end": {
+            "line": 23,
+            "column": 31
+          }
+        }
+      },
+      "range": [
+        727,
+        759
+      ],
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 32
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Represents an XML entity reference.\r\n *\r\n * An XML entity reference is structured as follows, where \r\n * <code>{entity}</code> is name of the entity to be referenced:\r\n *\r\n * <code>&amp;{entity};</code>\r\n *\r\n * The <code>{entity}</code> value is a property of this node.\r\n *\r\n * XmlEntityRef nodes cannot have any children.\r\n ",
+          "range": [
+            763,
+            1099
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 0
+            },
+            "end": {
+              "line": 36,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "XmlEntityRef",
+          "range": [
+            1122,
+            1134
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 21
+            },
+            "end": {
+              "line": 37,
+              "column": 33
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "XmlNode",
+          "range": [
+            1143,
+            1150
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 42
+            },
+            "end": {
+              "line": 37,
+              "column": 49
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor",
+                "range": [
+                  1314,
+                  1325
+                ],
+                "loc": {
+                  "start": {
+                    "line": 43,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 43,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "entity",
+                    "range": [
+                      1326,
+                      1332
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 43,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 43,
+                        "column": 22
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Super",
+                          "range": [
+                            1345,
+                            1350
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 44,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 44,
+                              "column": 13
+                            }
+                          }
+                        },
+                        "arguments": [],
+                        "range": [
+                          1345,
+                          1352
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 44,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 44,
+                            "column": 15
+                          }
+                        }
+                      },
+                      "range": [
+                        1345,
+                        1353
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 44,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 44,
+                          "column": 16
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              1363,
+                              1367
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 45,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 45,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "entity",
+                            "range": [
+                              1368,
+                              1374
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 45,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 45,
+                                "column": 19
+                              }
+                            }
+                          },
+                          "range": [
+                            1363,
+                            1374
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 45,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 19
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "entity",
+                          "range": [
+                            1377,
+                            1383
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 45,
+                              "column": 22
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 28
+                            }
+                          }
+                        },
+                        "range": [
+                          1363,
+                          1383
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 45,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 45,
+                            "column": 28
+                          }
+                        }
+                      },
+                      "range": [
+                        1363,
+                        1384
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 45,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 45,
+                          "column": 29
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1334,
+                    1391
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 43,
+                      "column": 24
+                    },
+                    "end": {
+                      "line": 46,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1325,
+                  1391
+                ],
+                "loc": {
+                  "start": {
+                    "line": 43,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "constructor",
+              "computed": false,
+              "range": [
+                1314,
+                1391
+              ],
+              "loc": {
+                "start": {
+                  "line": 43,
+                  "column": 4
+                },
+                "end": {
+                  "line": 46,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Initializes a new instance of the {@link XmlEntityRef} class.\r\n     *\r\n     * @param {string} entity The entity to be referenced.\r\n     ",
+                  "range": [
+                    1158,
+                    1308
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 38,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 42,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Gets the entity to be referenced.\r\n     *\r\n     * @returns {string} The entity to be referenced.\r\n     ",
+                  "range": [
+                    1399,
+                    1516
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 48,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 52,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "entity",
+                "range": [
+                  1526,
+                  1532
+                ],
+                "loc": {
+                  "start": {
+                    "line": 53,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 53,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            1553,
+                            1557
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 54,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 19
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "_entity",
+                          "range": [
+                            1558,
+                            1565
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 54,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 27
+                            }
+                          }
+                        },
+                        "range": [
+                          1553,
+                          1565
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 54,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 54,
+                            "column": 27
+                          }
+                        }
+                      },
+                      "range": [
+                        1546,
+                        1566
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 54,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 54,
+                          "column": 28
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1535,
+                    1573
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 53,
+                      "column": 17
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1532,
+                  1573
+                ],
+                "loc": {
+                  "start": {
+                    "line": 53,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 55,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "get",
+              "computed": false,
+              "range": [
+                1522,
+                1573
+              ],
+              "loc": {
+                "start": {
+                  "line": 53,
+                  "column": 4
+                },
+                "end": {
+                  "line": 55,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Gets the entity to be referenced.\r\n     *\r\n     * @returns {string} The entity to be referenced.\r\n     ",
+                  "range": [
+                    1399,
+                    1516
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 48,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 52,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Sets the entity to be referenced.\r\n     *\r\n     * @param {string} entity The entity to be referenced.\r\n     ",
+                  "range": [
+                    1581,
+                    1703
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 57,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "entity",
+                "range": [
+                  1713,
+                  1719
+                ],
+                "loc": {
+                  "start": {
+                    "line": 62,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 62,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "entity",
+                    "range": [
+                      1720,
+                      1726
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 62,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 62,
+                        "column": 21
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "IfStatement",
+                      "test": {
+                        "type": "UnaryExpression",
+                        "operator": "!",
+                        "argument": {
+                          "type": "CallExpression",
+                          "callee": {
+                            "type": "Identifier",
+                            "name": "typeCheck",
+                            "range": [
+                              1744,
+                              1753
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 63,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 63,
+                                "column": 22
+                              }
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "type": "Literal",
+                              "value": "String",
+                              "raw": "\"String\"",
+                              "range": [
+                                1754,
+                                1762
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 63,
+                                  "column": 23
+                                },
+                                "end": {
+                                  "line": 63,
+                                  "column": 31
+                                }
+                              }
+                            },
+                            {
+                              "type": "Identifier",
+                              "name": "entity",
+                              "range": [
+                                1764,
+                                1770
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 63,
+                                  "column": 33
+                                },
+                                "end": {
+                                  "line": 63,
+                                  "column": 39
+                                }
+                              }
+                            }
+                          ],
+                          "range": [
+                            1744,
+                            1771
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 63,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 63,
+                              "column": 40
+                            }
+                          }
+                        },
+                        "prefix": true,
+                        "range": [
+                          1743,
+                          1771
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 63,
+                            "column": 12
+                          },
+                          "end": {
+                            "line": 63,
+                            "column": 40
+                          }
+                        }
+                      },
+                      "consequent": {
+                        "type": "BlockStatement",
+                        "body": [
+                          {
+                            "type": "ThrowStatement",
+                            "argument": {
+                              "type": "NewExpression",
+                              "callee": {
+                                "type": "Identifier",
+                                "name": "TypeError",
+                                "range": [
+                                  1798,
+                                  1807
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 64,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 64,
+                                    "column": 31
+                                  }
+                                }
+                              },
+                              "arguments": [
+                                {
+                                  "type": "Literal",
+                                  "value": "entity should be a string",
+                                  "raw": "\"entity should be a string\"",
+                                  "range": [
+                                    1808,
+                                    1835
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 64,
+                                      "column": 32
+                                    },
+                                    "end": {
+                                      "line": 64,
+                                      "column": 59
+                                    }
+                                  }
+                                }
+                              ],
+                              "range": [
+                                1794,
+                                1836
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 64,
+                                  "column": 18
+                                },
+                                "end": {
+                                  "line": 64,
+                                  "column": 60
+                                }
+                              }
+                            },
+                            "range": [
+                              1788,
+                              1837
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 64,
+                                "column": 12
+                              },
+                              "end": {
+                                "line": 64,
+                                "column": 61
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1773,
+                          1848
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 63,
+                            "column": 42
+                          },
+                          "end": {
+                            "line": 65,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "alternate": {
+                        "type": "IfStatement",
+                        "test": {
+                          "type": "UnaryExpression",
+                          "operator": "!",
+                          "argument": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "validate",
+                                "range": [
+                                  1859,
+                                  1867
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 65,
+                                    "column": 20
+                                  },
+                                  "end": {
+                                    "line": 65,
+                                    "column": 28
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "name",
+                                "range": [
+                                  1868,
+                                  1872
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 65,
+                                    "column": 29
+                                  },
+                                  "end": {
+                                    "line": 65,
+                                    "column": 33
+                                  }
+                                }
+                              },
+                              "range": [
+                                1859,
+                                1872
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 65,
+                                  "column": 20
+                                },
+                                "end": {
+                                  "line": 65,
+                                  "column": 33
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Identifier",
+                                "name": "entity",
+                                "range": [
+                                  1873,
+                                  1879
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 65,
+                                    "column": 34
+                                  },
+                                  "end": {
+                                    "line": 65,
+                                    "column": 40
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1859,
+                              1880
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 65,
+                                "column": 20
+                              },
+                              "end": {
+                                "line": 65,
+                                "column": 41
+                              }
+                            }
+                          },
+                          "prefix": true,
+                          "range": [
+                            1858,
+                            1880
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 65,
+                              "column": 19
+                            },
+                            "end": {
+                              "line": 65,
+                              "column": 41
+                            }
+                          }
+                        },
+                        "consequent": {
+                          "type": "BlockStatement",
+                          "body": [
+                            {
+                              "type": "ThrowStatement",
+                              "argument": {
+                                "type": "NewExpression",
+                                "callee": {
+                                  "type": "Identifier",
+                                  "name": "Error",
+                                  "range": [
+                                    1907,
+                                    1912
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 66,
+                                      "column": 22
+                                    },
+                                    "end": {
+                                      "line": 66,
+                                      "column": 27
+                                    }
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "type": "BinaryExpression",
+                                    "operator": "+",
+                                    "left": {
+                                      "type": "Literal",
+                                      "value": "entity should not contain characters",
+                                      "raw": "\"entity should not contain characters\"",
+                                      "range": [
+                                        1913,
+                                        1951
+                                      ],
+                                      "loc": {
+                                        "start": {
+                                          "line": 66,
+                                          "column": 28
+                                        },
+                                        "end": {
+                                          "line": 66,
+                                          "column": 66
+                                        }
+                                      }
+                                    },
+                                    "right": {
+                                      "type": "Literal",
+                                      "value": " not allowed in XML names",
+                                      "raw": "\" not allowed in XML names\"",
+                                      "range": [
+                                        1971,
+                                        1998
+                                      ],
+                                      "loc": {
+                                        "start": {
+                                          "line": 67,
+                                          "column": 16
+                                        },
+                                        "end": {
+                                          "line": 67,
+                                          "column": 43
+                                        }
+                                      }
+                                    },
+                                    "range": [
+                                      1913,
+                                      1998
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 66,
+                                        "column": 28
+                                      },
+                                      "end": {
+                                        "line": 67,
+                                        "column": 43
+                                      }
+                                    }
+                                  }
+                                ],
+                                "range": [
+                                  1903,
+                                  1999
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 66,
+                                    "column": 18
+                                  },
+                                  "end": {
+                                    "line": 67,
+                                    "column": 44
+                                  }
+                                }
+                              },
+                              "range": [
+                                1897,
+                                2000
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 66,
+                                  "column": 12
+                                },
+                                "end": {
+                                  "line": 67,
+                                  "column": 45
+                                }
+                              }
+                            }
+                          ],
+                          "range": [
+                            1882,
+                            2011
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 65,
+                              "column": 43
+                            },
+                            "end": {
+                              "line": 68,
+                              "column": 9
+                            }
+                          }
+                        },
+                        "alternate": null,
+                        "range": [
+                          1854,
+                          2011
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 65,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 68,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "range": [
+                        1739,
+                        2011
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 63,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 68,
+                          "column": 9
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              2021,
+                              2025
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 69,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 69,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "_entity",
+                            "range": [
+                              2026,
+                              2033
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 69,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 69,
+                                "column": 20
+                              }
+                            }
+                          },
+                          "range": [
+                            2021,
+                            2033
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 69,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 69,
+                              "column": 20
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "entity",
+                          "range": [
+                            2036,
+                            2042
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 69,
+                              "column": 23
+                            },
+                            "end": {
+                              "line": 69,
+                              "column": 29
+                            }
+                          }
+                        },
+                        "range": [
+                          2021,
+                          2042
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 69,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 69,
+                            "column": 29
+                          }
+                        }
+                      },
+                      "range": [
+                        2021,
+                        2043
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 69,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 30
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1728,
+                    2050
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 62,
+                      "column": 23
+                    },
+                    "end": {
+                      "line": 70,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1719,
+                  2050
+                ],
+                "loc": {
+                  "start": {
+                    "line": 62,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 70,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "set",
+              "computed": false,
+              "range": [
+                1709,
+                2050
+              ],
+              "loc": {
+                "start": {
+                  "line": 62,
+                  "column": 4
+                },
+                "end": {
+                  "line": 70,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Sets the entity to be referenced.\r\n     *\r\n     * @param {string} entity The entity to be referenced.\r\n     ",
+                  "range": [
+                    1581,
+                    1703
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 57,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2058,
+                    2165
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 72,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "children",
+                "range": [
+                  2171,
+                  2179
+                ],
+                "loc": {
+                  "start": {
+                    "line": 76,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 76,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2203,
+                            2208
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 77,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 77,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlEntityRef nodes cannot have children",
+                            "raw": "\"XmlEntityRef nodes cannot have children\"",
+                            "range": [
+                              2209,
+                              2250
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 77,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 77,
+                                "column": 65
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2199,
+                          2251
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 77,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 77,
+                            "column": 66
+                          }
+                        }
+                      },
+                      "range": [
+                        2193,
+                        2252
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 77,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 77,
+                          "column": 67
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2182,
+                    2259
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 76,
+                      "column": 15
+                    },
+                    "end": {
+                      "line": 78,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2179,
+                  2259
+                ],
+                "loc": {
+                  "start": {
+                    "line": 76,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 78,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2171,
+                2259
+              ],
+              "loc": {
+                "start": {
+                  "line": 76,
+                  "column": 4
+                },
+                "end": {
+                  "line": 78,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2058,
+                    2165
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 72,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2267,
+                    2374
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 80,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 83,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "insertChild",
+                "range": [
+                  2380,
+                  2391
+                ],
+                "loc": {
+                  "start": {
+                    "line": 84,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 84,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "node",
+                    "range": [
+                      2392,
+                      2396
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 84,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 84,
+                        "column": 20
+                      }
+                    }
+                  },
+                  {
+                    "type": "Identifier",
+                    "name": "index",
+                    "range": [
+                      2398,
+                      2403
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 84,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 84,
+                        "column": 27
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2426,
+                            2431
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 85,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 85,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlEntityRef nodes cannot have children",
+                            "raw": "\"XmlEntityRef nodes cannot have children\"",
+                            "range": [
+                              2432,
+                              2473
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 85,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 85,
+                                "column": 65
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2422,
+                          2474
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 85,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 85,
+                            "column": 66
+                          }
+                        }
+                      },
+                      "range": [
+                        2416,
+                        2475
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 85,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 85,
+                          "column": 67
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2405,
+                    2482
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 84,
+                      "column": 29
+                    },
+                    "end": {
+                      "line": 86,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2391,
+                  2482
+                ],
+                "loc": {
+                  "start": {
+                    "line": 84,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 86,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2380,
+                2482
+              ],
+              "loc": {
+                "start": {
+                  "line": 84,
+                  "column": 4
+                },
+                "end": {
+                  "line": 86,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2267,
+                    2374
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 80,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 83,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2490,
+                    2597
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 88,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 91,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "removeChild",
+                "range": [
+                  2603,
+                  2614
+                ],
+                "loc": {
+                  "start": {
+                    "line": 92,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 92,
+                    "column": 15
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "node",
+                    "range": [
+                      2615,
+                      2619
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 92,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 92,
+                        "column": 20
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2642,
+                            2647
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 93,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 93,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlEntityRef nodes cannot have children",
+                            "raw": "\"XmlEntityRef nodes cannot have children\"",
+                            "range": [
+                              2648,
+                              2689
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 93,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 93,
+                                "column": 65
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2638,
+                          2690
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 93,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 93,
+                            "column": 66
+                          }
+                        }
+                      },
+                      "range": [
+                        2632,
+                        2691
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 93,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 93,
+                          "column": 67
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2621,
+                    2698
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 92,
+                      "column": 22
+                    },
+                    "end": {
+                      "line": 94,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2614,
+                  2698
+                ],
+                "loc": {
+                  "start": {
+                    "line": 92,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 94,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2603,
+                2698
+              ],
+              "loc": {
+                "start": {
+                  "line": 92,
+                  "column": 4
+                },
+                "end": {
+                  "line": 94,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2490,
+                    2597
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 88,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 91,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2706,
+                    2813
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 96,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 99,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "removeChildAtIndex",
+                "range": [
+                  2819,
+                  2837
+                ],
+                "loc": {
+                  "start": {
+                    "line": 100,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 100,
+                    "column": 22
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "index",
+                    "range": [
+                      2838,
+                      2843
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 100,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 100,
+                        "column": 28
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ThrowStatement",
+                      "argument": {
+                        "type": "NewExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "Error",
+                          "range": [
+                            2866,
+                            2871
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 101,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 101,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "XmlEntityRef nodes cannot have children",
+                            "raw": "\"XmlEntityRef nodes cannot have children\"",
+                            "range": [
+                              2872,
+                              2913
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 101,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 101,
+                                "column": 65
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2862,
+                          2914
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 101,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 101,
+                            "column": 66
+                          }
+                        }
+                      },
+                      "range": [
+                        2856,
+                        2915
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 101,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 101,
+                          "column": 67
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    2845,
+                    2922
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 100,
+                      "column": 30
+                    },
+                    "end": {
+                      "line": 102,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2837,
+                  2922
+                ],
+                "loc": {
+                  "start": {
+                    "line": 100,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2819,
+                2922
+              ],
+              "loc": {
+                "start": {
+                  "line": 100,
+                  "column": 4
+                },
+                "end": {
+                  "line": 102,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+                  "range": [
+                    2706,
+                    2813
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 96,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 99,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+                  "range": [
+                    2930,
+                    3218
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 104,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 111,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "toString",
+                "range": [
+                  3224,
+                  3232
+                ],
+                "loc": {
+                  "start": {
+                    "line": 112,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 112,
+                    "column": 12
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "AssignmentPattern",
+                    "left": {
+                      "type": "Identifier",
+                      "name": "options",
+                      "range": [
+                        3233,
+                        3240
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 112,
+                          "column": 13
+                        },
+                        "end": {
+                          "line": 112,
+                          "column": 20
+                        }
+                      }
+                    },
+                    "right": {
+                      "type": "ObjectExpression",
+                      "properties": [],
+                      "range": [
+                        3243,
+                        3245
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 112,
+                          "column": 23
+                        },
+                        "end": {
+                          "line": 112,
+                          "column": 25
+                        }
+                      }
+                    },
+                    "range": [
+                      3233,
+                      3245
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 112,
+                        "column": 13
+                      },
+                      "end": {
+                        "line": 112,
+                        "column": 25
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "BinaryExpression",
+                        "operator": "+",
+                        "left": {
+                          "type": "BinaryExpression",
+                          "operator": "+",
+                          "left": {
+                            "type": "Literal",
+                            "value": "&",
+                            "raw": "\"&\"",
+                            "range": [
+                              3265,
+                              3268
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 113,
+                                "column": 15
+                              },
+                              "end": {
+                                "line": 113,
+                                "column": 18
+                              }
+                            }
+                          },
+                          "right": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "ThisExpression",
+                              "range": [
+                                3271,
+                                3275
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 113,
+                                  "column": 21
+                                },
+                                "end": {
+                                  "line": 113,
+                                  "column": 25
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "entity",
+                              "range": [
+                                3276,
+                                3282
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 113,
+                                  "column": 26
+                                },
+                                "end": {
+                                  "line": 113,
+                                  "column": 32
+                                }
+                              }
+                            },
+                            "range": [
+                              3271,
+                              3282
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 113,
+                                "column": 21
+                              },
+                              "end": {
+                                "line": 113,
+                                "column": 32
+                              }
+                            }
+                          },
+                          "range": [
+                            3265,
+                            3282
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 113,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 113,
+                              "column": 32
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": ";",
+                          "raw": "\";\"",
+                          "range": [
+                            3285,
+                            3288
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 113,
+                              "column": 35
+                            },
+                            "end": {
+                              "line": 113,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "range": [
+                          3265,
+                          3288
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 113,
+                            "column": 15
+                          },
+                          "end": {
+                            "line": 113,
+                            "column": 38
+                          }
+                        }
+                      },
+                      "range": [
+                        3258,
+                        3289
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 113,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 113,
+                          "column": 39
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    3247,
+                    3296
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 112,
+                      "column": 27
+                    },
+                    "end": {
+                      "line": 114,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  3232,
+                  3296
+                ],
+                "loc": {
+                  "start": {
+                    "line": 112,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 114,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                3224,
+                3296
+              ],
+              "loc": {
+                "start": {
+                  "line": 112,
+                  "column": 4
+                },
+                "end": {
+                  "line": 114,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+                  "range": [
+                    2930,
+                    3218
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 104,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 111,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            1151,
+            3299
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 50
+            },
+            "end": {
+              "line": 115,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          1116,
+          3299
+        ],
+        "loc": {
+          "start": {
+            "line": 37,
+            "column": 15
+          },
+          "end": {
+            "line": 115,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Represents an XML entity reference.\r\n *\r\n * An XML entity reference is structured as follows, where \r\n * <code>{entity}</code> is name of the entity to be referenced:\r\n *\r\n * <code>&amp;{entity};</code>\r\n *\r\n * The <code>{entity}</code> value is a property of this node.\r\n *\r\n * XmlEntityRef nodes cannot have any children.\r\n ",
+            "range": [
+              763,
+              1099
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 0
+              },
+              "end": {
+                "line": 36,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        1101,
+        3299
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 115,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Represents an XML entity reference.\r\n *\r\n * An XML entity reference is structured as follows, where \r\n * <code>{entity}</code> is name of the entity to be referenced:\r\n *\r\n * <code>&amp;{entity};</code>\r\n *\r\n * The <code>{entity}</code> value is a property of this node.\r\n *\r\n * XmlEntityRef nodes cannot have any children.\r\n ",
+          "range": [
+            763,
+            1099
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 0
+            },
+            "end": {
+              "line": 36,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    619,
+    3299
+  ],
+  "loc": {
+    "start": {
+      "line": 17,
+      "column": 0
+    },
+    "end": {
+      "line": 115,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+      "range": [
+        0,
+        615
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 15,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Represents an XML entity reference.\r\n *\r\n * An XML entity reference is structured as follows, where \r\n * <code>{entity}</code> is name of the entity to be referenced:\r\n *\r\n * <code>&amp;{entity};</code>\r\n *\r\n * The <code>{entity}</code> value is a property of this node.\r\n *\r\n * XmlEntityRef nodes cannot have any children.\r\n ",
+      "range": [
+        763,
+        1099
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Initializes a new instance of the {@link XmlEntityRef} class.\r\n     *\r\n     * @param {string} entity The entity to be referenced.\r\n     ",
+      "range": [
+        1158,
+        1308
+      ],
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 4
+        },
+        "end": {
+          "line": 42,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Gets the entity to be referenced.\r\n     *\r\n     * @returns {string} The entity to be referenced.\r\n     ",
+      "range": [
+        1399,
+        1516
+      ],
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 4
+        },
+        "end": {
+          "line": 52,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Sets the entity to be referenced.\r\n     *\r\n     * @param {string} entity The entity to be referenced.\r\n     ",
+      "range": [
+        1581,
+        1703
+      ],
+      "loc": {
+        "start": {
+          "line": 57,
+          "column": 4
+        },
+        "end": {
+          "line": 61,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2058,
+        2165
+      ],
+      "loc": {
+        "start": {
+          "line": 72,
+          "column": 4
+        },
+        "end": {
+          "line": 75,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2267,
+        2374
+      ],
+      "loc": {
+        "start": {
+          "line": 80,
+          "column": 4
+        },
+        "end": {
+          "line": 83,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2490,
+        2597
+      ],
+      "loc": {
+        "start": {
+          "line": 88,
+          "column": 4
+        },
+        "end": {
+          "line": 91,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Throws an exception since {@link XmlEntityRef} nodes cannot have any\r\n     * children.\r\n     ",
+      "range": [
+        2706,
+        2813
+      ],
+      "loc": {
+        "start": {
+          "line": 96,
+          "column": 4
+        },
+        "end": {
+          "line": 99,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n     * Returns an XML string representation of this node.\r\n     *\r\n     * @param {StringOptions} [options] Formatting options for the string\r\n     *                                  representation.\r\n     *\r\n     * @returns {string} An XML string representation of this node.\r\n     ",
+      "range": [
+        2930,
+        3218
+      ],
+      "loc": {
+        "start": {
+          "line": 104,
+          "column": 4
+        },
+        "end": {
+          "line": 111,
+          "column": 7
+        }
+      }
+    }
+  ]
+}

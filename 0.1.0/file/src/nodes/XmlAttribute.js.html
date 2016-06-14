@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/nodes/XmlAttribute.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-document">document</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">nodes</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlAttribute.js~XmlAttribute.html">XmlAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCdata.js~XmlCdata.html">XmlCdata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCharRef.js~XmlCharRef.html">XmlCharRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlComment.js~XmlComment.html">XmlComment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDecl.js~XmlDecl.html">XmlDecl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDocument.js~XmlDocument.html">XmlDocument</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtd.js~XmlDtd.html">XmlDtd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html">XmlDtdAttlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdElement.js~XmlDtdElement.html">XmlDtdElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html">XmlDtdEntity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html">XmlDtdNotation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html">XmlDtdParamEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlElement.js~XmlElement.html">XmlElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlEntityRef.js~XmlEntityRef.html">XmlEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlNode.js~XmlNode.html">XmlNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlProcInst.js~XmlProcInst.html">XmlProcInst</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlText.js~XmlText.html">XmlText</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">options</div><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DeclarationOptions">DeclarationOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StringOptions">StringOptions</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/nodes/XmlAttribute.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (C) 2016 Michael Kourlas
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+&quot;use strict&quot;;
+
+import {typeCheck} from &quot;type-check&quot;;
+
+import * as escape from &quot;../utils/escape&quot;;
+import * as stringOptions from &quot;../options/string&quot;;
+import * as validate from &quot;../utils/validate&quot;;
+
+import XmlCharRef from &quot;./XmlCharRef&quot;;
+import XmlEntityRef from &quot;./XmlEntityRef&quot;;
+import XmlNode from &quot;./XmlNode&quot;;
+import XmlText from &quot;./XmlText&quot;;
+
+/**
+ * Represents an XML element attribute.
+ *
+ * An XML element attribute is part of the start tag of an element and is
+ * structured as follows, where &lt;code&gt;{name}&lt;/code&gt; is the name of the attribute
+ * and &lt;code&gt;{value}&lt;/code&gt; is the value of the attribute:
+ *
+ * &lt;code&gt;&amp;lt;element {name}=&quot;{value}&quot;&amp;gt;&lt;/code&gt;
+ *
+ * The &lt;code&gt;{name}&lt;/code&gt; value is a property of this node, while the
+ * &lt;code&gt;{value}&lt;/code&gt; property consists of the children of this node.
+ *
+ * XmlAttribute nodes must have at least one child, and can have an unlimited
+ * number of {@link XmlCharRef}, {@link XmlEntityRef}, and {@link XmlText}
+ * nodes as children.
+ */
+export default class XmlAttribute extends XmlNode {
+    /**
+     * Initializes a new instance of the {@link XmlAttribute} class.
+     *
+     * @param {string} name             The name of the XML attribute.
+     * @param {XmlNode|XmlNode[]} value The initial value of the XML attribute.
+     *                                  Additional children can be added later.
+     *                                  Only {@link XmlCharRef},
+     *                                  {@link XmlEntityRef}, and
+     *                                  {@link XmlText} nodes are permitted.
+     */
+    constructor(name, value) {
+        super();
+        this.name = name;
+        if (typeCheck(&quot;Array&quot;, value)) {
+            for (let node of value) {
+                this.insertChild(node);
+            }
+        } else {
+            this.insertChild(value);
+        }
+    }
+
+    /**
+     * Gets the name of this attribute.
+     *
+     * @returns {string} The name of this attribute.
+     */
+    get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of this attribute.
+     *
+     * @param {string} name The name of this attribute.
+     */
+    set name(name) {
+        if (!typeCheck(&quot;String&quot;, name)) {
+            throw new TypeError(&quot;name should be a string&quot;);
+        } else if (!validate.name(name)) {
+            throw new Error(&quot;name should not contain characters not&quot; +
+                &quot; allowed in XML names&quot;);
+        }
+        this._name = name;
+    }
+
+    /**
+     * Inserts a new XML character reference at the specified index.
+     *
+     * @param {string} char    The character to represent using the reference.
+     * @param {boolean} [hex]  Whether to use the hexadecimal or decimal
+     *                         representation for the reference. If left
+     *                         undefined, decimal is the default.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlCharRef} The newly created XML declaration.
+     */
+    charRef(char, hex, index) {
+        let charRef = new XmlCharRef(char, hex);
+        this.insertChild(charRef, index);
+        return charRef;
+    }
+
+    /**
+     * Inserts a new XML entity reference at the specified index.
+     *
+     * @param {string} entity  The entity to be referenced.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlEntityRef} The newly created XML declaration.
+     */
+    entityRef(entity, index) {
+        let charRef = new XmlEntityRef(entity);
+        this.insertChild(charRef, index);
+        return charRef;
+    }
+
+    /**
+     * Inserts the specified node into this node&apos;s children at the specified
+     * index. The node is not inserted if it is already present. If this node
+     * already has a parent, it is removed from that parent.
+     *
+     * Note that only {@link XmlCharRef}, {@link XmlEntityRef}, and
+     * {@link XmlText} nodes can be inserted; otherwise, an exception will be
+     * thrown.
+     *
+     * @param {XmlNode} node   The node to insert.
+     * @param {number} [index] The index at which to insert the node. Nodes at
+     *                         or after the index are shifted to the right. If
+     *                         no index is specified, the node is inserted at
+     *                         the end.
+     *
+     * @returns {XmlNode} The node inserted into this node&apos;s children, or
+     *                    undefined if no node was inserted.
+     */
+    insertChild(node, index) {
+        if (!(node instanceof XmlCharRef || node instanceof XmlEntityRef ||
+            node instanceof XmlText)) {
+            throw new TypeError(&quot;node should be an instance of XmlCharRef,&quot; +
+                &quot; XmlEntityRef, or XmlText&quot;);
+        }
+        return super.insertChild(node, index);
+    }
+
+    /**
+     * Removes the specified node from this node&apos;s children.
+     *
+     * Note that this node must have at least one child. Attempts to remove
+     * the last child node will result in an exception.
+     *
+     * @param {XmlNode} node The node to remove.
+     *
+     * @returns {boolean} Whether a node was removed.
+     */
+    removeChild(node) {
+        if (this._children.length === 1) {
+            throw new Error(&quot;XmlAttribute nodes must have at least one child&quot;);
+        }
+        return super.removeChild(node);
+    }
+
+    /**
+     * Removes the node at the specified index from this node&apos;s children.
+     *
+     * Note that this node must have at least one child. Attempts to remove
+     * the last child node will result in an exception.
+     *
+     * @param {number} index The index at which the node to be removed is
+     *                       located.
+     *
+     * @returns {XmlNode} The node that was removed, or undefined if no node
+     *                    was removed.
+     */
+    removeChildAtIndex(index) {
+        if (this._children.length === 1) {
+            throw new Error(&quot;XmlAttribute nodes must have at least one child&quot;);
+        }
+        return super.removeChildAtIndex(index);
+    }
+
+    /**
+     * Inserts a new XML text node at the specified index.
+     *
+     * @param {string} text    Arbitrary character data.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlText} The newly created XML declaration.
+     */
+    text(text, index) {
+        let textNode = new XmlText(text);
+        this.insertChild(textNode, index);
+        return textNode;
+    }
+
+    /**
+     * Returns an XML string representation of this node.
+     *
+     * @param {StringOptions} [options] Formatting options for the string
+     *                                  representation.
+     *
+     * @returns {string} An XML string representation of this node.
+     */
+    toString(options = {}) {
+        stringOptions.validate(options);
+
+        let quote = options.doubleQuotes ? &quot;\&quot;&quot; : &quot;&apos;&quot;;
+        let str = this.name + &quot;=&quot; + quote;
+        for (let child of this._children) {
+            if (options.doubleQuotes) {
+                str += escape.doubleQuotes(child.toString(options));
+            } else {
+                str += escape.singleQuotes(child.toString(options));
+            }
+        }
+        str += quote;
+        return str;
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

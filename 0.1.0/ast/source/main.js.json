@@ -1,0 +1,2505 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "\"use strict\"",
+        "range": [
+          619,
+          631
+        ],
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
+          },
+          "end": {
+            "line": 17,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        619,
+        632
+      ],
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 0
+        },
+        "end": {
+          "line": 17,
+          "column": 13
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+          "range": [
+            0,
+            615
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 15,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlAttribute",
+            "range": [
+              643,
+              655
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 7
+              },
+              "end": {
+                "line": 19,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            643,
+            655
+          ],
+          "loc": {
+            "start": {
+              "line": 19,
+              "column": 7
+            },
+            "end": {
+              "line": 19,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlAttribute",
+        "raw": "\"./nodes/XmlAttribute\"",
+        "range": [
+          661,
+          683
+        ],
+        "loc": {
+          "start": {
+            "line": 19,
+            "column": 25
+          },
+          "end": {
+            "line": 19,
+            "column": 47
+          }
+        }
+      },
+      "range": [
+        636,
+        684
+      ],
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlCdata",
+            "range": [
+              693,
+              701
+            ],
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 7
+              },
+              "end": {
+                "line": 20,
+                "column": 15
+              }
+            }
+          },
+          "range": [
+            693,
+            701
+          ],
+          "loc": {
+            "start": {
+              "line": 20,
+              "column": 7
+            },
+            "end": {
+              "line": 20,
+              "column": 15
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlCdata",
+        "raw": "\"./nodes/XmlCdata\"",
+        "range": [
+          707,
+          725
+        ],
+        "loc": {
+          "start": {
+            "line": 20,
+            "column": 21
+          },
+          "end": {
+            "line": 20,
+            "column": 39
+          }
+        }
+      },
+      "range": [
+        686,
+        726
+      ],
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 40
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlCharRef",
+            "range": [
+              735,
+              745
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 7
+              },
+              "end": {
+                "line": 21,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            735,
+            745
+          ],
+          "loc": {
+            "start": {
+              "line": 21,
+              "column": 7
+            },
+            "end": {
+              "line": 21,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlCharRef",
+        "raw": "\"./nodes/XmlCharRef\"",
+        "range": [
+          751,
+          771
+        ],
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 23
+          },
+          "end": {
+            "line": 21,
+            "column": 43
+          }
+        }
+      },
+      "range": [
+        728,
+        772
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 0
+        },
+        "end": {
+          "line": 21,
+          "column": 44
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlComment",
+            "range": [
+              781,
+              791
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 7
+              },
+              "end": {
+                "line": 22,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            781,
+            791
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 7
+            },
+            "end": {
+              "line": 22,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlComment",
+        "raw": "\"./nodes/XmlComment\"",
+        "range": [
+          797,
+          817
+        ],
+        "loc": {
+          "start": {
+            "line": 22,
+            "column": 23
+          },
+          "end": {
+            "line": 22,
+            "column": 43
+          }
+        }
+      },
+      "range": [
+        774,
+        818
+      ],
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 44
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDecl",
+            "range": [
+              827,
+              834
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 7
+              },
+              "end": {
+                "line": 23,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            827,
+            834
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 7
+            },
+            "end": {
+              "line": 23,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDecl",
+        "raw": "\"./nodes/XmlDecl\"",
+        "range": [
+          840,
+          857
+        ],
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 20
+          },
+          "end": {
+            "line": 23,
+            "column": 37
+          }
+        }
+      },
+      "range": [
+        820,
+        858
+      ],
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 38
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDocument",
+            "range": [
+              867,
+              878
+            ],
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 7
+              },
+              "end": {
+                "line": 24,
+                "column": 18
+              }
+            }
+          },
+          "range": [
+            867,
+            878
+          ],
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 7
+            },
+            "end": {
+              "line": 24,
+              "column": 18
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDocument",
+        "raw": "\"./nodes/XmlDocument\"",
+        "range": [
+          884,
+          905
+        ],
+        "loc": {
+          "start": {
+            "line": 24,
+            "column": 24
+          },
+          "end": {
+            "line": 24,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        860,
+        906
+      ],
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtd",
+            "range": [
+              915,
+              921
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 7
+              },
+              "end": {
+                "line": 25,
+                "column": 13
+              }
+            }
+          },
+          "range": [
+            915,
+            921
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 7
+            },
+            "end": {
+              "line": 25,
+              "column": 13
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtd",
+        "raw": "\"./nodes/XmlDtd\"",
+        "range": [
+          927,
+          943
+        ],
+        "loc": {
+          "start": {
+            "line": 25,
+            "column": 19
+          },
+          "end": {
+            "line": 25,
+            "column": 35
+          }
+        }
+      },
+      "range": [
+        908,
+        944
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 36
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdAttlist",
+            "range": [
+              953,
+              966
+            ],
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 7
+              },
+              "end": {
+                "line": 26,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            953,
+            966
+          ],
+          "loc": {
+            "start": {
+              "line": 26,
+              "column": 7
+            },
+            "end": {
+              "line": 26,
+              "column": 20
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtdAttlist",
+        "raw": "\"./nodes/XmlDtdAttlist\"",
+        "range": [
+          972,
+          995
+        ],
+        "loc": {
+          "start": {
+            "line": 26,
+            "column": 26
+          },
+          "end": {
+            "line": 26,
+            "column": 49
+          }
+        }
+      },
+      "range": [
+        946,
+        996
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 50
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdElement",
+            "range": [
+              1005,
+              1018
+            ],
+            "loc": {
+              "start": {
+                "line": 27,
+                "column": 7
+              },
+              "end": {
+                "line": 27,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            1005,
+            1018
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 7
+            },
+            "end": {
+              "line": 27,
+              "column": 20
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtdElement",
+        "raw": "\"./nodes/XmlDtdElement\"",
+        "range": [
+          1024,
+          1047
+        ],
+        "loc": {
+          "start": {
+            "line": 27,
+            "column": 26
+          },
+          "end": {
+            "line": 27,
+            "column": 49
+          }
+        }
+      },
+      "range": [
+        998,
+        1048
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 50
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdEntity",
+            "range": [
+              1057,
+              1069
+            ],
+            "loc": {
+              "start": {
+                "line": 28,
+                "column": 7
+              },
+              "end": {
+                "line": 28,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            1057,
+            1069
+          ],
+          "loc": {
+            "start": {
+              "line": 28,
+              "column": 7
+            },
+            "end": {
+              "line": 28,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtdEntity",
+        "raw": "\"./nodes/XmlDtdEntity\"",
+        "range": [
+          1075,
+          1097
+        ],
+        "loc": {
+          "start": {
+            "line": 28,
+            "column": 25
+          },
+          "end": {
+            "line": 28,
+            "column": 47
+          }
+        }
+      },
+      "range": [
+        1050,
+        1098
+      ],
+      "loc": {
+        "start": {
+          "line": 28,
+          "column": 0
+        },
+        "end": {
+          "line": 28,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdNotation",
+            "range": [
+              1107,
+              1121
+            ],
+            "loc": {
+              "start": {
+                "line": 29,
+                "column": 7
+              },
+              "end": {
+                "line": 29,
+                "column": 21
+              }
+            }
+          },
+          "range": [
+            1107,
+            1121
+          ],
+          "loc": {
+            "start": {
+              "line": 29,
+              "column": 7
+            },
+            "end": {
+              "line": 29,
+              "column": 21
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtdNotation",
+        "raw": "\"./nodes/XmlDtdNotation\"",
+        "range": [
+          1127,
+          1151
+        ],
+        "loc": {
+          "start": {
+            "line": 29,
+            "column": 27
+          },
+          "end": {
+            "line": 29,
+            "column": 51
+          }
+        }
+      },
+      "range": [
+        1100,
+        1152
+      ],
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 0
+        },
+        "end": {
+          "line": 29,
+          "column": 52
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdParamEntityRef",
+            "range": [
+              1161,
+              1181
+            ],
+            "loc": {
+              "start": {
+                "line": 30,
+                "column": 7
+              },
+              "end": {
+                "line": 30,
+                "column": 27
+              }
+            }
+          },
+          "range": [
+            1161,
+            1181
+          ],
+          "loc": {
+            "start": {
+              "line": 30,
+              "column": 7
+            },
+            "end": {
+              "line": 30,
+              "column": 27
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlDtdParamEntityRef",
+        "raw": "\"./nodes/XmlDtdParamEntityRef\"",
+        "range": [
+          1187,
+          1217
+        ],
+        "loc": {
+          "start": {
+            "line": 30,
+            "column": 33
+          },
+          "end": {
+            "line": 30,
+            "column": 63
+          }
+        }
+      },
+      "range": [
+        1154,
+        1218
+      ],
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 64
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlElement",
+            "range": [
+              1227,
+              1237
+            ],
+            "loc": {
+              "start": {
+                "line": 31,
+                "column": 7
+              },
+              "end": {
+                "line": 31,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            1227,
+            1237
+          ],
+          "loc": {
+            "start": {
+              "line": 31,
+              "column": 7
+            },
+            "end": {
+              "line": 31,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlElement",
+        "raw": "\"./nodes/XmlElement\"",
+        "range": [
+          1243,
+          1263
+        ],
+        "loc": {
+          "start": {
+            "line": 31,
+            "column": 23
+          },
+          "end": {
+            "line": 31,
+            "column": 43
+          }
+        }
+      },
+      "range": [
+        1220,
+        1264
+      ],
+      "loc": {
+        "start": {
+          "line": 31,
+          "column": 0
+        },
+        "end": {
+          "line": 31,
+          "column": 44
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlEntityRef",
+            "range": [
+              1273,
+              1285
+            ],
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 7
+              },
+              "end": {
+                "line": 32,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            1273,
+            1285
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 7
+            },
+            "end": {
+              "line": 32,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlEntityRef",
+        "raw": "\"./nodes/XmlEntityRef\"",
+        "range": [
+          1291,
+          1313
+        ],
+        "loc": {
+          "start": {
+            "line": 32,
+            "column": 25
+          },
+          "end": {
+            "line": 32,
+            "column": 47
+          }
+        }
+      },
+      "range": [
+        1266,
+        1314
+      ],
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlNode",
+            "range": [
+              1323,
+              1330
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 7
+              },
+              "end": {
+                "line": 33,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            1323,
+            1330
+          ],
+          "loc": {
+            "start": {
+              "line": 33,
+              "column": 7
+            },
+            "end": {
+              "line": 33,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlNode",
+        "raw": "\"./nodes/XmlNode\"",
+        "range": [
+          1336,
+          1353
+        ],
+        "loc": {
+          "start": {
+            "line": 33,
+            "column": 20
+          },
+          "end": {
+            "line": 33,
+            "column": 37
+          }
+        }
+      },
+      "range": [
+        1316,
+        1354
+      ],
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 38
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlProcInst",
+            "range": [
+              1363,
+              1374
+            ],
+            "loc": {
+              "start": {
+                "line": 34,
+                "column": 7
+              },
+              "end": {
+                "line": 34,
+                "column": 18
+              }
+            }
+          },
+          "range": [
+            1363,
+            1374
+          ],
+          "loc": {
+            "start": {
+              "line": 34,
+              "column": 7
+            },
+            "end": {
+              "line": 34,
+              "column": 18
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlProcInst",
+        "raw": "\"./nodes/XmlProcInst\"",
+        "range": [
+          1380,
+          1401
+        ],
+        "loc": {
+          "start": {
+            "line": 34,
+            "column": 24
+          },
+          "end": {
+            "line": 34,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        1356,
+        1402
+      ],
+      "loc": {
+        "start": {
+          "line": 34,
+          "column": 0
+        },
+        "end": {
+          "line": 34,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "XmlText",
+            "range": [
+              1411,
+              1418
+            ],
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 7
+              },
+              "end": {
+                "line": 35,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            1411,
+            1418
+          ],
+          "loc": {
+            "start": {
+              "line": 35,
+              "column": 7
+            },
+            "end": {
+              "line": 35,
+              "column": 14
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./nodes/XmlText",
+        "raw": "\"./nodes/XmlText\"",
+        "range": [
+          1424,
+          1441
+        ],
+        "loc": {
+          "start": {
+            "line": 35,
+            "column": 20
+          },
+          "end": {
+            "line": 35,
+            "column": 37
+          }
+        }
+      },
+      "range": [
+        1404,
+        1442
+      ],
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 38
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlAttribute",
+            "range": [
+              1454,
+              1466
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 8
+              },
+              "end": {
+                "line": 37,
+                "column": 20
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlAttribute",
+            "range": [
+              1454,
+              1466
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 8
+              },
+              "end": {
+                "line": 37,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            1454,
+            1466
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 8
+            },
+            "end": {
+              "line": 37,
+              "column": 20
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlCdata",
+            "range": [
+              1468,
+              1476
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 22
+              },
+              "end": {
+                "line": 37,
+                "column": 30
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlCdata",
+            "range": [
+              1468,
+              1476
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 22
+              },
+              "end": {
+                "line": 37,
+                "column": 30
+              }
+            }
+          },
+          "range": [
+            1468,
+            1476
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 22
+            },
+            "end": {
+              "line": 37,
+              "column": 30
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlCharRef",
+            "range": [
+              1478,
+              1488
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 32
+              },
+              "end": {
+                "line": 37,
+                "column": 42
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlCharRef",
+            "range": [
+              1478,
+              1488
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 32
+              },
+              "end": {
+                "line": 37,
+                "column": 42
+              }
+            }
+          },
+          "range": [
+            1478,
+            1488
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 32
+            },
+            "end": {
+              "line": 37,
+              "column": 42
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlComment",
+            "range": [
+              1490,
+              1500
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 44
+              },
+              "end": {
+                "line": 37,
+                "column": 54
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlComment",
+            "range": [
+              1490,
+              1500
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 44
+              },
+              "end": {
+                "line": 37,
+                "column": 54
+              }
+            }
+          },
+          "range": [
+            1490,
+            1500
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 44
+            },
+            "end": {
+              "line": 37,
+              "column": 54
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDecl",
+            "range": [
+              1502,
+              1509
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 56
+              },
+              "end": {
+                "line": 37,
+                "column": 63
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDecl",
+            "range": [
+              1502,
+              1509
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 56
+              },
+              "end": {
+                "line": 37,
+                "column": 63
+              }
+            }
+          },
+          "range": [
+            1502,
+            1509
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 56
+            },
+            "end": {
+              "line": 37,
+              "column": 63
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDocument",
+            "range": [
+              1511,
+              1522
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 65
+              },
+              "end": {
+                "line": 37,
+                "column": 76
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDocument",
+            "range": [
+              1511,
+              1522
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 65
+              },
+              "end": {
+                "line": 37,
+                "column": 76
+              }
+            }
+          },
+          "range": [
+            1511,
+            1522
+          ],
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 65
+            },
+            "end": {
+              "line": 37,
+              "column": 76
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtd",
+            "range": [
+              1529,
+              1535
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 4
+              },
+              "end": {
+                "line": 38,
+                "column": 10
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtd",
+            "range": [
+              1529,
+              1535
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 4
+              },
+              "end": {
+                "line": 38,
+                "column": 10
+              }
+            }
+          },
+          "range": [
+            1529,
+            1535
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 4
+            },
+            "end": {
+              "line": 38,
+              "column": 10
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtdAttlist",
+            "range": [
+              1537,
+              1550
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 12
+              },
+              "end": {
+                "line": 38,
+                "column": 25
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdAttlist",
+            "range": [
+              1537,
+              1550
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 12
+              },
+              "end": {
+                "line": 38,
+                "column": 25
+              }
+            }
+          },
+          "range": [
+            1537,
+            1550
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 12
+            },
+            "end": {
+              "line": 38,
+              "column": 25
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtdElement",
+            "range": [
+              1552,
+              1565
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 27
+              },
+              "end": {
+                "line": 38,
+                "column": 40
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdElement",
+            "range": [
+              1552,
+              1565
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 27
+              },
+              "end": {
+                "line": 38,
+                "column": 40
+              }
+            }
+          },
+          "range": [
+            1552,
+            1565
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 27
+            },
+            "end": {
+              "line": 38,
+              "column": 40
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtdEntity",
+            "range": [
+              1567,
+              1579
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 42
+              },
+              "end": {
+                "line": 38,
+                "column": 54
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdEntity",
+            "range": [
+              1567,
+              1579
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 42
+              },
+              "end": {
+                "line": 38,
+                "column": 54
+              }
+            }
+          },
+          "range": [
+            1567,
+            1579
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 42
+            },
+            "end": {
+              "line": 38,
+              "column": 54
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtdNotation",
+            "range": [
+              1581,
+              1595
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 56
+              },
+              "end": {
+                "line": 38,
+                "column": 70
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdNotation",
+            "range": [
+              1581,
+              1595
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 56
+              },
+              "end": {
+                "line": 38,
+                "column": 70
+              }
+            }
+          },
+          "range": [
+            1581,
+            1595
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 56
+            },
+            "end": {
+              "line": 38,
+              "column": 70
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlDtdParamEntityRef",
+            "range": [
+              1602,
+              1622
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 4
+              },
+              "end": {
+                "line": 39,
+                "column": 24
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlDtdParamEntityRef",
+            "range": [
+              1602,
+              1622
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 4
+              },
+              "end": {
+                "line": 39,
+                "column": 24
+              }
+            }
+          },
+          "range": [
+            1602,
+            1622
+          ],
+          "loc": {
+            "start": {
+              "line": 39,
+              "column": 4
+            },
+            "end": {
+              "line": 39,
+              "column": 24
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlElement",
+            "range": [
+              1624,
+              1634
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 26
+              },
+              "end": {
+                "line": 39,
+                "column": 36
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlElement",
+            "range": [
+              1624,
+              1634
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 26
+              },
+              "end": {
+                "line": 39,
+                "column": 36
+              }
+            }
+          },
+          "range": [
+            1624,
+            1634
+          ],
+          "loc": {
+            "start": {
+              "line": 39,
+              "column": 26
+            },
+            "end": {
+              "line": 39,
+              "column": 36
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlEntityRef",
+            "range": [
+              1636,
+              1648
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 38
+              },
+              "end": {
+                "line": 39,
+                "column": 50
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlEntityRef",
+            "range": [
+              1636,
+              1648
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 38
+              },
+              "end": {
+                "line": 39,
+                "column": 50
+              }
+            }
+          },
+          "range": [
+            1636,
+            1648
+          ],
+          "loc": {
+            "start": {
+              "line": 39,
+              "column": 38
+            },
+            "end": {
+              "line": 39,
+              "column": 50
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlNode",
+            "range": [
+              1650,
+              1657
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 52
+              },
+              "end": {
+                "line": 39,
+                "column": 59
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlNode",
+            "range": [
+              1650,
+              1657
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 52
+              },
+              "end": {
+                "line": 39,
+                "column": 59
+              }
+            }
+          },
+          "range": [
+            1650,
+            1657
+          ],
+          "loc": {
+            "start": {
+              "line": 39,
+              "column": 52
+            },
+            "end": {
+              "line": 39,
+              "column": 59
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlProcInst",
+            "range": [
+              1659,
+              1670
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 61
+              },
+              "end": {
+                "line": 39,
+                "column": 72
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlProcInst",
+            "range": [
+              1659,
+              1670
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 61
+              },
+              "end": {
+                "line": 39,
+                "column": 72
+              }
+            }
+          },
+          "range": [
+            1659,
+            1670
+          ],
+          "loc": {
+            "start": {
+              "line": 39,
+              "column": 61
+            },
+            "end": {
+              "line": 39,
+              "column": 72
+            }
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "exported": {
+            "type": "Identifier",
+            "name": "XmlText",
+            "range": [
+              1677,
+              1684
+            ],
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 4
+              },
+              "end": {
+                "line": 40,
+                "column": 11
+              }
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "name": "XmlText",
+            "range": [
+              1677,
+              1684
+            ],
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 4
+              },
+              "end": {
+                "line": 40,
+                "column": 11
+              }
+            }
+          },
+          "range": [
+            1677,
+            1684
+          ],
+          "loc": {
+            "start": {
+              "line": 40,
+              "column": 4
+            },
+            "end": {
+              "line": 40,
+              "column": 11
+            }
+          }
+        }
+      ],
+      "source": null,
+      "range": [
+        1446,
+        1686
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 13
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Creates a new XML document.\r\n *\r\n * @param {string} root The name of the root element of the document.\r\n *\r\n * @returns {XmlDocument} The new XML document.\r\n ",
+          "range": [
+            1690,
+            1858
+          ],
+          "loc": {
+            "start": {
+              "line": 42,
+              "column": 0
+            },
+            "end": {
+              "line": 48,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "document",
+          "range": [
+            1876,
+            1884
+          ],
+          "loc": {
+            "start": {
+              "line": 49,
+              "column": 16
+            },
+            "end": {
+              "line": 49,
+              "column": 24
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "root",
+            "range": [
+              1885,
+              1889
+            ],
+            "loc": {
+              "start": {
+                "line": 49,
+                "column": 25
+              },
+              "end": {
+                "line": 49,
+                "column": 29
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "NewExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "XmlDocument",
+                  "range": [
+                    1909,
+                    1920
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 50,
+                      "column": 15
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 26
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "root",
+                    "range": [
+                      1921,
+                      1925
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 50,
+                        "column": 27
+                      },
+                      "end": {
+                        "line": 50,
+                        "column": 31
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1905,
+                  1926
+                ],
+                "loc": {
+                  "start": {
+                    "line": 50,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 50,
+                    "column": 32
+                  }
+                }
+              },
+              "range": [
+                1898,
+                1927
+              ],
+              "loc": {
+                "start": {
+                  "line": 50,
+                  "column": 4
+                },
+                "end": {
+                  "line": 50,
+                  "column": 33
+                }
+              }
+            }
+          ],
+          "range": [
+            1891,
+            1930
+          ],
+          "loc": {
+            "start": {
+              "line": 49,
+              "column": 31
+            },
+            "end": {
+              "line": 51,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1867,
+          1930
+        ],
+        "loc": {
+          "start": {
+            "line": 49,
+            "column": 7
+          },
+          "end": {
+            "line": 51,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Creates a new XML document.\r\n *\r\n * @param {string} root The name of the root element of the document.\r\n *\r\n * @returns {XmlDocument} The new XML document.\r\n ",
+            "range": [
+              1690,
+              1858
+            ],
+            "loc": {
+              "start": {
+                "line": 42,
+                "column": 0
+              },
+              "end": {
+                "line": 48,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1860,
+        1930
+      ],
+      "loc": {
+        "start": {
+          "line": 49,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Creates a new XML document.\r\n *\r\n * @param {string} root The name of the root element of the document.\r\n *\r\n * @returns {XmlDocument} The new XML document.\r\n ",
+          "range": [
+            1690,
+            1858
+          ],
+          "loc": {
+            "start": {
+              "line": 42,
+              "column": 0
+            },
+            "end": {
+              "line": 48,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    619,
+    1930
+  ],
+  "loc": {
+    "start": {
+      "line": 17,
+      "column": 0
+    },
+    "end": {
+      "line": 51,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+      "range": [
+        0,
+        615
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 15,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Creates a new XML document.\r\n *\r\n * @param {string} root The name of the root element of the document.\r\n *\r\n * @returns {XmlDocument} The new XML document.\r\n ",
+      "range": [
+        1690,
+        1858
+      ],
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 0
+        },
+        "end": {
+          "line": 48,
+          "column": 3
+        }
+      }
+    }
+  ]
+}

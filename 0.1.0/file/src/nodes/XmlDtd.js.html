@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/nodes/XmlDtd.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-document">document</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">nodes</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlAttribute.js~XmlAttribute.html">XmlAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCdata.js~XmlCdata.html">XmlCdata</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlCharRef.js~XmlCharRef.html">XmlCharRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlComment.js~XmlComment.html">XmlComment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDecl.js~XmlDecl.html">XmlDecl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDocument.js~XmlDocument.html">XmlDocument</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtd.js~XmlDtd.html">XmlDtd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html">XmlDtdAttlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdElement.js~XmlDtdElement.html">XmlDtdElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html">XmlDtdEntity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html">XmlDtdNotation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html">XmlDtdParamEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlElement.js~XmlElement.html">XmlElement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlEntityRef.js~XmlEntityRef.html">XmlEntityRef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlNode.js~XmlNode.html">XmlNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlProcInst.js~XmlProcInst.html">XmlProcInst</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nodes/XmlText.js~XmlText.html">XmlText</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">options</div><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DeclarationOptions">DeclarationOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StringOptions">StringOptions</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/nodes/XmlDtd.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright (C) 2016 Michael Kourlas
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+&quot;use strict&quot;;
+
+import {typeCheck} from &quot;type-check&quot;;
+
+import * as stringOptions from &quot;../options/string&quot;;
+import * as validate from &quot;../utils/validate&quot;;
+
+import XmlComment from &quot;./XmlComment&quot;;
+import XmlDtdAttlist from &quot;./XmlDtdAttlist&quot;;
+import XmlDtdElement from &quot;./XmlDtdElement&quot;;
+import XmlDtdEntity from &quot;./XmlDtdEntity&quot;;
+import XmlDtdNotation from &quot;./XmlDtdNotation&quot;;
+import XmlDtdParamEntityRef from &quot;./XmlDtdParamEntityRef&quot;;
+import XmlNode from &quot;./XmlNode&quot;;
+import XmlProcInst from &quot;./XmlProcInst&quot;;
+
+/**
+ * Represents an XML document type definition (DTD).
+ *
+ * An XML document type definition  is structured as follows, where
+ * &lt;code&gt;{name}&lt;/code&gt; is the name of the DTD, &lt;code&gt;{sysId}&lt;/code&gt; is the
+ * system identifier of the DTD, &lt;code&gt;{pubId}&lt;/code&gt; is the public identifier
+ * of the DTD, and &lt;code&gt;{intSubset}&lt;/code&gt; is the internal subset of the DTD:
+ * &lt;code&gt;&lt;pre&gt;&amp;lt;!DOCTYPE {name} SYSTEM &quot;{sysId}&quot; PUBLIC &quot;{pubId}&quot; [
+ *     {intSubset}
+ * ]&amp;gt;&lt;/pre&gt;&lt;/code&gt;
+ *
+ * The &lt;code&gt;{name}&lt;/code&gt;, &lt;code&gt;{pubId}&lt;/code&gt;, and &lt;code&gt;{sysId}&lt;/code&gt;
+ * values are properties of the node, while the &lt;code&gt;{intSubset}&lt;/code&gt; value
+ * consists of the children of this node.
+ *
+ * XmlDtd nodes can have an unlimited number of {@link XmlComment},
+ * {@link XmlDtdAttlist}, {@link XmlDtdElement}, {@link XmlDtdEntity},
+ * {@link XmlDtdNotation}, {@link XmlDtdParamEntityRef}, and
+ * {@link XmlProcInst} nodes.
+ */
+export default class XmlDtd extends XmlNode {
+    /**
+     * Initializes a new instance of the {@link XmlDtd} class.
+     *
+     * @param {string} name    The name of the DTD.
+     * @param {string} [sysId] The system identifier of the DTD, excluding
+     *                         quotation marks.
+     * @param {string} [pubId] The public identifier of the DTD, excluding
+     *                         quotation marks. If a public identifier is
+     *                         provided, a system identifier must be provided
+     *                         as well.
+     */
+    constructor(name, sysId, pubId) {
+        super();
+        this.name = name;
+        this.sysId = sysId;
+        this.pubId = pubId;
+    }
+
+    /**
+     * Gets the name of the DTD.
+     *
+     * @returns {string} The name of the DTD.
+     */
+    get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of the DTD.
+     * 
+     * @param {string} name The name of the DTD.
+     */
+    set name(name) {
+        if (!typeCheck(&quot;String&quot;, name)) {
+            throw new TypeError(&quot;name should be a string&quot;);
+        } else if (!validate.name(name)) {
+            throw new Error(&quot;name should not contain characters not&quot; +
+                &quot; allowed in XML names&quot;);
+        }
+        this._name = name;
+    }
+
+    /**
+     * Gets the public identifier of the DTD, excluding quotation marks.
+     *
+     * @returns {string|undefined} The public identifier of the DTD, excluding
+     *                             quotation marks.
+     */
+    get pubId() {
+        return this._pubId;
+    }
+
+    /**
+     * Sets the public identifier of the DTD, excluding quotation marks. If a
+     * public identifier is provided, a system identifier must be provided as
+     * well.
+     *
+     * @param {string|undefined} pubId The public identifier of the DTD,
+     *                                 excluding quotation marks.
+     */
+    set pubId(pubId) {
+        if (typeCheck(&quot;String&quot;, pubId)) {
+            if (!/^(\u0020|\u000D|\u000A|[a-zA-Z0-9]|[-&apos;()+,./:=?;!*#@$_%])*$/
+                    .test(pubId)) {
+                throw new Error(&quot;pubId should not contain characters not&quot; +
+                    &quot; allowed in public identifiers&quot;);
+            } else if (typeCheck(&quot;Undefined&quot;, this.sysId)) {
+                throw new Error(&quot;pubId should not be defined if sysId is&quot; +
+                    &quot; undefined&quot;);
+            }
+        } else if (!typeCheck(&quot;Undefined&quot;, pubId)) {
+            throw new TypeError(&quot;pubId should be a string or undefined&quot;);
+        }
+        this._pubId = pubId;
+    }
+
+    /**
+     * Gets the system identifier of the DTD, excluding quotation marks.
+     *
+     * @returns {string|undefined} The system identifier of the DTD, excluding
+     *                             quotation marks.
+     */
+    get sysId() {
+        return this._sysId;
+    }
+
+    /**
+     * Sets the system identifier of the DTD, excluding quotation marks.
+     *
+     * @param {string|undefined} sysId The system identifier of the DTD,
+     *                                 excluding quotation marks.
+     */
+    set sysId(sysId) {
+        if (typeCheck(&quot;String&quot;, sysId)) {
+            if (!validate.char(sysId)) {
+                throw new Error(&quot;sysId should not contain characters not&quot; +
+                    &quot; allowed in XML&quot;);
+            } else if (sysId.indexOf(&quot;&apos;&quot;) !== -1 &amp;&amp;
+                sysId.indexOf(&quot;\&quot;&quot;) !== -1) {
+                throw new Error(&quot;sysId should not contain both single quotes&quot; +
+                    &quot; and double quotes&quot;);
+            }
+        } else if (typeCheck(&quot;Undefined&quot;, sysId)) {
+            if (!typeCheck(&quot;Undefined&quot;, this.pubId)) {
+                throw new Error(&quot;sysId should not be undefined if pubId is&quot; +
+                    &quot; defined&quot;);
+            }
+        } else {
+            throw new TypeError(&quot;sysId should be a string or undefined&quot;);
+        }
+        this._sysId = sysId;
+    }
+
+    /**
+     * Inserts a new attribute-list declaration at the specified index. If no
+     * index is specified, the node is inserted at the end of this node&apos;s
+     * children.
+     *
+     * @param {string} text    The text of the attribute-list declaration.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlDtdAttlist} The newly created attribute-list declaration.
+     */
+    attlist(text, index) {
+        let attlist = new XmlDtdAttlist(text);
+        this.insertChild(attlist, index);
+        return attlist;
+    }
+
+    /**
+     * Inserts a new comment at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} content The data of the comment.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlComment} The newly created comment.
+     */
+    comment(content, index) {
+        let comment = new XmlComment(content);
+        this.insertChild(comment, index);
+        return comment;
+    }
+
+    /**
+     * Inserts a new element declaration at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} text    The text of the element declaration.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlDtdElement} The newly created element declaration.
+     */
+    element(text, index) {
+        let element = new XmlDtdElement(text);
+        this.insertChild(element, index);
+        return element;
+    }
+
+    /**
+     * Inserts a new entity declaration at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} text    The text of the entity declaration.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlDtdEntity} The newly created entity declaration.
+     */
+    entity(text, index) {
+        let entity = new XmlDtdEntity(text);
+        this.insertChild(entity, index);
+        return entity;
+    }
+
+    /**
+     * Inserts the specified node into this node&apos;s children at the specified
+     * index. The node is not inserted if it is already present. If this node
+     * already has a parent, it is removed from that parent.
+     *
+     * Only {@link XmlComment}, {@link XmlDtdAttlist}, {@link XmlDtdElement},
+     * {@link XmlDtdEntity}, {@link XmlDtdNotation}, and {@link XmlProcInst}
+     * nodes can be inserted; otherwise an exception will be thrown.
+     *
+     * @param {XmlNode} node   The node to insert.
+     * @param {number} [index] The index at which to insert the node. Nodes at
+     *                         or after the index are shifted to the right. If
+     *                         no index is specified, the node is inserted at
+     *                         the end.
+     *
+     * @returns {XmlNode} The node inserted into this node&apos;s children, or
+     *                    undefined if no node was inserted.
+     */
+    insertChild(node, index) {
+        if (!(node instanceof XmlComment || node instanceof XmlDtdAttlist ||
+            node instanceof XmlDtdElement || node instanceof XmlDtdEntity ||
+            node instanceof XmlDtdNotation ||
+            node instanceof XmlDtdParamEntityRef ||
+            node instanceof XmlProcInst)) {
+            throw new TypeError(&quot;node should be an instance of&quot; +
+                &quot; XmlComment, XmlDtdAttlist, XmlDtdElement, XmlDtdEntity,&quot; +
+                &quot; XmlDtdNotation, XmlDtdParamEntityRef, or XmlProcInst&quot;);
+        }
+        return super.insertChild(node, index);
+    }
+
+    /**
+     * Inserts a new notation declaration at the specified index. If no index is
+     * specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} text    The text of the notation declaration.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlDtdNotation} The newly created notation declaration.
+     */
+    notation(text, index) {
+        let notation = new XmlDtdNotation(text);
+        this.insertChild(notation, index);
+        return notation;
+    }
+
+    /**
+     * Inserts a new parameter entity reference at the specified index. If no
+     * index is specified, the node is inserted at the end of this node&apos;s
+     * children.
+     *
+     * @param {string} entity  The entity to reference.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlDtdParamEntityRef} The newly created parameter entity
+     *                                 reference.
+     */
+    paramEntityRef(entity, index) {
+        let paramEntity = new XmlDtdParamEntityRef(entity);
+        this.insertChild(paramEntity, index);
+        return paramEntity;
+    }
+
+    /**
+     * Inserts a new processing instruction at the specified index. If no index
+     * is specified, the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} target    The target of the processing instruction.
+     * @param {string} [content] The data of the processing instruction, or
+     *                           undefined if there is no target.
+     * @param {number} [index]   The index at which the node should be inserted.
+     *                           If no index is specified, the node is inserted
+     *                           at the end of this node&apos;s children.
+     *
+     * @returns {XmlProcInst} The newly created processing instruction.
+     */
+    procInst(target, content, index) {
+        let procInst = new XmlProcInst(target, content);
+        this.insertChild(procInst, index);
+        return procInst;
+    }
+
+    /**
+     * Returns an XML string representation of this node.
+     *
+     * @param {StringOptions} [options] Formatting options for the string
+     *                                  representation.
+     *
+     * @returns {string} An XML string representation of this node.
+     */
+    toString(options = {}) {
+        stringOptions.validate(options);
+
+        let str = &quot;&lt;!DOCTYPE &quot; + this.name;
+        if (typeCheck(&quot;Undefined&quot;, this.pubId)) {
+            if (!typeCheck(&quot;Undefined&quot;, this.sysId)) {
+                str += &quot; &quot;;
+                str = appendId(&quot;SYSTEM&quot;, this.sysId, str, options);
+            }
+        } else {
+            str += &quot; &quot;;
+            str = appendId(&quot;PUBLIC&quot;, this.pubId, str, options);
+            str = appendId(&quot;&quot;, this.sysId, str, options);
+        }
+
+        if (this._children.length !== 0) {
+            str += &quot; [&quot;;
+            for (let node of this._children) {
+                if (options.pretty) {
+                    str += options.newline + options.indent;
+                }
+                str += node.toString(options);
+            }
+            if (options.pretty) {
+                str += options.newline;
+            }
+            str += &quot;]&gt;&quot;;
+        } else {
+            str += &quot;&gt;&quot;;
+        }
+
+        return str;
+    }
+}
+
+/**
+ * Appends the XML string representation of a public or system identifier to
+ * an existing string.
+ *
+ * @param {string} type           &quot;SYSTEM&quot;, &quot;PUBLIC&quot;, or &quot;&quot;
+ * @param {string} value          The value of the identifier.
+ * @param {string} str            The string to which the string representation
+ *                                should be appended.
+ * @param {StringOptions} options Formatting options for the string
+ *                                representation.
+ *
+ * @returns {string} The updated string.
+ */
+function appendId(type, value, str, options) {
+    str += type + &quot; &quot;;
+    if (options.doubleQuotes) {
+        if (value.indexOf(&quot;\&quot;&quot;) !== -1) {
+            throw new Error(&quot;options.doubleQuotes inconsistent with&quot; +
+                &quot; sysId or pubId&quot;);
+        }
+        str += &quot;\&quot;&quot; + value + &quot;\&quot;&quot;;
+    } else {
+        if (value.indexOf(&quot;&apos;&quot;) !== -1) {
+            throw new Error(&quot;options.doubleQuotes inconsistent with&quot; +
+                &quot; sysId or pubId&quot;);
+        }
+        str += &quot;&apos;&quot; + value + &quot;&apos;&quot;;
+    }
+    return str;
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

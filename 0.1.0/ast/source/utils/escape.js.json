@@ -1,0 +1,1377 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "\"use strict\"",
+        "range": [
+          619,
+          631
+        ],
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
+          },
+          "end": {
+            "line": 17,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        619,
+        632
+      ],
+      "loc": {
+        "start": {
+          "line": 17,
+          "column": 0
+        },
+        "end": {
+          "line": 17,
+          "column": 13
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+          "range": [
+            0,
+            615
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 15,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces ampersands (&) with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with ampersands escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            636,
+            867
+          ],
+          "loc": {
+            "start": {
+              "line": 19,
+              "column": 0
+            },
+            "end": {
+              "line": 27,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ampersands",
+          "range": [
+            885,
+            895
+          ],
+          "loc": {
+            "start": {
+              "line": 28,
+              "column": 16
+            },
+            "end": {
+              "line": 28,
+              "column": 26
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "str",
+            "range": [
+              896,
+              899
+            ],
+            "loc": {
+              "start": {
+                "line": 28,
+                "column": 27
+              },
+              "end": {
+                "line": 28,
+                "column": 30
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "str",
+                    "range": [
+                      915,
+                      918
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 11
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 14
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "replace",
+                    "range": [
+                      919,
+                      926
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 22
+                      }
+                    }
+                  },
+                  "range": [
+                    915,
+                    926
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 29,
+                      "column": 11
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 22
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": {},
+                    "raw": "/&/g",
+                    "regex": {
+                      "pattern": "&",
+                      "flags": "g"
+                    },
+                    "range": [
+                      927,
+                      931
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 27
+                      }
+                    }
+                  },
+                  {
+                    "type": "Literal",
+                    "value": "&amp;",
+                    "raw": "\"&amp;\"",
+                    "range": [
+                      933,
+                      940
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 29
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 36
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  915,
+                  941
+                ],
+                "loc": {
+                  "start": {
+                    "line": 29,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 29,
+                    "column": 37
+                  }
+                }
+              },
+              "range": [
+                908,
+                942
+              ],
+              "loc": {
+                "start": {
+                  "line": 29,
+                  "column": 4
+                },
+                "end": {
+                  "line": 29,
+                  "column": 38
+                }
+              }
+            }
+          ],
+          "range": [
+            901,
+            945
+          ],
+          "loc": {
+            "start": {
+              "line": 28,
+              "column": 32
+            },
+            "end": {
+              "line": 30,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          876,
+          945
+        ],
+        "loc": {
+          "start": {
+            "line": 28,
+            "column": 7
+          },
+          "end": {
+            "line": 30,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces ampersands (&) with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with ampersands escaped.\r\n *\r\n * @private\r\n ",
+            "range": [
+              636,
+              867
+            ],
+            "loc": {
+              "start": {
+                "line": 19,
+                "column": 0
+              },
+              "end": {
+                "line": 27,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces left angle brackets (&lt;) with the appropriate XML character\r\n * reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with left angle brackets\r\n *                   escaped.\r\n *\r\n * @private\r\n ",
+            "range": [
+              949,
+              1227
+            ],
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 42,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        869,
+        945
+      ],
+      "loc": {
+        "start": {
+          "line": 28,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces ampersands (&) with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with ampersands escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            636,
+            867
+          ],
+          "loc": {
+            "start": {
+              "line": 19,
+              "column": 0
+            },
+            "end": {
+              "line": 27,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces left angle brackets (&lt;) with the appropriate XML character\r\n * reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with left angle brackets\r\n *                   escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            949,
+            1227
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 0
+            },
+            "end": {
+              "line": 42,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "leftAngleBrackets",
+          "range": [
+            1245,
+            1262
+          ],
+          "loc": {
+            "start": {
+              "line": 43,
+              "column": 16
+            },
+            "end": {
+              "line": 43,
+              "column": 33
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "str",
+            "range": [
+              1263,
+              1266
+            ],
+            "loc": {
+              "start": {
+                "line": 43,
+                "column": 34
+              },
+              "end": {
+                "line": 43,
+                "column": 37
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "str",
+                    "range": [
+                      1282,
+                      1285
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 11
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 14
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "replace",
+                    "range": [
+                      1286,
+                      1293
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 22
+                      }
+                    }
+                  },
+                  "range": [
+                    1282,
+                    1293
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 44,
+                      "column": 11
+                    },
+                    "end": {
+                      "line": 44,
+                      "column": 22
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": {},
+                    "raw": "/</g",
+                    "regex": {
+                      "pattern": "<",
+                      "flags": "g"
+                    },
+                    "range": [
+                      1294,
+                      1298
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 27
+                      }
+                    }
+                  },
+                  {
+                    "type": "Literal",
+                    "value": "&lt;",
+                    "raw": "\"&lt;\"",
+                    "range": [
+                      1300,
+                      1306
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 44,
+                        "column": 29
+                      },
+                      "end": {
+                        "line": 44,
+                        "column": 35
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1282,
+                  1307
+                ],
+                "loc": {
+                  "start": {
+                    "line": 44,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 36
+                  }
+                }
+              },
+              "range": [
+                1275,
+                1308
+              ],
+              "loc": {
+                "start": {
+                  "line": 44,
+                  "column": 4
+                },
+                "end": {
+                  "line": 44,
+                  "column": 37
+                }
+              }
+            }
+          ],
+          "range": [
+            1268,
+            1311
+          ],
+          "loc": {
+            "start": {
+              "line": 43,
+              "column": 39
+            },
+            "end": {
+              "line": 45,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1236,
+          1311
+        ],
+        "loc": {
+          "start": {
+            "line": 43,
+            "column": 7
+          },
+          "end": {
+            "line": 45,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces left angle brackets (&lt;) with the appropriate XML character\r\n * reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with left angle brackets\r\n *                   escaped.\r\n *\r\n * @private\r\n ",
+            "range": [
+              949,
+              1227
+            ],
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 42,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces single quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with single quotes escaped.\r\n *\r\n * @private\r\n ",
+            "range": [
+              1315,
+              1552
+            ],
+            "loc": {
+              "start": {
+                "line": 47,
+                "column": 0
+              },
+              "end": {
+                "line": 55,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1229,
+        1311
+      ],
+      "loc": {
+        "start": {
+          "line": 43,
+          "column": 0
+        },
+        "end": {
+          "line": 45,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces left angle brackets (&lt;) with the appropriate XML character\r\n * reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with left angle brackets\r\n *                   escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            949,
+            1227
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 0
+            },
+            "end": {
+              "line": 42,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces single quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with single quotes escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            1315,
+            1552
+          ],
+          "loc": {
+            "start": {
+              "line": 47,
+              "column": 0
+            },
+            "end": {
+              "line": 55,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "singleQuotes",
+          "range": [
+            1570,
+            1582
+          ],
+          "loc": {
+            "start": {
+              "line": 56,
+              "column": 16
+            },
+            "end": {
+              "line": 56,
+              "column": 28
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "str",
+            "range": [
+              1583,
+              1586
+            ],
+            "loc": {
+              "start": {
+                "line": 56,
+                "column": 29
+              },
+              "end": {
+                "line": 56,
+                "column": 32
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "str",
+                    "range": [
+                      1602,
+                      1605
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 11
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 14
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "replace",
+                    "range": [
+                      1606,
+                      1613
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 22
+                      }
+                    }
+                  },
+                  "range": [
+                    1602,
+                    1613
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 57,
+                      "column": 11
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 22
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": {},
+                    "raw": "/'/g",
+                    "regex": {
+                      "pattern": "'",
+                      "flags": "g"
+                    },
+                    "range": [
+                      1614,
+                      1618
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 27
+                      }
+                    }
+                  },
+                  {
+                    "type": "Literal",
+                    "value": "&apos;",
+                    "raw": "\"&apos;\"",
+                    "range": [
+                      1620,
+                      1628
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 57,
+                        "column": 29
+                      },
+                      "end": {
+                        "line": 57,
+                        "column": 37
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1602,
+                  1629
+                ],
+                "loc": {
+                  "start": {
+                    "line": 57,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 57,
+                    "column": 38
+                  }
+                }
+              },
+              "range": [
+                1595,
+                1630
+              ],
+              "loc": {
+                "start": {
+                  "line": 57,
+                  "column": 4
+                },
+                "end": {
+                  "line": 57,
+                  "column": 39
+                }
+              }
+            }
+          ],
+          "range": [
+            1588,
+            1633
+          ],
+          "loc": {
+            "start": {
+              "line": 56,
+              "column": 34
+            },
+            "end": {
+              "line": 58,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1561,
+          1633
+        ],
+        "loc": {
+          "start": {
+            "line": 56,
+            "column": 7
+          },
+          "end": {
+            "line": 58,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces single quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with single quotes escaped.\r\n *\r\n * @private\r\n ",
+            "range": [
+              1315,
+              1552
+            ],
+            "loc": {
+              "start": {
+                "line": 47,
+                "column": 0
+              },
+              "end": {
+                "line": 55,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces double quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with double quotes escaped.\r\n * \r\n * @private\r\n ",
+            "range": [
+              1637,
+              1875
+            ],
+            "loc": {
+              "start": {
+                "line": 60,
+                "column": 0
+              },
+              "end": {
+                "line": 68,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1554,
+        1633
+      ],
+      "loc": {
+        "start": {
+          "line": 56,
+          "column": 0
+        },
+        "end": {
+          "line": 58,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces single quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with single quotes escaped.\r\n *\r\n * @private\r\n ",
+          "range": [
+            1315,
+            1552
+          ],
+          "loc": {
+            "start": {
+              "line": 47,
+              "column": 0
+            },
+            "end": {
+              "line": 55,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces double quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with double quotes escaped.\r\n * \r\n * @private\r\n ",
+          "range": [
+            1637,
+            1875
+          ],
+          "loc": {
+            "start": {
+              "line": 60,
+              "column": 0
+            },
+            "end": {
+              "line": 68,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "doubleQuotes",
+          "range": [
+            1893,
+            1905
+          ],
+          "loc": {
+            "start": {
+              "line": 69,
+              "column": 16
+            },
+            "end": {
+              "line": 69,
+              "column": 28
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "str",
+            "range": [
+              1906,
+              1909
+            ],
+            "loc": {
+              "start": {
+                "line": 69,
+                "column": 29
+              },
+              "end": {
+                "line": 69,
+                "column": 32
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "str",
+                    "range": [
+                      1925,
+                      1928
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 11
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 14
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "replace",
+                    "range": [
+                      1929,
+                      1936
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 22
+                      }
+                    }
+                  },
+                  "range": [
+                    1925,
+                    1936
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 70,
+                      "column": 11
+                    },
+                    "end": {
+                      "line": 70,
+                      "column": 22
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": {},
+                    "raw": "/\"/g",
+                    "regex": {
+                      "pattern": "\"",
+                      "flags": "g"
+                    },
+                    "range": [
+                      1937,
+                      1941
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 27
+                      }
+                    }
+                  },
+                  {
+                    "type": "Literal",
+                    "value": "&quot;",
+                    "raw": "\"&quot;\"",
+                    "range": [
+                      1943,
+                      1951
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 70,
+                        "column": 29
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 37
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1925,
+                  1952
+                ],
+                "loc": {
+                  "start": {
+                    "line": 70,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 70,
+                    "column": 38
+                  }
+                }
+              },
+              "range": [
+                1918,
+                1953
+              ],
+              "loc": {
+                "start": {
+                  "line": 70,
+                  "column": 4
+                },
+                "end": {
+                  "line": 70,
+                  "column": 39
+                }
+              }
+            }
+          ],
+          "range": [
+            1911,
+            1956
+          ],
+          "loc": {
+            "start": {
+              "line": 69,
+              "column": 34
+            },
+            "end": {
+              "line": 71,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1884,
+          1956
+        ],
+        "loc": {
+          "start": {
+            "line": 69,
+            "column": 7
+          },
+          "end": {
+            "line": 71,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n * Replaces double quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with double quotes escaped.\r\n * \r\n * @private\r\n ",
+            "range": [
+              1637,
+              1875
+            ],
+            "loc": {
+              "start": {
+                "line": 60,
+                "column": 0
+              },
+              "end": {
+                "line": 68,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        1877,
+        1956
+      ],
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 0
+        },
+        "end": {
+          "line": 71,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n * Replaces double quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with double quotes escaped.\r\n * \r\n * @private\r\n ",
+          "range": [
+            1637,
+            1875
+          ],
+          "loc": {
+            "start": {
+              "line": 60,
+              "column": 0
+            },
+            "end": {
+              "line": 68,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    619,
+    1956
+  ],
+  "loc": {
+    "start": {
+      "line": 17,
+      "column": 0
+    },
+    "end": {
+      "line": 71,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Copyright (C) 2016 Michael Kourlas\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *   http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n ",
+      "range": [
+        0,
+        615
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 15,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Replaces ampersands (&) with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with ampersands escaped.\r\n *\r\n * @private\r\n ",
+      "range": [
+        636,
+        867
+      ],
+      "loc": {
+        "start": {
+          "line": 19,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Replaces left angle brackets (&lt;) with the appropriate XML character\r\n * reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with left angle brackets\r\n *                   escaped.\r\n *\r\n * @private\r\n ",
+      "range": [
+        949,
+        1227
+      ],
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 42,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Replaces single quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with single quotes escaped.\r\n *\r\n * @private\r\n ",
+      "range": [
+        1315,
+        1552
+      ],
+      "loc": {
+        "start": {
+          "line": 47,
+          "column": 0
+        },
+        "end": {
+          "line": 55,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\r\n * Replaces double quotes (\") with the appropriate XML character reference.\r\n *\r\n * @param {string} str The string to escape.\r\n *\r\n * @returns {string} A copy of the specified string with double quotes escaped.\r\n * \r\n * @private\r\n ",
+      "range": [
+        1637,
+        1875
+      ],
+      "loc": {
+        "start": {
+          "line": 60,
+          "column": 0
+        },
+        "end": {
+          "line": 68,
+          "column": 3
+        }
+      }
+    }
+  ]
+}
