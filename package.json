@@ -18,7 +18,6 @@
     "url": "git://github.com/michaelkourlas/node-xmlcreate.git"
   },
   "scripts": {
-    "prepublish": "./node_modules/.bin/gulp",
     "test": "./node_modules/.bin/gulp test"
   },
   "dependencies": {
