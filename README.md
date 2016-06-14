@@ -1,5 +1,7 @@
 # xmlcreate #
 
+[![Build Status](https://travis-ci.org/michaelkourlas/node-xmlcreate.svg?branch=master)](https://travis-ci.org/michaelkourlas/node-xmlcreate)
+
 ## Overview ##
 
 xmlcreate is a Node.js module that can be used to easily build XML using a
