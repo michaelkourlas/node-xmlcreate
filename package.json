@@ -14,13 +14,21 @@
     "name": "Michael Kourlas",
     "email": "michael@kourlas.net"
   },
+  "files": [
+    "docs",
+    "examples",
+    "lib",
+    "CHANGES.md",
+    "LICENSE.md",
+    "NOTICE.md",
+    "npm-shrinkwrap.json",
+    "package.json",
+    "README.md"
+  ],
   "main": "./lib/main.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/michaelkourlas/node-xmlcreate.git"
-  },
-  "scripts": {
-    "test": "./node_modules/.bin/gulp test"
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
