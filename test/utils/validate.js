@@ -21,7 +21,7 @@ import {assert} from "chai";
 import * as validate from "../../lib/utils/validate";
 
 describe("validate", () => {
-    describe("#char(str)", () => {
+    describe("#char", () => {
         it("should return false if the specified string contains" +
             " characters not allowed in XML", () => {
             assert.isFalse(validate.char(String.fromCodePoint(0x0001)));
@@ -83,7 +83,7 @@ describe("validate", () => {
         });
     });
 
-    describe("#singleChar(str)", () => {
+    describe("#singleChar", () => {
         it("should return false if the specified string contains more" +
             " than one character or if that character is not allowed in" +
             " XML", () => {
@@ -109,7 +109,7 @@ describe("validate", () => {
         });
     });
 
-    describe("#name(str)", () => {
+    describe("#name", () => {
         it("should return false if the specified string contains characters" +
             " not allowed in XML names", () => {
             assert.isFalse(validate.name(String.fromCodePoint(0x0001)));

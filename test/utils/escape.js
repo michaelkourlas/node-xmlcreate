@@ -21,7 +21,7 @@ import {assert} from "chai";
 import * as escape from "../../lib/utils/escape";
 
 describe("escape", () => {
-    describe("#ampersands(str)", () => {
+    describe("#ampersands", () => {
          it("should escape all ampersands in a string", () => {
              assert.strictEqual(escape.ampersands("&"), "&amp;");
              assert.strictEqual(escape.ampersands("abc&"), "abc&amp;");
@@ -32,7 +32,7 @@ describe("escape", () => {
          });
     });
 
-    describe("#leftAngleBrackets(str)", () => {
+    describe("#leftAngleBrackets", () => {
         it("should escape all left angle brackets in a string", () => {
             assert.strictEqual(escape.leftAngleBrackets("<"), "&lt;");
             assert.strictEqual(escape.leftAngleBrackets("abc<"), "abc&lt;");
@@ -42,7 +42,7 @@ describe("escape", () => {
         });
     });
 
-    describe("#singleQuotes(str)", () => {
+    describe("#singleQuotes", () => {
         it("should escape all single quotes in a string", () => {
             assert.strictEqual(escape.singleQuotes("'"), "&apos;");
             assert.strictEqual(escape.singleQuotes("abc'"), "abc&apos;");
@@ -52,7 +52,7 @@ describe("escape", () => {
         });
     });
 
-    describe("#doubleQuotes(str)", () => {
+    describe("#doubleQuotes", () => {
         it("should escape all double quotes in a string", () => {
             assert.strictEqual(escape.doubleQuotes("\""), "&quot;");
             assert.strictEqual(escape.doubleQuotes("abc\""), "abc&quot;");

@@ -21,7 +21,7 @@ import {assert} from "chai";
 import * as declaration from "../../lib/options/declaration";
 
 describe("declaration", () => {
-    describe("#validate(options)", () => {
+    describe("#validate", () => {
         it("should return the specified options object if all options are" +
             " specified and valid", () => {
             let options = {
