@@ -150,7 +150,7 @@ describe("XmlAttribute", () => {
         });
     });
 
-    describe("#text(text, index)", () => {
+    describe("#text", () => {
         it("should add an XmlText node to this node's children at the" +
             " specified index with the specified text and return the" +
             " newly added node", () => {
