@@ -1,110 +1,110 @@
 window.esdocSearchIndex = [
   [
-    "xmlcreate/src/nodes/xmlattribute.js~xmlattribute",
+    "xmlcreate/lib/nodes/xmlattribute.js~xmlattribute",
     "class/src/nodes/XmlAttribute.js~XmlAttribute.html",
-    "<span>XmlAttribute</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlAttribute.js</span>",
+    "<span>XmlAttribute</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlAttribute.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlcdata.js~xmlcdata",
+    "xmlcreate/lib/nodes/xmlcdata.js~xmlcdata",
     "class/src/nodes/XmlCdata.js~XmlCdata.html",
-    "<span>XmlCdata</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlCdata.js</span>",
+    "<span>XmlCdata</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlCdata.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlcharref.js~xmlcharref",
+    "xmlcreate/lib/nodes/xmlcharref.js~xmlcharref",
     "class/src/nodes/XmlCharRef.js~XmlCharRef.html",
-    "<span>XmlCharRef</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlCharRef.js</span>",
+    "<span>XmlCharRef</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlCharRef.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlcomment.js~xmlcomment",
+    "xmlcreate/lib/nodes/xmlcomment.js~xmlcomment",
     "class/src/nodes/XmlComment.js~XmlComment.html",
-    "<span>XmlComment</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlComment.js</span>",
+    "<span>XmlComment</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlComment.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldecl.js~xmldecl",
+    "xmlcreate/lib/nodes/xmldecl.js~xmldecl",
     "class/src/nodes/XmlDecl.js~XmlDecl.html",
-    "<span>XmlDecl</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDecl.js</span>",
+    "<span>XmlDecl</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDecl.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldocument.js~xmldocument",
+    "xmlcreate/lib/nodes/xmldocument.js~xmldocument",
     "class/src/nodes/XmlDocument.js~XmlDocument.html",
-    "<span>XmlDocument</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDocument.js</span>",
+    "<span>XmlDocument</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDocument.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtd.js~xmldtd",
+    "xmlcreate/lib/nodes/xmldtd.js~xmldtd",
     "class/src/nodes/XmlDtd.js~XmlDtd.html",
-    "<span>XmlDtd</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtd.js</span>",
+    "<span>XmlDtd</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtd.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtdattlist.js~xmldtdattlist",
+    "xmlcreate/lib/nodes/xmldtdattlist.js~xmldtdattlist",
     "class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html",
-    "<span>XmlDtdAttlist</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtdAttlist.js</span>",
+    "<span>XmlDtdAttlist</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtdAttlist.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtdelement.js~xmldtdelement",
+    "xmlcreate/lib/nodes/xmldtdelement.js~xmldtdelement",
     "class/src/nodes/XmlDtdElement.js~XmlDtdElement.html",
-    "<span>XmlDtdElement</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtdElement.js</span>",
+    "<span>XmlDtdElement</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtdElement.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtdentity.js~xmldtdentity",
+    "xmlcreate/lib/nodes/xmldtdentity.js~xmldtdentity",
     "class/src/nodes/XmlDtdEntity.js~XmlDtdEntity.html",
-    "<span>XmlDtdEntity</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtdEntity.js</span>",
+    "<span>XmlDtdEntity</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtdEntity.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtdnotation.js~xmldtdnotation",
+    "xmlcreate/lib/nodes/xmldtdnotation.js~xmldtdnotation",
     "class/src/nodes/XmlDtdNotation.js~XmlDtdNotation.html",
-    "<span>XmlDtdNotation</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtdNotation.js</span>",
+    "<span>XmlDtdNotation</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtdNotation.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmldtdparamentityref.js~xmldtdparamentityref",
+    "xmlcreate/lib/nodes/xmldtdparamentityref.js~xmldtdparamentityref",
     "class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html",
-    "<span>XmlDtdParamEntityRef</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlDtdParamEntityRef.js</span>",
+    "<span>XmlDtdParamEntityRef</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlDtdParamEntityRef.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlelement.js~xmlelement",
+    "xmlcreate/lib/nodes/xmlelement.js~xmlelement",
     "class/src/nodes/XmlElement.js~XmlElement.html",
-    "<span>XmlElement</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlElement.js</span>",
+    "<span>XmlElement</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlElement.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlentityref.js~xmlentityref",
+    "xmlcreate/lib/nodes/xmlentityref.js~xmlentityref",
     "class/src/nodes/XmlEntityRef.js~XmlEntityRef.html",
-    "<span>XmlEntityRef</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlEntityRef.js</span>",
+    "<span>XmlEntityRef</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlEntityRef.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlnode.js~xmlnode",
+    "xmlcreate/lib/nodes/xmlnode.js~xmlnode",
     "class/src/nodes/XmlNode.js~XmlNode.html",
-    "<span>XmlNode</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlNode.js</span>",
+    "<span>XmlNode</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlNode.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmlprocinst.js~xmlprocinst",
+    "xmlcreate/lib/nodes/xmlprocinst.js~xmlprocinst",
     "class/src/nodes/XmlProcInst.js~XmlProcInst.html",
-    "<span>XmlProcInst</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlProcInst.js</span>",
+    "<span>XmlProcInst</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlProcInst.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/nodes/xmltext.js~xmltext",
+    "xmlcreate/lib/nodes/xmltext.js~xmltext",
     "class/src/nodes/XmlText.js~XmlText.html",
-    "<span>XmlText</span> <span class=\"search-result-import-path\">xmlcreate/src/nodes/XmlText.js</span>",
+    "<span>XmlText</span> <span class=\"search-result-import-path\">xmlcreate/lib/nodes/XmlText.js</span>",
     "class"
   ],
   [
-    "xmlcreate/src/main.js~document",
+    "xmlcreate/lib/main.js~document",
     "function/index.html#static-function-document",
-    "<span>document</span> <span class=\"search-result-import-path\">xmlcreate/src/main.js</span>",
+    "<span>document</span> <span class=\"search-result-import-path\">xmlcreate/lib/main.js</span>",
     "function"
   ],
   [
@@ -571,13 +571,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmlcharref.js~xmlcharref#char",
-    "class/src/nodes/XmlCharRef.js~XmlCharRef.html#instance-set-char",
+    "class/src/nodes/XmlCharRef.js~XmlCharRef.html#instance-get-char",
     "src/nodes/XmlCharRef.js~XmlCharRef#char",
     "member"
   ],
   [
     "src/nodes/xmlcharref.js~xmlcharref#char",
-    "class/src/nodes/XmlCharRef.js~XmlCharRef.html#instance-get-char",
+    "class/src/nodes/XmlCharRef.js~XmlCharRef.html#instance-set-char",
     "src/nodes/XmlCharRef.js~XmlCharRef#char",
     "member"
   ],
@@ -703,13 +703,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#encoding",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-encoding",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-encoding",
     "src/nodes/XmlDecl.js~XmlDecl#encoding",
     "member"
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#encoding",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-encoding",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-encoding",
     "src/nodes/XmlDecl.js~XmlDecl#encoding",
     "member"
   ],
@@ -733,13 +733,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#standalone",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-standalone",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-standalone",
     "src/nodes/XmlDecl.js~XmlDecl#standalone",
     "member"
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#standalone",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-standalone",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-standalone",
     "src/nodes/XmlDecl.js~XmlDecl#standalone",
     "member"
   ],
@@ -751,13 +751,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#version",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-version",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-version",
     "src/nodes/XmlDecl.js~XmlDecl#version",
     "member"
   ],
   [
     "src/nodes/xmldecl.js~xmldecl#version",
-    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-set-version",
+    "class/src/nodes/XmlDecl.js~XmlDecl.html#instance-get-version",
     "src/nodes/XmlDecl.js~XmlDecl#version",
     "member"
   ],
@@ -901,13 +901,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldtd.js~xmldtd#pubid",
-    "class/src/nodes/XmlDtd.js~XmlDtd.html#instance-get-pubId",
+    "class/src/nodes/XmlDtd.js~XmlDtd.html#instance-set-pubId",
     "src/nodes/XmlDtd.js~XmlDtd#pubId",
     "member"
   ],
   [
     "src/nodes/xmldtd.js~xmldtd#pubid",
-    "class/src/nodes/XmlDtd.js~XmlDtd.html#instance-set-pubId",
+    "class/src/nodes/XmlDtd.js~XmlDtd.html#instance-get-pubId",
     "src/nodes/XmlDtd.js~XmlDtd#pubId",
     "member"
   ],
@@ -967,13 +967,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldtdattlist.js~xmldtdattlist#text",
-    "class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html#instance-get-text",
+    "class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html#instance-set-text",
     "src/nodes/XmlDtdAttlist.js~XmlDtdAttlist#text",
     "member"
   ],
   [
     "src/nodes/xmldtdattlist.js~xmldtdattlist#text",
-    "class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html#instance-set-text",
+    "class/src/nodes/XmlDtdAttlist.js~XmlDtdAttlist.html#instance-get-text",
     "src/nodes/XmlDtdAttlist.js~XmlDtdAttlist#text",
     "member"
   ],
@@ -1021,13 +1021,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldtdelement.js~xmldtdelement#text",
-    "class/src/nodes/XmlDtdElement.js~XmlDtdElement.html#instance-set-text",
+    "class/src/nodes/XmlDtdElement.js~XmlDtdElement.html#instance-get-text",
     "src/nodes/XmlDtdElement.js~XmlDtdElement#text",
     "member"
   ],
   [
     "src/nodes/xmldtdelement.js~xmldtdelement#text",
-    "class/src/nodes/XmlDtdElement.js~XmlDtdElement.html#instance-get-text",
+    "class/src/nodes/XmlDtdElement.js~XmlDtdElement.html#instance-set-text",
     "src/nodes/XmlDtdElement.js~XmlDtdElement#text",
     "member"
   ],
@@ -1165,13 +1165,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmldtdparamentityref.js~xmldtdparamentityref#entity",
-    "class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html#instance-get-entity",
+    "class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html#instance-set-entity",
     "src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef#entity",
     "member"
   ],
   [
     "src/nodes/xmldtdparamentityref.js~xmldtdparamentityref#entity",
-    "class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html#instance-set-entity",
+    "class/src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef.html#instance-get-entity",
     "src/nodes/XmlDtdParamEntityRef.js~XmlDtdParamEntityRef#entity",
     "member"
   ],
@@ -1309,13 +1309,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmlentityref.js~xmlentityref#entity",
-    "class/src/nodes/XmlEntityRef.js~XmlEntityRef.html#instance-get-entity",
+    "class/src/nodes/XmlEntityRef.js~XmlEntityRef.html#instance-set-entity",
     "src/nodes/XmlEntityRef.js~XmlEntityRef#entity",
     "member"
   ],
   [
     "src/nodes/xmlentityref.js~xmlentityref#entity",
-    "class/src/nodes/XmlEntityRef.js~XmlEntityRef.html#instance-set-entity",
+    "class/src/nodes/XmlEntityRef.js~XmlEntityRef.html#instance-get-entity",
     "src/nodes/XmlEntityRef.js~XmlEntityRef#entity",
     "member"
   ],
@@ -1441,13 +1441,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmlprocinst.js~xmlprocinst#content",
-    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-set-content",
+    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-get-content",
     "src/nodes/XmlProcInst.js~XmlProcInst#content",
     "member"
   ],
   [
     "src/nodes/xmlprocinst.js~xmlprocinst#content",
-    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-get-content",
+    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-set-content",
     "src/nodes/XmlProcInst.js~XmlProcInst#content",
     "member"
   ],
@@ -1471,13 +1471,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmlprocinst.js~xmlprocinst#target",
-    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-get-target",
+    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-set-target",
     "src/nodes/XmlProcInst.js~XmlProcInst#target",
     "member"
   ],
   [
     "src/nodes/xmlprocinst.js~xmlprocinst#target",
-    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-set-target",
+    "class/src/nodes/XmlProcInst.js~XmlProcInst.html#instance-get-target",
     "src/nodes/XmlProcInst.js~XmlProcInst#target",
     "member"
   ],
@@ -1525,13 +1525,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/nodes/xmltext.js~xmltext#text",
-    "class/src/nodes/XmlText.js~XmlText.html#instance-get-text",
+    "class/src/nodes/XmlText.js~XmlText.html#instance-set-text",
     "src/nodes/XmlText.js~XmlText#text",
     "member"
   ],
   [
     "src/nodes/xmltext.js~xmltext#text",
-    "class/src/nodes/XmlText.js~XmlText.html#instance-set-text",
+    "class/src/nodes/XmlText.js~XmlText.html#instance-get-text",
     "src/nodes/XmlText.js~XmlText#text",
     "member"
   ],

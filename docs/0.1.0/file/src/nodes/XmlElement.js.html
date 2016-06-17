@@ -177,6 +177,18 @@ export default class XmlElement extends XmlNode {
     }
 
     /**
+     * Returns an array containing all of the children of this node that are
+     * instances of {@link XmlAttribute}.
+     *
+     * @returns {XmlAttribute[]} An array containing all of the children of
+     *                           this node that are instances of
+     *                           {@link XmlAttribute}.
+     */
+    attributes() {
+        return this._children.filter(node =&gt; node instanceof XmlAttribute);
+    }
+
+    /**
      * Inserts a new CDATA section at the specified index. If no index is
      * specified, the node is inserted at the end of this node&apos;s children.
      *
@@ -214,23 +226,6 @@ export default class XmlElement extends XmlNode {
     }
 
     /**
-     * Inserts a new element at the specified index. If no index is specified,
-     * the node is inserted at the end of this node&apos;s children.
-     *
-     * @param {string} name    The name of the element.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node&apos;s children.
-     *
-     * @returns {XmlElement} The newly created element.
-     */
-    element(name, index) {
-        let element = new XmlElement(name);
-        this.insertChild(element, index);
-        return element;
-    }
-
-    /**
      * Inserts a new comment at the specified index. If no index is specified,
      * the node is inserted at the end of this node&apos;s children.
      *
@@ -248,6 +243,23 @@ export default class XmlElement extends XmlNode {
     }
 
     /**
+     * Inserts a new element at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} name    The name of the element.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlElement} The newly created element.
+     */
+    element(name, index) {
+        let element = new XmlElement(name);
+        this.insertChild(element, index);
+        return element;
+    }
+
+    /**
      * Inserts a new entity reference at the specified index. If no index is
      * specified, the node is inserted at the end of this node&apos;s children.
      *
@@ -262,42 +274,6 @@ export default class XmlElement extends XmlNode {
         let entityRef = new XmlEntityRef(entity);
         this.insertChild(entityRef, index);
         return entityRef;
-    }
-
-    /**
-     * Inserts a new processing instruction at the specified index. If no index
-     * is specified, the node is inserted at the end of this node&apos;s children.
-     *
-     * @param {string} target    The target of the processing instruction.
-     * @param {string} [content] The data of the processing instruction, or
-     *                           undefined if there is no target.
-     * @param {number} [index]   The index at which the node should be inserted.
-     *                           If no index is specified, the node is inserted
-     *                           at the end of this node&apos;s children.
-     *
-     * @returns {XmlProcInst} The newly created processing instruction.
-     */
-    procInst(target, content, index) {
-        let procInst = new XmlProcInst(target, content);
-        this.insertChild(procInst, index);
-        return procInst;
-    }
-
-    /**
-     * Inserts some new text at the specified index. If no index is specified,
-     * the node is inserted at the end of this node&apos;s children.
-     *
-     * @param {string} text    Arbitrary character data.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node&apos;s children.
-     *
-     * @returns {XmlText} The newly created text node.
-     */
-    text(text, index) {
-        let txt = new XmlText(text);
-        this.insertChild(txt, index);
-        return txt;
     }
 
     /**
@@ -348,15 +324,39 @@ export default class XmlElement extends XmlNode {
     }
 
     /**
-     * Returns an array containing all of the children of this node that are
-     * instances of {@link XmlAttribute}.
+     * Inserts a new processing instruction at the specified index. If no index
+     * is specified, the node is inserted at the end of this node&apos;s children.
      *
-     * @returns {XmlAttribute[]} An array containing all of the children of
-     *                           this node that are instances of
-     *                           {@link XmlAttribute}.
+     * @param {string} target    The target of the processing instruction.
+     * @param {string} [content] The data of the processing instruction, or
+     *                           undefined if there is no target.
+     * @param {number} [index]   The index at which the node should be inserted.
+     *                           If no index is specified, the node is inserted
+     *                           at the end of this node&apos;s children.
+     *
+     * @returns {XmlProcInst} The newly created processing instruction.
      */
-    attributes() {
-        return this._children.filter(node =&gt; node instanceof XmlAttribute);
+    procInst(target, content, index) {
+        let procInst = new XmlProcInst(target, content);
+        this.insertChild(procInst, index);
+        return procInst;
+    }
+
+    /**
+     * Inserts some new text at the specified index. If no index is specified,
+     * the node is inserted at the end of this node&apos;s children.
+     *
+     * @param {string} text    Arbitrary character data.
+     * @param {number} [index] The index at which the node should be inserted.
+     *                         If no index is specified, the node is inserted
+     *                         at the end of this node&apos;s children.
+     *
+     * @returns {XmlText} The newly created text node.
+     */
+    text(text, index) {
+        let txt = new XmlText(text);
+        this.insertChild(txt, index);
+        return txt;
     }
 
     /**
