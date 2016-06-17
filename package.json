@@ -15,8 +15,6 @@
     "email": "michael@kourlas.net"
   },
   "files": [
-    "docs",
-    "examples",
     "lib",
     "CHANGES.md",
     "LICENSE.md",
