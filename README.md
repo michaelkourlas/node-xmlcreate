@@ -63,7 +63,7 @@ includes source maps.
 
 ## Usage ##
 
-The documentation for the current version is available [here](https://michaelkourlas.github.io/node-xmlcreate/docs/0.1.0/).
+The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/0.1.0/).
 
 You can also build the documentation using gulp:
 
