@@ -47,7 +47,7 @@ npm install xmlcreate
 You can also build xmlcreate from source using gulp: 
 
 ````
-git clone https://github.com/michaelkourlas/xmlcreate.git
+git clone https://github.com/michaelkourlas/node-xmlcreate.git
 gulp
 ````
 
