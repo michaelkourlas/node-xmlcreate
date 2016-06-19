@@ -125,6 +125,8 @@ This example produces the following XML:
 </html>
 ````
 
+Additional examples can be found in examples/example.js.
+
 ## Tests ##
 
 xmlcreate includes a set of tests to verify core functionality. You can run
