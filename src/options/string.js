@@ -65,21 +65,21 @@ export function validate(options) {
     if (!typeCheck("Boolean", options.doubleQuotes)) {
         options.doubleQuotes = defaults.doubleQuotes;
     }
-    
+
     if (!typeCheck("String | Undefined", options.indent)) {
         throw new TypeError("options.indent should be a boolean");
     }
     if (!typeCheck("String", options.indent)) {
         options.indent = defaults.indent;
     }
-    
+
     if (!typeCheck("String | Undefined", options.newline)) {
         throw new TypeError("options.newline should be a boolean");
     }
     if (!typeCheck("String", options.newline)) {
         options.newline = defaults.newline;
     }
-    
+
     if (!typeCheck("Boolean | Undefined", options.pretty)) {
         throw new TypeError("options.pretty should be a boolean");
     }

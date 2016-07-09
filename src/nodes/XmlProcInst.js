@@ -17,9 +17,7 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as validate from "../utils/validate";
-
 import XmlNode from "./XmlNode";
 
 /**
@@ -146,7 +144,7 @@ export default class XmlProcInst extends XmlNode {
      *
      * @returns {string} An XML string representation of this node.
      */
-    toString(options = {})  {
+    toString(options = {}) {
         if (this.content === undefined) {
             return "<?" + this.target + "?>";
         } else {

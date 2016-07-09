@@ -17,10 +17,8 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as stringOptions from "../options/string";
 import * as validate from "../utils/validate";
-
 import XmlAttribute from "./XmlAttribute";
 import XmlCdata from "./XmlCdata";
 import XmlCharRef from "./XmlCharRef";

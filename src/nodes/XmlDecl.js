@@ -17,10 +17,8 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as declarationOptions from "../options/declaration";
 import * as stringOptions from "../options/string";
-
 import XmlNode from "./XmlNode";
 
 /**

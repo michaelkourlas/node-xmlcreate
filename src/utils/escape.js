@@ -63,7 +63,7 @@ export function singleQuotes(str) {
  * @param {string} str The string to escape.
  *
  * @returns {string} A copy of the specified string with double quotes escaped.
- * 
+ *
  * @private
  */
 export function doubleQuotes(str) {

@@ -17,9 +17,7 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as stringOptions from "../options/string";
-
 import XmlComment from "./XmlComment";
 import XmlDecl from "./XmlDecl";
 import XmlDtd from "./XmlDtd";

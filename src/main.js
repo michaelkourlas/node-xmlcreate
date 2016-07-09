@@ -34,10 +34,12 @@ import XmlNode from "./nodes/XmlNode";
 import XmlProcInst from "./nodes/XmlProcInst";
 import XmlText from "./nodes/XmlText";
 
-export {XmlAttribute, XmlCdata, XmlCharRef, XmlComment, XmlDecl, XmlDocument,
+export {
+    XmlAttribute, XmlCdata, XmlCharRef, XmlComment, XmlDecl, XmlDocument,
     XmlDtd, XmlDtdAttlist, XmlDtdElement, XmlDtdEntity, XmlDtdNotation,
     XmlDtdParamEntityRef, XmlElement, XmlEntityRef, XmlNode, XmlProcInst,
-    XmlText};
+    XmlText
+};
 
 /**
  * Creates a new XML document.

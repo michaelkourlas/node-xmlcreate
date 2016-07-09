@@ -17,9 +17,7 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as validate from "../utils/validate";
-
 import XmlNode from "./XmlNode";
 
 /**
@@ -27,7 +25,7 @@ import XmlNode from "./XmlNode";
  *
  * An XML notation declaration is structured as follows, where
  * <code>{text}</code> is the text of the declaration:
- * 
+ *
  * <code>&lt;!NOTATION {text}&gt;</code>
  *
  * The <code>{text}</code> value is a property of this node.

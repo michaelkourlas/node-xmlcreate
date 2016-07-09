@@ -24,7 +24,7 @@
  *
  * @returns {boolean} Whether the specified string only contains characters
  *                    permitted by the XML specification.
- *                    
+ *
  * @private
  */
 export function char(str) {

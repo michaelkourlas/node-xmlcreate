@@ -60,7 +60,7 @@ export function validate(options) {
     if (!typeCheck("String | Undefined", options.encoding)) {
         throw new TypeError("options.encoding should be a string or undefined");
     }
-    
+
     if (!typeCheck("String | Undefined", options.standalone)) {
         throw new TypeError("options.standalone should be a string or" +
             " undefined");

@@ -17,15 +17,13 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as validate from "../utils/validate";
-
 import XmlNode from "./XmlNode";
 
 /**
  * Represents an XML entity reference.
  *
- * An XML entity reference is structured as follows, where 
+ * An XML entity reference is structured as follows, where
  * <code>{entity}</code> is name of the entity to be referenced:
  *
  * <code>&amp;{entity};</code>

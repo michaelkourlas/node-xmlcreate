@@ -17,9 +17,7 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as validate from "../utils/validate";
-
 import XmlNode from "./XmlNode";
 
 /**

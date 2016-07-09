@@ -17,10 +17,8 @@
 "use strict";
 
 import {typeCheck} from "type-check";
-
 import * as stringOptions from "../options/string";
 import * as validate from "../utils/validate";
-
 import XmlComment from "./XmlComment";
 import XmlDtdAttlist from "./XmlDtdAttlist";
 import XmlDtdElement from "./XmlDtdElement";
@@ -80,7 +78,7 @@ export default class XmlDtd extends XmlNode {
 
     /**
      * Sets the name of the DTD.
-     * 
+     *
      * @param {string} name The name of the DTD.
      */
     set name(name) {
