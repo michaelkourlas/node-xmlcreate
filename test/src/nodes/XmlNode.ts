@@ -50,16 +50,16 @@ describe("XmlNode", () => {
             assert.strictEqual(parentNode.children()[1], secondChildNode);
         });
 
-        it("should return a copy of the array containing this node's" +
-            " children, not the original", () => {
+        it("should return a copy of the array containing this node's"
+           + " children, not the original", () => {
             let node = new XmlNode();
             assert.notStrictEqual(node.children(), node.children());
         });
     });
 
     describe("#insertChild", () => {
-        it("should throw an error if the specified node is not an" +
-            " XmlNode", () => {
+        it("should throw an error if the specified node is not an"
+           + " XmlNode", () => {
             let node = new XmlNode();
             assert.throws((): XmlNode => node.insertChild(undefined));
             assert.throws((): XmlNode => node.insertChild(null));
@@ -67,30 +67,32 @@ describe("XmlNode", () => {
             assert.throws((): XmlNode => node.insertChild(<any> "error"));
         });
 
-        it("should throw an error if the specified index is not an" +
-            " integer", () => {
+        it("should throw an error if the specified index is not an"
+           + " integer", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
-            assert.throws((): XmlNode => parentNode.insertChild(childNode, null));
+            assert.throws(
+                (): XmlNode => parentNode.insertChild(childNode, null));
             assert.throws((): XmlNode => parentNode.insertChild(childNode,
-                                                             <any> "error"));
-            assert.throws((): XmlNode => parentNode.insertChild(childNode, 3.3));
+                                                                <any> "error"));
+            assert.throws(
+                (): XmlNode => parentNode.insertChild(childNode, 3.3));
         });
 
-        it("should throw an error if the specified index is not within the" +
-            " bounds of this node's children", () => {
+        it("should throw an error if the specified index is not within the"
+           + " bounds of this node's children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             let secondChildNode = new XmlNode();
             parentNode.insertChild(childNode, 0);
             assert.throws(() => parentNode.insertChild(secondChildNode, -1));
-            assert.throws(() => parentNode.insertChild(secondChildNode,
-                parentNode.children().length + 1));
+            assert.throws(() => parentNode.insertChild(
+                secondChildNode, parentNode.children().length + 1));
         });
 
-        it("should insert the specified node at the appropriate location in" +
-            " this node's children, set the specified node's parent field to" +
-            " this node, and return the specified node", () => {
+        it("should insert the specified node at the appropriate location in"
+           + " this node's children, set the specified node's parent field to"
+           + " this node, and return the specified node", () => {
             let parentNode = new XmlNode();
             for (let i = 0; i < 10; i++) {
                 parentNode.insertChild(new XmlNode());
@@ -101,40 +103,40 @@ describe("XmlNode", () => {
             assert.strictEqual(childNode.parent, parentNode);
             let secondChildNode = new XmlNode();
             assert.strictEqual(parentNode.insertChild(secondChildNode, 3),
-                secondChildNode);
+                               secondChildNode);
             assert.strictEqual(parentNode.children()[3], secondChildNode);
             assert.strictEqual(secondChildNode.parent, parentNode);
             let thirdChildNode = new XmlNode();
-            assert.strictEqual(parentNode.insertChild(thirdChildNode,
-                parentNode.children().length), thirdChildNode);
+            assert.strictEqual(parentNode.insertChild(
+                thirdChildNode, parentNode.children().length), thirdChildNode);
             assert.strictEqual(
                 parentNode.children()[parentNode.children().length - 1],
                 thirdChildNode);
             assert.strictEqual(thirdChildNode.parent, parentNode);
         });
 
-        it("should insert the specified node at the end of this node's" +
-            " children if no index is specified and return the specified" +
-            " node", () => {
+        it("should insert the specified node at the end of this node's"
+           + " children if no index is specified and return the specified"
+           + " node", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             let secondChildNode = new XmlNode();
             assert.strictEqual(parentNode.insertChild(childNode, 0), childNode);
             assert.strictEqual(parentNode.insertChild(secondChildNode),
-                secondChildNode);
+                               secondChildNode);
             assert.strictEqual(
                 parentNode.children()[parentNode.children().length - 1],
                 secondChildNode);
         });
 
-        it("should do nothing and return undefined if the specified node is" +
-            " already a child of this node", () => {
+        it("should do nothing and return undefined if the specified node is"
+           + " already a child of this node", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             let secondChildNode = new XmlNode();
             assert.strictEqual(parentNode.insertChild(childNode), childNode);
             assert.strictEqual(parentNode.insertChild(secondChildNode),
-                secondChildNode);
+                               secondChildNode);
             assert.isUndefined(parentNode.insertChild(childNode, 1));
             assert.strictEqual(parentNode.children().length, 2);
             assert.strictEqual(parentNode.children()[0], childNode);
@@ -148,8 +150,8 @@ describe("XmlNode", () => {
             assert.isUndefined(node.next());
         });
 
-        it("should return undefined if this node is the last of its parent's" +
-            " children", () => {
+        it("should return undefined if this node is the last of its parent's"
+           + " children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(new XmlNode());
@@ -157,8 +159,8 @@ describe("XmlNode", () => {
             assert.isUndefined(childNode.next());
         });
 
-        it("should return this node's parent's second child if this node is" +
-            " the first of its parent's children", () => {
+        it("should return this node's parent's second child if this node is"
+           + " the first of its parent's children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             let secondChildNode = new XmlNode();
@@ -174,8 +176,8 @@ describe("XmlNode", () => {
             assert.isUndefined(node.prev());
         });
 
-        it("should return undefined if this node is the first of its parent's" +
-            " children", () => {
+        it("should return undefined if this node is the first of its parent's"
+           + " children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -183,8 +185,8 @@ describe("XmlNode", () => {
             assert.isUndefined(childNode.prev());
         });
 
-        it("should return this node's parent's first child if this node is" +
-            " the second of its parent's children", () => {
+        it("should return this node's parent's first child if this node is"
+           + " the second of its parent's children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             let secondChildNode = new XmlNode();
@@ -195,8 +197,8 @@ describe("XmlNode", () => {
     });
 
     describe("#remove", () => {
-        it("should remove this node from its parent's children, set this" +
-            " node's parent field to undefined, and return the parent", () => {
+        it("should remove this node from its parent's children, set this"
+           + " node's parent field to undefined, and return the parent", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -205,8 +207,8 @@ describe("XmlNode", () => {
             assert.isUndefined(childNode.parent);
         });
 
-        it("should leave this node's parent field unchanged and return" +
-            " undefined if this node has no parent", () => {
+        it("should leave this node's parent field unchanged and return"
+           + " undefined if this node has no parent", () => {
             let childNode = new XmlNode();
             assert.isUndefined(childNode.remove());
             assert.isUndefined(childNode.parent);
@@ -214,8 +216,8 @@ describe("XmlNode", () => {
     });
 
     describe("#removeChild", () => {
-        it("should throw an error if the specified node is not an" +
-            " XmlNode", () => {
+        it("should throw an error if the specified node is not an"
+           + " XmlNode", () => {
             let node = new XmlNode();
             assert.throws((): boolean => node.removeChild(undefined));
             assert.throws((): boolean => node.removeChild(null));
@@ -223,8 +225,8 @@ describe("XmlNode", () => {
             assert.throws((): boolean => node.removeChild(<any> "error"));
         });
 
-        it("should do nothing and return false if the specified node is not" +
-            " a child of this node", () => {
+        it("should do nothing and return false if the specified node is not"
+           + " a child of this node", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -234,9 +236,9 @@ describe("XmlNode", () => {
             assert.strictEqual(parentNode.children()[0], childNode);
         });
 
-        it("should remove the specified node from this node's children, set" +
-            " the specified node's parent field to undefined, and return" +
-            " true", () => {
+        it("should remove the specified node from this node's children, set"
+           + " the specified node's parent field to undefined, and return"
+           + " true", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -247,16 +249,17 @@ describe("XmlNode", () => {
     });
 
     describe("#removeChildAtIndex", () => {
-        it("should throw an error if the specified index is not an" +
-            " integer or undefined", () => {
+        it("should throw an error if the specified index is not an"
+           + " integer or undefined", () => {
             let node = new XmlNode();
             assert.throws((): XmlNode => node.removeChildAtIndex(null));
-            assert.throws((): XmlNode => node.removeChildAtIndex(<any> "error"));
+            assert.throws(
+                (): XmlNode => node.removeChildAtIndex(<any> "error"));
             assert.throws((): XmlNode => node.removeChildAtIndex(3.3));
         });
 
-        it("should throw an error if the specified index is not within the" +
-            " bounds of this node's children", () => {
+        it("should throw an error if the specified index is not within the"
+           + " bounds of this node's children", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode, 0);
@@ -265,9 +268,9 @@ describe("XmlNode", () => {
                 parentNode.children().length));
         });
 
-        it("should remove the node at the specified index from this node's" +
-            " children, set that node's parent field to undefined, and return" +
-            " that node", () => {
+        it("should remove the node at the specified index from this node's"
+           + " children, set that node's parent field to undefined, and return"
+           + " that node", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -285,8 +288,8 @@ describe("XmlNode", () => {
     });
 
     describe("#top", () => {
-        it("should return the parent of this node's parent if that node has" +
-            " no parent", () => {
+        it("should return the parent of this node's parent if that node has"
+           + " no parent", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);
@@ -295,8 +298,8 @@ describe("XmlNode", () => {
             assert.strictEqual(grandChildNode.top(), parentNode);
         });
 
-        it("should return the parent of this node if that node has no" +
-            " parent", () => {
+        it("should return the parent of this node if that node has no"
+           + " parent", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
             parentNode.insertChild(childNode);

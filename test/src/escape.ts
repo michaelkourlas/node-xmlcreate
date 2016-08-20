@@ -18,7 +18,7 @@ import {
     escapeAmpersands,
     escapeDoubleQuotes,
     escapeLeftAngleBrackets,
-    escapeSingleQuotes,
+    escapeSingleQuotes
 } from "../../lib/escape";
 import {assert} from "chai";
 
@@ -29,7 +29,7 @@ describe("escape", () => {
             assert.strictEqual(escapeAmpersands("abc&"), "abc&amp;");
             assert.strictEqual(escapeAmpersands("&abc"), "&amp;abc");
             assert.strictEqual(escapeAmpersands("&a&bc&"),
-                "&amp;a&amp;bc&amp;");
+                               "&amp;a&amp;bc&amp;");
             assert.strictEqual(escapeAmpersands("&amp;"), "&amp;amp;");
         });
     });
@@ -40,7 +40,7 @@ describe("escape", () => {
             assert.strictEqual(escapeLeftAngleBrackets("abc<"), "abc&lt;");
             assert.strictEqual(escapeLeftAngleBrackets("<abc"), "&lt;abc");
             assert.strictEqual(escapeLeftAngleBrackets("<a<bc<"),
-                "&lt;a&lt;bc&lt;");
+                               "&lt;a&lt;bc&lt;");
         });
     });
 
@@ -50,7 +50,7 @@ describe("escape", () => {
             assert.strictEqual(escapeSingleQuotes("abc'"), "abc&apos;");
             assert.strictEqual(escapeSingleQuotes("'abc"), "&apos;abc");
             assert.strictEqual(escapeSingleQuotes("'a'bc'"),
-                "&apos;a&apos;bc&apos;");
+                               "&apos;a&apos;bc&apos;");
         });
     });
 
@@ -60,7 +60,7 @@ describe("escape", () => {
             assert.strictEqual(escapeDoubleQuotes("abc\""), "abc&quot;");
             assert.strictEqual(escapeDoubleQuotes("\"abc"), "&quot;abc");
             assert.strictEqual(escapeDoubleQuotes("\"a\"bc\""),
-                "&quot;a&quot;bc&quot;");
+                               "&quot;a&quot;bc&quot;");
         });
     });
 });

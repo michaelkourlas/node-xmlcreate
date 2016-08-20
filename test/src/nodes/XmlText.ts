@@ -37,8 +37,8 @@ describe("XmlText", () => {
             assert.strictEqual(node.text, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlText("abc");
             assert.throws((): void => node.text = undefined);
             assert.throws((): void => node.text = null);
@@ -46,11 +46,12 @@ describe("XmlText", () => {
             assert.throws((): void => node.text = <any> new XmlText(""));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlText("abc");
-            assert.throws(() => node.text = "abc" +
-                String.fromCharCode(0x0001) + "def");
+            assert.throws(() => node.text = "abc"
+                                            + String.fromCharCode(0x0001)
+                                            + "def");
         });
     });
 
@@ -85,14 +86,14 @@ describe("XmlText", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlText("abc");
             assert.strictEqual(node.toString(), "abc");
 
             node = new XmlText("<&a&b<c&<");
             assert.strictEqual(node.toString(),
-                "&lt;&amp;a&amp;b&lt;c&amp;&lt;");
+                               "&lt;&amp;a&amp;b&lt;c&amp;&lt;");
         });
     });
 });

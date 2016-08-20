@@ -17,7 +17,7 @@
 import {
     validateChar,
     validateName,
-    validateSingleChar,
+    validateSingleChar
 } from "../../lib/validate";
 import {assert} from "chai";
 

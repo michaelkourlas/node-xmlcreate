@@ -16,7 +16,7 @@
 
 import {
     validateDeclarationOptions,
-    validateStringOptions,
+    validateStringOptions
 } from "../../lib/options";
 import {assert} from "chai";
 
@@ -27,21 +27,21 @@ describe("options", () => {
             let options = {
                 encoding: "UTF-8",
                 standalone: "yes",
-                version: "1.0",
+                version: "1.0"
             };
             assert.strictEqual(validateDeclarationOptions(options), options);
 
             options = {
                 encoding: "UTF-16",
                 standalone: "no",
-                version: "1.1",
+                version: "1.1"
             };
             assert.strictEqual(validateDeclarationOptions(options), options);
 
             options = {
                 encoding: undefined,
                 standalone: undefined,
-                version: "1.0",
+                version: "1.0"
             };
             assert.strictEqual(validateDeclarationOptions(options), options);
         });
@@ -49,17 +49,17 @@ describe("options", () => {
         it("should throw an error if the specified options object contains" +
            " invalid options", () => {
             let options: any = {
-                encoding: null,
+                encoding: null
             };
             assert.throws(() => validateDeclarationOptions(options));
 
             options = {
-                standalone: null,
+                standalone: null
             };
             assert.throws(() => validateDeclarationOptions(options));
 
             options = {
-                version: null,
+                version: null
             };
             assert.throws(() => validateDeclarationOptions(options));
         });
@@ -81,7 +81,7 @@ describe("options", () => {
                 doubleQuotes: false,
                 indent: "    ",
                 newline: "\n",
-                pretty: true,
+                pretty: true
             };
             assert.strictEqual(validateStringOptions(options), options);
 
@@ -89,7 +89,7 @@ describe("options", () => {
                 doubleQuotes: true,
                 indent: "\t",
                 newline: "\r\n",
-                pretty: false,
+                pretty: false
             };
             assert.strictEqual(validateStringOptions(options), options);
         });
@@ -97,22 +97,22 @@ describe("options", () => {
         it("should throw an error if the specified options object contains" +
            " invalid options", () => {
             let options: any = {
-                doubleQuotes: null,
+                doubleQuotes: null
             };
             assert.throws(() => validateStringOptions(options));
 
             options = {
-                indent: null,
+                indent: null
             };
             assert.throws(() => validateStringOptions(options));
 
             options = {
-                newline: null,
+                newline: null
             };
             assert.throws(() => validateStringOptions(options));
 
             options = {
-                pretty: null,
+                pretty: null
             };
             assert.throws(() => validateStringOptions(options));
         });
@@ -126,7 +126,7 @@ describe("options", () => {
                                                   doubleQuotes: false,
                                                   indent: "    ",
                                                   newline: "\n",
-                                                  pretty: true,
+                                                  pretty: true
                                               })
             );
         });

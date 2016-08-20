@@ -19,8 +19,8 @@ import {assert} from "chai";
 
 describe("XmlDtdParamEntityRef", () => {
     describe("#constructor", () => {
-        it("should create an XmlDtdParamEntityRef node with the specified" +
-            " data", () => {
+        it("should create an XmlDtdParamEntityRef node with the specified"
+           + " data", () => {
             let node = new XmlDtdParamEntityRef("abc");
             assert.strictEqual(node.toString(), "%abc;");
         });
@@ -38,17 +38,18 @@ describe("XmlDtdParamEntityRef", () => {
             assert.strictEqual(node.entity, "def123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlDtdParamEntityRef("abc");
             assert.throws((): void => node.entity = undefined);
             assert.throws((): void => node.entity = null);
             assert.throws((): void => node.entity = <any> 0);
-            assert.throws((): void => node.entity = <any> new XmlDtdParamEntityRef("abc"));
+            assert.throws((): void => node.entity =
+                <any> new XmlDtdParamEntityRef("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML names", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML names", () => {
             let node = new XmlDtdParamEntityRef("abc");
             assert.throws(() => node.entity = ".");
         });
@@ -85,8 +86,8 @@ describe("XmlDtdParamEntityRef", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDtdParamEntityRef("abc");
             assert.strictEqual(node.toString(), "%abc;");
         });

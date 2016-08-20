@@ -19,14 +19,14 @@ import {assert} from "chai";
 
 describe("XmlProcInst", () => {
     describe("#constructor", () => {
-        it("should create an XmlProcInst node with the specified" +
-            " target", () => {
+        it("should create an XmlProcInst node with the specified"
+           + " target", () => {
             let node = new XmlProcInst("target");
             assert.strictEqual(node.toString(), "<?target?>");
         });
 
-        it("should create an XmlProcInst node with the specified" +
-            " target and content", () => {
+        it("should create an XmlProcInst node with the specified"
+           + " target and content", () => {
             let node = new XmlProcInst("target", "content");
             assert.strictEqual(node.toString(), "<?target content?>");
         });
@@ -44,24 +44,26 @@ describe("XmlProcInst", () => {
             assert.strictEqual(node.target, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlProcInst("abc");
             assert.throws((): void => node.target = undefined);
             assert.throws((): void => node.target = null);
             assert.throws((): void => node.target = <any> 0);
-            assert.throws((): void => node.target = <any> new XmlProcInst("target"));
+            assert.throws(
+                (): void => node.target = <any> new XmlProcInst("target"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlProcInst("abc");
-            assert.throws(() => node.target = "abc" +
-                String.fromCharCode(0x0001) + "def");
+            assert.throws(() => node.target = "abc"
+                                              + String.fromCharCode(0x0001)
+                                              + "def");
         });
 
-        it("should throw an error if the specified value is equal" +
-            " to 'xml'", () => {
+        it("should throw an error if the specified value is equal"
+           + " to 'xml'", () => {
             let node = new XmlProcInst("abc");
             assert.throws(() => node.target = "xml");
         });
@@ -79,23 +81,25 @@ describe("XmlProcInst", () => {
             assert.strictEqual(node.content, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string or undefined", () => {
+        it("should throw an error if the specified value is not a"
+           + " string or undefined", () => {
             let node = new XmlProcInst("abc", "def");
             assert.throws((): void => node.content = null);
             assert.throws((): void => node.content = <any> 0);
-            assert.throws((): void => node.content = <any> new XmlProcInst("target"));
+            assert.throws(
+                (): void => node.content = <any> new XmlProcInst("target"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlProcInst("abc");
-            assert.throws(() => node.content = "abc" +
-                String.fromCharCode(0x0001) + "def");
+            assert.throws(() => node.content = "abc"
+                                               + String.fromCharCode(0x0001)
+                                               + "def");
         });
 
-        it("should throw an error if the specified value contains the" +
-            " string '?>'", () => {
+        it("should throw an error if the specified value contains the"
+           + " string '?>'", () => {
             let node = new XmlProcInst("?a?b??c>>?");
             assert.throws(() => node.content = "?>");
             assert.throws(() => node.content = "abc?>123");
@@ -135,8 +139,8 @@ describe("XmlProcInst", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlProcInst("abc");
             assert.strictEqual(node.toString(), "<?abc?>");
 

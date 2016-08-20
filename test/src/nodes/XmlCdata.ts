@@ -37,8 +37,8 @@ describe("XmlCdata", () => {
             assert.strictEqual(node.data, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-           " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlCdata("abc");
             assert.throws((): void => node.data = undefined);
             assert.throws((): void => node.data = null);
@@ -46,15 +46,16 @@ describe("XmlCdata", () => {
             assert.throws((): void => node.data = <any> new XmlCdata(""));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlCdata("abc");
-            assert.throws(() => node.data = "abc" + String.fromCharCode(0x0001)
+            assert.throws(() => node.data = "abc"
+                                            + String.fromCharCode(0x0001)
                                             + "def");
         });
 
-        it("should throw an error if the specified value contains the" +
-           " string ']]>'", () => {
+        it("should throw an error if the specified value contains the"
+           + " string ']]>'", () => {
             let node = new XmlCdata("]]a]>bc>");
             assert.throws(() => node.data = "]]>");
             assert.throws(() => node.data = "abc]]>123");
@@ -94,8 +95,8 @@ describe("XmlCdata", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-           " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlCdata("abc");
             assert.strictEqual(node.toString(), "<![CDATA[abc]]>");
         });

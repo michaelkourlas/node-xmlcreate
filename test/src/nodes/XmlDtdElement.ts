@@ -38,8 +38,8 @@ describe("XmlDtdElement", () => {
             assert.strictEqual(node.text, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-           " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlDtdElement("abc");
             assert.throws((): void => node.text = undefined);
             assert.throws((): void => node.text = null);
@@ -48,11 +48,11 @@ describe("XmlDtdElement", () => {
                 (): void => node.text = <any> new XmlDtdElement("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlDtdElement("abc");
-            assert.throws(() => node.text = "abc" +
-                                            String.fromCharCode(0x0001)
+            assert.throws(() => node.text = "abc"
+                                            + String.fromCharCode(0x0001)
                                             + "def");
         });
     });
@@ -88,8 +88,8 @@ describe("XmlDtdElement", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-           " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDtdElement("abc");
             assert.strictEqual(node.toString(), "<!ELEMENT abc>");
         });

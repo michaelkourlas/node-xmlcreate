@@ -38,19 +38,21 @@ describe("XmlDtdNotation", () => {
             assert.strictEqual(node.text, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-           " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlDtdNotation("abc");
             assert.throws((): void => node.text = undefined);
             assert.throws((): void => node.text = null);
             assert.throws((): void => node.text = <any> 0);
-            assert.throws((): void => node.text = <any> new XmlDtdNotation("abc"));
+            assert.throws(
+                (): void => node.text = <any> new XmlDtdNotation("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlDtdNotation("abc");
-            assert.throws(() => node.text = "abc" + String.fromCharCode(0x0001) + "def");
+            assert.throws(
+                () => node.text = "abc" + String.fromCharCode(0x0001) + "def");
         });
     });
 
@@ -85,8 +87,8 @@ describe("XmlDtdNotation", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-           " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDtdNotation("abc");
             assert.strictEqual(node.toString(), "<!NOTATION abc>");
         });

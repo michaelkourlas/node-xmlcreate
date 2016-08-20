@@ -37,20 +37,22 @@ describe("XmlDtdEntity", () => {
             assert.strictEqual(node.text, "123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlDtdEntity("abc");
             assert.throws((): void => node.text = undefined);
             assert.throws((): void => node.text = null);
             assert.throws((): void => node.text = <any> 0);
-            assert.throws((): void => node.text = <any> new XmlDtdEntity("abc"));
+            assert.throws(
+                (): void => node.text = <any> new XmlDtdEntity("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlDtdEntity("abc");
-            assert.throws(() => node.text = "abc" +
-                String.fromCharCode(0x0001) + "def");
+            assert.throws(() => node.text = "abc"
+                                            + String.fromCharCode(0x0001)
+                                            + "def");
         });
     });
 
@@ -85,8 +87,8 @@ describe("XmlDtdEntity", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDtdEntity("abc");
             assert.strictEqual(node.toString(), "<!ENTITY abc>");
         });

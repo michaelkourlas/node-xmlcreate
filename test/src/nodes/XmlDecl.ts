@@ -22,15 +22,15 @@ describe("XmlDecl", () => {
         it("should create an XmlDecl node with the specified options", () => {
             let node = new XmlDecl({encoding: "UTF-8"});
             assert.strictEqual(node.toString(),
-                "<?xml version='1.0' encoding='UTF-8'?>");
+                               "<?xml version='1.0' encoding='UTF-8'?>");
 
             node = new XmlDecl({standalone: "yes"});
             assert.strictEqual(node.toString(),
-                "<?xml version='1.0' standalone='yes'?>");
+                               "<?xml version='1.0' standalone='yes'?>");
 
             node = new XmlDecl({version: "1.1"});
             assert.strictEqual(node.toString(),
-                "<?xml version='1.1'?>");
+                               "<?xml version='1.1'?>");
         });
     });
 
@@ -50,16 +50,16 @@ describe("XmlDecl", () => {
             assert.strictEqual(node.encoding, undefined);
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string or undefined", () => {
+        it("should throw an error if the specified value is not a"
+           + " string or undefined", () => {
             let node = new XmlDecl();
             assert.throws((): void => node.encoding = null);
             assert.throws((): void => node.encoding = <any> 0);
             assert.throws((): void => node.encoding = <any> new XmlDecl());
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML encodings or is empty", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML encodings or is empty", () => {
             let node = new XmlDecl();
             assert.throws(() => node.encoding = "");
             assert.throws(() => node.encoding = "UTF-16$");
@@ -76,8 +76,8 @@ describe("XmlDecl", () => {
             assert.strictEqual(node.standalone, "yes");
         });
 
-        it("should set this node's standalone attribute to the specified" +
-            " value", () => {
+        it("should set this node's standalone attribute to the specified"
+           + " value", () => {
             let node = new XmlDecl();
             node.standalone = "yes";
             assert.strictEqual(node.standalone, "yes");
@@ -87,16 +87,16 @@ describe("XmlDecl", () => {
             assert.strictEqual(node.standalone, undefined);
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string or undefined", () => {
+        it("should throw an error if the specified value is not a"
+           + " string or undefined", () => {
             let node = new XmlDecl();
             assert.throws((): void => node.standalone = null);
             assert.throws((): void => node.standalone = <any> 0);
             assert.throws((): void => node.standalone = <any> new XmlDecl());
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in the standalone attribute or is empty", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in the standalone attribute or is empty", () => {
             let node = new XmlDecl();
             assert.throws(() => node.standalone = "");
             assert.throws(() => node.standalone = "maybe");
@@ -119,8 +119,8 @@ describe("XmlDecl", () => {
             assert.strictEqual(node.version, "1.1234567890");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlDecl();
             assert.throws((): void => node.version = undefined);
             assert.throws((): void => node.version = null);
@@ -128,8 +128,8 @@ describe("XmlDecl", () => {
             assert.throws((): void => node.version = <any> new XmlDecl());
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in the version attribute or is empty", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in the version attribute or is empty", () => {
             let node = new XmlDecl();
             assert.throws(() => node.version = "");
             assert.throws(() => node.version = "1");
@@ -170,40 +170,42 @@ describe("XmlDecl", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDecl({
                 encoding: "UTF-8",
                 standalone: "yes",
-                version: "1.0",
+                version: "1.0"
             });
             assert.strictEqual(node.toString(),
-                "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>");
+                               "<?xml version='1.0' encoding='UTF-8'"
+                               + " standalone='yes'?>");
 
             node = new XmlDecl({
                 encoding: undefined,
                 standalone: undefined,
-                version: "1.1",
+                version: "1.1"
             });
             assert.strictEqual(node.toString(), "<?xml version='1.1'?>");
         });
 
-        it("should return a string that uses single or double quotes for" +
-            " attribute values depending on the specified options", () => {
+        it("should return a string that uses single or double quotes for"
+           + " attribute values depending on the specified options", () => {
             let node = new XmlDecl({
                 encoding: "UTF-8",
-                standalone: "yes",
+                standalone: "yes"
             });
             assert.strictEqual(node.toString({doubleQuotes: false}),
-                "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>");
+                               "<?xml version='1.0' encoding='UTF-8'"
+                               + " standalone='yes'?>");
 
             node = new XmlDecl({
                 encoding: "UTF-8",
-                standalone: "yes",
+                standalone: "yes"
             });
             assert.strictEqual(node.toString({doubleQuotes: true}),
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"" +
-                " standalone=\"yes\"?>");
+                               "<?xml version=\"1.0\" encoding=\"UTF-8\"" +
+                               " standalone=\"yes\"?>");
         });
     });
 });

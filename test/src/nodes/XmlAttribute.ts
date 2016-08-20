@@ -19,14 +19,14 @@ import {
     XmlCharRef,
     XmlEntityRef,
     XmlNode,
-    XmlText,
+    XmlText
 } from "../../../lib/main";
 import {assert} from "chai";
 
 describe("XmlAttribute", () => {
     describe("#constructor", () => {
-        it("should create an XmlAttribute node with the specified name and" +
-           " value or values", () => {
+        it("should create an XmlAttribute node with the specified name and"
+           + " value or values", () => {
             let node = new XmlAttribute("name",
                 new XmlText("value"));
             assert.strictEqual(node.toString(),
@@ -36,7 +36,7 @@ describe("XmlAttribute", () => {
                 new XmlText("value"),
                 new XmlCharRef("a", true),
                 new XmlCharRef("b", false),
-                new XmlEntityRef("test"),
+                new XmlEntityRef("test")
             ]);
             assert.strictEqual(node.toString(),
                                "name='value&#x61;&#98;&test;'");
@@ -55,8 +55,8 @@ describe("XmlAttribute", () => {
             assert.strictEqual(node.name, "name2");
         });
 
-        it("should throw an error if the specified value is not a" +
-           " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlAttribute("name", new XmlText("value"));
             assert.throws((): void => node.name = undefined);
             assert.throws((): void => node.name = null);
@@ -64,17 +64,17 @@ describe("XmlAttribute", () => {
             assert.throws((): void => node.name = <any> new XmlText(""));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in XML names", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML names", () => {
             let node = new XmlAttribute("name", new XmlText("value"));
             assert.throws(() => node.name = ".");
         });
     });
 
     describe("#charRef", () => {
-        it("should add an XmlCharRef node to this node's children at the" +
-           " specified index with the specified char and hex" +
-           " property and return the newly added node", () => {
+        it("should add an XmlCharRef node to this node's children at the"
+           + " specified index with the specified char and hex"
+           + " property and return the newly added node", () => {
             let node = new XmlAttribute("name", new XmlText(""));
             assert.isTrue(node.charRef("a", true) instanceof XmlCharRef);
             assert.isTrue(node.charRef("b", false, 0) instanceof XmlCharRef);
@@ -83,9 +83,9 @@ describe("XmlAttribute", () => {
     });
 
     describe("#entityRef", () => {
-        it("should add an XmlEntityRef node to this node's children at the" +
-           " specified index with the specified entity name and return" +
-           " the newly added node", () => {
+        it("should add an XmlEntityRef node to this node's children at the"
+           + " specified index with the specified entity name and return"
+           + " the newly added node", () => {
             let node = new XmlAttribute("name", new XmlText(""));
             assert.isTrue(node.entityRef("a") instanceof XmlEntityRef);
             assert.isTrue(node.entityRef("b", 0) instanceof XmlEntityRef);
@@ -94,14 +94,14 @@ describe("XmlAttribute", () => {
     });
 
     describe("#insertChild", () => {
-        it("should throw an error if the specified node is not an" +
-           " XmlCharRef, XmlEntityRef, or XmlText node", () => {
+        it("should throw an error if the specified node is not an"
+           + " XmlCharRef, XmlEntityRef, or XmlText node", () => {
             let node = new XmlAttribute("name", new XmlText(""));
             assert.throws(() => node.insertChild(new XmlNode()));
         });
 
-        it("should insert an XmlCharRef, XmlEntityRef, or XmlText node at" +
-           " the specified index in this node's children", () => {
+        it("should insert an XmlCharRef, XmlEntityRef, or XmlText node at"
+           + " the specified index in this node's children", () => {
             let charRefNode = new XmlCharRef("x");
             let entityRefNode = new XmlEntityRef("y");
             let textNode = new XmlText("z");
@@ -140,8 +140,8 @@ describe("XmlAttribute", () => {
             assert.throws(() => node.removeChildAtIndex(0));
         });
 
-        it("should remove the node at the specified index from this" +
-           " node", () => {
+        it("should remove the node at the specified index from this"
+           + " node", () => {
             let textNode = new XmlText("");
             let secondTextNode = new XmlText("");
             let node = new XmlAttribute("name", textNode);
@@ -153,9 +153,9 @@ describe("XmlAttribute", () => {
     });
 
     describe("#text", () => {
-        it("should add an XmlText node to this node's children at the" +
-           " specified index with the specified text and return the" +
-           " newly added node", () => {
+        it("should add an XmlText node to this node's children at the"
+           + " specified index with the specified text and return the"
+           + " newly added node", () => {
             let node = new XmlAttribute("name", new XmlText(""));
             assert.isTrue(node.text("a") instanceof XmlText);
             assert.isTrue(node.text("b", 0) instanceof XmlText);
@@ -164,8 +164,8 @@ describe("XmlAttribute", () => {
     });
 
     describe("#toString(options)", () => {
-        it("should return a string containing the XML string representation" +
-           " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlAttribute("a", new XmlText(""));
             node.insertChild(new XmlText("b"));
             node.insertChild(new XmlEntityRef("c"));
@@ -173,8 +173,8 @@ describe("XmlAttribute", () => {
             assert.strictEqual(node.toString(), "a='b&c;&#100;'");
         });
 
-        it("should return a string that uses single or double quotes for" +
-           " attribute values depending on the specified options", () => {
+        it("should return a string that uses single or double quotes for"
+           + " attribute values depending on the specified options", () => {
             let node = new XmlAttribute("name", new XmlText(""));
             node.insertChild(new XmlText("'hello'"));
             assert.strictEqual(node.toString({doubleQuotes: false}),

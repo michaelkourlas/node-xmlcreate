@@ -29,11 +29,11 @@ import {assert} from "chai";
 
 describe("XmlDtd", () => {
     describe("#constructor", () => {
-        it("should create an XmlDtd node with the specified name, sysId," +
-           " and pubId", () => {
+        it("should create an XmlDtd node with the specified name, sysId,"
+           + " and pubId", () => {
             let node = new XmlDtd("abc", "def", "ghi");
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc PUBLIC 'ghi'" +
-                                                " 'def'>");
+            assert.strictEqual(node.toString(), "<!DOCTYPE abc PUBLIC 'ghi'"
+                                                + " 'def'>");
 
             node = new XmlDtd("abc", "def");
             assert.strictEqual(node.toString(), "<!DOCTYPE abc SYSTEM 'def'>");
@@ -64,8 +64,8 @@ describe("XmlDtd", () => {
             assert.throws((): void => node.name = <any> new XmlDtd("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in XML names", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML names", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.name = ".");
         });
@@ -93,8 +93,8 @@ describe("XmlDtd", () => {
             assert.throws((): void => node.pubId = <any> new XmlDtd("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in public identifiers", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in public identifiers", () => {
             let node = new XmlDtd("abc", "def");
             assert.throws(() => node.pubId = "~");
             assert.throws(() => node.pubId = "~ab");
@@ -103,8 +103,8 @@ describe("XmlDtd", () => {
             assert.throws(() => node.pubId = "a~b~~ab~a");
         });
 
-        it("should throw an error if the specified value is undefined when" +
-           " sysId is undefined", () => {
+        it("should throw an error if the specified value is undefined when"
+           + " sysId is undefined", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.pubId = "def");
         });
@@ -122,35 +122,35 @@ describe("XmlDtd", () => {
             assert.strictEqual(node.sysId, "def");
         });
 
-        it("should throw an error if the specified value is not a" +
-           " string or undefined", () => {
+        it("should throw an error if the specified value is not a"
+           + " string or undefined", () => {
             let node = new XmlDtd("abc");
             assert.throws((): void => node.sysId = null);
             assert.throws((): void => node.sysId = <any> 0);
             assert.throws((): void => node.sysId = <any> new XmlDtd("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-           " not allowed in system identifiers", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in system identifiers", () => {
             let node = new XmlDtd("abc");
-            assert.throws(() => node.sysId = "abc" +
-                                             String.fromCharCode(0x0001)
+            assert.throws(() => node.sysId = "abc"
+                                             + String.fromCharCode(0x0001)
                                              + "def");
             assert.throws(() => node.sysId = "'\"");
             assert.throws(() => node.sysId = "abc'abc\"abc");
         });
 
-        it("should throw an error if the specified value is undefined when" +
-           " pubId is defined", () => {
+        it("should throw an error if the specified value is undefined when"
+           + " pubId is defined", () => {
             let node = new XmlDtd("abc", "def", "ghi");
             assert.throws((): void => node.sysId = undefined);
         });
     });
 
     describe("#attlist", () => {
-        it("should add an XmlDtdAttlist node to this node's children at the" +
-           " specified index with the specified text and return" +
-           " the newly added node", () => {
+        it("should add an XmlDtdAttlist node to this node's children at the"
+           + " specified index with the specified text and return"
+           + " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.attlist("test") instanceof XmlDtdAttlist);
             assert.isTrue(node.attlist("test2", 0) instanceof XmlDtdAttlist);
@@ -163,9 +163,9 @@ describe("XmlDtd", () => {
     });
 
     describe("#comment", () => {
-        it("should add an XmlComment node to this node's children at the" +
-           " specified index with the specified text and return" +
-           " the newly added node", () => {
+        it("should add an XmlComment node to this node's children at the"
+           + " specified index with the specified text and return"
+           + " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.comment("test") instanceof XmlComment);
             assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
@@ -177,9 +177,9 @@ describe("XmlDtd", () => {
     });
 
     describe("#element", () => {
-        it("should add an XmlDtdElement node to this node's children at the" +
-           " specified index with the specified text and return" +
-           " the newly added node", () => {
+        it("should add an XmlDtdElement node to this node's children at the"
+           + " specified index with the specified text and return"
+           + " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.element("test") instanceof XmlDtdElement);
             assert.isTrue(node.element("test2", 0) instanceof XmlDtdElement);
@@ -192,9 +192,9 @@ describe("XmlDtd", () => {
     });
 
     describe("#entity", () => {
-        it("should add an XmlDtdEntity node to this node's children at the" +
-           " specified index with the specified text and return" +
-           " the newly added node", () => {
+        it("should add an XmlDtdEntity node to this node's children at the"
+           + " specified index with the specified text and return"
+           + " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.entity("test") instanceof XmlDtdEntity);
             assert.isTrue(node.entity("test2", 0) instanceof XmlDtdEntity);
@@ -206,8 +206,8 @@ describe("XmlDtd", () => {
     });
 
     describe("#insertChild", () => {
-        it("should add the specified node to this node's children at the" +
-           " specified index", () => {
+        it("should add the specified node to this node's children at the"
+           + " specified index", () => {
             let commentNode = new XmlComment("comment");
             let attlistNode = new XmlDtdAttlist("attlist");
             let elementNode = new XmlDtdElement("element");
@@ -232,17 +232,17 @@ describe("XmlDtd", () => {
                                + "    %ref;\n    <!--comment-->\n]>");
         });
 
-        it("should throw an error if the specified node is not an" +
-           " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
+        it("should throw an error if the specified node is not an"
+           + " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.insertChild(new XmlNode()));
         });
     });
 
     describe("#notation", () => {
-        it("should add an XmlDtdNotation node to this node's children at the" +
-           " specified index with the specified text and return" +
-           " the newly added node", () => {
+        it("should add an XmlDtdNotation node to this node's children at the"
+           + " specified index with the specified text and return"
+           + " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.notation("test") instanceof XmlDtdNotation);
             assert.isTrue(node.notation("test2", 0) instanceof XmlDtdNotation);
@@ -255,9 +255,9 @@ describe("XmlDtd", () => {
     });
 
     describe("#paramEntityRef", () => {
-        it("should add an XmlDtdParamEntityRef node to this node's children" +
-           " at the specified index with the specified text and" +
-           " return the newly added node", () => {
+        it("should add an XmlDtdParamEntityRef node to this node's children"
+           + " at the specified index with the specified text and"
+           + " return the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(
                 node.paramEntityRef("test") instanceof XmlDtdParamEntityRef);
@@ -272,9 +272,9 @@ describe("XmlDtd", () => {
     });
 
     describe("#procInst", () => {
-        it("should add an XmlProcInst node to this node's children" +
-           " at the specified index with the specified text and" +
-           " return the newly added node", () => {
+        it("should add an XmlProcInst node to this node's children"
+           + " at the specified index with the specified text and"
+           + " return the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.procInst("test", "a") instanceof XmlProcInst);
             assert.isTrue(
@@ -292,8 +292,8 @@ describe("XmlDtd", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-           " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlDtd("abc");
             assert.strictEqual(node.toString(), "<!DOCTYPE abc>");
 
@@ -335,15 +335,15 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n" +
-                               "    <!ATTLIST test1>\n    <!--test2-->\n" +
-                               "    <!ELEMENT test3>\n    <!ENTITY test4>\n" +
-                               "    <!NOTATION test5>\n    %test6;\n"
+                               "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                               + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                               + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                               + "    <!NOTATION test5>\n    %test6;\n"
                                + "    <?test7 test8?>\n]>");
         });
 
-        it("should return a string that uses pretty printing depending on" +
-           " the specified options", () => {
+        it("should return a string that uses pretty printing depending on"
+           + " the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -358,8 +358,8 @@ describe("XmlDtd", () => {
                                + " test5>%test6;<?test7 test8?>]>");
         });
 
-        it("should return a string that uses a specific newline character" +
-           " depending on the specified options", () => {
+        it("should return a string that uses a specific newline character"
+           + " depending on the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -376,8 +376,8 @@ describe("XmlDtd", () => {
                                + "    %test6;\r\n    <?test7 test8?>\r\n]>");
         });
 
-        it("should return a string that uses a specific indent character" +
-           " depending on the specified options", () => {
+        it("should return a string that uses a specific indent character"
+           + " depending on the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -393,8 +393,8 @@ describe("XmlDtd", () => {
                                + "\n\t%test6;\n\t<?test7 test8?>\n]>");
         });
 
-        it("should return a string that uses a specified quotes" +
-           " character depending on the specified options", () => {
+        it("should return a string that uses a specified quotes"
+           + " character depending on the specified options", () => {
             let node = new XmlDtd("abc", "def", "ghi");
             node.attlist("test1");
             node.comment("test2");
@@ -411,8 +411,8 @@ describe("XmlDtd", () => {
                                + "    <?test7 test8?>\n]>");
         });
 
-        it("should throw an error if the sysId or pubId are inconsistent" +
-           " with the quotes option", () => {
+        it("should throw an error if the sysId or pubId are inconsistent"
+           + " with the quotes option", () => {
             let node = new XmlDtd("abc", "'def'", "'ghi'");
             assert.throws(() => node.toString());
 

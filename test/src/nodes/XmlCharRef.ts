@@ -19,8 +19,8 @@ import {assert} from "chai";
 
 describe("XmlCharRef", () => {
     describe("#constructor", () => {
-        it("should create an XmlCharRef node with the specified" +
-            " character value and representation", () => {
+        it("should create an XmlCharRef node with the specified"
+           + " character value and representation", () => {
             let node = new XmlCharRef("a");
             assert.strictEqual(node.toString(), "&#97;");
 
@@ -38,15 +38,15 @@ describe("XmlCharRef", () => {
             assert.strictEqual(node.char, "a");
         });
 
-        it("should set this node's character value to the specified" +
-            " value", () => {
+        it("should set this node's character value to the specified"
+           + " value", () => {
             let node = new XmlCharRef("a");
             node.char = "b";
             assert.strictEqual(node.char, "b");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlCharRef("a");
             assert.throws((): void => node.char = undefined);
             assert.throws((): void => node.char = null);
@@ -54,14 +54,14 @@ describe("XmlCharRef", () => {
             assert.throws((): void => node.char = <any> new XmlCharRef(""));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlCharRef("a");
             assert.throws(() => node.char = String.fromCharCode(0x0001));
         });
 
-        it("should throw an error if the specified value contains more than" +
-            " one character", () => {
+        it("should throw an error if the specified value contains more than"
+           + " one character", () => {
             let node = new XmlCharRef("a");
             assert.throws(() => node.char = "bc");
         });
@@ -79,8 +79,8 @@ describe("XmlCharRef", () => {
             assert.isTrue(node.hex);
         });
 
-        it("should throw an error if the specified value is not a" +
-            " boolean", () => {
+        it("should throw an error if the specified value is not a"
+           + " boolean", () => {
             let node = new XmlCharRef("a");
             assert.throws((): void => node.hex = undefined);
             assert.throws((): void => node.hex = null);
@@ -121,20 +121,20 @@ describe("XmlCharRef", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlCharRef("a");
             assert.strictEqual(node.toString(), "&#97;");
 
-            node = new XmlCharRef(String.fromCharCode(0xdbff) +
-                String.fromCharCode(0xdc00));
+            node = new XmlCharRef(String.fromCharCode(0xdbff)
+                                  + String.fromCharCode(0xdc00));
             assert.strictEqual(node.toString(), "&#1113088;");
 
             node = new XmlCharRef("b", true);
             assert.strictEqual(node.toString(), "&#x62;");
 
-            node = new XmlCharRef(String.fromCharCode(0xdbff) +
-                String.fromCharCode(0xdc00), true);
+            node = new XmlCharRef(String.fromCharCode(0xdbff)
+                                  + String.fromCharCode(0xdc00), true);
             assert.strictEqual(node.toString(), "&#x10fc00;");
         });
     });

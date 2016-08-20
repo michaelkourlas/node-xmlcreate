@@ -37,17 +37,18 @@ describe("XmlEntityRef", () => {
             assert.strictEqual(node.entity, "def123");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlEntityRef("abc");
             assert.throws((): void => node.entity = undefined);
             assert.throws((): void => node.entity = null);
             assert.throws((): void => node.entity = <any> 0);
-            assert.throws((): void => node.entity = <any> new XmlEntityRef("abc"));
+            assert.throws(
+                (): void => node.entity = <any> new XmlEntityRef("abc"));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML names", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML names", () => {
             let node = new XmlEntityRef("abc");
             assert.throws(() => node.entity = ".");
         });
@@ -84,8 +85,8 @@ describe("XmlEntityRef", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlEntityRef("abc");
             assert.strictEqual(node.toString(), "&abc;");
         });

@@ -37,8 +37,8 @@ describe("XmlComment", () => {
             assert.strictEqual(node.content, "b");
         });
 
-        it("should throw an error if the specified value is not a" +
-            " string", () => {
+        it("should throw an error if the specified value is not a"
+           + " string", () => {
             let node = new XmlComment("a");
             assert.throws((): void => node.content = undefined);
             assert.throws((): void => node.content = null);
@@ -46,15 +46,16 @@ describe("XmlComment", () => {
             assert.throws((): void => node.content = <any> new XmlComment(""));
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML", () => {
             let node = new XmlComment("abc");
-            assert.throws(() => node.content = "abc" +
-                String.fromCharCode(0x0001) + "def");
+            assert.throws(() => node.content = "abc"
+                                               + String.fromCharCode(0x0001)
+                                               + "def");
         });
 
-        it("should throw an error if the specified value contains characters" +
-            " not allowed in XML comments", () => {
+        it("should throw an error if the specified value contains characters"
+           + " not allowed in XML comments", () => {
             let node = new XmlComment("-a-bc");
             assert.throws(() => node.content = "--");
             assert.throws(() => node.content = "abc--def");
@@ -95,8 +96,8 @@ describe("XmlComment", () => {
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation" +
-            " for this node", () => {
+        it("should return a string containing the XML string representation"
+           + " for this node", () => {
             let node = new XmlComment("abc");
             assert.strictEqual(node.toString(), "<!--abc-->");
         });
