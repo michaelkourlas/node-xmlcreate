@@ -44,7 +44,7 @@ The easiest way to install xmlcreate is using npm:
 npm install xmlcreate
 ````
 
-You can also build xmlcreate from source using npm, typings, and gulp: 
+You can also build xmlcreate from source using npm, gulp, and typings: 
 
 ````
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
@@ -52,6 +52,13 @@ npm install
 typings install
 gulp
 ````
+
+You'll need to install gulp and typings first if you don't have them:
+
+```
+npm install -g gulp
+npm install -g typings
+```
 
 You can then copy the folder into your node_modules directory.
 
