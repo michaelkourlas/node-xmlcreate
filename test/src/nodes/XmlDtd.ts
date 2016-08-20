@@ -23,17 +23,17 @@ import {
     XmlDtdNotation,
     XmlDtdParamEntityRef,
     XmlNode,
-    XmlProcInst,
+    XmlProcInst
 } from "../../../lib/main";
 import {assert} from "chai";
 
 describe("XmlDtd", () => {
     describe("#constructor", () => {
         it("should create an XmlDtd node with the specified name, sysId," +
-            " and pubId", () => {
+           " and pubId", () => {
             let node = new XmlDtd("abc", "def", "ghi");
             assert.strictEqual(node.toString(), "<!DOCTYPE abc PUBLIC 'ghi'" +
-                " 'def'>");
+                                                " 'def'>");
 
             node = new XmlDtd("abc", "def");
             assert.strictEqual(node.toString(), "<!DOCTYPE abc SYSTEM 'def'>");
@@ -56,7 +56,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value is not a" +
-            " string", () => {
+           " string", () => {
             let node = new XmlDtd("abc");
             assert.throws((): void => node.name = undefined);
             assert.throws((): void => node.name = null);
@@ -65,7 +65,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value contains characters" +
-            " not allowed in XML names", () => {
+           " not allowed in XML names", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.name = ".");
         });
@@ -86,7 +86,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value is not a" +
-            " string or undefined", () => {
+           " string or undefined", () => {
             let node = new XmlDtd("abc", "def");
             assert.throws((): void => node.pubId = null);
             assert.throws((): void => node.pubId = <any> 0);
@@ -94,7 +94,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value contains characters" +
-            " not allowed in public identifiers", () => {
+           " not allowed in public identifiers", () => {
             let node = new XmlDtd("abc", "def");
             assert.throws(() => node.pubId = "~");
             assert.throws(() => node.pubId = "~ab");
@@ -104,7 +104,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value is undefined when" +
-            " sysId is undefined", () => {
+           " sysId is undefined", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.pubId = "def");
         });
@@ -123,7 +123,7 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value is not a" +
-            " string or undefined", () => {
+           " string or undefined", () => {
             let node = new XmlDtd("abc");
             assert.throws((): void => node.sysId = null);
             assert.throws((): void => node.sysId = <any> 0);
@@ -131,16 +131,17 @@ describe("XmlDtd", () => {
         });
 
         it("should throw an error if the specified value contains characters" +
-            " not allowed in system identifiers", () => {
+           " not allowed in system identifiers", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.sysId = "abc" +
-                String.fromCharCode(0x0001) + "def");
+                                             String.fromCharCode(0x0001)
+                                             + "def");
             assert.throws(() => node.sysId = "'\"");
             assert.throws(() => node.sysId = "abc'abc\"abc");
         });
 
         it("should throw an error if the specified value is undefined when" +
-            " pubId is defined", () => {
+           " pubId is defined", () => {
             let node = new XmlDtd("abc", "def", "ghi");
             assert.throws((): void => node.sysId = undefined);
         });
@@ -148,62 +149,65 @@ describe("XmlDtd", () => {
 
     describe("#attlist", () => {
         it("should add an XmlDtdAttlist node to this node's children at the" +
-            " specified index with the specified text and return" +
-            " the newly added node", () => {
+           " specified index with the specified text and return" +
+           " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.attlist("test") instanceof XmlDtdAttlist);
             assert.isTrue(node.attlist("test2", 0) instanceof XmlDtdAttlist);
             assert.isTrue(node.attlist("test3", 1) instanceof XmlDtdAttlist);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <!ATTLIST test2>\n    <!ATTLIST test3>\n" +
-                "    <!ATTLIST test>\n]>");
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <!ATTLIST test2>\n"
+                               + "    <!ATTLIST test3>\n"
+                               + "    <!ATTLIST test>\n]>");
         });
     });
 
     describe("#comment", () => {
         it("should add an XmlComment node to this node's children at the" +
-            " specified index with the specified text and return" +
-            " the newly added node", () => {
+           " specified index with the specified text and return" +
+           " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.comment("test") instanceof XmlComment);
             assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
             assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <!--test2-->\n    <!--test3-->\n    <!--test-->\n]>");
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <!--test2-->\n"
+                               + "    <!--test3-->\n    <!--test-->\n]>");
         });
     });
 
     describe("#element", () => {
         it("should add an XmlDtdElement node to this node's children at the" +
-            " specified index with the specified text and return" +
-            " the newly added node", () => {
+           " specified index with the specified text and return" +
+           " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.element("test") instanceof XmlDtdElement);
             assert.isTrue(node.element("test2", 0) instanceof XmlDtdElement);
             assert.isTrue(node.element("test3", 1) instanceof XmlDtdElement);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <!ELEMENT test2>\n    <!ELEMENT test3>\n" +
-                "    <!ELEMENT test>\n]>");
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <!ELEMENT test2>\n"
+                               + "    <!ELEMENT test3>\n"
+                               + "    <!ELEMENT test>\n]>");
         });
     });
 
     describe("#entity", () => {
         it("should add an XmlDtdEntity node to this node's children at the" +
-            " specified index with the specified text and return" +
-            " the newly added node", () => {
+           " specified index with the specified text and return" +
+           " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.entity("test") instanceof XmlDtdEntity);
             assert.isTrue(node.entity("test2", 0) instanceof XmlDtdEntity);
             assert.isTrue(node.entity("test3", 1) instanceof XmlDtdEntity);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <!ENTITY test2>\n    <!ENTITY test3>\n" +
-                "    <!ENTITY test>\n]>");
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <!ENTITY test2>\n"
+                               + "    <!ENTITY test3>\n    <!ENTITY test>\n]>");
         });
     });
 
     describe("#insertChild", () => {
         it("should add the specified node to this node's children at the" +
-            " specified index", () => {
+           " specified index", () => {
             let commentNode = new XmlComment("comment");
             let attlistNode = new XmlDtdAttlist("attlist");
             let elementNode = new XmlDtdElement("element");
@@ -220,14 +224,16 @@ describe("XmlDtd", () => {
             node.insertChild(notationNode, 4);
             node.insertChild(paramEntityRefNode, 5);
             assert.strictEqual(node.toString(),
-                "<!DOCTYPE abc [\n    <?target content?>\n" +
-                "    <!ATTLIST attlist>\n    <!ELEMENT element>\n" +
-                "    <!ELEMENT entity>\n    <!NOTATION notation>\n" +
-                "    %ref;\n    <!--comment-->\n]>");
+                               "<!DOCTYPE abc [\n    <?target content?>\n"
+                               + "    <!ATTLIST attlist>\n"
+                               + "    <!ELEMENT element>\n"
+                               + "    <!ELEMENT entity>\n"
+                               + "    <!NOTATION notation>\n"
+                               + "    %ref;\n    <!--comment-->\n]>");
         });
 
         it("should throw an error if the specified node is not an" +
-            " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
+           " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
             let node = new XmlDtd("abc");
             assert.throws(() => node.insertChild(new XmlNode()));
         });
@@ -235,50 +241,59 @@ describe("XmlDtd", () => {
 
     describe("#notation", () => {
         it("should add an XmlDtdNotation node to this node's children at the" +
-            " specified index with the specified text and return" +
-            " the newly added node", () => {
+           " specified index with the specified text and return" +
+           " the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.notation("test") instanceof XmlDtdNotation);
             assert.isTrue(node.notation("test2", 0) instanceof XmlDtdNotation);
             assert.isTrue(node.notation("test3", 1) instanceof XmlDtdNotation);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <!NOTATION test2>\n    <!NOTATION test3>\n" +
-                "    <!NOTATION test>\n]>");
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <!NOTATION test2>\n"
+                               + "    <!NOTATION test3>\n"
+                               + "    <!NOTATION test>\n]>");
         });
     });
 
     describe("#paramEntityRef", () => {
         it("should add an XmlDtdParamEntityRef node to this node's children" +
-            " at the specified index with the specified text and" +
-            " return the newly added node", () => {
+           " at the specified index with the specified text and" +
+           " return the newly added node", () => {
             let node = new XmlDtd("abc");
-            assert.isTrue(node.paramEntityRef("test") instanceof XmlDtdParamEntityRef);
-            assert.isTrue(node.paramEntityRef("test2", 0) instanceof XmlDtdParamEntityRef);
-            assert.isTrue(node.paramEntityRef("test3", 1) instanceof XmlDtdParamEntityRef);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    %test2;\n    %test3;\n    %test;\n]>");
+            assert.isTrue(
+                node.paramEntityRef("test") instanceof XmlDtdParamEntityRef);
+            assert.isTrue(node.paramEntityRef("test2", 0)
+                          instanceof XmlDtdParamEntityRef);
+            assert.isTrue(node.paramEntityRef("test3", 1)
+                          instanceof XmlDtdParamEntityRef);
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    %test2;\n    %test3;\n"
+                               + "    %test;\n]>");
         });
     });
 
     describe("#procInst", () => {
         it("should add an XmlProcInst node to this node's children" +
-            " at the specified index with the specified text and" +
-            " return the newly added node", () => {
+           " at the specified index with the specified text and" +
+           " return the newly added node", () => {
             let node = new XmlDtd("abc");
             assert.isTrue(node.procInst("test", "a") instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test2", "b", 0) instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test3", "c", 1) instanceof XmlProcInst);
+            assert.isTrue(
+                node.procInst("test2", "b", 0) instanceof XmlProcInst);
+            assert.isTrue(
+                node.procInst("test3", "c", 1) instanceof XmlProcInst);
             assert.isTrue(node.procInst("test4") instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test5", undefined, 0) instanceof XmlProcInst);
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc [\n" +
-                "    <?test5?>\n    <?test2 b?>\n    <?test3 c?>\n" +
-                "    <?test a?>\n    <?test4?>\n]>");
+            assert.isTrue(
+                node.procInst("test5", undefined, 0) instanceof XmlProcInst);
+            assert.strictEqual(node.toString(),
+                               "<!DOCTYPE abc [\n    <?test5?>\n"
+                               + "    <?test2 b?>\n    <?test3 c?>\n"
+                               + "    <?test a?>\n    <?test4?>\n]>");
         });
     });
 
     describe("#toString", () => {
         it("should return a string containing the XML string representation" +
-            " for this node", () => {
+           " for this node", () => {
             let node = new XmlDtd("abc");
             assert.strictEqual(node.toString(), "<!DOCTYPE abc>");
 
@@ -291,9 +306,10 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString(),
-                "<!DOCTYPE abc [\n    <!ATTLIST test1>\n    <!--test2-->\n" +
-                "    <!ELEMENT test3>\n    <!ENTITY test4>\n" +
-                "    <!NOTATION test5>\n    %test6;\n    <?test7 test8?>\n]>");
+                               "<!DOCTYPE abc [\n    <!ATTLIST test1>\n"
+                               + "    <!--test2-->\n    <!ELEMENT test3>\n"
+                               + "    <!ENTITY test4>\n    <!NOTATION test5>\n"
+                               + "    %test6;\n    <?test7 test8?>\n]>");
 
             node = new XmlDtd("abc", "def");
             node.attlist("test1");
@@ -304,10 +320,11 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString(),
-                "<!DOCTYPE abc SYSTEM \'def\' [\n    <!ATTLIST test1>\n" +
-                "    <!--test2-->\n    <!ELEMENT test3>\n" +
-                "    <!ENTITY test4>\n    <!NOTATION test5>\n" +
-                "    %test6;\n    <?test7 test8?>\n]>");
+                               "<!DOCTYPE abc SYSTEM \'def\' [\n"
+                               + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                               + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                               + "    <!NOTATION test5>\n    %test6;\n"
+                               + "    <?test7 test8?>\n]>");
 
             node = new XmlDtd("abc", "def", "ghi");
             node.attlist("test1");
@@ -318,14 +335,15 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString(),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n" +
-                "    <!ATTLIST test1>\n    <!--test2-->\n" +
-                "    <!ELEMENT test3>\n    <!ENTITY test4>\n" +
-                "    <!NOTATION test5>\n    %test6;\n    <?test7 test8?>\n]>");
+                               "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n" +
+                               "    <!ATTLIST test1>\n    <!--test2-->\n" +
+                               "    <!ELEMENT test3>\n    <!ENTITY test4>\n" +
+                               "    <!NOTATION test5>\n    %test6;\n"
+                               + "    <?test7 test8?>\n]>");
         });
 
         it("should return a string that uses pretty printing depending on" +
-            " the specified options", () => {
+           " the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -335,13 +353,13 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString({pretty: false}),
-                "<!DOCTYPE abc [<!ATTLIST test1><!--test2-->" +
-                "<!ELEMENT test3><!ENTITY test4><!NOTATION test5>%test6;" +
-                "<?test7 test8?>]>");
+                               "<!DOCTYPE abc [<!ATTLIST test1><!--test2-->"
+                               + "<!ELEMENT test3><!ENTITY test4><!NOTATION"
+                               + " test5>%test6;<?test7 test8?>]>");
         });
 
         it("should return a string that uses a specific newline character" +
-            " depending on the specified options", () => {
+           " depending on the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -351,14 +369,15 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString({newline: "\r\n"}),
-                "<!DOCTYPE abc [\r\n    <!ATTLIST test1>\r\n" +
-                "    <!--test2-->\r\n    <!ELEMENT test3>\r\n" +
-                "    <!ENTITY test4>\r\n    <!NOTATION test5>\r\n" +
-                "    %test6;\r\n    <?test7 test8?>\r\n]>");
+                               "<!DOCTYPE abc [\r\n    <!ATTLIST test1>\r\n"
+                               + "    <!--test2-->\r\n    <!ELEMENT test3>\r\n"
+                               + "    <!ENTITY test4>\r\n"
+                               + "    <!NOTATION test5>\r\n"
+                               + "    %test6;\r\n    <?test7 test8?>\r\n]>");
         });
 
         it("should return a string that uses a specific indent character" +
-            " depending on the specified options", () => {
+           " depending on the specified options", () => {
             let node = new XmlDtd("abc");
             node.attlist("test1");
             node.comment("test2");
@@ -368,13 +387,14 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString({indent: "\t"}),
-                "<!DOCTYPE abc [\n\t<!ATTLIST test1>\n\t<!--test2-->\n" +
-                "\t<!ELEMENT test3>\n\t<!ENTITY test4>\n" +
-                "\t<!NOTATION test5>\n\t%test6;\n\t<?test7 test8?>\n]>");
+                               "<!DOCTYPE abc [\n\t<!ATTLIST test1>\n\t"
+                               + "<!--test2-->\n\t<!ELEMENT test3>\n\t"
+                               + "<!ENTITY test4>\n\t<!NOTATION test5>"
+                               + "\n\t%test6;\n\t<?test7 test8?>\n]>");
         });
 
         it("should return a string that uses a specified quotes" +
-            " character depending on the specified options", () => {
+           " character depending on the specified options", () => {
             let node = new XmlDtd("abc", "def", "ghi");
             node.attlist("test1");
             node.comment("test2");
@@ -384,14 +404,15 @@ describe("XmlDtd", () => {
             node.paramEntityRef("test6");
             node.procInst("test7", "test8");
             assert.strictEqual(node.toString({doubleQuotes: true}),
-                "<!DOCTYPE abc PUBLIC \"ghi\" \"def\" [\n" +
-                "    <!ATTLIST test1>\n    <!--test2-->\n" +
-                "    <!ELEMENT test3>\n    <!ENTITY test4>\n" +
-                "    <!NOTATION test5>\n    %test6;\n    <?test7 test8?>\n]>");
+                               "<!DOCTYPE abc PUBLIC \"ghi\" \"def\" [\n"
+                               + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                               + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                               + "    <!NOTATION test5>\n    %test6;\n"
+                               + "    <?test7 test8?>\n]>");
         });
 
         it("should throw an error if the sysId or pubId are inconsistent" +
-            " with the quotes option", () => {
+           " with the quotes option", () => {
             let node = new XmlDtd("abc", "'def'", "'ghi'");
             assert.throws(() => node.toString());
 
