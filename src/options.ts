@@ -18,7 +18,8 @@ import {isType} from "./utils";
 
 /**
  * Formatting options for the string representation of an {@link XmlNode} and
- * its children. This object is used by {@link XmlNode#toString}.
+ * its children. This object is used by the `toString` method of
+ * {@link XmlNode}.
  */
 export interface IStringOptions {
     /**
