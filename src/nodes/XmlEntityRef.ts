@@ -25,7 +25,9 @@ import XmlNode from "./XmlNode";
  * An XML entity reference is structured as follows, where
  * `{entity}` is name of the entity to be referenced:
  *
- * `&amp;{entity};`
+ * ```xml
+ * &{entity};
+ * ```
  *
  * The `{entity}` value is a property of this node.
  *
