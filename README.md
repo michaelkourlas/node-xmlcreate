@@ -44,10 +44,12 @@ The easiest way to install xmlcreate is using npm:
 npm install xmlcreate
 ````
 
-You can also build xmlcreate from source using gulp: 
+You can also build xmlcreate from source using npm, typings, and gulp: 
 
 ````
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
+npm install
+typings install
 gulp
 ````
 

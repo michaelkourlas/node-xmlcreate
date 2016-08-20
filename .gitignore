@@ -1,8 +1,10 @@
-# JetBrains
+# WebStorm
 .idea/
 
-# JavaScript
+# JavaScript and TypeScript
 lib/
+test/lib/
+typings/
 
 # Documentation
 docs/

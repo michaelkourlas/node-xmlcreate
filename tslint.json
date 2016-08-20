@@ -1,0 +1,13 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "one-line": {
+            "check-open-brace": false
+        },
+        "variable-name": {
+            "check-format": {
+                "allow-leading-underscore": true
+            }
+        }
+    }
+}
