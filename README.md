@@ -40,18 +40,18 @@ serialized to text. The formatting of the text is customizable.
 
 The easiest way to install xmlcreate is using npm:
 
-````
+```
 npm install xmlcreate
-````
+```
 
 You can also build xmlcreate from source using npm, gulp, and typings: 
 
-````
+```
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
 npm install
 typings install
 gulp
-````
+```
 
 You'll need to install gulp and typings first if you don't have them:
 
@@ -76,15 +76,15 @@ The documentation for the current version is available [here](http://www.kourlas
 
 You can also build the documentation using gulp:
 
-````
+```
 gulp docs
-````
+```
 
 ## Examples ##
 
 The following example illustrates the basic usage of xmlcreate:
 
-````javascript
+```javascript
 var xmlcreate = require("xmlcreate");
 
 var document = xmlcreate.document("html");
@@ -116,11 +116,11 @@ document
                 .text("This is some text on my website.");
 
 console.log(document.toString({doubleQuotes: true}));
-````
+```
 
 This example produces the following XML:
 
-````xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -132,7 +132,7 @@ This example produces the following XML:
         <p>This is some text on my website.</p>
     </body>
 </html>
-````
+```
 
 Additional examples can be found in examples/example.js.
 
@@ -141,9 +141,9 @@ Additional examples can be found in examples/example.js.
 xmlcreate includes a set of tests to verify core functionality. You can run
 the tests using gulp:
 
-````
+```
 gulp test
-````
+```
 
 The `test` target builds the production variant of xmlcreate before running
 the tests. The `test-prod` target does the same thing, while the `test-dev`
