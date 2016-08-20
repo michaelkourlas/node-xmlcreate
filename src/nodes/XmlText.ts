@@ -63,8 +63,8 @@ export default class XmlText extends XmlNode {
         if (!isType(text, "String")) {
             throw new TypeError("text should be a string");
         } else if (!validateChar(text)) {
-            throw new Error("text should not contain characters not allowed" +
-                            " in XML");
+            throw new Error("text should not contain characters not allowed"
+                            + " in XML");
         }
 
         this._text = text;

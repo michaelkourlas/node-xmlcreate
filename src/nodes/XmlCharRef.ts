@@ -84,8 +84,8 @@ export default class XmlCharRef extends XmlNode {
         if (!isType(char, "String")) {
             throw new TypeError("char should be a string");
         } else if (!validateSingleChar(char)) {
-            throw new Error("char should contain a single character, and this" +
-                            " character should be allowed in XML");
+            throw new Error("char should contain a single character, and this"
+                            + " character should be allowed in XML");
         }
         this._char = char;
     }

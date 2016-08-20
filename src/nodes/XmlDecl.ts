@@ -18,7 +18,7 @@ import {
     IDeclarationOptions,
     IStringOptions,
     validateDeclarationOptions,
-    validateStringOptions,
+    validateStringOptions
 } from "../options";
 import {isType} from "../utils";
 import XmlNode from "./XmlNode";
@@ -109,8 +109,8 @@ export default class XmlDecl extends XmlNode {
     set standalone(standalone: string) {
         if (isType(standalone, "String")) {
             if (!/^(yes|no)$/.test(standalone)) {
-                throw new Error("standalone should be either the string" +
-                                " 'yes' or the string 'no'");
+                throw new Error("standalone should be either the string"
+                                + " 'yes' or the string 'no'");
             }
         } else if (!isType(standalone, "Undefined")) {
             throw new TypeError("standalone should be a string or undefined");

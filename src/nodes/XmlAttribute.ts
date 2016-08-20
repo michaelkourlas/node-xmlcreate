@@ -84,8 +84,8 @@ export default class XmlAttribute extends XmlNode {
         if (!isType(name, "String")) {
             throw new TypeError("name should be a string");
         } else if (!validateName(name)) {
-            throw new Error("name should not contain characters not" +
-                            " allowed in XML names");
+            throw new Error("name should not contain characters not"
+                            + " allowed in XML names");
         }
         this._name = name;
     }
@@ -147,8 +147,8 @@ export default class XmlAttribute extends XmlNode {
         if (!(node instanceof XmlCharRef || node instanceof XmlEntityRef ||
               node instanceof XmlText))
         {
-            throw new TypeError("node should be an instance of XmlCharRef," +
-                                " XmlEntityRef, or XmlText");
+            throw new TypeError("node should be an instance of XmlCharRef,"
+                                + " XmlEntityRef, or XmlText");
         }
         return super.insertChild(node, index);
     }

@@ -17,7 +17,7 @@
 import {
     IDeclarationOptions,
     IStringOptions,
-    validateStringOptions,
+    validateStringOptions
 } from "../options";
 import {isType} from "../utils";
 import XmlComment from "./XmlComment";
@@ -160,46 +160,49 @@ export default class XmlDocument extends XmlNode {
      *                    undefined if no node was inserted.
      */
     public insertChild(node: XmlNode, index?: number): XmlNode {
-        if (!(node instanceof XmlComment || node instanceof XmlDecl ||
-              node instanceof XmlDtd || node instanceof XmlProcInst))
+        if (!(node instanceof XmlComment
+              || node instanceof XmlDecl
+              || node instanceof XmlDtd
+              || node instanceof XmlProcInst))
         {
-            throw new TypeError("node should be an instance of" +
-                                " XmlComment, XmlDecl, XmlDtd, or XmlProcInst");
+            throw new TypeError("node should be an instance of"
+                                + " XmlComment, XmlDecl, XmlDtd, or"
+                                + " XmlProcInst");
         }
 
         if (node instanceof XmlComment || node instanceof XmlProcInst) {
             if (this._children[0] instanceof XmlDecl) {
                 if (index === 0) {
-                    throw new Error("XmlComment or XmlProcInst node should be" +
-                                    " inserted after the XmlDecl node");
+                    throw new Error("XmlComment or XmlProcInst node should be"
+                                    + " inserted after the XmlDecl node");
                 }
             }
         } else if (node instanceof XmlDecl) {
             if (this._children[0] instanceof XmlDecl) {
-                throw new Error("XmlDocument node should only contain one" +
-                                " XmlDecl node");
+                throw new Error("XmlDocument node should only contain one"
+                                + " XmlDecl node");
             }
             if (index !== 0) {
-                throw new Error("XmlDecl node should be inserted at the" +
-                                " beginning of an XmlDocument node");
+                throw new Error("XmlDecl node should be inserted at the"
+                                + " beginning of an XmlDocument node");
             }
         } else if (node instanceof XmlDtd) {
             if (this._children[0] instanceof XmlDecl) {
                 if (index === 0) {
-                    throw new Error("XmlDtd node should be inserted after" +
-                                    " the XmlDecl node");
+                    throw new Error("XmlDtd node should be inserted after"
+                                    + " the XmlDecl node");
                 }
             }
             for (let i = 0; i < index && i < this._children.length; i++) {
                 if (this._children[i] instanceof XmlElement) {
-                    throw new Error("XmlDtd node should be inserted before" +
-                                    " the XmlElement node");
+                    throw new Error("XmlDtd node should be inserted before"
+                                    + " the XmlElement node");
                 }
             }
             for (let child of this._children) {
                 if (child instanceof XmlDtd) {
-                    throw new Error("XmlDocument node should only contain" +
-                                    " one XmlDtd node");
+                    throw new Error("XmlDocument node should only contain"
+                                    + " one XmlDtd node");
                 }
             }
         }
@@ -239,8 +242,8 @@ export default class XmlDocument extends XmlNode {
      */
     public removeChild(node: XmlNode): boolean {
         if (node instanceof XmlElement) {
-            throw new Error("XmlElement nodes cannot be removed from" +
-                            " XmlDocument nodes");
+            throw new Error("XmlElement nodes cannot be removed from"
+                            + " XmlDocument nodes");
         }
         return super.removeChild(node);
     }
@@ -259,8 +262,8 @@ export default class XmlDocument extends XmlNode {
      */
     public removeChildAtIndex(index: number): XmlNode {
         if (this._children[index] instanceof XmlElement) {
-            throw new Error("XmlElement nodes cannot be removed from" +
-                            " XmlDocument nodes");
+            throw new Error("XmlElement nodes cannot be removed from"
+                            + " XmlDocument nodes");
         }
         return super.removeChildAtIndex(index);
     }

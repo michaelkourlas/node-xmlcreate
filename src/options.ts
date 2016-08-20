@@ -51,7 +51,7 @@ const stringOptionsDefaults = {
     doubleQuotes: false,
     indent: "    ",
     newline: "\n",
-    pretty: true,
+    pretty: true
 };
 Object.freeze(stringOptionsDefaults);
 
@@ -127,16 +127,17 @@ export interface IDeclarationOptions {
 const declarationOptionsDefaults: IDeclarationOptions = {
     encoding: undefined,
     standalone: undefined,
-    version: "1.0",
+    version: "1.0"
 };
 Object.freeze(declarationOptionsDefaults);
 
+/* tslint:disable max-line-length */
 /**
  * Validates an XML declaration options object and replaces undefined values
  * with their appropriate defaults.
  *
  * @param {IDeclarationOptions} options The XML declaration options object to
- *                                     validate.
+ *                                      validate.
  *
  * @returns {IDeclarationOptions} The updated XML declaration options object.
  *
@@ -144,6 +145,7 @@ Object.freeze(declarationOptionsDefaults);
  */
 export function validateDeclarationOptions(options: IDeclarationOptions): IDeclarationOptions
 {
+    /* tslint:enable max-line-length */
     if (!isType(options.encoding, "String", "Undefined")) {
         throw new TypeError("options.encoding should be a string or undefined");
     }

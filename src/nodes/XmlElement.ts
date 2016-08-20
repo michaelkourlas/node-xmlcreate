@@ -80,8 +80,8 @@ export default class XmlElement extends XmlNode {
         if (!isType(name, "String")) {
             throw new TypeError("name should be a string");
         } else if (!validateName(name)) {
-            throw new Error("name should not contain characters not" +
-                            " allowed in XML names");
+            throw new Error("name should not contain characters not"
+                            + " allowed in XML names");
         }
         this._name = name;
     }
@@ -243,14 +243,14 @@ export default class XmlElement extends XmlNode {
      *                    undefined if no node was inserted.
      */
     public insertChild(node: XmlNode, index?: number): XmlNode {
-        if (!(node instanceof XmlAttribute ||
-              node instanceof XmlCdata ||
-              node instanceof XmlCharRef ||
-              node instanceof XmlComment ||
-              node instanceof XmlElement ||
-              node instanceof XmlEntityRef ||
-              node instanceof XmlProcInst ||
-              node instanceof XmlText))
+        if (!(node instanceof XmlAttribute
+              || node instanceof XmlCdata
+              || node instanceof XmlCharRef
+              || node instanceof XmlComment
+              || node instanceof XmlElement
+              || node instanceof XmlEntityRef
+              || node instanceof XmlProcInst
+              || node instanceof XmlText))
         {
             throw new TypeError("node should be an instance of XmlAttribute,"
                                 + " XmlCdata, XmlCharRef, XmlComment,"
@@ -263,8 +263,8 @@ export default class XmlElement extends XmlNode {
                 n => n instanceof XmlAttribute);
             for (let attribute of <XmlAttribute[]> attributes) {
                 if (attribute.name === node.name) {
-                    throw new Error("element already contains an" +
-                                    " XmlAttribute object with name "
+                    throw new Error("element already contains an"
+                                    + " XmlAttribute object with name "
                                     + node.name);
                 }
             }
@@ -396,9 +396,9 @@ export default class XmlElement extends XmlNode {
  */
 function allSameLineNodes(nodes: XmlNode[]): boolean {
     for (let node of nodes) {
-        if (!((node instanceof XmlCharRef ||
-               node instanceof XmlEntityRef ||
-               node instanceof XmlText)))
+        if (!((node instanceof XmlCharRef
+               || node instanceof XmlEntityRef
+               || node instanceof XmlText)))
         {
             return false;
         }
@@ -420,10 +420,10 @@ function allSameLineNodes(nodes: XmlNode[]): boolean {
  * @private
  */
 function onSameLine(prev: XmlNode, next: XmlNode): boolean {
-    return (prev instanceof XmlCharRef ||
-            prev instanceof XmlEntityRef ||
-            prev instanceof XmlText) &&
-           (next instanceof XmlCharRef ||
-            next instanceof XmlEntityRef ||
-            next instanceof XmlText);
+    return (prev instanceof XmlCharRef
+            || prev instanceof XmlEntityRef
+            || prev instanceof XmlText)
+           && (next instanceof XmlCharRef
+               || next instanceof XmlEntityRef
+               || next instanceof XmlText);
 }

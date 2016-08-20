@@ -109,8 +109,8 @@ export default class XmlNode {
     public next(): XmlNode {
         if (isType(this.parent, "Undefined")) {
             return undefined;
-        } else if (this.parent._children.indexOf(this) ===
-                   this.parent._children.length - 1)
+        } else if (this.parent._children.indexOf(this)
+                   === this.parent._children.length - 1)
         {
             return undefined;
         }

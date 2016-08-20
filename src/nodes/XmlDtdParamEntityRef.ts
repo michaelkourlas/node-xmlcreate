@@ -64,8 +64,8 @@ export default class XmlDtdParamEntityRef extends XmlNode {
         if (!isType(entity, "String")) {
             throw new TypeError("entity should be a string");
         } else if (!validateName(entity)) {
-            throw new Error("entity should not contain characters" +
-                            " not allowed in XML names");
+            throw new Error("entity should not contain characters"
+                            + " not allowed in XML names");
         }
         this._entity = entity;
     }

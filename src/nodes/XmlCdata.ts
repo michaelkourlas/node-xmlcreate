@@ -64,8 +64,8 @@ export default class XmlCdata extends XmlNode {
         if (!isType(data, "String")) {
             throw new TypeError("character data should be a string");
         } else if (!validateChar(data)) {
-            throw new Error("character data should not contain characters not" +
-                            " allowed in XML");
+            throw new Error("character data should not contain characters not"
+                            + " allowed in XML");
         } else if (/]]>/.test(data)) {
             throw new Error("data should not contain the string ']]>'");
         }

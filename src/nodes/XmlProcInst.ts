@@ -69,8 +69,8 @@ export default class XmlProcInst extends XmlNode {
         if (!isType(target, "String")) {
             throw new TypeError("target should be a string");
         } else if (!validateChar(target)) {
-            throw new Error("target should not contain characters" +
-                            " not allowed in XML");
+            throw new Error("target should not contain characters"
+                            + " not allowed in XML");
         } else if (target === "xml") {
             throw new Error("target should not be the string 'xml'");
         }
@@ -99,8 +99,8 @@ export default class XmlProcInst extends XmlNode {
         }
         if (isType(content, "String")) {
             if (!validateChar(content)) {
-                throw new Error("data should not contain characters" +
-                                " not allowed in XML");
+                throw new Error("data should not contain characters"
+                                + " not allowed in XML");
             } else if (/\?>/.test(content)) {
                 throw new Error("data should not contain the string '?>'");
             }

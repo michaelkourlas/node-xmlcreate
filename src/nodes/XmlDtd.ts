@@ -31,7 +31,7 @@ import XmlProcInst from "./XmlProcInst";
  *
  * An XML document type definition  is structured as follows, where `{name}` is
  * the name of the DTD, `{sysId}` is the system identifier of the DTD,
- * `{pubId}` is the public identifier of the DTD, and `{intSubset}` is the 
+ * `{pubId}` is the public identifier of the DTD, and `{intSubset}` is the
  * internal subset of the DTD:
  *
  * ```xml
@@ -89,8 +89,8 @@ export default class XmlDtd extends XmlNode {
         if (!isType(name, "String")) {
             throw new TypeError("name should be a string");
         } else if (!validateName(name)) {
-            throw new Error("name should not contain characters not" +
-                            " allowed in XML names");
+            throw new Error("name should not contain characters not"
+                            + " allowed in XML names");
         }
         this._name = name;
     }
@@ -118,11 +118,11 @@ export default class XmlDtd extends XmlNode {
             if (!/^(\u0020|\u000D|\u000A|[a-zA-Z0-9]|[-'()+,./:=?;!*#@$_%])*$/
                     .test(pubId))
             {
-                throw new Error("pubId should not contain characters not" +
-                                " allowed in public identifiers");
+                throw new Error("pubId should not contain characters not"
+                                + " allowed in public identifiers");
             } else if (isType(this.sysId, "Undefined")) {
-                throw new Error("pubId should not be defined if sysId is" +
-                                " undefined");
+                throw new Error("pubId should not be defined if sysId is"
+                                + " undefined");
             }
         } else if (!isType(pubId, "Undefined")) {
             throw new TypeError("pubId should be a string or undefined");
@@ -149,18 +149,18 @@ export default class XmlDtd extends XmlNode {
     set sysId(sysId: string) {
         if (isType(sysId, "String")) {
             if (!validateChar(sysId)) {
-                throw new Error("sysId should not contain characters not" +
-                                " allowed in XML");
+                throw new Error("sysId should not contain characters not"
+                                + " allowed in XML");
             } else if (sysId.indexOf("'") !== -1 &&
                        sysId.indexOf("\"") !== -1)
             {
-                throw new Error("sysId should not contain both single quotes" +
-                                " and double quotes");
+                throw new Error("sysId should not contain both single quotes"
+                                + " and double quotes");
             }
         } else if (isType(sysId, "Undefined")) {
             if (!isType(this.pubId, "Undefined")) {
-                throw new Error("sysId should not be undefined if pubId is" +
-                                " defined");
+                throw new Error("sysId should not be undefined if pubId is"
+                                + " defined");
             }
         } else {
             throw new TypeError("sysId should be a string or undefined");
@@ -393,14 +393,14 @@ function appendId(type: string, value: string, str: string,
     str += type + " ";
     if (options.doubleQuotes) {
         if (value.indexOf("\"") !== -1) {
-            throw new Error("options.doubleQuotes inconsistent with" +
-                            " sysId or pubId");
+            throw new Error("options.doubleQuotes inconsistent with"
+                            + " sysId or pubId");
         }
         str += "\"" + value + "\"";
     } else {
         if (value.indexOf("'") !== -1) {
-            throw new Error("options.doubleQuotes inconsistent with" +
-                            " sysId or pubId");
+            throw new Error("options.doubleQuotes inconsistent with"
+                            + " sysId or pubId");
         }
         str += "'" + value + "'";
     }

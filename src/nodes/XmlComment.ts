@@ -64,11 +64,11 @@ export default class XmlComment extends XmlNode {
         if (!isType(content, "String")) {
             throw new TypeError("content should be a string");
         } else if (!validateChar(content)) {
-            throw new Error("content should not contain characters" +
-                            " not allowed in XML");
+            throw new Error("content should not contain characters"
+                            + " not allowed in XML");
         } else if (!/^([^-]|-[^-])*$/.test(content)) {
-            throw new Error("content should not contain the string '--' or" +
-                            " end with '-'");
+            throw new Error("content should not contain the string '--' or"
+                            + " end with '-'");
         }
         this._content = content;
     }
