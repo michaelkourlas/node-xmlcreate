@@ -268,12 +268,12 @@ export default class XmlDocument extends XmlNode {
     /**
      * Returns the root element of this document.
      *
-     * @returns {XmlNode} The root element of this document.
+     * @returns {XmlElement} The root element of this document.
      */
-    public root(): XmlNode {
+    public root(): XmlElement {
         for (let node of this._children) {
             if (node instanceof XmlElement) {
-                return node;
+                return <XmlElement> node;
             }
         }
         throw new Error("XmlDocument does not contain a root node");
