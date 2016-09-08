@@ -29,21 +29,30 @@ describe("options", () => {
                 standalone: "yes",
                 version: "1.0"
             };
-            assert.strictEqual(validateDeclarationOptions(options), options);
+            let stringifiedOptions = JSON.stringify(options);
+            assert.strictEqual(
+                JSON.stringify(validateDeclarationOptions(options)),
+                stringifiedOptions);
 
             options = {
                 encoding: "UTF-16",
                 standalone: "no",
                 version: "1.1"
             };
-            assert.strictEqual(validateDeclarationOptions(options), options);
+            stringifiedOptions = JSON.stringify(options);
+            assert.strictEqual(
+                JSON.stringify(validateDeclarationOptions(options)),
+                stringifiedOptions);
 
             options = {
                 encoding: undefined,
                 standalone: undefined,
                 version: "1.0"
             };
-            assert.strictEqual(validateDeclarationOptions(options), options);
+            stringifiedOptions = JSON.stringify(options);
+            assert.strictEqual(
+                JSON.stringify(validateDeclarationOptions(options)),
+                stringifiedOptions);
         });
 
         it("should throw an error if the specified options object contains" +
@@ -83,7 +92,10 @@ describe("options", () => {
                 newline: "\n",
                 pretty: true
             };
-            assert.strictEqual(validateStringOptions(options), options);
+            let stringifiedOptions = JSON.stringify(options);
+            assert.strictEqual(
+                JSON.stringify(validateStringOptions(options)),
+                stringifiedOptions);
 
             options = {
                 doubleQuotes: true,
@@ -91,7 +103,10 @@ describe("options", () => {
                 newline: "\r\n",
                 pretty: false
             };
-            assert.strictEqual(validateStringOptions(options), options);
+            stringifiedOptions = JSON.stringify(options);
+            assert.strictEqual(
+                JSON.stringify(validateStringOptions(options)),
+                stringifiedOptions);
         });
 
         it("should throw an error if the specified options object contains" +
@@ -122,13 +137,13 @@ describe("options", () => {
            " options are specified", () => {
             let options = {};
             assert.strictEqual(JSON.stringify(validateStringOptions(options)),
-                               JSON.stringify({
-                                                  doubleQuotes: false,
-                                                  indent: "    ",
-                                                  newline: "\n",
-                                                  pretty: true
-                                              })
-            );
+                               JSON.stringify(
+                                   {
+                                       doubleQuotes: false,
+                                       indent: "    ",
+                                       newline: "\n",
+                                       pretty: true
+                                   }));
         });
     });
 });
