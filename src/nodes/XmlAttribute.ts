@@ -15,8 +15,8 @@
  */
 
 import {escapeDoubleQuotes, escapeSingleQuotes} from "../escape";
-import {IStringOptions, validateStringOptions} from "../options";
-import {isType} from "../utils";
+import {IStringOptions, StringOptions} from "../options";
+import {isArray, isString} from "../utils";
 import {validateName} from "../validate";
 import XmlCharRef from "./XmlCharRef";
 import XmlEntityRef from "./XmlEntityRef";
@@ -47,18 +47,17 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlAttribute} class.
      *
-     * @param {string} name             The name of the XML attribute.
-     * @param {XmlNode|XmlNode[]} value The initial value of the XML attribute.
-     *                                  Additional children can be added later.
-     *                                  Only {@link XmlCharRef},
-     *                                  {@link XmlEntityRef}, and
-     *                                  {@link XmlText} nodes are permitted.
+     * @param name The name of the XML attribute.
+     * @param value The initial value of the XML attribute. Additional children
+     *              can be added later. Only {@link XmlCharRef},
+     *              {@link XmlEntityRef}, and {@link XmlText} nodes are
+     *              permitted.
      */
     constructor(name: string, value: XmlNode | XmlNode[]) {
         super();
         this.name = name;
-        if (isType(value, "Array")) {
-            for (let node of <XmlNode[]> value) {
+        if (isArray(value)) {
+            for (const node of <XmlNode[]> value) {
                 this.insertChild(node);
             }
         } else {
@@ -69,7 +68,7 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Gets the name of this attribute.
      *
-     * @returns {string} The name of this attribute.
+     * @returns The name of this attribute.
      */
     get name(): string {
         return this._name;
@@ -78,10 +77,10 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Sets the name of this attribute.
      *
-     * @param {string} name The name of this attribute.
+     * @param name The name of this attribute.
      */
     set name(name: string) {
-        if (!isType(name, "String")) {
+        if (!isString(name)) {
             throw new TypeError("name should be a string");
         } else if (!validateName(name)) {
             throw new Error("name should not contain characters not"
@@ -93,18 +92,17 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Inserts a new XML character reference at the specified index.
      *
-     * @param {string} char    The character to represent using the reference.
-     * @param {boolean} [hex]  Whether to use the hexadecimal or decimal
-     *                         representation for the reference. If left
-     *                         undefined, decimal is the default.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node's children.
+     * @param char The character to represent using the reference.
+     * @param hex Whether to use the hexadecimal or decimal representation for
+     *            the reference. If left undefined, decimal is the default.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this node's
+     *              children.
      *
-     * @returns {XmlCharRef} The newly created XML declaration.
+     * @returns The newly created XML declaration.
      */
     public charRef(char: string, hex: boolean, index?: number): XmlCharRef {
-        let charRef = new XmlCharRef(char, hex);
+        const charRef = new XmlCharRef(char, hex);
         this.insertChild(charRef, index);
         return charRef;
     }
@@ -112,15 +110,15 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Inserts a new XML entity reference at the specified index.
      *
-     * @param {string} entity  The entity to be referenced.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node's children.
+     * @param entity The entity to be referenced.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this
+     *              node's children.
      *
-     * @returns {XmlEntityRef} The newly created XML declaration.
+     * @returns The newly created XML declaration.
      */
     public entityRef(entity: string, index?: number): XmlEntityRef {
-        let charRef = new XmlEntityRef(entity);
+        const charRef = new XmlEntityRef(entity);
         this.insertChild(charRef, index);
         return charRef;
     }
@@ -134,16 +132,15 @@ export default class XmlAttribute extends XmlNode {
      * {@link XmlText} nodes can be inserted; otherwise, an exception will be
      * thrown.
      *
-     * @param {XmlNode} node   The node to insert.
-     * @param {number} [index] The index at which to insert the node. Nodes at
-     *                         or after the index are shifted to the right. If
-     *                         no index is specified, the node is inserted at
-     *                         the end.
+     * @param node The node to insert.
+     * @param index The index at which to insert the node. Nodes at or after the
+     *              index are shifted to the right. If no index is specified,
+     *              the node is inserted at the end.
      *
-     * @returns {XmlNode} The node inserted into this node's children, or
-     *                    undefined if no node was inserted.
+     * @returns The node inserted into this node's children, or undefined if no
+     *          node was inserted.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         if (!(node instanceof XmlCharRef || node instanceof XmlEntityRef ||
               node instanceof XmlText))
         {
@@ -159,9 +156,9 @@ export default class XmlAttribute extends XmlNode {
      * Note that this node must have at least one child. Attempts to remove
      * the last child node will result in an exception.
      *
-     * @param {XmlNode} node The node to remove.
+     * @param node The node to remove.
      *
-     * @returns {boolean} Whether a node was removed.
+     * @returns Whether a node was removed.
      */
     public removeChild(node: XmlNode): boolean {
         if (this._children.length === 1) {
@@ -176,11 +173,9 @@ export default class XmlAttribute extends XmlNode {
      * Note that this node must have at least one child. Attempts to remove
      * the last child node will result in an exception.
      *
-     * @param {number} index The index at which the node to be removed is
-     *                       located.
+     * @param index The index at which the node to be removed is located.
      *
-     * @returns {XmlNode} The node that was removed, or undefined if no node
-     *                    was removed.
+     * @returns The node that was removed, or undefined if no node was removed.
      */
     public removeChildAtIndex(index: number): XmlNode {
         if (this._children.length === 1) {
@@ -192,15 +187,15 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Inserts a new XML text node at the specified index.
      *
-     * @param {string} text    Arbitrary character data.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node's children.
+     * @param text Arbitrary character data.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this node's
+     *              children.
      *
-     * @returns {XmlText} The newly created XML declaration.
+     * @returns The newly created XML declaration.
      */
     public text(text: string, index?: number): XmlText {
-        let textNode = new XmlText(text);
+        const textNode = new XmlText(text);
         this.insertChild(textNode, index);
         return textNode;
     }
@@ -208,18 +203,17 @@ export default class XmlAttribute extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
-        validateStringOptions(options);
+        const optionsObj = new StringOptions(options);
 
-        let quote = options.doubleQuotes ? "\"" : "'";
+        const quote = optionsObj.doubleQuotes ? "\"" : "'";
         let str = this.name + "=" + quote;
-        for (let child of this._children) {
-            if (options.doubleQuotes) {
+        for (const child of this._children) {
+            if (optionsObj.doubleQuotes) {
                 str += escapeDoubleQuotes(child.toString(options));
             } else {
                 str += escapeSingleQuotes(child.toString(options));

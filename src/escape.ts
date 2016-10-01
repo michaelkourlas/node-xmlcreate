@@ -17,9 +17,9 @@
 /**
  * Replaces ampersands (&) with the appropriate XML character reference.
  *
- * @param {string} str The string to escape.
+ * @param str The string to escape.
  *
- * @returns {string} A copy of the specified string with ampersands escaped.
+ * @returns A copy of the specified string with ampersands escaped.
  *
  * @private
  */
@@ -31,10 +31,9 @@ export function escapeAmpersands(str: string): string {
  * Replaces left angle brackets (&lt;) with the appropriate XML character
  * reference.
  *
- * @param {string} str The string to escape.
+ * @param str The string to escape.
  *
- * @returns {string} A copy of the specified string with left angle brackets
- *                   escaped.
+ * @returns A copy of the specified string with left angle brackets escaped.
  *
  * @private
  */
@@ -45,9 +44,9 @@ export function escapeLeftAngleBrackets(str: string): string {
 /**
  * Replaces single quotes (") with the appropriate XML character reference.
  *
- * @param {string} str The string to escape.
+ * @param str The string to escape.
  *
- * @returns {string} A copy of the specified string with single quotes escaped.
+ * @returns A copy of the specified string with single quotes escaped.
  *
  * @private
  */
@@ -58,9 +57,9 @@ export function escapeSingleQuotes(str: string): string {
 /**
  * Replaces double quotes (") with the appropriate XML character reference.
  *
- * @param {string} str The string to escape.
+ * @param str The string to escape.
  *
- * @returns {string} A copy of the specified string with double quotes escaped.
+ * @returns A copy of the specified string with double quotes escaped.
  *
  * @private
  */

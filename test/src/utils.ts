@@ -14,17 +14,114 @@
  * limitations under the License.
  */
 
-import {getCodePoint, isInteger, isType} from "../../lib/utils";
+import {
+    getCodePoint,
+    isArray,
+    isBoolean,
+    isInteger,
+    isNumber,
+    isObject,
+    isString,
+    isUndefined
+} from "../../lib/utils";
 import {assert} from "chai";
 
 describe("utils", () => {
-    describe("#getCodePoint", () => {
-        it("should return the Unicode code point at the specified index in a"
-           + " string", () => {
-            assert.strictEqual(getCodePoint("abc", 1), 0x62);
-            assert.strictEqual(getCodePoint("a" + String.fromCharCode(0xd801)
-                                            + String.fromCharCode(0xdc37)
-                                            + "bc", 1), 0x10437);
+    describe("#isString", () => {
+        it("should return true for strings", () => {
+            assert.isTrue(isString("test"));
+            assert.isTrue(isString(""));
+            /* tslint:disable no-construct */
+            // noinspection JSPrimitiveTypeWrapperUsage
+            assert.isTrue(isString(new String("test")));
+            /* tslint:enable no-construct */
+        });
+
+        it("should return false for non-strings", () => {
+            assert.isFalse(isString(3));
+            assert.isFalse(isString(false));
+            assert.isFalse(isString(null));
+            assert.isFalse(isString(undefined));
+        });
+    });
+
+    describe("#isNumber", () => {
+        it("should return true for numbers", () => {
+            assert.isTrue(isNumber(3));
+            assert.isTrue(isNumber(3.2));
+            /* tslint:disable no-construct */
+            // noinspection JSPrimitiveTypeWrapperUsage
+            assert.isTrue(isNumber(new Number(3)));
+            /* tslint:enable no-construct */
+        });
+
+        it("should return false for non-numbers", () => {
+            assert.isFalse(isNumber("test"));
+            assert.isFalse(isNumber(false));
+            assert.isFalse(isNumber(null));
+            assert.isFalse(isNumber(undefined));
+        });
+    });
+
+    describe("#isBoolean", () => {
+        it("should return true for booleans", () => {
+            assert.isTrue(isBoolean(true));
+            /* tslint:disable no-construct */
+            // noinspection JSPrimitiveTypeWrapperUsage
+            assert.isTrue(isBoolean(new Boolean(false)));
+            /* tslint:enable no-construct */
+        });
+
+        it("should return false for non-booleans", () => {
+            assert.isFalse(isBoolean("test"));
+            assert.isFalse(isBoolean(3));
+            assert.isFalse(isBoolean(null));
+            assert.isFalse(isBoolean(undefined));
+        });
+    });
+
+    describe("#isUndefined", () => {
+        it("should return true for undefined", () => {
+            assert.isTrue(isUndefined(undefined));
+        });
+
+        it("should return false for values that are not undefined", () => {
+            assert.isFalse(isUndefined("test"));
+            assert.isFalse(isUndefined(3));
+            assert.isFalse(isUndefined(null));
+            assert.isFalse(isUndefined(true));
+        });
+    });
+
+    describe("#isObject", () => {
+        it("should return true for objects", () => {
+            assert.isTrue(isObject({a: "b"}));
+            assert.isTrue(isObject({}));
+            assert.isTrue(isObject(new (<any> (() => 0))()));
+        });
+
+        it("should return false for values that are not objects", () => {
+            assert.isFalse(isObject("test"));
+            assert.isFalse(isObject(3));
+            assert.isFalse(isObject(undefined));
+            assert.isFalse(isObject(true));
+            assert.isFalse(isObject(null));
+        });
+    });
+
+    describe("#isArray", () => {
+        it("should return true for arrays", () => {
+            assert.isTrue(isArray(["a", "b"]));
+            assert.isTrue(isArray(["a", 3]));
+            assert.isTrue(isArray([]));
+        });
+
+        it("should return false for values that are not arrays", () => {
+            assert.isFalse(isArray("test"));
+            assert.isFalse(isArray(3));
+            assert.isFalse(isArray(undefined));
+            assert.isFalse(isArray(true));
+            assert.isFalse(isArray(null));
         });
     });
 
@@ -46,20 +143,13 @@ describe("utils", () => {
         });
     });
 
-    describe("#isType", () => {
-        it("should return true if the specified value is of the specified"
-           + " types", () => {
-            assert.isTrue(isType(true, "Boolean"));
-            assert.isTrue(isType(true, "String", "Boolean"));
-            assert.isTrue(isType(undefined, "Undefined"));
-            assert.isTrue(isType(null, "Null"));
-            assert.isTrue(isType("blah", "String"));
-        });
-
-        it("should return false if the specified value is not of the specified"
-           + " types", () => {
-            assert.isFalse(isType("blah", "Boolean"));
-            assert.isFalse(isType(true, "String", "Undefined"));
+    describe("#getCodePoint", () => {
+        it("should return the Unicode code point at the specified index in a"
+           + " string", () => {
+            assert.strictEqual(getCodePoint("abc", 1), 0x62);
+            assert.strictEqual(getCodePoint("a" + String.fromCharCode(0xd801)
+                                            + String.fromCharCode(0xdc37)
+                                            + "bc", 1), 0x10437);
         });
     });
 });

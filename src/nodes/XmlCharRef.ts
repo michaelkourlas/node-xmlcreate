@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {getCodePoint, isType} from "../utils";
+import {getCodePoint, isBoolean, isString} from "../utils";
 import {validateSingleChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -55,10 +55,9 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlCharRef} class.
      *
-     * @param {string} char   The character to represent using the reference.
-     * @param {boolean} [hex] Whether to use the hexadecimal or decimal
-     *                        representation for the reference. If left
-     *                        undefined, decimal is the default.
+     * @param char The character to represent using the reference.
+     * @param hex Whether to use the hexadecimal or decimal representation for
+     *            the reference. If left undefined, decimal is the default.
      */
     constructor(char: string, hex: boolean = false) {
         super();
@@ -69,7 +68,7 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Gets the character to represent using the reference.
      *
-     * @returns {string} The character to represent using the reference.
+     * @returns The character to represent using the reference.
      */
     get char(): string {
         return this._char;
@@ -78,10 +77,10 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Sets the character to represent using the reference.
      *
-     * @param {string} char The character to represent using the reference.
+     * @param char The character to represent using the reference.
      */
     set char(char: string) {
-        if (!isType(char, "String")) {
+        if (!isString(char)) {
             throw new TypeError("char should be a string");
         } else if (!validateSingleChar(char)) {
             throw new Error("char should contain a single character, and this"
@@ -94,8 +93,8 @@ export default class XmlCharRef extends XmlNode {
      * Gets whether or not to use the hexadecimal or decimal representation for
      * the reference.
      *
-     * @returns {boolean} Whether or not to use the hexadecimal or decimal
-     *                    representation for the reference.
+     * @returns Whether or not to use the hexadecimal or decimal representation
+     *          for the reference.
      */
     get hex(): boolean {
         return this._hex;
@@ -105,11 +104,11 @@ export default class XmlCharRef extends XmlNode {
      * Sets whether or not to use the hexadecimal or decimal representation for
      * the reference.
      *
-     * @param {boolean} hex Whether or not to use the hexadecimal or decimal
-     *                      representation for the reference.
+     * @param hex Whether or not to use the hexadecimal or decimal
+     *            representation for the reference.
      */
     set hex(hex: boolean) {
-        if (!isType(hex, "Boolean")) {
+        if (!isBoolean(hex)) {
             throw new TypeError("hex should be a boolean");
         }
         this._hex = hex;
@@ -118,6 +117,8 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlCharRef} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlCharRef nodes cannot have children");
@@ -126,14 +127,23 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlCharRef} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlCharRef nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlCharRef} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlCharRef nodes cannot have children");
@@ -142,6 +152,10 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlCharRef} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlCharRef nodes cannot have children");
@@ -150,8 +164,7 @@ export default class XmlCharRef extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
      * @returns {string} An XML string representation of this node.
      */

@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString} from "../utils";
 import {validateChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -39,8 +39,7 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlDtdAttlist} class.
      *
-     * @param {string} text The text associated with the XML attribute-list
-     *                      declaration.
+     * @param text The text associated with the XML attribute-list declaration.
      */
     constructor(text: string) {
         super();
@@ -50,8 +49,7 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Gets the text associated with the XML attribute-list declaration.
      *
-     * @return {string} The text associated with the XML attribute-list
-     *                  declaration.
+     * @return The text associated with the XML attribute-list declaration.
      */
     get text(): string {
         return this._text;
@@ -60,11 +58,10 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Sets the text associated with the XML attribute-list declaration.
      *
-     * @param {string} text The text associated with the XML attribute-list
-     *                      declaration.
+     * @param text The text associated with the XML attribute-list declaration.
      */
     set text(text: string) {
-        if (!isType(text, "String")) {
+        if (!isString(text)) {
             throw new TypeError("text should be a string");
         } else if (!validateChar(text)) {
             throw new Error("data should not contain characters"
@@ -76,6 +73,8 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlDtdAttlist nodes cannot have children");
@@ -84,14 +83,23 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlDtdAttlist nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlDtdAttlist nodes cannot have children");
@@ -100,6 +108,10 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlDtdAttlist nodes cannot have children");
@@ -108,10 +120,9 @@ export default class XmlDtdAttlist extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
         return "<!ATTLIST " + this.text + ">";

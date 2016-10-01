@@ -47,8 +47,8 @@ describe("XmlProcInst", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlProcInst("abc");
-            assert.throws((): void => node.target = undefined);
-            assert.throws((): void => node.target = null);
+            assert.throws((): void => node.target = <any> undefined);
+            assert.throws((): void => node.target = <any> null);
             assert.throws((): void => node.target = <any> 0);
             assert.throws(
                 (): void => node.target = <any> new XmlProcInst("target"));
@@ -84,7 +84,7 @@ describe("XmlProcInst", () => {
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
             let node = new XmlProcInst("abc", "def");
-            assert.throws((): void => node.content = null);
+            assert.throws((): void => node.content = <any> null);
             assert.throws((): void => node.content = <any> 0);
             assert.throws(
                 (): void => node.content = <any> new XmlProcInst("target"));

@@ -16,7 +16,7 @@
 
 import {escapeAmpersands, escapeLeftAngleBrackets} from "../escape";
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString} from "../utils";
 import {validateChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -38,7 +38,7 @@ export default class XmlText extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlText} class.
      *
-     * @param {string} text Arbitrary character data.
+     * @param text Arbitrary character data.
      */
     constructor(text: string) {
         super();
@@ -48,7 +48,7 @@ export default class XmlText extends XmlNode {
     /**
      * Gets the text associated with this node.
      *
-     * @returns {string} The text associated with this node.
+     * @returns The text associated with this node.
      */
     get text(): string {
         return this._text;
@@ -57,10 +57,10 @@ export default class XmlText extends XmlNode {
     /**
      * Sets the text associated with this node.
      *
-     * @param {string} text Arbitrary character data.
+     * @param text Arbitrary character data.
      */
     set text(text: string) {
-        if (!isType(text, "String")) {
+        if (!isString(text)) {
             throw new TypeError("text should be a string");
         } else if (!validateChar(text)) {
             throw new Error("text should not contain characters not allowed"
@@ -73,6 +73,8 @@ export default class XmlText extends XmlNode {
     /**
      * Throws an exception since {@link XmlText} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlText nodes cannot have children");
@@ -81,14 +83,23 @@ export default class XmlText extends XmlNode {
     /**
      * Throws an exception since {@link XmlText} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlText nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlText} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlText nodes cannot have children");
@@ -97,6 +108,10 @@ export default class XmlText extends XmlNode {
     /**
      * Throws an exception since {@link XmlText} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlText nodes cannot have children");
@@ -105,8 +120,7 @@ export default class XmlText extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
      * @returns {string} An XML string representation of this node.
      */

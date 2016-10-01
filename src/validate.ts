@@ -18,10 +18,10 @@
  * Verifies that the specified string only contains characters permitted by the
  * XML specification.
  *
- * @param {string} str The string to validate.
+ * @param str The string to validate.
  *
- * @returns {boolean} Whether the specified string only contains characters
- *                    permitted by the XML specification.
+ * @returns Whether the specified string only contains characters permitted by
+ *          the XML specification.
  *
  * @private
  */
@@ -37,11 +37,10 @@ export function validateChar(str: string): boolean {
  * Verifies that the specified string only contains a single character, and
  * that this character is permitted by the XML specification.
  *
- * @param {string} str The string to validate.
+ * @param str The string to validate.
  *
- * @returns {boolean} Whether the specified string only contains a single
- *                    character, and that this character is permitted by the
- *                    XML specification.
+ * @returns Whether the specified string only contains a single character, and
+ *          that this character is permitted by the XML specification.
  *
  * @private
  */
@@ -60,10 +59,10 @@ export function validateSingleChar(str: string): boolean {
  * Verifies that the specified string only contains characters permitted by the
  * XML specification for names.
  *
- * @param {string} str The string to validate.
+ * @param str The string to validate.
  *
- * @returns {boolean} Whether the specified string only contains characters
- *                    permitted by the XML specification for names.
+ * @returns Whether the specified string only contains characters permitted by
+ *          the XML specification for names.
  *
  * @private
  */

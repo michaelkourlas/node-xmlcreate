@@ -40,8 +40,8 @@ describe("XmlComment", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlComment("a");
-            assert.throws((): void => node.content = undefined);
-            assert.throws((): void => node.content = null);
+            assert.throws((): void => node.content = <any> undefined);
+            assert.throws((): void => node.content = <any> null);
             assert.throws((): void => node.content = <any> 0);
             assert.throws((): void => node.content = <any> new XmlComment(""));
         });

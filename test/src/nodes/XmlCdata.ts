@@ -40,8 +40,8 @@ describe("XmlCdata", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlCdata("abc");
-            assert.throws((): void => node.data = undefined);
-            assert.throws((): void => node.data = null);
+            assert.throws((): void => node.data = <any> undefined);
+            assert.throws((): void => node.data = <any> null);
             assert.throws((): void => node.data = <any> 0);
             assert.throws((): void => node.data = <any> new XmlCdata(""));
         });

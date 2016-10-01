@@ -40,8 +40,8 @@ describe("XmlEntityRef", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlEntityRef("abc");
-            assert.throws((): void => node.entity = undefined);
-            assert.throws((): void => node.entity = null);
+            assert.throws((): void => node.entity = <any> undefined);
+            assert.throws((): void => node.entity = <any> null);
             assert.throws((): void => node.entity = <any> 0);
             assert.throws(
                 (): void => node.entity = <any> new XmlEntityRef("abc"));

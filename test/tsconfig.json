@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "es2015.collection"
+    ],
+    "module": "commonjs",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "target": "es5",
+    "types": [
+      "chai",
+      "mocha"
+    ]
+  },
+  "include": [
+    "src/*",
+    "src/**/*"
+  ]
+}

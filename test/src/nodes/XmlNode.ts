@@ -61,22 +61,26 @@ describe("XmlNode", () => {
         it("should throw an error if the specified node is not an"
            + " XmlNode", () => {
             let node = new XmlNode();
-            assert.throws((): XmlNode => node.insertChild(undefined));
-            assert.throws((): XmlNode => node.insertChild(null));
-            assert.throws((): XmlNode => node.insertChild(<any> 0));
-            assert.throws((): XmlNode => node.insertChild(<any> "error"));
+            assert.throws((): XmlNode | undefined => node.insertChild(
+                <any> undefined));
+            assert.throws((): XmlNode | undefined => node.insertChild(
+                <any> null));
+            assert.throws((): XmlNode | undefined => node.insertChild(
+                <any> 0));
+            assert.throws((): XmlNode | undefined => node.insertChild(
+                <any> "error"));
         });
 
         it("should throw an error if the specified index is not an"
            + " integer", () => {
             let parentNode = new XmlNode();
             let childNode = new XmlNode();
-            assert.throws(
-                (): XmlNode => parentNode.insertChild(childNode, null));
-            assert.throws((): XmlNode => parentNode.insertChild(childNode,
-                                                                <any> "error"));
-            assert.throws(
-                (): XmlNode => parentNode.insertChild(childNode, 3.3));
+            assert.throws((): XmlNode | undefined => parentNode.insertChild(
+                childNode, <any> null));
+            assert.throws((): XmlNode | undefined => parentNode.insertChild(
+                childNode, <any> "error"));
+            assert.throws((): XmlNode | undefined => parentNode.insertChild(
+                childNode, 3.3));
         });
 
         it("should throw an error if the specified index is not within the"
@@ -219,8 +223,8 @@ describe("XmlNode", () => {
         it("should throw an error if the specified node is not an"
            + " XmlNode", () => {
             let node = new XmlNode();
-            assert.throws((): boolean => node.removeChild(undefined));
-            assert.throws((): boolean => node.removeChild(null));
+            assert.throws((): boolean => node.removeChild(<any> undefined));
+            assert.throws((): boolean => node.removeChild(<any> null));
             assert.throws((): boolean => node.removeChild(<any> 0));
             assert.throws((): boolean => node.removeChild(<any> "error"));
         });
@@ -252,7 +256,7 @@ describe("XmlNode", () => {
         it("should throw an error if the specified index is not an"
            + " integer or undefined", () => {
             let node = new XmlNode();
-            assert.throws((): XmlNode => node.removeChildAtIndex(null));
+            assert.throws((): XmlNode => node.removeChildAtIndex(<any> null));
             assert.throws(
                 (): XmlNode => node.removeChildAtIndex(<any> "error"));
             assert.throws((): XmlNode => node.removeChildAtIndex(3.3));

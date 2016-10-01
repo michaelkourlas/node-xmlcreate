@@ -41,8 +41,8 @@ describe("XmlDtdElement", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlDtdElement("abc");
-            assert.throws((): void => node.text = undefined);
-            assert.throws((): void => node.text = null);
+            assert.throws((): void => node.text = <any> undefined);
+            assert.throws((): void => node.text = <any> null);
             assert.throws((): void => node.text = <any> 0);
             assert.throws(
                 (): void => node.text = <any> new XmlDtdElement("abc"));

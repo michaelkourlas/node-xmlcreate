@@ -1,3 +1,7 @@
+## 0.2.0 ##
+
+* Add null and undefined in type declarations
+
 ## 0.1.1 ##
 
 * Re-write in TypeScript

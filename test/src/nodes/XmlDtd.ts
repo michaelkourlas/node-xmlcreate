@@ -58,8 +58,8 @@ describe("XmlDtd", () => {
         it("should throw an error if the specified value is not a" +
            " string", () => {
             let node = new XmlDtd("abc");
-            assert.throws((): void => node.name = undefined);
-            assert.throws((): void => node.name = null);
+            assert.throws((): void => node.name = <any> undefined);
+            assert.throws((): void => node.name = <any> null);
             assert.throws((): void => node.name = <any> 0);
             assert.throws((): void => node.name = <any> new XmlDtd("abc"));
         });
@@ -88,7 +88,7 @@ describe("XmlDtd", () => {
         it("should throw an error if the specified value is not a" +
            " string or undefined", () => {
             let node = new XmlDtd("abc", "def");
-            assert.throws((): void => node.pubId = null);
+            assert.throws((): void => node.pubId = <any> null);
             assert.throws((): void => node.pubId = <any> 0);
             assert.throws((): void => node.pubId = <any> new XmlDtd("abc"));
         });
@@ -125,7 +125,7 @@ describe("XmlDtd", () => {
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
             let node = new XmlDtd("abc");
-            assert.throws((): void => node.sysId = null);
+            assert.throws((): void => node.sysId = <any> null);
             assert.throws((): void => node.sysId = <any> 0);
             assert.throws((): void => node.sysId = <any> new XmlDtd("abc"));
         });

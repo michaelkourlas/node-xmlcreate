@@ -50,8 +50,8 @@ describe("XmlElement", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlElement("name");
-            assert.throws((): void => node.name = undefined);
-            assert.throws((): void => node.name = null);
+            assert.throws((): void => node.name = <any> undefined);
+            assert.throws((): void => node.name = <any> null);
             assert.throws((): void => node.name = <any> 0);
             assert.throws((): void => node.name = <any> new XmlElement(""));
         });

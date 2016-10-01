@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString, isUndefined} from "../utils";
 import {validateChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -36,14 +36,14 @@ import XmlNode from "./XmlNode";
  */
 export default class XmlProcInst extends XmlNode {
     private _target: string;
-    private _content: string;
+    private _content?: string;
 
     /**
      * Initializes a new instance of the {@link XmlProcInst} class.
      *
-     * @param {string} target    The target of the processing instruction.
-     * @param {string} [content] The data of the processing instruction, or
-     *                           undefined if there is no target.
+     * @param target The target of the processing instruction.
+     * @param content The data of the processing instruction, or undefined if
+     *                there is no target.
      */
     constructor(target: string, content?: string) {
         super();
@@ -54,7 +54,7 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Gets the target of the processing instruction.
      *
-     * @returns {string} The target of the processing instruction.
+     * @returns The target of the processing instruction.
      */
     get target(): string {
         return this._target;
@@ -63,10 +63,10 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Sets the target of the processing instruction.
      *
-     * @param {string} target The target of the processing instruction.
+     * @param target The target of the processing instruction.
      */
     set target(target: string) {
-        if (!isType(target, "String")) {
+        if (!isString(target)) {
             throw new TypeError("target should be a string");
         } else if (!validateChar(target)) {
             throw new Error("target should not contain characters"
@@ -80,24 +80,24 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Gets the data of the processing instruction.
      *
-     * @returns {string} The data of the processing instruction. This value
-     *                   may be undefined.
+     * @returns The data of the processing instruction. This value may be
+     *          undefined.
      */
-    get content(): string {
+    get content(): string | undefined {
         return this._content;
     }
 
     /**
      * Sets the data of the processing instruction.
      *
-     * @param {string} content The data of the processing instruction. This
-     *                         value may be undefined.
+     * @param content The data of the processing instruction. This value may be
+     *                undefined.
      */
-    set content(content: string) {
-        if (!isType(content, "String", "Undefined")) {
+    set content(content: string | undefined) {
+        if (!isString(content) && !isUndefined(content)) {
             throw new TypeError("data should be a string or undefined");
         }
-        if (isType(content, "String")) {
+        if (isString(content)) {
             if (!validateChar(content)) {
                 throw new Error("data should not contain characters"
                                 + " not allowed in XML");
@@ -111,6 +111,8 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Throws an exception since {@link XmlProcInst} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlProcInst nodes cannot have children");
@@ -119,14 +121,23 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Throws an exception since {@link XmlProcInst} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlProcInst nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlProcInst} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlProcInst nodes cannot have children");
@@ -135,6 +146,10 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Throws an exception since {@link XmlProcInst} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlProcInst nodes cannot have children");
@@ -143,8 +158,7 @@ export default class XmlProcInst extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
      * @returns {string} An XML string representation of this node.
      */

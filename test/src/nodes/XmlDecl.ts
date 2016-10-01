@@ -53,7 +53,7 @@ describe("XmlDecl", () => {
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
             let node = new XmlDecl();
-            assert.throws((): void => node.encoding = null);
+            assert.throws((): void => node.encoding = <any> null);
             assert.throws((): void => node.encoding = <any> 0);
             assert.throws((): void => node.encoding = <any> new XmlDecl());
         });
@@ -90,7 +90,7 @@ describe("XmlDecl", () => {
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
             let node = new XmlDecl();
-            assert.throws((): void => node.standalone = null);
+            assert.throws((): void => node.standalone = <any> null);
             assert.throws((): void => node.standalone = <any> 0);
             assert.throws((): void => node.standalone = <any> new XmlDecl());
         });
@@ -122,8 +122,8 @@ describe("XmlDecl", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlDecl();
-            assert.throws((): void => node.version = undefined);
-            assert.throws((): void => node.version = null);
+            assert.throws((): void => node.version = <any> undefined);
+            assert.throws((): void => node.version = <any> null);
             assert.throws((): void => node.version = <any> 0);
             assert.throws((): void => node.version = <any> new XmlDecl());
         });

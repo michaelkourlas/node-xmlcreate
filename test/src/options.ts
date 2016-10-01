@@ -15,44 +15,34 @@
  */
 
 import {
-    validateDeclarationOptions,
-    validateStringOptions
+    DeclarationOptions,
+    IDeclarationOptions,
+    StringOptions
 } from "../../lib/options";
 import {assert} from "chai";
 
 describe("options", () => {
-    describe("#validateDeclarationOptions", () => {
+    describe("#DeclarationOptions", () => {
         it("should return the specified options object if all options are" +
            " specified and valid", () => {
-            let options = {
+            let options: IDeclarationOptions = {
                 encoding: "UTF-8",
                 standalone: "yes",
                 version: "1.0"
             };
-            let stringifiedOptions = JSON.stringify(options);
-            assert.strictEqual(
-                JSON.stringify(validateDeclarationOptions(options)),
-                stringifiedOptions);
+            assert.deepEqual(new DeclarationOptions(options), options);
 
             options = {
                 encoding: "UTF-16",
                 standalone: "no",
                 version: "1.1"
             };
-            stringifiedOptions = JSON.stringify(options);
-            assert.strictEqual(
-                JSON.stringify(validateDeclarationOptions(options)),
-                stringifiedOptions);
+            assert.deepEqual(new DeclarationOptions(options), options);
 
             options = {
-                encoding: undefined,
-                standalone: undefined,
                 version: "1.0"
             };
-            stringifiedOptions = JSON.stringify(options);
-            assert.strictEqual(
-                JSON.stringify(validateDeclarationOptions(options)),
-                stringifiedOptions);
+            assert.deepEqual(new DeclarationOptions(options), options);
         });
 
         it("should throw an error if the specified options object contains" +
@@ -60,30 +50,28 @@ describe("options", () => {
             let options: any = {
                 encoding: null
             };
-            assert.throws(() => validateDeclarationOptions(options));
+            assert.throws(() => new DeclarationOptions(options));
 
             options = {
                 standalone: null
             };
-            assert.throws(() => validateDeclarationOptions(options));
+            assert.throws(() => new DeclarationOptions(options));
 
             options = {
                 version: null
             };
-            assert.throws(() => validateDeclarationOptions(options));
+            assert.throws(() => new DeclarationOptions(options));
         });
 
         it("should return a validated version of the specified options with" +
            " undefined values replaced with appropriate defaults if not all" +
            " options are specified", () => {
-            let options = {};
-            assert.strictEqual(
-                JSON.stringify(validateDeclarationOptions(options)),
-                JSON.stringify({version: "1.0"}));
+            const options = {};
+            assert.deepEqual(new DeclarationOptions(options), {version: "1.0"});
         });
     });
 
-    describe("#validateStringOptions", () => {
+    describe("#StringOptions", () => {
         it("should return the specified options object if all options are" +
            " specified and valid", () => {
             let options = {
@@ -92,10 +80,7 @@ describe("options", () => {
                 newline: "\n",
                 pretty: true
             };
-            let stringifiedOptions = JSON.stringify(options);
-            assert.strictEqual(
-                JSON.stringify(validateStringOptions(options)),
-                stringifiedOptions);
+            assert.deepEqual(new StringOptions(options), options);
 
             options = {
                 doubleQuotes: true,
@@ -103,10 +88,7 @@ describe("options", () => {
                 newline: "\r\n",
                 pretty: false
             };
-            stringifiedOptions = JSON.stringify(options);
-            assert.strictEqual(
-                JSON.stringify(validateStringOptions(options)),
-                stringifiedOptions);
+            assert.deepEqual(new StringOptions(options), options);
         });
 
         it("should throw an error if the specified options object contains" +
@@ -114,36 +96,34 @@ describe("options", () => {
             let options: any = {
                 doubleQuotes: null
             };
-            assert.throws(() => validateStringOptions(options));
+            assert.throws(() => new StringOptions(options));
 
             options = {
                 indent: null
             };
-            assert.throws(() => validateStringOptions(options));
+            assert.throws(() => new StringOptions(options));
 
             options = {
                 newline: null
             };
-            assert.throws(() => validateStringOptions(options));
+            assert.throws(() => new StringOptions(options));
 
             options = {
                 pretty: null
             };
-            assert.throws(() => validateStringOptions(options));
+            assert.throws(() => new StringOptions(options));
         });
 
         it("should return a validated version of the specified options with" +
            " undefined values replaced with appropriate defaults if not all" +
            " options are specified", () => {
-            let options = {};
-            assert.strictEqual(JSON.stringify(validateStringOptions(options)),
-                               JSON.stringify(
-                                   {
-                                       doubleQuotes: false,
-                                       indent: "    ",
-                                       newline: "\n",
-                                       pretty: true
-                                   }));
+            const options = {};
+            assert.deepEqual(new StringOptions(options), {
+                doubleQuotes: false,
+                indent: "    ",
+                newline: "\n",
+                pretty: true
+            });
         });
     });
 });

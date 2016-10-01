@@ -15,64 +15,77 @@
  */
 
 /**
- * Retrieve the Unicode code point at the specified index in the specified
- * string.
- *
- * @param {string} str The string from which to retrieve the Unicode code
- *                     point.
- * @param {number} index The specified index.
- *
- * @returns {number} The Unicode code point at the specified position.
- *
  * @private
  */
-export function getCodePoint(str: string, index: number): number {
-    let size = str.length;
-    if (index < 0 || index >= size) {
-        return undefined;
-    }
-    let first = str.charCodeAt(index);
-    if (first >= 0xD800 && first <= 0xDBFF && size > index + 1) {
-        let second = str.charCodeAt(index + 1);
-        if (second >= 0xDC00 && second <= 0xDFFF) {
-            return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
-        }
-    }
-    return first;
+export function isString(val: any): val is string {
+    return Object.prototype.toString.call(val) === "[object String]";
 }
 
 /**
- * Determines whether a number is an integer.
- *
- * @param {number} value The number to check.
- *
- * @returns {boolean} Whether or not the number is an integer.
- *
  * @private
  */
-export function isInteger(value: number): boolean {
+export function isNumber(val: any): val is number {
+    return Object.prototype.toString.call(val) === "[object Number]";
+}
+
+/**
+ * @private
+ */
+export function isBoolean(val: any): val is boolean {
+    return Object.prototype.toString.call(val) === "[object Boolean]";
+}
+
+/**
+ * @private
+ */
+export function isUndefined(val: any): val is undefined {
+    return Object.prototype.toString.call(val) === "[object Undefined]";
+}
+
+/**
+ * @private
+ */
+export function isObject(val: any): val is Object {
+    return Object.prototype.toString.call(val) === "[object Object]";
+}
+
+/**
+ * @private
+ */
+export function isArray(val: any): val is any[] {
+    return Object.prototype.toString.call(val) === "[object Array]";
+}
+
+/**
+ * @private
+ */
+export function isInteger(value: any): boolean {
     return typeof value === "number" &&
            isFinite(value) &&
            Math.floor(value) === value;
 }
 
 /**
- * Returns true if the specified value are of any of the specified types, as
- * determined by the Object.prototype.toString.call function.
+ * Retrieve the Unicode code point at the specified index in the specified
+ * string.
  *
- * @param {*} val The specified value.
- * @param {...string[]} types The specified types.
+ * @param str The string from which to retrieve the Unicode code point.
+ * @param index The specified index.
  *
- * @returns {boolean} Whether or not the specified value are of any of the
- *                    specified types.
+ * @returns The Unicode code point at the specified position.
  *
  * @private
  */
-export function isType(val: any, ...types: string[]): boolean {
-    for (let type of types) {
-        if (Object.prototype.toString.call(val) === "[object " + type + "]") {
-            return true;
+export function getCodePoint(str: string, index: number): number {
+    if (index < 0 || index >= str.length) {
+        throw new Error("invalid index for specified string");
+    }
+    let first = str.charCodeAt(index);
+    if (first >= 0xD800 && first <= 0xDBFF && str.length > index + 1) {
+        let second = str.charCodeAt(index + 1);
+        if (second >= 0xDC00 && second <= 0xDFFF) {
+            return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
         }
     }
-    return false;
+    return first;
 }

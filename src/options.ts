@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {isType} from "./utils";
+import {isBoolean, isObject, isString, isUndefined} from "./utils";
 
 /**
  * Formatting options for the string representation of an {@link XmlNode} and
@@ -45,57 +45,58 @@ export interface IStringOptions {
 }
 
 /**
- * @private
- */
-const stringOptionsDefaults = {
-    doubleQuotes: false,
-    indent: "    ",
-    newline: "\n",
-    pretty: true
-};
-Object.freeze(stringOptionsDefaults);
-
-/**
- * Validates a string options object and replaces undefined values with their
- * appropriate defaults.
- *
- * @param {IStringOptions} options The string options object to validate.
- *
- * @returns {IStringOptions} The updated string options object.
+ * Implementation of the IStringOptions interface used to provide default values
+ * to fields.
  *
  * @private
  */
-export function validateStringOptions(options: IStringOptions): IStringOptions {
-    if (!isType(options.doubleQuotes, "Boolean", "Undefined")) {
-        throw new TypeError("options.doubleQuotes should be a boolean or"
-                            + " undefined");
-    }
-    if (!isType(options.doubleQuotes, "Boolean")) {
-        options.doubleQuotes = stringOptionsDefaults.doubleQuotes;
-    }
+export class StringOptions implements IStringOptions {
+    public doubleQuotes: boolean = false;
+    public indent: string = "    ";
+    public newline: string = "\n";
+    public pretty: boolean = true;
 
-    if (!isType(options.indent, "String", "Undefined")) {
-        throw new TypeError("options.indent should be a string or undefined");
-    }
-    if (!isType(options.indent, "String")) {
-        options.indent = stringOptionsDefaults.indent;
-    }
+    constructor(stringOptions: IStringOptions = {}) {
+        if (!isObject(stringOptions)) {
+            throw new TypeError("options should be an Object or undefined");
+        }
 
-    if (!isType(options.newline, "String", "Undefined")) {
-        throw new TypeError("options.newline should be a string or undefined");
-    }
-    if (!isType(options.newline, "String")) {
-        options.newline = stringOptionsDefaults.newline;
-    }
+        if (!isBoolean(stringOptions.doubleQuotes)) {
+            if (!isUndefined(stringOptions.doubleQuotes)) {
+                throw new TypeError("options.doubleQuotes should be a boolean"
+                                    + " or undefined");
+            }
+        } else {
+            this.doubleQuotes = stringOptions.doubleQuotes;
+        }
 
-    if (!isType(options.pretty, "Boolean", "Undefined")) {
-        throw new TypeError("options.pretty should be a boolean or undefined");
-    }
-    if (!isType(options.pretty, "Boolean")) {
-        options.pretty = stringOptionsDefaults.pretty;
-    }
+        if (!isString(stringOptions.indent)) {
+            if (!isUndefined(stringOptions.indent)) {
+                throw new TypeError("options.indent should be a string"
+                                    + " or undefined");
+            }
+        } else {
+            this.indent = stringOptions.indent;
+        }
 
-    return options;
+        if (!isString(stringOptions.newline)) {
+            if (!isUndefined(stringOptions.newline)) {
+                throw new TypeError("options.newline should be a string"
+                                    + " or undefined");
+            }
+        } else {
+            this.newline = stringOptions.newline;
+        }
+
+        if (!isBoolean(stringOptions.pretty)) {
+            if (!isUndefined(stringOptions.pretty)) {
+                throw new TypeError("options.pretty should be a boolean"
+                                    + " or undefined");
+            }
+        } else {
+            this.pretty = stringOptions.pretty;
+        }
+    }
 }
 
 /**
@@ -122,45 +123,46 @@ export interface IDeclarationOptions {
 }
 
 /**
- * @private
- */
-const declarationOptionsDefaults: IDeclarationOptions = {
-    encoding: undefined,
-    standalone: undefined,
-    version: "1.0"
-};
-Object.freeze(declarationOptionsDefaults);
-
-/* tslint:disable max-line-length */
-/**
- * Validates an XML declaration options object and replaces undefined values
- * with their appropriate defaults.
- *
- * @param {IDeclarationOptions} options The XML declaration options object to
- *                                      validate.
- *
- * @returns {IDeclarationOptions} The updated XML declaration options object.
+ * Implementation of the IDeclarationOptions interface used to provide default
+ * values to fields.
  *
  * @private
  */
-export function validateDeclarationOptions(options: IDeclarationOptions): IDeclarationOptions
-{
-    /* tslint:enable max-line-length */
-    if (!isType(options.encoding, "String", "Undefined")) {
-        throw new TypeError("options.encoding should be a string or undefined");
-    }
+export class DeclarationOptions implements IDeclarationOptions {
+    public encoding?: string;
+    public standalone?: string;
+    public version: string = "1.0";
 
-    if (!isType(options.standalone, "String", "Undefined")) {
-        throw new TypeError("options.standalone should be a string or" +
-                            " undefined");
-    }
+    constructor(declarationOptions: IDeclarationOptions = {}) {
+        if (!isObject(declarationOptions)) {
+            throw new TypeError("options should be an Object or undefined");
+        }
 
-    if (!isType(options.version, "String", "Undefined")) {
-        throw new TypeError("options.version should be a string or undefined");
-    }
-    if (!isType(options.version, "String")) {
-        options.version = declarationOptionsDefaults.version;
-    }
+        if (!isString(declarationOptions.encoding)) {
+            if (!isUndefined(declarationOptions.encoding)) {
+                throw new TypeError("options.encoding should be a string"
+                                    + " or undefined");
+            }
+        } else {
+            this.encoding = declarationOptions.encoding;
+        }
 
-    return options;
+        if (!isString(declarationOptions.standalone)) {
+            if (!isUndefined(declarationOptions.standalone)) {
+                throw new TypeError("options.standalone should be a string"
+                                    + " or undefined");
+            }
+        } else {
+            this.standalone = declarationOptions.standalone;
+        }
+
+        if (!isString(declarationOptions.version)) {
+            if (!isUndefined(declarationOptions.version)) {
+                throw new TypeError("options.version should be a string"
+                                    + " or undefined");
+            }
+        } else {
+            this.version = declarationOptions.version;
+        }
+    }
 }

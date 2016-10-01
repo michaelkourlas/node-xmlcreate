@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString} from "../utils";
 import {validateChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -39,7 +39,7 @@ export default class XmlComment extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlComment} class.
      *
-     * @param {string} content The content of the comment.
+     * @param content The content of the comment.
      */
     constructor(content: string) {
         super();
@@ -49,7 +49,7 @@ export default class XmlComment extends XmlNode {
     /**
      * Gets the content of the comment.
      *
-     * @returns {string} The content of the comment.
+     * @returns The content of the comment.
      */
     get content(): string {
         return this._content;
@@ -58,10 +58,10 @@ export default class XmlComment extends XmlNode {
     /**
      * Sets the content of the comment.
      *
-     * @param {string} content The content of the comment.
+     * @param content The content of the comment.
      */
     set content(content: string) {
-        if (!isType(content, "String")) {
+        if (!isString(content)) {
             throw new TypeError("content should be a string");
         } else if (!validateChar(content)) {
             throw new Error("content should not contain characters"
@@ -76,6 +76,8 @@ export default class XmlComment extends XmlNode {
     /**
      * Throws an exception since {@link XmlComment} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlComment nodes cannot have children");
@@ -84,8 +86,13 @@ export default class XmlComment extends XmlNode {
     /**
      * Throws an exception since {@link XmlComment} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined
     {
         throw new Error("XmlComment nodes cannot have children");
     }
@@ -93,6 +100,10 @@ export default class XmlComment extends XmlNode {
     /**
      * Throws an exception since {@link XmlComment} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlComment nodes cannot have children");
@@ -101,6 +112,10 @@ export default class XmlComment extends XmlNode {
     /**
      * Throws an exception since {@link XmlComment} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlComment nodes cannot have children");
@@ -109,10 +124,9 @@ export default class XmlComment extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
         return "<!--" + this.content + "-->";

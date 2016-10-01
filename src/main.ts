@@ -42,9 +42,9 @@ export {
 /**
  * Creates a new XML document.
  *
- * @param {string} root The name of the root element of the document.
+ * @param root The name of the root element of the document.
  *
- * @returns {XmlDocument} The new XML document.
+ * @returns The new XML document.
  */
 export function document(root: string): XmlDocument {
     return new XmlDocument(root);

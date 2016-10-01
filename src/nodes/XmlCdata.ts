@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString} from "../utils";
 import {validateChar} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -39,7 +39,7 @@ export default class XmlCdata extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlCdata} class.
      *
-     * @param {string} data The character data of the CDATA section.
+     * @param data The character data of the CDATA section.
      */
     constructor(data: string) {
         super();
@@ -49,7 +49,7 @@ export default class XmlCdata extends XmlNode {
     /**
      * Gets the character data of the CDATA section.
      *
-     * @returns {string} The character data of the CDATA section.
+     * @returns The character data of the CDATA section.
      */
     get data(): string {
         return this._data;
@@ -58,10 +58,10 @@ export default class XmlCdata extends XmlNode {
     /**
      * Sets the character data of the CDATA section.
      *
-     * @param {string} data The character data of the CDATA section.
+     * @param data The character data of the CDATA section.
      */
     set data(data: string) {
-        if (!isType(data, "String")) {
+        if (!isString(data)) {
             throw new TypeError("character data should be a string");
         } else if (!validateChar(data)) {
             throw new Error("character data should not contain characters not"
@@ -75,6 +75,8 @@ export default class XmlCdata extends XmlNode {
     /**
      * Throws an exception since {@link XmlCdata} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlCdata nodes cannot have children");
@@ -83,8 +85,13 @@ export default class XmlCdata extends XmlNode {
     /**
      * Throws an exception since {@link XmlCdata} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined
     {
         throw new Error("XmlCdata nodes cannot have children");
     }
@@ -92,6 +99,10 @@ export default class XmlCdata extends XmlNode {
     /**
      * Throws an exception since {@link XmlCdata} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlCdata nodes cannot have children");
@@ -100,6 +111,10 @@ export default class XmlCdata extends XmlNode {
     /**
      * Throws an exception since {@link XmlCdata} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlCdata nodes cannot have children");
@@ -108,10 +123,9 @@ export default class XmlCdata extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
         return "<![CDATA[" + this.data + "]]>";

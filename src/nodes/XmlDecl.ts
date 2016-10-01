@@ -15,12 +15,12 @@
  */
 
 import {
+    DeclarationOptions,
     IDeclarationOptions,
     IStringOptions,
-    validateDeclarationOptions,
-    validateStringOptions
+    StringOptions
 } from "../options";
-import {isType} from "../utils";
+import {isString, isUndefined} from "../utils";
 import XmlNode from "./XmlNode";
 
 /**
@@ -41,48 +41,46 @@ import XmlNode from "./XmlNode";
  * XmlDecl nodes cannot have any children.
  */
 export default class XmlDecl extends XmlNode {
-    private _encoding: string;
-    private _standalone: string;
+    private _encoding?: string;
+    private _standalone?: string;
     private _version: string;
 
     /**
      * Initializes a new instance of the {@link XmlDecl} class.
      *
-     * @param {IDeclarationOptions} [options] The options associated with the
-     *     XML declaration.
+     * @param options The options associated with the XML declaration.
      */
     constructor(options: IDeclarationOptions = {}) {
         super();
-        validateDeclarationOptions(options);
-        this.encoding = options.encoding;
-        this.standalone = options.standalone;
-        this.version = options.version;
+        const optionsObj = new DeclarationOptions(options);
+        this.encoding = optionsObj.encoding;
+        this.standalone = optionsObj.standalone;
+        this.version = optionsObj.version;
     }
 
     /**
      * Gets the XML encoding to be included in the declaration.
      *
-     * @returns {string} The XML encoding to be included in the declaration.
-     *                   This value may be undefined.
+     * @returns The XML encoding to be included in the declaration. This value
+     *          may be undefined.
      */
-    get encoding(): string {
+    get encoding(): string | undefined {
         return this._encoding;
     }
 
     /**
      * Sets the XML encoding to be included in the declaration.
      *
-     * @param encoding {string} The XML encoding to be included in the
-     *                          declaration. This value must be a valid
-     *                          encoding. If left undefined, no encoding is
-     *                          included.
+     * @param encoding The XML encoding to be included in the declaration. This
+     *                 value must be a valid encoding. If left undefined, no
+     *                 encoding is included.
      */
-    set encoding(encoding: string) {
-        if (isType(encoding, "String")) {
+    set encoding(encoding: string | undefined) {
+        if (isString(encoding)) {
             if (!/^[A-Za-z][A-Za-z0-9._-]*$/.test(encoding)) {
                 throw new Error("encoding should be a valid XML encoding");
             }
-        } else if (!isType(encoding, "Undefined")) {
+        } else if (!isUndefined(encoding)) {
             throw new TypeError("name should be a string or undefined");
         }
         this._encoding = encoding;
@@ -91,28 +89,27 @@ export default class XmlDecl extends XmlNode {
     /**
      * Gets the XML standalone attribute to be included in the declaration.
      *
-     * @returns {string} The XML standalone attribute to be included in the
-     *                   declaration. This value may be undefined.
+     * @returns The XML standalone attribute to be included in the declaration.
+     *          This value may be undefined.
      */
-    get standalone(): string {
+    get standalone(): string | undefined {
         return this._standalone;
     }
 
     /**
      * Sets the XML standalone attribute to be included in the declaration.
      *
-     * @param {string} standalone The XML standalone attribute to be included.
-     *                            This value must be "yes" or "no". If left
-     *                            undefined, no standalone attribute is
-     *                            included.
+     * @param standalone The XML standalone attribute to be included. This
+     *                   value must be "yes" or "no". If left undefined, no
+     *                   standalone attribute is included.
      */
-    set standalone(standalone: string) {
-        if (isType(standalone, "String")) {
+    set standalone(standalone: string | undefined) {
+        if (isString(standalone)) {
             if (!/^(yes|no)$/.test(standalone)) {
                 throw new Error("standalone should be either the string"
                                 + " 'yes' or the string 'no'");
             }
-        } else if (!isType(standalone, "Undefined")) {
+        } else if (!isUndefined(standalone)) {
             throw new TypeError("standalone should be a string or undefined");
         }
         this._standalone = standalone;
@@ -121,7 +118,7 @@ export default class XmlDecl extends XmlNode {
     /**
      * Gets the XML version to be included in the declaration.
      *
-     * @returns {string} The XML version to tbe included in the declaration.
+     * @returns The XML version to tbe included in the declaration.
      */
     get version(): string {
         return this._version;
@@ -130,13 +127,12 @@ export default class XmlDecl extends XmlNode {
     /**
      * Sets the XML version to be included in the declaration.
      *
-     * @param {string} version The XML version to be included in the
-     *                         declaration. This value must be a valid XML
-     *                         version number. If left undefined, the default
-     *                         version is "1.0".
+     * @param version The XML version to be included in the declaration. This
+     *                value must be a valid XML version number. If left
+     *                undefined, the default version is "1.0".
      */
     set version(version: string) {
-        if (!isType(version, "String")) {
+        if (!isString(version)) {
             throw new TypeError("version should be a string");
         } else if (!/^1\.[0-9]+$/.test(version)) {
             throw new Error("version should be a valid XML version");
@@ -147,6 +143,8 @@ export default class XmlDecl extends XmlNode {
     /**
      * Throws an exception since {@link XmlDecl} nodes cannot have any
      * children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlDecl nodes cannot have children");
@@ -155,14 +153,23 @@ export default class XmlDecl extends XmlNode {
     /**
      * Throws an exception since {@link XmlDecl} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlDecl nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlDecl} nodes cannot have any
      * children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlDecl nodes cannot have children");
@@ -171,6 +178,10 @@ export default class XmlDecl extends XmlNode {
     /**
      * Throws an exception since {@link XmlDecl} nodes cannot have any
      * children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlDecl nodes cannot have children");
@@ -179,20 +190,19 @@ export default class XmlDecl extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
-        validateStringOptions(options);
+        const optionsObj = new StringOptions(options);
 
-        let quote = options.doubleQuotes ? '"' : "'";
+        const quote = optionsObj.doubleQuotes ? '"' : "'";
         let str = "<?xml version=" + quote + this.version + quote;
-        if (isType(this.encoding, "String")) {
+        if (isString(this.encoding)) {
             str += " encoding=" + quote + this.encoding + quote;
         }
-        if (isType(this.standalone, "String")) {
+        if (isString(this.standalone)) {
             str += " standalone=" + quote + this.standalone + quote;
         }
         str += "?>";

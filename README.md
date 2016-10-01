@@ -1,6 +1,7 @@
 # xmlcreate #
 
 [![Build Status](https://travis-ci.org/michaelkourlas/node-xmlcreate.svg?branch=master)](https://travis-ci.org/michaelkourlas/node-xmlcreate)
+[![npm version](https://badge.fury.io/js/xmlcreate.svg)](https://badge.fury.io/js/xmlcreate)
 
 ## Overview ##
 

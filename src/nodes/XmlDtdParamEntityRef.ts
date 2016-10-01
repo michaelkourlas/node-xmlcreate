@@ -15,7 +15,7 @@
  */
 
 import {IStringOptions} from "../options";
-import {isType} from "../utils";
+import {isString} from "../utils";
 import {validateName} from "../validate";
 import XmlNode from "./XmlNode";
 
@@ -39,7 +39,7 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlDtdParamEntityRef} class.
      *
-     * @param {string} entity The entity to be referenced.
+     * @param entity The entity to be referenced.
      */
     constructor(entity: string) {
         super();
@@ -49,7 +49,7 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Gets the entity to be referenced.
      *
-     * @returns {string} The entity to be referenced.
+     * @returns The entity to be referenced.
      */
     get entity(): string {
         return this._entity;
@@ -58,10 +58,10 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Sets the entity to be referenced.
      *
-     * @param {string} entity The entity to be referenced.
+     * @param entity The entity to be referenced.
      */
     set entity(entity: string) {
-        if (!isType(entity, "String")) {
+        if (!isString(entity)) {
             throw new TypeError("entity should be a string");
         } else if (!validateName(entity)) {
             throw new Error("entity should not contain characters"
@@ -73,6 +73,8 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
      * any children.
+     *
+     * @returns This method does not return.
      */
     public children(): XmlNode[] {
         throw new Error("XmlDtdParamEntityRef nodes cannot have children");
@@ -81,14 +83,23 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
      * any children.
+     *
+     * @param node This parameter is unused.
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         throw new Error("XmlDtdParamEntityRef nodes cannot have children");
     }
 
     /**
      * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
      * any children.
+     *
+     * @param node This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChild(node: XmlNode): boolean {
         throw new Error("XmlDtdParamEntityRef nodes cannot have children");
@@ -97,6 +108,10 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
      * any children.
+     *
+     * @param index This parameter is unused.
+     *
+     * @returns This method does not return.
      */
     public removeChildAtIndex(index: number): XmlNode {
         throw new Error("XmlDtdParamEntityRef nodes cannot have children");
@@ -105,10 +120,9 @@ export default class XmlDtdParamEntityRef extends XmlNode {
     /**
      * Returns an XML string representation of this node.
      *
-     * @param {IStringOptions} [options] Formatting options for the string
-     *                                  representation.
+     * @param options Formatting options for the string representation.
      *
-     * @returns {string} An XML string representation of this node.
+     * @returns An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
         return "%" + this.entity + ";";

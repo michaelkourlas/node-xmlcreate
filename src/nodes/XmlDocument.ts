@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-import {
-    IDeclarationOptions,
-    IStringOptions,
-    validateStringOptions
-} from "../options";
-import {isType} from "../utils";
+import {IDeclarationOptions, IStringOptions, StringOptions} from "../options";
+import {isUndefined} from "../utils";
 import XmlComment from "./XmlComment";
 import XmlDecl from "./XmlDecl";
 import XmlDtd from "./XmlDtd";
@@ -65,7 +61,7 @@ export default class XmlDocument extends XmlNode {
     /**
      * Initializes a new instance of the {@link XmlDocument} class.
      *
-     * @param {string} root The name of the root element.
+     * @param root The name of the root element.
      */
     constructor(root: string) {
         super();
@@ -76,15 +72,15 @@ export default class XmlDocument extends XmlNode {
      * Inserts a new comment at the specified index. If no index is specified,
      * the node is inserted at the end of this node's children.
      *
-     * @param {string} content The data of the comment.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         at the end of this node's children.
+     * @param content The data of the comment.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this node's
+     *              children.
      *
-     * @returns {XmlComment} The newly created element.
+     * @returns The newly created element.
      */
     public comment(content: string, index?: number): XmlComment {
-        let comment = new XmlComment(content);
+        const comment = new XmlComment(content);
         this.insertChild(comment, index);
         return comment;
     }
@@ -92,13 +88,12 @@ export default class XmlDocument extends XmlNode {
     /**
      * Inserts a new XML declaration at the beginning of this node's children.
      *
-     * @param {IDeclarationOptions} [options] The options associated with the
-     *                                       XML declaration.
+     * @param options The options associated with the XML declaration.
      *
-     * @returns {XmlDecl} The newly created XML declaration.
+     * @returns The newly created XML declaration.
      */
     public decl(options?: IDeclarationOptions): XmlDecl {
-        let declaration = new XmlDecl(options);
+        const declaration = new XmlDecl(options);
         this.insertChild(declaration, 0);
         return declaration;
     }
@@ -109,26 +104,23 @@ export default class XmlDocument extends XmlNode {
      * if one exists, or at the beginning of this node's children if one does
      * not.
      *
-     * @param {string} name    The name of the DTD.
-     * @param {string} [sysId] The system identifier of the DTD, excluding
-     *                         quotation marks.
-     * @param {string} [pubId] The public identifier of the DTD, excluding
-     *                         quotation marks. If a public identifier is
-     *                         provided, a system identifier must be provided
-     *                         as well.
-     * @param {number} [index] The index at which the node should be inserted.
-     *                         If no index is specified, the node is inserted
-     *                         immediately after the XML declaration if one
-     *                         exists, or at the beginning of this node's
-     *                         children if one does not.
+     * @param name The name of the DTD.
+     * @param sysId The system identifier of the DTD, excluding quotation marks.
+     * @param pubId The public identifier of the DTD, excluding quotation marks.
+     *              If a public identifier is provided, a system identifier
+     *              must be provided as well.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted immediately after the
+     *              XML declaration if one exists, or at the beginning of this
+     *              node's children if one does not.
      *
-     * @returns {XmlDtd} The newly created XML document type definition.
+     * @returns The newly created XML document type definition.
      */
     public dtd(name: string, sysId?: string, pubId?: string,
                index?: number): XmlDtd
     {
-        let dtd = new XmlDtd(name, sysId, pubId);
-        if (isType(index, "Undefined")) {
+        const dtd = new XmlDtd(name, sysId, pubId);
+        if (isUndefined(index)) {
             if (this._children[0] instanceof XmlDecl) {
                 index = 1;
             } else {
@@ -150,16 +142,15 @@ export default class XmlDocument extends XmlNode {
      * precede the {@link XmlElement} node. In addition, {@link XmlComment} or
      * {@link XmlProcInst} nodes must follow the {@link XmlDecl} node.
      *
-     * @param {XmlNode} node   The node to insert.
-     * @param {number} [index] The index at which to insert the node. Nodes at
-     *                         or after the index are shifted to the right. If
-     *                         no index is specified, the node is inserted at
-     *                         the end.
+     * @param node The node to insert.
+     * @param index The index at which to insert the node. Nodes at or after
+     *              the index are shifted to the right. If no index is
+     *              specified, the node is inserted at the end.
      *
-     * @returns {XmlNode} The node inserted into this node's children, or
-     *                    undefined if no node was inserted.
+     * @returns The node inserted into this node's children, or undefined if no
+     *          node was inserted.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode {
+    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         if (!(node instanceof XmlComment
               || node instanceof XmlDecl
               || node instanceof XmlDtd
@@ -199,7 +190,7 @@ export default class XmlDocument extends XmlNode {
                                     + " the XmlElement node");
                 }
             }
-            for (let child of this._children) {
+            for (const child of this._children) {
                 if (child instanceof XmlDtd) {
                     throw new Error("XmlDocument node should only contain"
                                     + " one XmlDtd node");
@@ -213,19 +204,19 @@ export default class XmlDocument extends XmlNode {
      * Inserts a new processing instruction at the specified index. If no index
      * is specified, the node is inserted at the end of this node's children.
      *
-     * @param {string} target    The target of the processing instruction.
-     * @param {string} [content] The data of the processing instruction, or
-     *                           undefined if there is no target.
-     * @param {number} [index]   The index at which the node should be inserted.
-     *                           If no index is specified, the node is inserted
-     *                           at the end of this node's children.
+     * @param target The target of the processing instruction.
+     * @param content The data of the processing instruction, or undefined if
+     *                there is no target.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this node's
+     *              children.
      *
-     * @returns {XmlProcInst} The newly created processing instruction.
+     * @returns The newly created processing instruction.
      */
     public procInst(target: string, content?: string,
                     index?: number): XmlProcInst
     {
-        let procInst = new XmlProcInst(target, content);
+        const procInst = new XmlProcInst(target, content);
         this.insertChild(procInst, index);
         return procInst;
     }
@@ -236,9 +227,9 @@ export default class XmlDocument extends XmlNode {
      * Note that {@link XmlElement} nodes cannot be removed from this node;
      * attempts to do so will result in an exception being thrown.
      *
-     * @param {XmlNode} node The node to remove.
+     * @param node The node to remove.
      *
-     * @returns {boolean} Whether a node was removed.
+     * @returns Whether a node was removed.
      */
     public removeChild(node: XmlNode): boolean {
         if (node instanceof XmlElement) {
@@ -254,11 +245,10 @@ export default class XmlDocument extends XmlNode {
      * Note that {@link XmlElement} nodes cannot be removed from this node;
      * attempts to do so will result in an exception being thrown.
      *
-     * @param {number} index The index at which the node to be removed is
+     * @param index The index at which the node to be removed is
      *                       located.
      *
-     * @returns {XmlNode} The node that was removed, or undefined if no node
-     *                    was removed.
+     * @returns The node that was removed, or undefined if no node was removed.
      */
     public removeChildAtIndex(index: number): XmlNode {
         if (this._children[index] instanceof XmlElement) {
@@ -271,10 +261,10 @@ export default class XmlDocument extends XmlNode {
     /**
      * Returns the root element of this document.
      *
-     * @returns {XmlElement} The root element of this document.
+     * @returns The root element of this document.
      */
     public root(): XmlElement {
-        for (let node of this._children) {
+        for (const node of this._children) {
             if (node instanceof XmlElement) {
                 return <XmlElement> node;
             }
@@ -291,18 +281,18 @@ export default class XmlDocument extends XmlNode {
      * @returns {string} An XML string representation of this node.
      */
     public toString(options: IStringOptions = {}): string {
-        validateStringOptions(options);
+        const optionsObj = new StringOptions(options);
 
         let str = "";
-        for (let node of this._children) {
+        for (const node of this._children) {
             str += node.toString(options);
-            if (options.pretty) {
-                str += options.newline;
+            if (optionsObj.pretty) {
+                str += optionsObj.newline;
             }
         }
 
-        let len = str.length - options.newline.length;
-        if (str.substr(len) === options.newline) {
+        const len = str.length - optionsObj.newline.length;
+        if (str.substr(len) === optionsObj.newline) {
             str = str.substr(0, len);
         }
 

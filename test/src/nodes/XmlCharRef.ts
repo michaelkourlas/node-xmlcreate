@@ -48,8 +48,8 @@ describe("XmlCharRef", () => {
         it("should throw an error if the specified value is not a"
            + " string", () => {
             let node = new XmlCharRef("a");
-            assert.throws((): void => node.char = undefined);
-            assert.throws((): void => node.char = null);
+            assert.throws((): void => node.char = <any> undefined);
+            assert.throws((): void => node.char = <any> null);
             assert.throws((): void => node.char = <any> 0);
             assert.throws((): void => node.char = <any> new XmlCharRef(""));
         });
@@ -82,8 +82,8 @@ describe("XmlCharRef", () => {
         it("should throw an error if the specified value is not a"
            + " boolean", () => {
             let node = new XmlCharRef("a");
-            assert.throws((): void => node.hex = undefined);
-            assert.throws((): void => node.hex = null);
+            assert.throws((): void => node.hex = <any> undefined);
+            assert.throws((): void => node.hex = <any> null);
             assert.throws((): void => node.hex = <any> 0);
             assert.throws((): void => node.hex = <any> "test");
             assert.throws((): void => node.hex = <any> new XmlCharRef(""));
