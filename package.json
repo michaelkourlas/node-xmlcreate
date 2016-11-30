@@ -43,8 +43,5 @@
     "tslint": "^4.0.2",
     "typedoc": "^0.5.1",
     "typescript": "^2.0.10"
-  },
-  "engines": {
-    "node": ">=4.0.0"
   }
 }
