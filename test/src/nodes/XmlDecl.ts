@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlDecl} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlDecl} from "../../../lib/main";
 
 describe("XmlDecl", () => {
     describe("#constructor", () => {

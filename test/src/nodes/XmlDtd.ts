@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     XmlComment,
     XmlDtd,
@@ -25,7 +25,6 @@ import {
     XmlNode,
     XmlProcInst
 } from "../../../lib/main";
-import {assert} from "chai";
 
 describe("XmlDtd", () => {
     describe("#constructor", () => {

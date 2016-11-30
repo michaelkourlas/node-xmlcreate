@@ -42,6 +42,21 @@ export function escapeLeftAngleBrackets(str: string): string {
 }
 
 /**
+ * Replaces right angle brackets (&gt;) with the appropriate XML character
+ * reference when part of the string "]]>".
+ *
+ * @param str The string to escape.
+ *
+ * @returns A copy of the specified string with right angle brackets escaped
+ *          when part of the string "]]>".
+ *
+ * @private
+ */
+export function escapeRightAngleBracketsInCdataTerminator(str: string): string {
+    return str.replace(/]]>/g, "]]&gt;");
+}
+
+/**
  * Replaces single quotes (") with the appropriate XML character reference.
  *
  * @param str The string to escape.

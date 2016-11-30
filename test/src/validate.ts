@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     validateChar,
     validateName,
     validateSingleChar
 } from "../../lib/validate";
-import {assert} from "chai";
 
 describe("validate", () => {
     describe("#validateChar", () => {

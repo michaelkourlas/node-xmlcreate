@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     XmlAttribute,
     XmlCdata,
+    XmlCharData,
     XmlCharRef,
     XmlComment,
     XmlElement,
     XmlEntityRef,
     XmlNode,
-    XmlProcInst,
-    XmlText
+    XmlProcInst
 } from "../../../lib/main";
-import {assert} from "chai";
 
 describe("XmlElement", () => {
     describe("#constructor", () => {
@@ -166,7 +165,8 @@ describe("XmlElement", () => {
     describe("#insertChild", () => {
         it("should throw an error if the specified node is not an"
            + " XmlAttribute, XmlCdata, XmlCharRef, XmlComment,"
-           + " XmlElement, XmlEntityRef, XmlProcInst, or XmlText node", () => {
+           + " XmlElement, XmlEntityRef, XmlProcInst, or XmlCharData"
+           + " node", () => {
             let node = new XmlElement("name");
             assert.throws(() => node.insertChild(new XmlNode()));
         });
@@ -179,7 +179,7 @@ describe("XmlElement", () => {
             node.attribute("test2", "test3");
             node.comment("test4");
             assert.throws(() => node.insertChild(
-                new XmlAttribute("test2", new XmlText("test5"))));
+                new XmlAttribute("test2", new XmlCharData("test5"))));
         });
     });
 
@@ -204,12 +204,12 @@ describe("XmlElement", () => {
     });
 
     describe("#text", () => {
-        it("should add an XmlText node to this node's children at the"
+        it("should add an XmlCharData node to this node's children at the"
            + " specified index with the specified text and return the"
            + " newly added node", () => {
             let node = new XmlElement("name");
-            assert.isTrue(node.text("a") instanceof XmlText);
-            assert.isTrue(node.text("b", 0) instanceof XmlText);
+            assert.isTrue(node.charData("a") instanceof XmlCharData);
+            assert.isTrue(node.charData("b", 0) instanceof XmlCharData);
             assert.strictEqual(node.toString(), "<name>ba</name>");
         });
     });
@@ -227,7 +227,7 @@ describe("XmlElement", () => {
                                                 + " test5=\'test6\'/>");
 
             node = new XmlElement("test7");
-            node.text("a");
+            node.charData("a");
             node.charRef("b");
             node.entityRef("c");
             // noinspection CheckDtdRefs
@@ -238,10 +238,10 @@ describe("XmlElement", () => {
             node.charRef("b");
             node.entityRef("c");
             node.comment("d");
-            node.text("e");
+            node.charData("e");
             node.comment("f");
-            node.text("g");
-            node.text("h");
+            node.charData("g");
+            node.charData("h");
             // noinspection CheckDtdRefs
             assert.strictEqual(node.toString(),
                                "<test8>\n    <!--a-->\n    &#98;&c;\n"
@@ -251,11 +251,11 @@ describe("XmlElement", () => {
             node = new XmlElement("test9");
             node.cdata("c");
             let subNode = node.element("test10");
-            subNode.text("a");
+            subNode.charData("a");
             subNode.comment("b");
             let subSubNode = subNode.element("test11");
-            subSubNode.text("d");
-            subSubNode.text("e");
+            subSubNode.charData("d");
+            subSubNode.charData("e");
             subSubNode.attribute("k", "l");
             subNode.comment("f");
             node.procInst("g", "h");
@@ -277,10 +277,10 @@ describe("XmlElement", () => {
             node.charRef("b");
             node.entityRef("c");
             node.comment("d");
-            node.text("e");
+            node.charData("e");
             node.comment("f");
-            node.text("g");
-            node.text("h");
+            node.charData("g");
+            node.charData("h");
             // noinspection CheckDtdRefs
             assert.strictEqual(node.toString({pretty: false}),
                                "<test8><!--a-->&#98;&c;<!--d-->e"
@@ -289,11 +289,11 @@ describe("XmlElement", () => {
             node = new XmlElement("test9");
             node.cdata("c");
             let subNode = node.element("test10");
-            subNode.text("a");
+            subNode.charData("a");
             subNode.comment("b");
             let subSubNode = subNode.element("test11");
-            subSubNode.text("d");
-            subSubNode.text("e");
+            subSubNode.charData("d");
+            subSubNode.charData("e");
             subSubNode.attribute("k", "l");
             subNode.comment("f");
             node.procInst("g", "h");
@@ -313,10 +313,10 @@ describe("XmlElement", () => {
             node.charRef("b");
             node.entityRef("c");
             node.comment("d");
-            node.text("e");
+            node.charData("e");
             node.comment("f");
-            node.text("g");
-            node.text("h");
+            node.charData("g");
+            node.charData("h");
             // noinspection CheckDtdRefs
             assert.strictEqual(node.toString({newline: "\r\n"}),
                                "<test8>\r\n    <!--a-->\r\n    &#98;&c;"
@@ -326,11 +326,11 @@ describe("XmlElement", () => {
             node = new XmlElement("test9");
             node.cdata("c");
             let subNode = node.element("test10");
-            subNode.text("a");
+            subNode.charData("a");
             subNode.comment("b");
             let subSubNode = subNode.element("test11");
-            subSubNode.text("d");
-            subSubNode.text("e");
+            subSubNode.charData("d");
+            subSubNode.charData("e");
             subSubNode.attribute("k", "l");
             subNode.comment("f");
             node.procInst("g", "h");
@@ -352,10 +352,10 @@ describe("XmlElement", () => {
             node.charRef("b");
             node.entityRef("c");
             node.comment("d");
-            node.text("e");
+            node.charData("e");
             node.comment("f");
-            node.text("g");
-            node.text("h");
+            node.charData("g");
+            node.charData("h");
             // noinspection CheckDtdRefs
             assert.strictEqual(node.toString({indent: "\t"}),
                                "<test8>\n\t<!--a-->\n\t&#98;&c;\n\t<!--d-->\n"
@@ -364,11 +364,11 @@ describe("XmlElement", () => {
             node = new XmlElement("test9");
             node.cdata("c");
             let subNode = node.element("test10");
-            subNode.text("a");
+            subNode.charData("a");
             subNode.comment("b");
             let subSubNode = subNode.element("test11");
-            subSubNode.text("d");
-            subSubNode.text("e");
+            subSubNode.charData("d");
+            subSubNode.charData("e");
             subSubNode.attribute("k", "l");
             subNode.comment("f");
             node.procInst("g", "h");
@@ -393,11 +393,11 @@ describe("XmlElement", () => {
             node = new XmlElement("test9");
             node.cdata("c");
             let subNode = node.element("test10");
-            subNode.text("a");
+            subNode.charData("a");
             subNode.comment("b");
             let subSubNode = subNode.element("test11");
-            subSubNode.text("d");
-            subSubNode.text("e");
+            subSubNode.charData("d");
+            subSubNode.charData("e");
             subSubNode.attribute("k", "l");
             subNode.comment("f");
             node.procInst("g", "h");

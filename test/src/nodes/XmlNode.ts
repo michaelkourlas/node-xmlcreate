@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import XmlNode from "../../../lib/nodes/XmlNode";
 import {assert} from "chai";
+import XmlNode from "../../../lib/nodes/XmlNode";
 
 describe("XmlNode", () => {
     describe("#parent", () => {

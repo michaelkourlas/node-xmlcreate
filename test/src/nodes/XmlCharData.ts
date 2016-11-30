@@ -14,73 +14,73 @@
  * limitations under the License.
  */
 import {assert} from "chai";
-import {XmlDtdEntity} from "../../../lib/main";
+import {XmlCharData} from "../../../lib/main";
 
-describe("XmlDtdEntity", () => {
+describe("XmlCharData", () => {
     describe("#constructor", () => {
-        it("should create an XmlDtdEntity node with the specified data", () => {
-            let node = new XmlDtdEntity("abc");
-            assert.strictEqual(node.toString(), "<!ENTITY abc>");
+        it("should create an XmlCharData node with the specified text", () => {
+            let node = new XmlCharData("abc");
+            assert.strictEqual(node.toString(), "abc");
         });
     });
 
     describe("#text", () => {
         it("should return this node's text", () => {
-            let node = new XmlDtdEntity("abc");
-            assert.strictEqual(node.text, "abc");
+            let node = new XmlCharData("abc");
+            assert.strictEqual(node.charData, "abc");
         });
 
         it("should set this node's text to the specified value", () => {
-            let node = new XmlDtdEntity("abc");
-            node.text = "123";
-            assert.strictEqual(node.text, "123");
+            let node = new XmlCharData("abc");
+            node.charData = "123";
+            assert.strictEqual(node.charData, "123");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlDtdEntity("abc");
-            assert.throws((): void => node.text = <any> undefined);
-            assert.throws((): void => node.text = <any> null);
-            assert.throws((): void => node.text = <any> 0);
-            assert.throws(
-                (): void => node.text = <any> new XmlDtdEntity("abc"));
+            let node = new XmlCharData("abc");
+            assert.throws((): void => node.charData = <any> undefined);
+            assert.throws((): void => node.charData = <any> null);
+            assert.throws((): void => node.charData = <any> 0);
+            assert.throws((): void => node.charData =
+                <any> new XmlCharData(""));
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML", () => {
-            let node = new XmlDtdEntity("abc");
-            assert.throws(() => node.text = "abc"
-                                            + String.fromCharCode(0x0001)
-                                            + "def");
+            let node = new XmlCharData("abc");
+            assert.throws(() => node.charData = "abc"
+                                                + String.fromCharCode(0x0001)
+                                                + "def");
         });
     });
 
     describe("#children", () => {
         it("should throw an error", () => {
-            let node = new XmlDtdEntity("a");
+            let node = new XmlCharData("a");
             assert.throws(() => node.children());
         });
     });
 
     describe("#insertChild", () => {
         it("should throw an error", () => {
-            let node = new XmlDtdEntity("a");
-            let childNode = new XmlDtdEntity("b");
+            let node = new XmlCharData("a");
+            let childNode = new XmlCharData("b");
             assert.throws(() => node.insertChild(childNode));
         });
     });
 
     describe("#removeChild", () => {
         it("should throw an error", () => {
-            let node = new XmlDtdEntity("a");
-            let childNode = new XmlDtdEntity("b");
+            let node = new XmlCharData("a");
+            let childNode = new XmlCharData("b");
             assert.throws(() => node.removeChild(childNode));
         });
     });
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error", () => {
-            let node = new XmlDtdEntity("a");
+            let node = new XmlCharData("a");
             assert.throws(() => node.removeChildAtIndex(0));
         });
     });
@@ -88,8 +88,12 @@ describe("XmlDtdEntity", () => {
     describe("#toString", () => {
         it("should return a string containing the XML string representation"
            + " for this node", () => {
-            let node = new XmlDtdEntity("abc");
-            assert.strictEqual(node.toString(), "<!ENTITY abc>");
+            let node = new XmlCharData("abc");
+            assert.strictEqual(node.toString(), "abc");
+
+            node = new XmlCharData("<&a&b<c&<>]]>");
+            assert.strictEqual(node.toString(),
+                               "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]&gt;");
         });
     });
 });

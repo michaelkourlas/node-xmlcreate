@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {escapeDoubleQuotes, escapeSingleQuotes} from "../escape";
 import {IStringOptions, StringOptions} from "../options";
 import {isArray, isString} from "../utils";
 import {validateName} from "../validate";
+import XmlAttributeText from "./XmlAttributeText";
 import XmlCharRef from "./XmlCharRef";
 import XmlEntityRef from "./XmlEntityRef";
 import XmlNode from "./XmlNode";
-import XmlText from "./XmlText";
 
 /**
  * Represents an XML element attribute.
@@ -38,8 +37,8 @@ import XmlText from "./XmlText";
  * consists of the children of this node.
  *
  * XmlAttribute nodes must have at least one child, and can have an unlimited
- * number of {@link XmlCharRef}, {@link XmlEntityRef}, and {@link XmlText}
- * nodes as children.
+ * number of {@link XmlAttributeText}, {@link XmlCharRef}, and
+ * {@link XmlEntityRef} nodes as children.
  */
 export default class XmlAttribute extends XmlNode {
     private _name: string;
@@ -49,8 +48,8 @@ export default class XmlAttribute extends XmlNode {
      *
      * @param name The name of the XML attribute.
      * @param value The initial value of the XML attribute. Additional children
-     *              can be added later. Only {@link XmlCharRef},
-     *              {@link XmlEntityRef}, and {@link XmlText} nodes are
+     *              can be added later. Only {@link XmlAttributeText},
+     *              {@link XmlCharRef}, and {@link XmlEntityRef} nodes are
      *              permitted.
      */
     constructor(name: string, value: XmlNode | XmlNode[]) {
@@ -129,8 +128,8 @@ export default class XmlAttribute extends XmlNode {
      * already has a parent, it is removed from that parent.
      *
      * Note that only {@link XmlCharRef}, {@link XmlEntityRef}, and
-     * {@link XmlText} nodes can be inserted; otherwise, an exception will be
-     * thrown.
+     * {@link XmlCharData} nodes can be inserted; otherwise, an exception will
+     * be thrown.
      *
      * @param node The node to insert.
      * @param index The index at which to insert the node. Nodes at or after the
@@ -142,10 +141,10 @@ export default class XmlAttribute extends XmlNode {
      */
     public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
         if (!(node instanceof XmlCharRef || node instanceof XmlEntityRef ||
-              node instanceof XmlText))
+              node instanceof XmlAttributeText))
         {
             throw new TypeError("node should be an instance of XmlCharRef,"
-                                + " XmlEntityRef, or XmlText");
+                                + " XmlEntityRef, or XmlAttributeText");
         }
         return super.insertChild(node, index);
     }
@@ -194,8 +193,8 @@ export default class XmlAttribute extends XmlNode {
      *
      * @returns The newly created XML declaration.
      */
-    public text(text: string, index?: number): XmlText {
-        const textNode = new XmlText(text);
+    public text(text: string, index?: number): XmlAttributeText {
+        const textNode = new XmlAttributeText(text);
         this.insertChild(textNode, index);
         return textNode;
     }

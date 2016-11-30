@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import XmlAttribute from "./nodes/XmlAttribute";
+import XmlAttributeText from "./nodes/XmlAttributeText";
 import XmlCdata from "./nodes/XmlCdata";
+import XmlCharData from "./nodes/XmlCharData";
 import XmlCharRef from "./nodes/XmlCharRef";
 import XmlComment from "./nodes/XmlComment";
 import XmlDecl from "./nodes/XmlDecl";
@@ -30,13 +31,12 @@ import XmlElement from "./nodes/XmlElement";
 import XmlEntityRef from "./nodes/XmlEntityRef";
 import XmlNode from "./nodes/XmlNode";
 import XmlProcInst from "./nodes/XmlProcInst";
-import XmlText from "./nodes/XmlText";
 
 export {
-    XmlAttribute, XmlCdata, XmlCharRef, XmlComment, XmlDecl, XmlDocument,
-    XmlDtd, XmlDtdAttlist, XmlDtdElement, XmlDtdEntity, XmlDtdNotation,
-    XmlDtdParamEntityRef, XmlElement, XmlEntityRef, XmlNode, XmlProcInst,
-    XmlText
+    XmlAttribute, XmlAttributeText, XmlCdata, XmlCharData, XmlCharRef,
+    XmlComment, XmlDecl, XmlDocument, XmlDtd, XmlDtdAttlist, XmlDtdElement,
+    XmlDtdEntity, XmlDtdNotation, XmlDtdParamEntityRef, XmlElement,
+    XmlEntityRef, XmlNode, XmlProcInst
 };
 
 /**

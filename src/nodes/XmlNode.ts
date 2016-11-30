@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {IStringOptions} from "../options";
 import {isInteger, isNumber, isUndefined} from "../utils";
 

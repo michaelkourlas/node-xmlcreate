@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlComment} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlComment} from "../../../lib/main";
 
 describe("XmlComment", () => {
     describe("#constructor", () => {

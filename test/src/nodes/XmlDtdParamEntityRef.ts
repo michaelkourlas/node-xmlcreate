@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlDtdParamEntityRef} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlDtdParamEntityRef} from "../../../lib/main";
 
 describe("XmlDtdParamEntityRef", () => {
     describe("#constructor", () => {

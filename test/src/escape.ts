@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     escapeAmpersands,
     escapeDoubleQuotes,
     escapeLeftAngleBrackets,
     escapeSingleQuotes
 } from "../../lib/escape";
-import {assert} from "chai";
 
 describe("escape", () => {
     describe("#escapeAmpersands", () => {

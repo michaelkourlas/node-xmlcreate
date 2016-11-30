@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlEntityRef} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlEntityRef} from "../../../lib/main";
 
 describe("XmlEntityRef", () => {
     describe("#constructor", () => {

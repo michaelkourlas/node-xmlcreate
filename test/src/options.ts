@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     DeclarationOptions,
     IDeclarationOptions,
     StringOptions
 } from "../../lib/options";
-import {assert} from "chai";
 
 describe("options", () => {
     describe("#DeclarationOptions", () => {

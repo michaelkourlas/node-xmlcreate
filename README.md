@@ -102,17 +102,17 @@ document
             .up()
         .element("head")
             .element("title")
-                .text("My page title")
+                .charData("My page title")
                     .up()
                 .up()
             .up()
         .element("body")
             .element("h1")
-                .text("Welcome!")
+                .charData("Welcome!")
                     .up()
                 .up()
             .element("p")
-                .text("This is some text on my website.");
+                .charData("This is some text on my website.");
 
 console.log(document.toString({doubleQuotes: true}));
 ```

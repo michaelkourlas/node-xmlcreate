@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlCdata} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlCdata} from "../../../lib/main";
 
 describe("XmlCdata", () => {
     describe("#constructor", () => {

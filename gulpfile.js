@@ -70,7 +70,7 @@ var docOptions = {
     module: "commonjs",
     out: "docs",
     target: "es5",
-    // TODO: Remove this option once TypeDoc supports TypeScript 2.0
+    // TODO: Remove this option once TypeDoc fully supports TypeScript 2.0
     ignoreCompilerErrors: true
 };
 gulp.task("docs", function() {

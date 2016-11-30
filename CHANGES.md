@@ -1,6 +1,9 @@
 ## 0.2.0 ##
 
 * Add null and undefined in type declarations
+* Replace `XmlText` with `XmlCharData` and `XmlAttributeText` to reflect
+  differences in what characters are acceptable in attribute values versus
+  character data
 
 ## 0.1.1 ##
 

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlCharRef} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlCharRef} from "../../../lib/main";
 
 describe("XmlCharRef", () => {
     describe("#constructor", () => {

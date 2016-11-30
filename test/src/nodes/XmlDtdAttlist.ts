@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlDtdAttlist} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlDtdAttlist} from "../../../lib/main";
 
 describe("XmlDtdAttlist", () => {
     describe("#constructor", () => {

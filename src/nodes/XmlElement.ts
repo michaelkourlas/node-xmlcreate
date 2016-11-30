@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {IStringOptions, StringOptions} from "../options";
 import {isArray, isString} from "../utils";
 import {validateName} from "../validate";
 import XmlAttribute from "./XmlAttribute";
+import XmlAttributeText from "./XmlAttributeText";
 import XmlCdata from "./XmlCdata";
+import XmlCharData from "./XmlCharData";
 import XmlCharRef from "./XmlCharRef";
 import XmlComment from "./XmlComment";
 import XmlEntityRef from "./XmlEntityRef";
 import XmlNode from "./XmlNode";
 import XmlProcInst from "./XmlProcInst";
-import XmlText from "./XmlText";
 
 /**
  * Represents an XML element.
@@ -47,7 +47,7 @@ import XmlText from "./XmlText";
  * XmlElement nodes can have an unlimited number of {@link XmlAttribute},
  * {@link XmlCdata}, {@link XmlCharRef}, {@link XmlComment},
  * {@link XmlElement}, {@link XmlEntityRef}, {@link XmlProcInst}, or
- * {@link XmlText} nodes as children.
+ * {@link XmlCharData} nodes as children.
  */
 export default class XmlElement extends XmlNode {
     private _name: string;
@@ -92,24 +92,26 @@ export default class XmlElement extends XmlNode {
      *
      * @param name The name of the attribute.
      * @param value The value of the attribute. Strings are converted to
-     *        XmlText nodes.
+     *        XmlAttributeText nodes.
      * @param index The index at which the node should be inserted. If no index
      *              is specified, the node is inserted at the end of this
      *              node's children.
      *
      * @returns {XmlAttribute} The newly created attribute.
      */
-    public attribute(name: string, value: string | XmlNode | (string|XmlNode)[],
+    public attribute(name: string,
+                     value: string | XmlNode | Array<string | XmlNode>,
                      index?: number): XmlAttribute
     {
         if (isString(value)) {
-            value = new XmlText(value);
+            value = new XmlAttributeText(value);
         } else if (isArray(value)) {
-            const arrayVal = <(string|XmlNode)[]> value;
+            const arrayVal = <Array<string | XmlNode>> value;
+            // tslint:disable-next-line:prefer-for-of
             for (let i = 0; i < arrayVal.length; i++) {
                 if (isString(arrayVal[i])) {
                     const strVal = <string> arrayVal[i];
-                    arrayVal[i] = new XmlText(strVal);
+                    arrayVal[i] = new XmlAttributeText(strVal);
                 }
             }
         }
@@ -128,7 +130,7 @@ export default class XmlElement extends XmlNode {
      */
     public attributes(): XmlAttribute[] {
         return <XmlAttribute[]> this._children.filter(
-            node => node instanceof XmlAttribute);
+            (node) => node instanceof XmlAttribute);
     }
 
     /**
@@ -146,6 +148,23 @@ export default class XmlElement extends XmlNode {
         const cdata = new XmlCdata(content);
         this.insertChild(cdata, index);
         return cdata;
+    }
+
+    /**
+     * Inserts some character data at the specified index. If no index is
+     * specified, the node is inserted at the end of this node's children.
+     *
+     * @param charData Character data.
+     * @param index The index at which the node should be inserted. If no index
+     *              is specified, the node is inserted at the end of this
+     *              node's children.
+     *
+     * @returns The newly created text node.
+     */
+    public charData(charData: string, index?: number): XmlCharData {
+        const charDataNode = new XmlCharData(charData);
+        this.insertChild(charDataNode, index);
+        return charDataNode;
     }
 
     /**
@@ -225,8 +244,8 @@ export default class XmlElement extends XmlNode {
      *
      * Note that only {@link XmlAttribute}, {@link XmlCdata},
      * {@link XmlCharRef}, {@link XmlComment}, {@link XmlElement},
-     * {@link XmlEntityRef}, {@link XmlProcInst}, or {@link XmlText} nodes can
-     * be inserted; otherwise, an exception will be thrown.
+     * {@link XmlEntityRef}, {@link XmlProcInst}, or {@link XmlCharData} nodes
+     * can be inserted; otherwise, an exception will be thrown.
      *
      * @param node The node to insert.
      * @param index The index at which to insert the node. Nodes at or after
@@ -244,7 +263,7 @@ export default class XmlElement extends XmlNode {
               || node instanceof XmlElement
               || node instanceof XmlEntityRef
               || node instanceof XmlProcInst
-              || node instanceof XmlText))
+              || node instanceof XmlCharData))
         {
             throw new TypeError("node should be an instance of XmlAttribute,"
                                 + " XmlCdata, XmlCharRef, XmlComment,"
@@ -254,7 +273,7 @@ export default class XmlElement extends XmlNode {
 
         if (node instanceof XmlAttribute) {
             const attributes = this._children.filter(
-                n => n instanceof XmlAttribute);
+                (n) => n instanceof XmlAttribute);
             for (const attribute of <XmlAttribute[]> attributes) {
                 if (attribute.name === node.name) {
                     throw new Error("element already contains an"
@@ -289,23 +308,6 @@ export default class XmlElement extends XmlNode {
     }
 
     /**
-     * Inserts some new text at the specified index. If no index is specified,
-     * the node is inserted at the end of this node's children.
-     *
-     * @param text Arbitrary character data.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created text node.
-     */
-    public text(text: string, index?: number): XmlText {
-        const txt = new XmlText(text);
-        this.insertChild(txt, index);
-        return txt;
-    }
-
-    /**
      * Returns an XML string representation of this node.
      *
      * @param options Formatting options for the string representation.
@@ -316,9 +318,8 @@ export default class XmlElement extends XmlNode {
         const optionsObj = new StringOptions(options);
 
         const attributes = this.attributes();
-        const nodes = this._children.filter(node => {
-            return (<XmlNode[]> attributes).indexOf(node) === -1;
-        });
+        const nodes = this._children.filter(
+            (node) => (<XmlNode[]> attributes).indexOf(node) === -1);
 
         // Element tag start
         let str = "<" + this._name;
@@ -341,7 +342,7 @@ export default class XmlElement extends XmlNode {
 
                 // Line break before child nodes unless all nodes, or at least
                 // the most recent two, are of type XmlCharacterReference,
-                // XmlEntityReference, or XmlText
+                // XmlEntityReference, or XmlCharData
                 if (optionsObj.pretty) {
                     if (!allSameLineNodes(nodes)) {
                         if (!(i > 0 && onSameLine(next, prev))) {
@@ -357,7 +358,7 @@ export default class XmlElement extends XmlNode {
             }
 
             // Line break before end tag unless all nodes are of type
-            // XmlCharacterReference, XmlEntityReference, or XmlText
+            // XmlCharacterReference, XmlEntityReference, or XmlCharData
             if (optionsObj.pretty) {
                 if (!allSameLineNodes(nodes)) {
                     str += optionsObj.newline;
@@ -377,12 +378,12 @@ export default class XmlElement extends XmlNode {
 
 /**
  * Returns true if the specified nodes are all of type {@link XmlCharRef},
- * {@link XmlEntityRef}, or {@link XmlText}.
+ * {@link XmlEntityRef}, or {@link XmlCharData}.
  *
  * @param nodes The specified nodes.
  *
  * @returns Whether or not the specified nodes are all of type
- *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlText}.
+ *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlCharData}.
  *
  * @private
  */
@@ -390,7 +391,7 @@ function allSameLineNodes(nodes: XmlNode[]): boolean {
     for (const node of nodes) {
         if (!((node instanceof XmlCharRef
                || node instanceof XmlEntityRef
-               || node instanceof XmlText)))
+               || node instanceof XmlCharData)))
         {
             return false;
         }
@@ -400,21 +401,21 @@ function allSameLineNodes(nodes: XmlNode[]): boolean {
 
 /**
  * Returns true if the specified nodes are all of type {@link XmlCharRef},
- * {@link XmlEntityRef}, or {@link XmlText}.
+ * {@link XmlEntityRef}, or {@link XmlCharData}.
  *
  * @param prev The first specified node.
  * @param next The second specified node.
  *
  * @returns Whether or not the specified nodes are all of type
- *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlText}.
+ *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlCharData}.
  *
  * @private
  */
 function onSameLine(prev: XmlNode, next?: XmlNode): boolean {
     return (prev instanceof XmlCharRef
             || prev instanceof XmlEntityRef
-            || prev instanceof XmlText)
+            || prev instanceof XmlCharData)
            && (next instanceof XmlCharRef
                || next instanceof XmlEntityRef
-               || next instanceof XmlText);
+               || next instanceof XmlCharData);
 }

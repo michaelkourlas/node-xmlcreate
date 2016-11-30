@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {IDeclarationOptions, IStringOptions, StringOptions} from "../options";
 import {isUndefined} from "../utils";
 import XmlComment from "./XmlComment";

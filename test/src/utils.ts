@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {assert} from "chai";
 import {
     getCodePoint,
     isArray,
@@ -24,7 +24,6 @@ import {
     isString,
     isUndefined
 } from "../../lib/utils";
-import {assert} from "chai";
 
 describe("utils", () => {
     describe("#isString", () => {

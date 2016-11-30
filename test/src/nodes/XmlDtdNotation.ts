@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlDtdNotation} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlDtdNotation} from "../../../lib/main";
 
 describe("XmlDtdNotation", () => {
     describe("#constructor", () => {

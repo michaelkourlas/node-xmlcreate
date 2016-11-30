@@ -25,37 +25,37 @@ var example1 = function() {
     var document = xmlcreate.document("html");
     document
         .decl({encoding: "UTF-8"})
-            .up()
+        .up()
         .dtd("html", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd",
              "-//W3C//DTD XHTML 1.0 Strict//EN")
-            .up()
+        .up()
         .root()
-            .attribute("xmlns", "http://www.w3.org/1999/xhtml")
-                .up()
-            .attribute("xml:lang", "en")
-                .up()
-            .attribute("lang", "en")
-                .up()
-            .element("head")
-                .element("title")
-                    .text("My page title")
-                        .up()
-                    .up()
-                .up()
-            .element("body")
-                .element("h1")
-                    .text("Welcome!")
-                        .up()
-                    .up()
-                .element("p")
-                    .text("This is some text on my website.")
-                        .up()
-                    .up()
-                .element("div")
-                    .element("img")
-                        .attribute("src", "picture.png")
-                            .up()
-                        .attribute("alt", "picture");
+        .attribute("xmlns", "http://www.w3.org/1999/xhtml")
+        .up()
+        .attribute("xml:lang", "en")
+        .up()
+        .attribute("lang", "en")
+        .up()
+        .element("head")
+        .element("title")
+        .charData("My page title")
+        .up()
+        .up()
+        .up()
+        .element("body")
+        .element("h1")
+        .charData("Welcome!")
+        .up()
+        .up()
+        .element("p")
+        .charData("This is some text on my website.")
+        .up()
+        .up()
+        .element("div")
+        .element("img")
+        .attribute("src", "picture.png")
+        .up()
+        .attribute("alt", "picture");
 
     console.log(document.toString({doubleQuotes: true}));
     console.log();
@@ -75,29 +75,29 @@ var example2 = function() {
 
     var root = document.root();
     root.insertChild(new xmlcreate.XmlAttribute("xmlns",
-        new xmlcreate.XmlText("http://www.w3.org/1999/xhtml")));
+        new xmlcreate.XmlAttributeText("http://www.w3.org/1999/xhtml")));
     root.insertChild(new xmlcreate.XmlAttribute("xml:lang",
-        new xmlcreate.XmlText("en")));
+        new xmlcreate.XmlAttributeText("en")));
     root.insertChild(new xmlcreate.XmlAttribute("lang",
-        new xmlcreate.XmlText("en")));
+        new xmlcreate.XmlAttributeText("en")));
 
     var headElement = new xmlcreate.XmlElement("head");
     root.insertChild(headElement);
 
     var titleElement = new xmlcreate.XmlElement("title");
     headElement.insertChild(titleElement);
-    titleElement.insertChild(new xmlcreate.XmlText("My page title"));
+    titleElement.insertChild(new xmlcreate.XmlCharData("My page title"));
 
     var bodyElement = new xmlcreate.XmlElement("body");
     root.insertChild(bodyElement);
 
     var headingElement = new xmlcreate.XmlElement("h1");
     bodyElement.insertChild(headingElement);
-    headingElement.insertChild(new xmlcreate.XmlText("Welcome!"));
+    headingElement.insertChild(new xmlcreate.XmlCharData("Welcome!"));
 
     var paragraphElement = new xmlcreate.XmlElement("p");
     bodyElement.insertChild(paragraphElement);
-    paragraphElement.insertChild(new xmlcreate.XmlText(
+    paragraphElement.insertChild(new xmlcreate.XmlCharData(
         "This is some text on my website."));
 
     var divElement = new xmlcreate.XmlElement("div");
@@ -106,9 +106,9 @@ var example2 = function() {
     var imageElement = new xmlcreate.XmlElement("img");
     divElement.insertChild(imageElement);
     imageElement.insertChild(new xmlcreate.XmlAttribute("src",
-        new xmlcreate.XmlText("picture.png")));
+        new xmlcreate.XmlAttributeText("picture.png")));
     imageElement.insertChild(new xmlcreate.XmlAttribute("alt",
-        new xmlcreate.XmlText("picture")));
+        new xmlcreate.XmlAttributeText("picture")));
 
     console.log(document.toString({doubleQuotes: true}));
     console.log();

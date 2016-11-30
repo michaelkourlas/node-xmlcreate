@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {XmlProcInst} from "../../../lib/main";
 import {assert} from "chai";
+import {XmlProcInst} from "../../../lib/main";
 
 describe("XmlProcInst", () => {
     describe("#constructor", () => {
