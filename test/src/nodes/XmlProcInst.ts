@@ -20,42 +20,42 @@ describe("XmlProcInst", () => {
     describe("#constructor", () => {
         it("should create an XmlProcInst node with the specified"
            + " target", () => {
-            let node = new XmlProcInst("target");
+            const node = new XmlProcInst("target");
             assert.strictEqual(node.toString(), "<?target?>");
         });
 
         it("should create an XmlProcInst node with the specified"
            + " target and content", () => {
-            let node = new XmlProcInst("target", "content");
+            const node = new XmlProcInst("target", "content");
             assert.strictEqual(node.toString(), "<?target content?>");
         });
     });
 
     describe("#target", () => {
         it("should return this node's target", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             assert.strictEqual(node.target, "abc");
         });
 
         it("should set this node's data to the specified value", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             node.target = "123";
             assert.strictEqual(node.target, "123");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlProcInst("abc");
-            assert.throws((): void => node.target = <any> undefined);
-            assert.throws((): void => node.target = <any> null);
-            assert.throws((): void => node.target = <any> 0);
+            const node = new XmlProcInst("abc");
+            assert.throws((): void => node.target = undefined as any);
+            assert.throws((): void => node.target = null as any);
+            assert.throws((): void => node.target = 0 as any);
             assert.throws(
-                (): void => node.target = <any> new XmlProcInst("target"));
+                (): void => node.target = new XmlProcInst("target") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             assert.throws(() => node.target = "abc"
                                               + String.fromCharCode(0x0001)
                                               + "def");
@@ -63,35 +63,35 @@ describe("XmlProcInst", () => {
 
         it("should throw an error if the specified value is equal"
            + " to 'xml'", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             assert.throws(() => node.target = "xml");
         });
     });
 
     describe("#content", () => {
         it("should return this node's content", () => {
-            let node = new XmlProcInst("abc", "def");
+            const node = new XmlProcInst("abc", "def");
             assert.strictEqual(node.content, "def");
         });
 
         it("should set this node's data to the specified value", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             node.content = "123";
             assert.strictEqual(node.content, "123");
         });
 
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
-            let node = new XmlProcInst("abc", "def");
-            assert.throws((): void => node.content = <any> null);
-            assert.throws((): void => node.content = <any> 0);
+            const node = new XmlProcInst("abc", "def");
+            assert.throws((): void => node.content = null as any);
+            assert.throws((): void => node.content = 0 as any);
             assert.throws(
-                (): void => node.content = <any> new XmlProcInst("target"));
+                (): void => node.content = new XmlProcInst("target") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML", () => {
-            let node = new XmlProcInst("abc");
+            const node = new XmlProcInst("abc");
             assert.throws(() => node.content = "abc"
                                                + String.fromCharCode(0x0001)
                                                + "def");
@@ -99,7 +99,7 @@ describe("XmlProcInst", () => {
 
         it("should throw an error if the specified value contains the"
            + " string '?>'", () => {
-            let node = new XmlProcInst("?a?b??c>>?");
+            const node = new XmlProcInst("?a?b??c>>?");
             assert.throws(() => node.content = "?>");
             assert.throws(() => node.content = "abc?>123");
             assert.throws(() => node.content = "?>abc123");
@@ -109,30 +109,30 @@ describe("XmlProcInst", () => {
 
     describe("#children", () => {
         it("should throw an error", () => {
-            let node = new XmlProcInst("a");
+            const node = new XmlProcInst("a");
             assert.throws(() => node.children());
         });
     });
 
     describe("#insertChild", () => {
         it("should throw an error", () => {
-            let node = new XmlProcInst("a");
-            let childNode = new XmlProcInst("b");
+            const node = new XmlProcInst("a");
+            const childNode = new XmlProcInst("b");
             assert.throws(() => node.insertChild(childNode));
         });
     });
 
     describe("#removeChild", () => {
         it("should throw an error", () => {
-            let node = new XmlProcInst("a");
-            let childNode = new XmlProcInst("b");
+            const node = new XmlProcInst("a");
+            const childNode = new XmlProcInst("b");
             assert.throws(() => node.removeChild(childNode));
         });
     });
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error", () => {
-            let node = new XmlProcInst("a");
+            const node = new XmlProcInst("a");
             assert.throws(() => node.removeChildAtIndex(0));
         });
     });

@@ -78,7 +78,8 @@ export default class XmlDocument extends XmlNode {
      *
      * @returns The newly created element.
      */
-    public comment(content: string, index?: number): XmlComment {
+    public comment(content: string,
+                   index: number = this._children.length): XmlComment {
         const comment = new XmlComment(content);
         this.insertChild(comment, index);
         return comment;
@@ -149,7 +150,9 @@ export default class XmlDocument extends XmlNode {
      * @returns The node inserted into this node's children, or undefined if no
      *          node was inserted.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
+    public insertChild(node: XmlNode,
+                       index: number
+                           = this._children.length): XmlNode | undefined {
         if (!(node instanceof XmlComment
               || node instanceof XmlDecl
               || node instanceof XmlDtd
@@ -213,7 +216,7 @@ export default class XmlDocument extends XmlNode {
      * @returns The newly created processing instruction.
      */
     public procInst(target: string, content?: string,
-                    index?: number): XmlProcInst
+                    index: number = this._children.length): XmlProcInst
     {
         const procInst = new XmlProcInst(target, content);
         this.insertChild(procInst, index);
@@ -265,7 +268,7 @@ export default class XmlDocument extends XmlNode {
     public root(): XmlElement {
         for (const node of this._children) {
             if (node instanceof XmlElement) {
-                return <XmlElement> node;
+                return node;
             }
         }
         throw new Error("XmlDocument does not contain a root node");

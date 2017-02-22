@@ -1,4 +1,4 @@
-## 0.2.0 ##
+## 1.0.0 ##
 
 * Add null and undefined in type declarations
 * Replace `XmlText` with `XmlCharData` and `XmlAttributeText` to reflect

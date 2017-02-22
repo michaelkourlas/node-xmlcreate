@@ -96,7 +96,6 @@ describe("utils", () => {
         it("should return true for objects", () => {
             assert.isTrue(isObject({a: "b"}));
             assert.isTrue(isObject({}));
-            assert.isTrue(isObject(new (<any> (() => 0))()));
         });
 
         it("should return false for values that are not objects", () => {
@@ -134,11 +133,11 @@ describe("utils", () => {
             assert.isFalse(isInteger(3.2));
             /* tslint:disable:no-construct */
             // noinspection JSPrimitiveTypeWrapperUsage
-            assert.isFalse(isInteger(<any> new Number(7)));
+            assert.isFalse(isInteger(new Number(7)));
             /* tslint:enable:no-construct */
             assert.isFalse(isInteger(undefined));
             assert.isFalse(isInteger(null));
-            assert.isFalse(isInteger(<any> "blah"));
+            assert.isFalse(isInteger("blah"));
         });
     });
 

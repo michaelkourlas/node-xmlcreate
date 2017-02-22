@@ -33,88 +33,88 @@ describe("XmlCharRef", () => {
 
     describe("#char", () => {
         it("should return this node's character value", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             assert.strictEqual(node.char, "a");
         });
 
         it("should set this node's character value to the specified"
            + " value", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             node.char = "b";
             assert.strictEqual(node.char, "b");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlCharRef("a");
-            assert.throws((): void => node.char = <any> undefined);
-            assert.throws((): void => node.char = <any> null);
-            assert.throws((): void => node.char = <any> 0);
-            assert.throws((): void => node.char = <any> new XmlCharRef(""));
+            const node = new XmlCharRef("a");
+            assert.throws((): void => node.char = undefined as any);
+            assert.throws((): void => node.char = null as any);
+            assert.throws((): void => node.char = 0 as any);
+            assert.throws((): void => node.char = new XmlCharRef("") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             assert.throws(() => node.char = String.fromCharCode(0x0001));
         });
 
         it("should throw an error if the specified value contains more than"
            + " one character", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             assert.throws(() => node.char = "bc");
         });
     });
 
     describe("#hex", () => {
         it("should return this node's hex value", () => {
-            let node = new XmlCharRef("a", false);
+            const node = new XmlCharRef("a", false);
             assert.isFalse(node.hex);
         });
 
         it("should set this node's hex value to the specified value", () => {
-            let node = new XmlCharRef("a", false);
+            const node = new XmlCharRef("a", false);
             node.hex = true;
             assert.isTrue(node.hex);
         });
 
         it("should throw an error if the specified value is not a"
            + " boolean", () => {
-            let node = new XmlCharRef("a");
-            assert.throws((): void => node.hex = <any> undefined);
-            assert.throws((): void => node.hex = <any> null);
-            assert.throws((): void => node.hex = <any> 0);
-            assert.throws((): void => node.hex = <any> "test");
-            assert.throws((): void => node.hex = <any> new XmlCharRef(""));
+            const node = new XmlCharRef("a");
+            assert.throws((): void => node.hex = undefined as any);
+            assert.throws((): void => node.hex = null as any);
+            assert.throws((): void => node.hex = 0 as any);
+            assert.throws((): void => node.hex = "test" as any);
+            assert.throws((): void => node.hex = new XmlCharRef("") as any);
         });
     });
 
     describe("#children", () => {
         it("should throw an error", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             assert.throws(() => node.children());
         });
     });
 
     describe("#insertChild", () => {
         it("should throw an error", () => {
-            let node = new XmlCharRef("a");
-            let childNode = new XmlCharRef("b");
+            const node = new XmlCharRef("a");
+            const childNode = new XmlCharRef("b");
             assert.throws(() => node.insertChild(childNode));
         });
     });
 
     describe("#removeChild", () => {
         it("should throw an error", () => {
-            let node = new XmlCharRef("a");
-            let childNode = new XmlCharRef("b");
+            const node = new XmlCharRef("a");
+            const childNode = new XmlCharRef("b");
             assert.throws(() => node.removeChild(childNode));
         });
     });
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error", () => {
-            let node = new XmlCharRef("a");
+            const node = new XmlCharRef("a");
             assert.throws(() => node.removeChildAtIndex(0));
         });
     });

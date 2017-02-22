@@ -44,29 +44,33 @@ describe("XmlAttribute", () => {
 
     describe("#name", () => {
         it("should return this node's name", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText("value"));
+            const node = new XmlAttribute("name",
+                new XmlAttributeText("value"));
             assert.strictEqual(node.name, "name");
         });
 
         it("should set this node's name to the specified value", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText("value"));
+            const node = new XmlAttribute("name",
+                new XmlAttributeText("value"));
             node.name = "name2";
             assert.strictEqual(node.name, "name2");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText("value"));
-            assert.throws((): void => node.name = <any> undefined);
-            assert.throws((): void => node.name = <any> null);
-            assert.throws((): void => node.name = <any> 0);
+            const node = new XmlAttribute("name",
+                new XmlAttributeText("value"));
+            assert.throws((): void => node.name = undefined as any);
+            assert.throws((): void => node.name = null as any);
+            assert.throws((): void => node.name = 0 as any);
             assert.throws((): void => node.name =
-                <any> new XmlAttributeText(""));
+                new XmlAttributeText("") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML names", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText("value"));
+            const node = new XmlAttribute("name",
+                new XmlAttributeText("value"));
             assert.throws(() => node.name = ".");
         });
     });
@@ -75,7 +79,7 @@ describe("XmlAttribute", () => {
         it("should add an XmlCharRef node to this node's children at the"
            + " specified index with the specified char and hex"
            + " property and return the newly added node", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const node = new XmlAttribute("name", new XmlAttributeText(""));
             assert.isTrue(node.charRef("a", true) instanceof XmlCharRef);
             assert.isTrue(node.charRef("b", false, 0) instanceof XmlCharRef);
             assert.strictEqual(node.toString(), "name='&#98;&#x61;'");
@@ -86,7 +90,7 @@ describe("XmlAttribute", () => {
         it("should add an XmlEntityRef node to this node's children at the"
            + " specified index with the specified entity name and return"
            + " the newly added node", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const node = new XmlAttribute("name", new XmlAttributeText(""));
             assert.isTrue(node.entityRef("a") instanceof XmlEntityRef);
             assert.isTrue(node.entityRef("b", 0) instanceof XmlEntityRef);
             assert.strictEqual(node.toString(), "name='&b;&a;'");
@@ -96,16 +100,16 @@ describe("XmlAttribute", () => {
     describe("#insertChild", () => {
         it("should throw an error if the specified node is not an"
            + " XmlCharRef, XmlEntityRef, or XmlAttributeText node", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const node = new XmlAttribute("name", new XmlAttributeText(""));
             assert.throws(() => node.insertChild(new XmlNode()));
         });
 
         it("should insert an XmlCharRef, XmlEntityRef, or XmlAttributeText"
            + " node at the specified index in this node's children", () => {
-            let charRefNode = new XmlCharRef("x");
-            let entityRefNode = new XmlEntityRef("y");
-            let textNode = new XmlAttributeText("z");
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const charRefNode = new XmlCharRef("x");
+            const entityRefNode = new XmlEntityRef("y");
+            const textNode = new XmlAttributeText("z");
+            const node = new XmlAttribute("name", new XmlAttributeText(""));
             node.insertChild(charRefNode);
             node.insertChild(entityRefNode, 0);
             node.insertChild(textNode, 1);
@@ -115,17 +119,17 @@ describe("XmlAttribute", () => {
 
     describe("#removeChild", () => {
         it("should throw an error if this node only has one child", () => {
-            let textNode = new XmlAttributeText("");
-            let secondTextNode = new XmlAttributeText("");
-            let node = new XmlAttribute("name", textNode);
+            const textNode = new XmlAttributeText("");
+            const secondTextNode = new XmlAttributeText("");
+            const node = new XmlAttribute("name", textNode);
             assert.throws(() => node.removeChild(textNode));
             assert.throws(() => node.removeChild(secondTextNode));
         });
 
         it("should remove the specified node from this node", () => {
-            let textNode = new XmlAttributeText("");
-            let secondTextNode = new XmlAttributeText("");
-            let node = new XmlAttribute("name", textNode);
+            const textNode = new XmlAttributeText("");
+            const secondTextNode = new XmlAttributeText("");
+            const node = new XmlAttribute("name", textNode);
             node.insertChild(secondTextNode);
             assert.isTrue(node.removeChild(textNode));
             assert.strictEqual(node.children().length, 1);
@@ -135,16 +139,16 @@ describe("XmlAttribute", () => {
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error if this node only has one child", () => {
-            let textNode = new XmlAttributeText("");
-            let node = new XmlAttribute("name", textNode);
+            const textNode = new XmlAttributeText("");
+            const node = new XmlAttribute("name", textNode);
             assert.throws(() => node.removeChildAtIndex(0));
         });
 
         it("should remove the node at the specified index from this"
            + " node", () => {
-            let textNode = new XmlAttributeText("");
-            let secondTextNode = new XmlAttributeText("");
-            let node = new XmlAttribute("name", textNode);
+            const textNode = new XmlAttributeText("");
+            const secondTextNode = new XmlAttributeText("");
+            const node = new XmlAttribute("name", textNode);
             node.insertChild(secondTextNode);
             assert.strictEqual(node.removeChildAtIndex(0), textNode);
             assert.strictEqual(node.children().length, 1);
@@ -156,7 +160,7 @@ describe("XmlAttribute", () => {
         it("should add an XmlAttributeText node to this node's children at the"
            + " specified index with the specified text and return the"
            + " newly added node", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const node = new XmlAttribute("name", new XmlAttributeText(""));
             assert.isTrue(node.text("a") instanceof XmlAttributeText);
             assert.isTrue(node.text("b", 0) instanceof XmlAttributeText);
             assert.strictEqual(node.toString(), "name='ba'");
@@ -166,7 +170,7 @@ describe("XmlAttribute", () => {
     describe("#toString(options)", () => {
         it("should return a string containing the XML string representation"
            + " for this node", () => {
-            let node = new XmlAttribute("a", new XmlAttributeText(""));
+            const node = new XmlAttribute("a", new XmlAttributeText(""));
             node.insertChild(new XmlAttributeText("b"));
             node.insertChild(new XmlEntityRef("c"));
             node.insertChild(new XmlCharRef("d"));
@@ -175,12 +179,14 @@ describe("XmlAttribute", () => {
 
         it("should return a string that uses single or double quotes for"
            + " attribute values depending on the specified options", () => {
-            let node = new XmlAttribute("name", new XmlAttributeText(""));
+            const node = new XmlAttribute("name",
+                new XmlAttributeText(""));
             node.insertChild(new XmlAttributeText("'hello'"));
             assert.strictEqual(node.toString({doubleQuotes: false}),
                                "name='&apos;hello&apos;'");
 
-            let secondNode = new XmlAttribute("name", new XmlAttributeText(""));
+            const secondNode = new XmlAttribute("name",
+                new XmlAttributeText(""));
             secondNode.insertChild(new XmlAttributeText("\"hello\""));
             assert.strictEqual(secondNode.toString({doubleQuotes: true}),
                                "name=\"&quot;hello&quot;\"");

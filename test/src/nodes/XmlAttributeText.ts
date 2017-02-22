@@ -20,36 +20,36 @@ describe("XmlAttributeText", () => {
     describe("#constructor", () => {
         it("should create an XmlAttributeText node with the specified"
            + " text", () => {
-            let node = new XmlAttributeText("abc");
+            const node = new XmlAttributeText("abc");
             assert.strictEqual(node.toString(), "abc");
         });
     });
 
     describe("#text", () => {
         it("should return this node's text", () => {
-            let node = new XmlAttributeText("abc");
+            const node = new XmlAttributeText("abc");
             assert.strictEqual(node.text, "abc");
         });
 
         it("should set this node's text to the specified value", () => {
-            let node = new XmlAttributeText("abc");
+            const node = new XmlAttributeText("abc");
             node.text = "123";
             assert.strictEqual(node.text, "123");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlAttributeText("abc");
-            assert.throws((): void => node.text = <any> undefined);
-            assert.throws((): void => node.text = <any> null);
-            assert.throws((): void => node.text = <any> 0);
+            const node = new XmlAttributeText("abc");
+            assert.throws((): void => node.text = undefined as any);
+            assert.throws((): void => node.text = null as any);
+            assert.throws((): void => node.text = 0 as any);
             assert.throws((): void => node.text =
-                <any> new XmlAttributeText(""));
+                new XmlAttributeText("") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML", () => {
-            let node = new XmlAttributeText("abc");
+            const node = new XmlAttributeText("abc");
             assert.throws(() => node.text = "abc"
                                             + String.fromCharCode(0x0001)
                                             + "def");
@@ -58,30 +58,30 @@ describe("XmlAttributeText", () => {
 
     describe("#children", () => {
         it("should throw an error", () => {
-            let node = new XmlAttributeText("a");
+            const node = new XmlAttributeText("a");
             assert.throws(() => node.children());
         });
     });
 
     describe("#insertChild", () => {
         it("should throw an error", () => {
-            let node = new XmlAttributeText("a");
-            let childNode = new XmlAttributeText("b");
+            const node = new XmlAttributeText("a");
+            const childNode = new XmlAttributeText("b");
             assert.throws(() => node.insertChild(childNode));
         });
     });
 
     describe("#removeChild", () => {
         it("should throw an error", () => {
-            let node = new XmlAttributeText("a");
-            let childNode = new XmlAttributeText("b");
+            const node = new XmlAttributeText("a");
+            const childNode = new XmlAttributeText("b");
             assert.throws(() => node.removeChild(childNode));
         });
     });
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error", () => {
-            let node = new XmlAttributeText("a");
+            const node = new XmlAttributeText("a");
             assert.throws(() => node.removeChildAtIndex(0));
         });
     });

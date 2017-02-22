@@ -35,12 +35,12 @@ describe("XmlDecl", () => {
 
     describe("#encoding", () => {
         it("should return this node's encoding", () => {
-            let node = new XmlDecl({encoding: "UTF-16"});
+            const node = new XmlDecl({encoding: "UTF-16"});
             assert.strictEqual(node.encoding, "UTF-16");
         });
 
         it("should set this node's encoding to the specified value", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             node.encoding = "UTF-16";
             assert.strictEqual(node.encoding, "UTF-16");
             node.encoding = "u.-_16";
@@ -51,15 +51,15 @@ describe("XmlDecl", () => {
 
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
-            let node = new XmlDecl();
-            assert.throws((): void => node.encoding = <any> null);
-            assert.throws((): void => node.encoding = <any> 0);
-            assert.throws((): void => node.encoding = <any> new XmlDecl());
+            const node = new XmlDecl();
+            assert.throws((): void => node.encoding = null as any);
+            assert.throws((): void => node.encoding = 0 as any);
+            assert.throws((): void => node.encoding = new XmlDecl() as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML encodings or is empty", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             assert.throws(() => node.encoding = "");
             assert.throws(() => node.encoding = "UTF-16$");
             assert.throws(() => node.encoding = "9UTF-16");
@@ -71,13 +71,13 @@ describe("XmlDecl", () => {
 
     describe("#standalone", () => {
         it("should return this node's standalone attribute", () => {
-            let node = new XmlDecl({standalone: "yes"});
+            const node = new XmlDecl({standalone: "yes"});
             assert.strictEqual(node.standalone, "yes");
         });
 
         it("should set this node's standalone attribute to the specified"
            + " value", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             node.standalone = "yes";
             assert.strictEqual(node.standalone, "yes");
             node.standalone = "no";
@@ -88,15 +88,15 @@ describe("XmlDecl", () => {
 
         it("should throw an error if the specified value is not a"
            + " string or undefined", () => {
-            let node = new XmlDecl();
-            assert.throws((): void => node.standalone = <any> null);
-            assert.throws((): void => node.standalone = <any> 0);
-            assert.throws((): void => node.standalone = <any> new XmlDecl());
+            const node = new XmlDecl();
+            assert.throws((): void => node.standalone = null as any);
+            assert.throws((): void => node.standalone = 0 as any);
+            assert.throws((): void => node.standalone = new XmlDecl() as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in the standalone attribute or is empty", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             assert.throws(() => node.standalone = "");
             assert.throws(() => node.standalone = "maybe");
         });
@@ -104,12 +104,12 @@ describe("XmlDecl", () => {
 
     describe("#version", () => {
         it("should return this node's version", () => {
-            let node = new XmlDecl({version: "1.0"});
+            const node = new XmlDecl({version: "1.0"});
             assert.strictEqual(node.version, "1.0");
         });
 
         it("should set this node's version to the specified value", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             node.version = "1.1";
             assert.strictEqual(node.version, "1.1");
             node.version = "1.789";
@@ -120,16 +120,16 @@ describe("XmlDecl", () => {
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlDecl();
-            assert.throws((): void => node.version = <any> undefined);
-            assert.throws((): void => node.version = <any> null);
-            assert.throws((): void => node.version = <any> 0);
-            assert.throws((): void => node.version = <any> new XmlDecl());
+            const node = new XmlDecl();
+            assert.throws((): void => node.version = undefined as any);
+            assert.throws((): void => node.version = null as any);
+            assert.throws((): void => node.version = 0 as any);
+            assert.throws((): void => node.version = new XmlDecl() as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in the version attribute or is empty", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             assert.throws(() => node.version = "");
             assert.throws(() => node.version = "1");
             assert.throws(() => node.version = "1.");
@@ -140,30 +140,30 @@ describe("XmlDecl", () => {
 
     describe("#children", () => {
         it("should throw an error", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             assert.throws(() => node.children());
         });
     });
 
     describe("#insertChild", () => {
         it("should throw an error", () => {
-            let node = new XmlDecl();
-            let childNode = new XmlDecl();
+            const node = new XmlDecl();
+            const childNode = new XmlDecl();
             assert.throws(() => node.insertChild(childNode));
         });
     });
 
     describe("#removeChild", () => {
         it("should throw an error", () => {
-            let node = new XmlDecl();
-            let childNode = new XmlDecl();
+            const node = new XmlDecl();
+            const childNode = new XmlDecl();
             assert.throws(() => node.removeChild(childNode));
         });
     });
 
     describe("#removeChildAtIndex", () => {
         it("should throw an error", () => {
-            let node = new XmlDecl();
+            const node = new XmlDecl();
             assert.throws(() => node.removeChildAtIndex(0));
         });
     });

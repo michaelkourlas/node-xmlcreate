@@ -106,17 +106,14 @@ export default class XmlElement extends XmlNode {
         if (isString(value)) {
             value = new XmlAttributeText(value);
         } else if (isArray(value)) {
-            const arrayVal = <Array<string | XmlNode>> value;
-            // tslint:disable-next-line:prefer-for-of
-            for (let i = 0; i < arrayVal.length; i++) {
-                if (isString(arrayVal[i])) {
-                    const strVal = <string> arrayVal[i];
-                    arrayVal[i] = new XmlAttributeText(strVal);
+            for (let i = 0; i < value.length; i++) {
+                if (isString(value[i])) {
+                    value[i] = new XmlAttributeText(value[i] as string);
                 }
             }
         }
 
-        const attribute = new XmlAttribute(name, <XmlNode|XmlNode[]> value);
+        const attribute = new XmlAttribute(name, value as XmlNode | XmlNode[]);
         this.insertChild(attribute, index);
         return attribute;
     }
@@ -129,8 +126,8 @@ export default class XmlElement extends XmlNode {
      *          instances of {@link XmlAttribute}.
      */
     public attributes(): XmlAttribute[] {
-        return <XmlAttribute[]> this._children.filter(
-            (node) => node instanceof XmlAttribute);
+        return this._children.filter(
+            (node) => node instanceof XmlAttribute) as XmlAttribute[];
     }
 
     /**
@@ -273,8 +270,8 @@ export default class XmlElement extends XmlNode {
 
         if (node instanceof XmlAttribute) {
             const attributes = this._children.filter(
-                (n) => n instanceof XmlAttribute);
-            for (const attribute of <XmlAttribute[]> attributes) {
+                (n) => n instanceof XmlAttribute) as XmlAttribute[];
+            for (const attribute of attributes) {
                 if (attribute.name === node.name) {
                     throw new Error("element already contains an"
                                     + " XmlAttribute object with name "
@@ -319,7 +316,7 @@ export default class XmlElement extends XmlNode {
 
         const attributes = this.attributes();
         const nodes = this._children.filter(
-            (node) => (<XmlNode[]> attributes).indexOf(node) === -1);
+            (node) => attributes.indexOf(node as XmlAttribute) === -1);
 
         // Element tag start
         let str = "<" + this._name;

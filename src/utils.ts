@@ -80,9 +80,9 @@ export function getCodePoint(str: string, index: number): number {
     if (index < 0 || index >= str.length) {
         throw new Error("invalid index for specified string");
     }
-    let first = str.charCodeAt(index);
+    const first = str.charCodeAt(index);
     if (first >= 0xD800 && first <= 0xDBFF && str.length > index + 1) {
-        let second = str.charCodeAt(index + 1);
+        const second = str.charCodeAt(index + 1);
         if (second >= 0xDC00 && second <= 0xDFFF) {
             return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
         }

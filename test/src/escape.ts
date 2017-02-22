@@ -18,6 +18,7 @@ import {
     escapeAmpersands,
     escapeDoubleQuotes,
     escapeLeftAngleBrackets,
+    escapeRightAngleBracketsInCdataTerminator,
     escapeSingleQuotes
 } from "../../lib/escape";
 
@@ -40,6 +41,28 @@ describe("escape", () => {
             assert.strictEqual(escapeLeftAngleBrackets("<abc"), "&lt;abc");
             assert.strictEqual(escapeLeftAngleBrackets("<a<bc<"),
                                "&lt;a&lt;bc&lt;");
+        });
+    });
+
+    describe("#escapeRightAngleBracketsInCdataTerminator", () => {
+        it("should escape all right angle brackets in CDATA"
+           + " terminators", () => {
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                ">"), ">");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                "abc>"), "abc>");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                ">abc"), ">abc");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                ">a>bc>"), ">a>bc>");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                "]]>"), "]]&gt;");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                "abc]]>"), "abc]]&gt;");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                "]]>abc"), "]]&gt;abc");
+            assert.strictEqual(escapeRightAngleBracketsInCdataTerminator(
+                "]]>a]]>bc]]>"), "]]&gt;a]]&gt;bc]]&gt;");
         });
     });
 

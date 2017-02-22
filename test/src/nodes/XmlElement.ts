@@ -29,35 +29,35 @@ import {
 describe("XmlElement", () => {
     describe("#constructor", () => {
         it("should create an XmlElement node with the specified name", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             assert.strictEqual(node.toString(), "<name/>");
         });
     });
 
     describe("#name", () => {
         it("should return this node's name", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             assert.strictEqual(node.name, "name");
         });
 
         it("should set this node's name to the specified value", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             node.name = "name2";
             assert.strictEqual(node.name, "name2");
         });
 
         it("should throw an error if the specified value is not a"
            + " string", () => {
-            let node = new XmlElement("name");
-            assert.throws((): void => node.name = <any> undefined);
-            assert.throws((): void => node.name = <any> null);
-            assert.throws((): void => node.name = <any> 0);
-            assert.throws((): void => node.name = <any> new XmlElement(""));
+            const node = new XmlElement("name");
+            assert.throws((): void => node.name = undefined as any);
+            assert.throws((): void => node.name = null as any);
+            assert.throws((): void => node.name = 0 as any);
+            assert.throws((): void => node.name = new XmlElement("") as any);
         });
 
         it("should throw an error if the specified value contains characters"
            + " not allowed in XML names", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             assert.throws(() => node.name = ".");
         });
     });
@@ -66,7 +66,7 @@ describe("XmlElement", () => {
         it("should add an XmlAttribute node to this node's children at the"
            + " specified index with the specified text and return"
            + " the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(
                 node.attribute("test", "test1") instanceof XmlAttribute);
             assert.isTrue(
@@ -82,14 +82,14 @@ describe("XmlElement", () => {
     describe("#attributes", () => {
         it("should return an array containing all of the children of this"
            + " node that are instances of XmlAttribute", () => {
-            let node = new XmlElement("abc");
-            let attributeNode = node.attribute("test1", "test2");
+            const node = new XmlElement("abc");
+            const attributeNode = node.attribute("test1", "test2");
             node.comment("test3");
             node.comment("test4");
-            let secondAttributeNode = node.attribute("test5", "test6");
+            const secondAttributeNode = node.attribute("test5", "test6");
             node.comment("test7");
 
-            let attributes = node.attributes();
+            const attributes = node.attributes();
             assert.strictEqual(attributes.length, 2);
             assert.notStrictEqual(attributes.indexOf(attributeNode), -1);
             assert.notStrictEqual(attributes.indexOf(secondAttributeNode), -1);
@@ -100,7 +100,7 @@ describe("XmlElement", () => {
         it("should add an XmlCdata node to this node's children at the"
            + " specified index with the specified text and return"
            + " the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.cdata("test") instanceof XmlCdata);
             assert.isTrue(node.cdata("test2", 0) instanceof XmlCdata);
             assert.isTrue(node.cdata("test3", 1) instanceof XmlCdata);
@@ -115,7 +115,7 @@ describe("XmlElement", () => {
         it("should add an XmlCharRef node to this node's children at the"
            + " specified index with the specified char and hex"
            + " property and return the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.charRef("a", true) instanceof XmlCharRef);
             assert.isTrue(node.charRef("b", false, 0) instanceof XmlCharRef);
             assert.strictEqual(node.toString(), "<abc>&#98;&#x61;</abc>");
@@ -126,7 +126,7 @@ describe("XmlElement", () => {
         it("should add an XmlComment node to this node's children at the"
            + " specified index with the specified text and return"
            + " the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.comment("test") instanceof XmlComment);
             assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
             assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
@@ -140,7 +140,7 @@ describe("XmlElement", () => {
         it("should add an XmlElement node to this node's children at the"
            + " specified index with the specified text and return"
            + " the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.element("test") instanceof XmlElement);
             assert.isTrue(node.element("test2", 0) instanceof XmlElement);
             assert.isTrue(node.element("test3", 1) instanceof XmlElement);
@@ -154,7 +154,7 @@ describe("XmlElement", () => {
         it("should add an XmlEntityRef node to this node's children at the"
            + " specified index with the specified entity name and return"
            + " the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.entityRef("a") instanceof XmlEntityRef);
             assert.isTrue(node.entityRef("b", 0) instanceof XmlEntityRef);
             // noinspection CheckDtdRefs
@@ -167,14 +167,14 @@ describe("XmlElement", () => {
            + " XmlAttribute, XmlCdata, XmlCharRef, XmlComment,"
            + " XmlElement, XmlEntityRef, XmlProcInst, or XmlCharData"
            + " node", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             assert.throws(() => node.insertChild(new XmlNode()));
         });
 
         it("should throw an error if the specified node is an XmlAttribute"
            + " node with the same name as an existing XmlAttribute node in"
            + " this node's children", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             node.comment("test1");
             node.attribute("test2", "test3");
             node.comment("test4");
@@ -187,7 +187,7 @@ describe("XmlElement", () => {
         it("should add an XmlProcInst node to this node's children"
            + " at the specified index with the specified text and"
            + " return the newly added node", () => {
-            let node = new XmlElement("abc");
+            const node = new XmlElement("abc");
             assert.isTrue(node.procInst("test", "a") instanceof XmlProcInst);
             assert.isTrue(
                 node.procInst("test2", "b", 0) instanceof XmlProcInst);
@@ -207,7 +207,7 @@ describe("XmlElement", () => {
         it("should add an XmlCharData node to this node's children at the"
            + " specified index with the specified text and return the"
            + " newly added node", () => {
-            let node = new XmlElement("name");
+            const node = new XmlElement("name");
             assert.isTrue(node.charData("a") instanceof XmlCharData);
             assert.isTrue(node.charData("b", 0) instanceof XmlCharData);
             assert.strictEqual(node.toString(), "<name>ba</name>");
@@ -250,10 +250,10 @@ describe("XmlElement", () => {
 
             node = new XmlElement("test9");
             node.cdata("c");
-            let subNode = node.element("test10");
+            const subNode = node.element("test10");
             subNode.charData("a");
             subNode.comment("b");
-            let subSubNode = subNode.element("test11");
+            const subSubNode = subNode.element("test11");
             subSubNode.charData("d");
             subSubNode.charData("e");
             subSubNode.attribute("k", "l");
@@ -288,10 +288,10 @@ describe("XmlElement", () => {
 
             node = new XmlElement("test9");
             node.cdata("c");
-            let subNode = node.element("test10");
+            const subNode = node.element("test10");
             subNode.charData("a");
             subNode.comment("b");
-            let subSubNode = subNode.element("test11");
+            const subSubNode = subNode.element("test11");
             subSubNode.charData("d");
             subSubNode.charData("e");
             subSubNode.attribute("k", "l");
@@ -325,10 +325,10 @@ describe("XmlElement", () => {
 
             node = new XmlElement("test9");
             node.cdata("c");
-            let subNode = node.element("test10");
+            const subNode = node.element("test10");
             subNode.charData("a");
             subNode.comment("b");
-            let subSubNode = subNode.element("test11");
+            const subSubNode = subNode.element("test11");
             subSubNode.charData("d");
             subSubNode.charData("e");
             subSubNode.attribute("k", "l");
@@ -363,10 +363,10 @@ describe("XmlElement", () => {
 
             node = new XmlElement("test9");
             node.cdata("c");
-            let subNode = node.element("test10");
+            const subNode = node.element("test10");
             subNode.charData("a");
             subNode.comment("b");
-            let subSubNode = subNode.element("test11");
+            const subSubNode = subNode.element("test11");
             subSubNode.charData("d");
             subSubNode.charData("e");
             subSubNode.attribute("k", "l");
@@ -392,10 +392,10 @@ describe("XmlElement", () => {
 
             node = new XmlElement("test9");
             node.cdata("c");
-            let subNode = node.element("test10");
+            const subNode = node.element("test10");
             subNode.charData("a");
             subNode.comment("b");
-            let subSubNode = subNode.element("test11");
+            const subSubNode = subNode.element("test11");
             subSubNode.charData("d");
             subSubNode.charData("e");
             subSubNode.attribute("k", "l");

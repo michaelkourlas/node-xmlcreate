@@ -56,11 +56,11 @@ export default class XmlAttribute extends XmlNode {
         super();
         this.name = name;
         if (isArray(value)) {
-            for (const node of <XmlNode[]> value) {
+            for (const node of value) {
                 this.insertChild(node);
             }
         } else {
-            this.insertChild(<XmlNode> value);
+            this.insertChild(value);
         }
     }
 

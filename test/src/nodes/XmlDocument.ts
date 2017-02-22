@@ -28,7 +28,7 @@ describe("XmlDocument", () => {
     describe("#constructor", () => {
         it("should create an XmlDocument node with the specified root"
            + " element name", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             assert.strictEqual(node.toString(), "<abc/>");
         });
     });
@@ -37,7 +37,7 @@ describe("XmlDocument", () => {
         it("should add an XmlComment node to this node's children at the"
            + " specified index with the specified comment text and return"
            + " the newly added node", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             assert.isTrue(node.comment("test") instanceof XmlComment);
             assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
             assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
@@ -124,11 +124,11 @@ describe("XmlDocument", () => {
     describe("#insertChild", () => {
         it("should add the specified node to this node's children at the"
            + " specified index", () => {
-            let commentNode = new XmlComment("comment");
-            let declNode = new XmlDecl();
-            let dtdNode = new XmlDtd("html");
-            let procInstNode = new XmlProcInst("target", "content");
-            let node = new XmlDocument("root");
+            const commentNode = new XmlComment("comment");
+            const declNode = new XmlDecl();
+            const dtdNode = new XmlDtd("html");
+            const procInstNode = new XmlProcInst("target", "content");
+            const node = new XmlDocument("root");
             node.insertChild(commentNode);
             node.insertChild(declNode, 0);
             node.insertChild(dtdNode, 1);
@@ -140,14 +140,14 @@ describe("XmlDocument", () => {
 
         it("should throw an error if the specified node is not an"
            + " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             assert.throws(() => node.insertChild(new XmlNode()));
         });
 
         it("should throw an error if the specified node is an XmlComment or"
            + " XmlProcInst node being inserted before an existing XmlDecl"
            + " node in this node's children", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             node.decl();
             assert.throws(() => node.insertChild(new XmlComment("comment"), 0));
             assert.throws(() => node.insertChild(new XmlProcInst("target",
@@ -157,7 +157,7 @@ describe("XmlDocument", () => {
         it("should throw an error if the specified node is an XmlDecl node"
            + " but this node's children already contains an XmlDecl"
            + " node", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             node.decl();
             assert.throws(() => node.insertChild(new XmlDecl()));
         });
@@ -165,14 +165,14 @@ describe("XmlDocument", () => {
         it("should throw an error if the specified node is an XmlDecl node"
            + " and is not being inserted at the beginning of this node's"
            + " children", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             assert.throws(() => node.insertChild(new XmlDecl(), 1));
         });
 
         it("should throw an error if the specified node is an XmlDtd node"
            + " and is being inserted before an existing XmlDecl node in this"
            + " node's children", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             node.decl();
             assert.throws(() => node.insertChild(new XmlDtd("html"), 0));
         });
@@ -180,14 +180,14 @@ describe("XmlDocument", () => {
         it("should throw an error if the specified node is an XmlDtd node"
            + " and is being inserted after an existing XmlElement node in"
            + " this node's children", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             assert.throws(() => node.insertChild(new XmlDtd("html"), 1));
         });
 
         it("should throw an error if the specified node is an XmlDtd node"
            + " but this node's children already contains an XmlDtd"
            + " node", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             node.dtd("html");
             assert.throws(() => node.insertChild(new XmlDtd("html")));
         });
@@ -197,7 +197,7 @@ describe("XmlDocument", () => {
         it("should add an XmlProcInst node to this node's children at the"
            + " specified index with the specified options and return the newly"
            + " added node", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             assert.isTrue(node.procInst("test",
                                         "test1") instanceof XmlProcInst);
             assert.isTrue(node.procInst("test2",
@@ -213,13 +213,13 @@ describe("XmlDocument", () => {
     describe("#removeChild", () => {
         it("should throw an error if the specified node is an XmlElement"
            + " node", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             assert.throws(() => node.removeChild(node.root()));
         });
 
         it("should remove the specified node from this node", () => {
-            let node = new XmlDocument("root");
-            let commentNode = node.comment("cmt");
+            const node = new XmlDocument("root");
+            const commentNode = node.comment("cmt");
             assert.isTrue(node.removeChild(commentNode));
         });
     });
@@ -227,30 +227,30 @@ describe("XmlDocument", () => {
     describe("#removeChildAtIndex", () => {
         it("should throw an error if the node at the specified index is an"
            + " XmlElement node", () => {
-            let node = new XmlDocument("root");
+            const node = new XmlDocument("root");
             assert.throws(() => node.removeChildAtIndex(0));
         });
 
         it("should remove the node at the specified index from this"
            + " node", () => {
-            let node = new XmlDocument("root");
-            let commentNode = node.comment("cmt");
+            const node = new XmlDocument("root");
+            const commentNode = node.comment("cmt");
             assert.strictEqual(node.removeChildAtIndex(1), commentNode);
         });
     });
 
     describe("#root", () => {
         it("should return the root element of this document", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             assert.isTrue(node.root() instanceof XmlElement);
-            assert.strictEqual((<XmlElement> node.root()).name, "abc");
+            assert.strictEqual((node.root()).name, "abc");
         });
     });
 
     describe("#toString", () => {
         it("should return a string containing the XML string representation"
            + " for this node", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             node.comment("comment1");
             node.comment("comment2", 0);
             node.decl({
@@ -269,7 +269,7 @@ describe("XmlDocument", () => {
 
         it("should return a string that uses pretty printing depending on"
            + " the specified options", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             node.comment("comment1");
             node.comment("comment2", 0);
             node.decl({
@@ -288,7 +288,7 @@ describe("XmlDocument", () => {
 
         it("should return a string that uses a specific newline character"
            + " depending on the specified options", () => {
-            let node = new XmlDocument("abc");
+            const node = new XmlDocument("abc");
             node.comment("comment1");
             node.comment("comment2", 0);
             node.decl({
