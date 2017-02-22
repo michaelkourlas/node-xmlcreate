@@ -32,6 +32,7 @@
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.39",
     "chai": "^3.5.0",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.0.1",
     "gulp-sourcemaps": "^2.4.1",
