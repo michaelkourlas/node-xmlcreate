@@ -71,7 +71,7 @@ includes source maps.
 
 ## Usage ##
 
-The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/0.1.1/).
+The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/1.0.1/).
 
 You can also build the documentation using gulp:
 
