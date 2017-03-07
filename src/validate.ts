@@ -26,7 +26,8 @@
  * @private
  */
 export function validateChar(str: string): boolean {
-    const charRegex = "\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]";
+    const charRegex = "\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]|"
+                      + "[\\uE000-\\uFFFD]";
     const surrogateCharRegex = "[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]";
 
     return new RegExp("^((" + charRegex + ")|(" + surrogateCharRegex + "))*$")
@@ -46,8 +47,8 @@ export function validateChar(str: string): boolean {
  */
 export function validateSingleChar(str: string): boolean {
     if (str.length === 1) {
-        return new RegExp("^\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]$")
-            .test(str);
+        return new RegExp("^\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]|"
+                          + "[\\uE000-\\uFFFD]$").test(str);
     } else if (str.length === 2) {
         return new RegExp("^[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]$").test(str);
     } else {
