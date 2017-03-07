@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2017 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ var typedoc = require("gulp-typedoc");
 var gulp = require("gulp");
 var merge2 = require("merge2");
 var mocha = require("gulp-mocha");
-var sourcemaps = require('gulp-sourcemaps');
+var sourcemaps = require("gulp-sourcemaps");
 var typescript = require("gulp-typescript");
 var tslint = require("gulp-tslint");
 
