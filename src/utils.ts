@@ -45,7 +45,7 @@ export function isUndefined(val: any): val is undefined {
 /**
  * @private
  */
-export function isObject(val: any): val is Object {
+export function isObject(val: any): val is object {
     return Object.prototype.toString.call(val) === "[object Object]";
 }
 

@@ -93,7 +93,8 @@ var docOptions = {
     mode: "file",
     module: "commonjs",
     out: "docs",
-    target: "es5"
+    target: "es5",
+    ignoreCompileErrors: true
 };
 gulp.task("docs", ["prod", "clean-docs"], function() {
     return gulp.src("src")
