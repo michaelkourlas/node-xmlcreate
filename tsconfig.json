@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "es5",
+      "es2015.symbol"
+    ],
     "module": "commonjs",
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true,
+    "noUnusedParameters": true,
+    "strict": true,
     "target": "es5"
   },
   "include": [

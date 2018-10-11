@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,403 +13,402 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {
-    XmlAttribute,
-    XmlCdata,
-    XmlCharData,
-    XmlCharRef,
-    XmlComment,
-    XmlElement,
-    XmlEntityRef,
-    XmlNode,
-    XmlProcInst
-} from "../../../lib/main";
+import XmlAttribute from "../../../lib/nodes/XmlAttribute";
+import XmlCdata from "../../../lib/nodes/XmlCdata";
+import XmlCharData from "../../../lib/nodes/XmlCharData";
+import XmlCharRef from "../../../lib/nodes/XmlCharRef";
+import XmlComment from "../../../lib/nodes/XmlComment";
+import XmlElement from "../../../lib/nodes/XmlElement";
+import XmlEntityRef from "../../../lib/nodes/XmlEntityRef";
+import XmlProcInst from "../../../lib/nodes/XmlProcInst";
 
 describe("XmlElement", () => {
-    describe("#constructor", () => {
-        it("should create an XmlElement node with the specified name", () => {
-            const node = new XmlElement("name");
-            assert.strictEqual(node.toString(), "<name/>");
-        });
+    it("#attribute", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.attribute({name: "def"}) instanceof XmlAttribute);
+        assert.isTrue(
+            node.attribute({name: "ghi"}).text({charData: "jkl"}).up()
+            instanceof XmlAttribute);
+        assert.strictEqual(node.toString(), "<abc def='' ghi='jkl'/>");
     });
 
-    describe("#name", () => {
-        it("should return this node's name", () => {
-            const node = new XmlElement("name");
-            assert.strictEqual(node.name, "name");
-        });
-
-        it("should set this node's name to the specified value", () => {
-            const node = new XmlElement("name");
-            node.name = "name2";
-            assert.strictEqual(node.name, "name2");
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " string", () => {
-            const node = new XmlElement("name");
-            assert.throws((): void => node.name = undefined as any);
-            assert.throws((): void => node.name = null as any);
-            assert.throws((): void => node.name = 0 as any);
-            assert.throws((): void => node.name = new XmlElement("") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in XML names", () => {
-            const node = new XmlElement("name");
-            assert.throws(() => node.name = ".");
-        });
+    it("#cdata", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.cdata({charData: "def"}) instanceof XmlCdata);
+        assert.strictEqual(node.toString(),
+                           "<abc>\n    <![CDATA[def]]>\n</abc>");
     });
 
-    describe("#attribute", () => {
-        it("should add an XmlAttribute node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(
-                node.attribute("test", "test1") instanceof XmlAttribute);
-            assert.isTrue(
-                node.attribute("test2", "test3", 0) instanceof XmlAttribute);
-            assert.isTrue(
-                node.attribute("test4", "test5", 1) instanceof XmlAttribute);
-            assert.strictEqual(node.toString(),
-                               "<abc test2='test3' test4='test5'"
-                               + " test='test1'/>");
-        });
+    it("#charData", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.charData({charData: "def"}) instanceof XmlCharData);
+        assert.strictEqual(node.toString(), "<abc>def</abc>");
     });
 
-    describe("#attributes", () => {
-        it("should return an array containing all of the children of this"
-           + " node that are instances of XmlAttribute", () => {
-            const node = new XmlElement("abc");
-            const attributeNode = node.attribute("test1", "test2");
-            node.comment("test3");
-            node.comment("test4");
-            const secondAttributeNode = node.attribute("test5", "test6");
-            node.comment("test7");
-
-            const attributes = node.attributes();
-            assert.strictEqual(attributes.length, 2);
-            assert.notStrictEqual(attributes.indexOf(attributeNode), -1);
-            assert.notStrictEqual(attributes.indexOf(secondAttributeNode), -1);
-        });
+    it("#charRef", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.charRef({char: "a"}) instanceof XmlCharRef);
+        assert.strictEqual(node.toString(), "<abc>&#97;</abc>");
     });
 
-    describe("#cdata", () => {
-        it("should add an XmlCdata node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.cdata("test") instanceof XmlCdata);
-            assert.isTrue(node.cdata("test2", 0) instanceof XmlCdata);
-            assert.isTrue(node.cdata("test3", 1) instanceof XmlCdata);
-            assert.strictEqual(node.toString(),
-                               "<abc>\n    <![CDATA[test2]]>\n"
-                               + "    <![CDATA[test3]]>\n"
-                               + "    <![CDATA[test]]>\n</abc>");
-        });
+    it("#comment", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.comment({charData: "def"}) instanceof XmlComment);
+        assert.strictEqual(node.toString(), "<abc>\n    <!--def-->\n</abc>");
     });
 
-    describe("#charRef", () => {
-        it("should add an XmlCharRef node to this node's children at the"
-           + " specified index with the specified char and hex"
-           + " property and return the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.charRef("a", true) instanceof XmlCharRef);
-            assert.isTrue(node.charRef("b", false, 0) instanceof XmlCharRef);
-            assert.strictEqual(node.toString(), "<abc>&#98;&#x61;</abc>");
-        });
+    it("#element", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.element({name: "def"}) instanceof XmlElement);
+        assert.strictEqual(node.toString(), "<abc>\n    <def/>\n</abc>");
     });
 
-    describe("#comment", () => {
-        it("should add an XmlComment node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.comment("test") instanceof XmlComment);
-            assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
-            assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
-            assert.strictEqual(node.toString(),
-                               "<abc>\n    <!--test2-->\n    <!--test3-->\n"
-                               + "    <!--test-->\n</abc>");
-        });
+    it("#entityRef", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.entityRef({name: "def"}) instanceof XmlEntityRef);
+        assert.strictEqual(node.toString(), "<abc>&def;</abc>");
     });
 
-    describe("#element", () => {
-        it("should add an XmlElement node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.element("test") instanceof XmlElement);
-            assert.isTrue(node.element("test2", 0) instanceof XmlElement);
-            assert.isTrue(node.element("test3", 1) instanceof XmlElement);
-            assert.strictEqual(node.toString(),
-                               "<abc>\n    <test2/>\n    <test3/>\n"
-                               + "    <test/>\n</abc>");
-        });
-    });
-
-    describe("#entityRef", () => {
-        it("should add an XmlEntityRef node to this node's children at the"
-           + " specified index with the specified entity name and return"
-           + " the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.entityRef("a") instanceof XmlEntityRef);
-            assert.isTrue(node.entityRef("b", 0) instanceof XmlEntityRef);
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString(), "<abc>&b;&a;</abc>");
-        });
-    });
-
-    describe("#insertChild", () => {
-        it("should throw an error if the specified node is not an"
-           + " XmlAttribute, XmlCdata, XmlCharRef, XmlComment,"
-           + " XmlElement, XmlEntityRef, XmlProcInst, or XmlCharData"
-           + " node", () => {
-            const node = new XmlElement("name");
-            assert.throws(() => node.insertChild(new XmlNode()));
-        });
-
-        it("should throw an error if the specified node is an XmlAttribute"
-           + " node with the same name as an existing XmlAttribute node in"
-           + " this node's children", () => {
-            const node = new XmlElement("name");
-            node.comment("test1");
-            node.attribute("test2", "test3");
-            node.comment("test4");
-            assert.throws(() => node.insertChild(
-                new XmlAttribute("test2", new XmlCharData("test5"))));
-        });
-    });
-
-    describe("#procInst", () => {
-        it("should add an XmlProcInst node to this node's children"
-           + " at the specified index with the specified text and"
-           + " return the newly added node", () => {
-            const node = new XmlElement("abc");
-            assert.isTrue(node.procInst("test", "a") instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test2", "b", 0) instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test3", "c", 1) instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test4") instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test5", undefined, 0) instanceof XmlProcInst);
-            assert.strictEqual(node.toString(),
-                               "<abc>\n    <?test5?>\n    <?test2 b?>\n"
-                               + "    <?test3 c?>\n    <?test a?>\n"
-                               + "    <?test4?>\n</abc>");
-        });
-    });
-
-    describe("#text", () => {
-        it("should add an XmlCharData node to this node's children at the"
-           + " specified index with the specified text and return the"
-           + " newly added node", () => {
-            const node = new XmlElement("name");
-            assert.isTrue(node.charData("a") instanceof XmlCharData);
-            assert.isTrue(node.charData("b", 0) instanceof XmlCharData);
-            assert.strictEqual(node.toString(), "<name>ba</name>");
-        });
+    it("#procInst", () => {
+        const node = new XmlElement(undefined, true, {name: "abc"});
+        assert.isTrue(node.procInst({target: "def", content: "ghi"})
+                      instanceof XmlProcInst);
+        assert.strictEqual(node.toString(), "<abc>\n    <?def ghi?>\n</abc>");
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            let node = new XmlElement("test1");
-            assert.strictEqual(node.toString(), "<test1/>");
+        function getElement(): XmlElement<undefined> {
+            const node = new XmlElement(undefined, true, {name: "root"});
+            // @formatter:off
+            node
+                .attribute({name: "overt"})
+                    .charRef({char: "v"}).up()
+                    .entityRef({name: "repair"}).up()
+                    .text({charData: "probable hospitable"}).up().up()
+                .attribute({name: "stage"})
+                    .text({charData: ""}).up().up()
+                .attribute({name: "shop"}).up()
+                .element({name: "abacus"})
+                    .element({name: "windows"})
+                        .element({name: "fire"})
+                            .charData({charData: "blue"}).up().up()
+                        .element({name: "laughable"})
+                            .charData({charData: "hateful"}).up().up()
+                        .element({name: "ring"})
+                            .charData({charData: "terrific"}).up().up().up()
+                    .element({name: "plug"})
+                        .element({name: "utter"})
+                            .charData({charData: "wander"}).up().up()
+                        .element({name: "toys"})
+                            .charData({charData: "groan"}).up().up().up()
+                    .element({name: "powerful"})
+                        .element({name: "coal"})
+                            .charData({charData: "dear"}).up().up()
+                        .element({name: "warm"})
+                            .charData({charData: "impartial"}).up().up()
+                        .element({name: "wink"})
+                            .charData({charData: "twig"}).up().up()
+                        .element({name: "secret"})
+                            .charData({charData: "x"}).up().up().up().up()
+                .element({name: "plant"})
+                    .comment({charData: "pin punch"}).up()
+                    .procInst({target: "arrogant", content: "sun rad"}).up()
+                    .entityRef({name: "functional"}).up()
+                    .charData({charData: "educated"}).up()
+                    .charRef({char: "w"}).up()
+                    .element({name: "thunder"}).up()
+                    .element({name: "berserk"})
+                        .charData({charData: ""}).up().up()
+                    .charData({charData: "route flaky"}).up()
+                    .entityRef({name: "ragged"}).up()
+                    .charRef({char: "q"}).up()
+                    .cdata({charData: "physical educated"}).up().up()
+                 .element({name: "baseball"})
+                    .charData({charData: "yawn"}).up()
+                    .entityRef({name: "jagged"}).up()
+                    .charRef({char: "g"}).up()
+                    .charData({charData: "camp"}).up()
+                    .charRef({char: "y"}).up()
+                    .entityRef({name: "tangible"}).up()
+                    .charData({charData: "squeamish"});
+            // @formatter:on
 
-            node = new XmlElement("test2");
-            node.attribute("test3", "test4");
-            node.attribute("test5", "test6");
-            assert.strictEqual(node.toString(), "<test2 test3=\'test4\'"
-                                                + " test5=\'test6\'/>");
+            return node;
+        }
 
-            node = new XmlElement("test7");
-            node.charData("a");
-            node.charRef("b");
-            node.entityRef("c");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString(), "<test7>a&#98;&c;</test7>");
-
-            node = new XmlElement("test8");
-            node.comment("a");
-            node.charRef("b");
-            node.entityRef("c");
-            node.comment("d");
-            node.charData("e");
-            node.comment("f");
-            node.charData("g");
-            node.charData("h");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString(),
-                               "<test8>\n    <!--a-->\n    &#98;&c;\n"
-                               + "    <!--d-->\n    e\n    <!--f-->\n"
-                               + "    gh\n</test8>");
-
-            node = new XmlElement("test9");
-            node.cdata("c");
-            const subNode = node.element("test10");
-            subNode.charData("a");
-            subNode.comment("b");
-            const subSubNode = subNode.element("test11");
-            subSubNode.charData("d");
-            subSubNode.charData("e");
-            subSubNode.attribute("k", "l");
-            subNode.comment("f");
-            node.procInst("g", "h");
-            node.entityRef("i");
-            node.charRef("j");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString(),
-                               "<test9>\n    <![CDATA[c]]>\n    <test10>\n"
-                               + "        a\n        <!--b-->\n"
-                               + "        <test11 k=\'l\'>de</test11>\n"
-                               + "        <!--f-->\n    </test10>\n"
-                               + "    <?g h?>\n    &i;&#106;\n</test9>");
+        it("normal name; no attributes; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = new XmlElement(undefined, true, {name: "abc"});
+            assert.strictEqual(node.toString(), "<abc/>");
         });
 
-        it("should return a string that uses pretty printing depending on"
-           + " the specified options", () => {
-            let node = new XmlElement("test8");
-            node.comment("a");
-            node.charRef("b");
-            node.entityRef("c");
-            node.comment("d");
-            node.charData("e");
-            node.comment("f");
-            node.charData("g");
-            node.charData("h");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({pretty: false}),
-                               "<test8><!--a-->&#98;&c;<!--d-->e"
-                               + "<!--f-->gh</test8>");
-
-            node = new XmlElement("test9");
-            node.cdata("c");
-            const subNode = node.element("test10");
-            subNode.charData("a");
-            subNode.comment("b");
-            const subSubNode = subNode.element("test11");
-            subSubNode.charData("d");
-            subSubNode.charData("e");
-            subSubNode.attribute("k", "l");
-            subNode.comment("f");
-            node.procInst("g", "h");
-            node.entityRef("i");
-            node.charRef("j");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({pretty: false}),
-                               "<test9><![CDATA[c]]><test10>a<!--b-->"
-                               + "<test11 k=\'l\'>de</test11><!--f-->"
-                               + "</test10><?g h?>&i;&#106;</test9>");
+        it("name with characters not allowed in XML names; no attributes;"
+           + " no children; default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(
+                () => new XmlElement(undefined, true, {
+                    name: "."
+                }));
+            assert.doesNotThrow(
+                () => new XmlElement(undefined, false, {
+                    name: "."
+                }));
         });
 
-        it("should return a string that uses a specific newline character"
-           + " depending on the specified options", () => {
-            let node = new XmlElement("test8");
-            node.comment("a");
-            node.charRef("b");
-            node.entityRef("c");
-            node.comment("d");
-            node.charData("e");
-            node.comment("f");
-            node.charData("g");
-            node.charData("h");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({newline: "\r\n"}),
-                               "<test8>\r\n    <!--a-->\r\n    &#98;&c;"
-                               + "\r\n    <!--d-->\r\n    e\r\n    "
-                               + "<!--f-->\r\n    gh\r\n</test8>");
-
-            node = new XmlElement("test9");
-            node.cdata("c");
-            const subNode = node.element("test10");
-            subNode.charData("a");
-            subNode.comment("b");
-            const subSubNode = subNode.element("test11");
-            subSubNode.charData("d");
-            subSubNode.charData("e");
-            subSubNode.attribute("k", "l");
-            subNode.comment("f");
-            node.procInst("g", "h");
-            node.entityRef("i");
-            node.charRef("j");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({newline: "\r\n"}),
-                               "<test9>\r\n    <![CDATA[c]]>\r\n    <test10>"
-                               + "\r\n        a\r\n        <!--b-->\r\n        "
-                               + "<test11 k=\'l\'>de</test11>\r\n        "
-                               + "<!--f-->\r\n    </test10>\r\n    <?g h?>\r\n"
-                               + "    &i;&#106;\r\n</test9>");
+        it("normal name; attributes; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = new XmlElement(undefined, true, {name: "abc"});
+            node.attribute({name: "def"}).text({charData: "ghi"});
+            node.attribute({name: "jkl"}).text({charData: "mno"});
+            assert.strictEqual(node.toString(), "<abc def='ghi' jkl='mno'/>");
         });
 
-        it("should return a string that uses a specific indent character"
-           + " depending on the specified options", () => {
-            let node = new XmlElement("test8");
-            node.comment("a");
-            node.charRef("b");
-            node.entityRef("c");
-            node.comment("d");
-            node.charData("e");
-            node.comment("f");
-            node.charData("g");
-            node.charData("h");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({indent: "\t"}),
-                               "<test8>\n\t<!--a-->\n\t&#98;&c;\n\t<!--d-->\n"
-                               + "\te\n\t<!--f-->\n\tgh\n</test8>");
-
-            node = new XmlElement("test9");
-            node.cdata("c");
-            const subNode = node.element("test10");
-            subNode.charData("a");
-            subNode.comment("b");
-            const subSubNode = subNode.element("test11");
-            subSubNode.charData("d");
-            subSubNode.charData("e");
-            subSubNode.attribute("k", "l");
-            subNode.comment("f");
-            node.procInst("g", "h");
-            node.entityRef("i");
-            node.charRef("j");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({indent: "\t"}),
-                               "<test9>\n\t<![CDATA[c]]>\n\t<test10>\n\t\ta\n"
-                               + "\t\t<!--b-->\n\t\t<test11 k=\'l\'>de"
-                               + "</test11>\n\t\t<!--f-->\n\t</test10>\n\t"
-                               + "<?g h?>\n\t&i;&#106;\n</test9>");
+        it("normal name; no attributes; single empty child; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = new XmlElement(undefined, true, {name: "abc"});
+            node.charData({charData: ""});
+            assert.strictEqual(node.toString(), "<abc/>");
         });
 
-        it("should return a string that uses single or double quotes for"
-           + " attribute values depending on the specified options", () => {
-            let node = new XmlElement("test2");
-            node.attribute("test3", "test4");
-            node.attribute("test5", "test6");
-            assert.strictEqual(node.toString({doubleQuotes: true}),
-                               "<test2 test3=\"test4\" test5=\"test6\"/>");
+        it("normal name; no attributes; children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString(),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
 
-            node = new XmlElement("test9");
-            node.cdata("c");
-            const subNode = node.element("test10");
-            subNode.charData("a");
-            subNode.comment("b");
-            const subSubNode = subNode.element("test11");
-            subSubNode.charData("d");
-            subSubNode.charData("e");
-            subSubNode.attribute("k", "l");
-            subNode.comment("f");
-            node.procInst("g", "h");
-            node.entityRef("i");
-            node.charRef("j");
-            // noinspection CheckDtdRefs
-            assert.strictEqual(node.toString({doubleQuotes: true}),
-                               "<test9>\n    <![CDATA[c]]>\n    <test10>\n"
-                               + "        a\n        <!--b-->\n"
-                               + "        <test11 k=\"l\">de</test11>\n"
-                               + "        <!--f-->\n    </test10>\n"
-                               + "    <?g h?>\n    &i;&#106;\n</test9>");
+        it("normal name; no attributes; children; single quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({doubleQuotes: false}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
+
+        it("normal name; no attributes; children; double quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            const node = getElement();
+            /* tslint:disable:quotemark */
+            assert.strictEqual(
+                node.toString({doubleQuotes: true}),
+                '<root overt="&#118;&repair;probable hospitable"'
+                + ' stage="" shop="">\n    <abacus>\n        <windows>'
+                + '\n            <fire>blue</fire>'
+                + '\n            <laughable>hateful</laughable>'
+                + '\n            <ring>terrific</ring>\n        </windows>'
+                + '\n        <plug>\n            <utter>wander</utter>'
+                + '\n            <toys>groan</toys>\n        </plug>'
+                + '\n        <powerful>\n            <coal>dear</coal>'
+                + '\n            <warm>impartial</warm>'
+                + '\n            <wink>twig</wink>'
+                + '\n            <secret>x</secret>\n        </powerful>'
+                + '\n    </abacus>\n    <plant>\n        <!--pin punch-->'
+                + '\n        <?arrogant sun rad?>'
+                + '\n        &functional;educated&#119;\n        <thunder/>'
+                + '\n        <berserk/>\n        route flaky&ragged;&#113;'
+                + '\n        <![CDATA[physical educated]]>\n    </plant>'
+                + '\n    <baseball>yawn&jagged;&#103;camp&#121;'
+                + '&tangible;squeamish</baseball>\n</root>');
+            /* tslint:enable:quotemark */
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " pretty printing on; default indentation;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({pretty: true}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " pretty printing off; default indentation;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({pretty: false}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''><abacus><windows>"
+                + "<fire>blue</fire>"
+                + "<laughable>hateful</laughable>"
+                + "<ring>terrific</ring></windows>"
+                + "<plug><utter>wander</utter>"
+                + "<toys>groan</toys></plug>"
+                + "<powerful><coal>dear</coal>"
+                + "<warm>impartial</warm>"
+                + "<wink>twig</wink>"
+                + "<secret>x</secret></powerful>"
+                + "</abacus><plant><!--pin punch-->"
+                + "<?arrogant sun rad?>"
+                + "&functional;educated&#119;<thunder/>"
+                + "<berserk/>route flaky&ragged;&#113;"
+                + "<![CDATA[physical educated]]></plant>"
+                + "<baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball></root>");
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " default pretty printing; indentation four spaces;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({indent: "    "}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " default pretty printing; indentation tabs;"
+           + " default newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({indent: "\t"}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n\t<abacus>\n\t\t<windows>"
+                + "\n\t\t\t<fire>blue</fire>"
+                + "\n\t\t\t<laughable>hateful</laughable>"
+                + "\n\t\t\t<ring>terrific</ring>\n\t\t</windows>"
+                + "\n\t\t<plug>\n\t\t\t<utter>wander</utter>"
+                + "\n\t\t\t<toys>groan</toys>\n\t\t</plug>"
+                + "\n\t\t<powerful>\n\t\t\t<coal>dear</coal>"
+                + "\n\t\t\t<warm>impartial</warm>"
+                + "\n\t\t\t<wink>twig</wink>"
+                + "\n\t\t\t<secret>x</secret>\n\t\t</powerful>"
+                + "\n\t</abacus>\n\t<plant>\n\t\t<!--pin punch-->"
+                + "\n\t\t<?arrogant sun rad?>"
+                + "\n\t\t&functional;educated&#119;\n\t\t<thunder/>"
+                + "\n\t\t<berserk/>\n\t\troute flaky&ragged;&#113;"
+                + "\n\t\t<![CDATA[physical educated]]>\n\t</plant>"
+                + "\n\t<baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " \\n newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({newline: "\n"}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>");
+        });
+
+        it("normal name; no attributes; children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " \\r\\n newline", () => {
+            const node = getElement();
+            assert.strictEqual(
+                node.toString({newline: "\r\n"}),
+                "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\r\n    <abacus>\r\n        <windows>"
+                + "\r\n            <fire>blue</fire>"
+                + "\r\n            <laughable>hateful</laughable>"
+                + "\r\n            <ring>terrific</ring>\r\n        </windows>"
+                + "\r\n        <plug>\r\n            <utter>wander</utter>"
+                + "\r\n            <toys>groan</toys>\r\n        </plug>"
+                + "\r\n        <powerful>\r\n            <coal>dear</coal>"
+                + "\r\n            <warm>impartial</warm>"
+                + "\r\n            <wink>twig</wink>"
+                + "\r\n            <secret>x</secret>\r\n        </powerful>"
+                + "\r\n    </abacus>\r\n    <plant>\r\n        <!--pin punch-->"
+                + "\r\n        <?arrogant sun rad?>"
+                + "\r\n        &functional;educated&#119;\r\n        <thunder/>"
+                + "\r\n        <berserk/>\r\n        route flaky&ragged;&#113;"
+                + "\r\n        <![CDATA[physical educated]]>\r\n    </plant>"
+                + "\r\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\r\n</root>");
         });
     });
 });

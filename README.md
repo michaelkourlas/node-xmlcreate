@@ -5,37 +5,18 @@
 
 ## Overview ##
 
-xmlcreate is a Node.js module that can be used to easily build XML using a
-simple API.
+xmlcreate is a Node.js module that can be used to build XML using a simple API.
 
 ## Features ##
 
-xmlcreate uses a DOM-style API to build XML. Each construct in XML, including
-elements, attributes, and even the document itself, is represented as a node
-in a tree with a document node at the root.
+xmlcreate allows you to use a series of chained function calls to build an XML 
+tree.
 
-Each node has a set of properties corresponding to the node's properties in
-XML. For example, the element node has a name property, while the CDATA node
-has a character data property.
+Once the tree is built, it can be serialized to text. The formatting of the 
+text is customizable.
 
-Each node also has a set of children corresponding to the node's value,
-children or attributes in XML, depending on the context. For example, the XML
-declaration and document type declaration are represented as child nodes of the
-root document node, while sub-elements and element attributes are represented
-as child nodes of element nodes.
-
-xmlcreate performs some basic validation during tree building to ensure that
-the resulting XML is well-formed. Nodes can only have certain types or
-quantities of nodes as children, while node properties are checked to ensure
-that they do not contain characters disallowed in XML for that node or in
-general.
-
-However, xmlcreate does not perform comprehensive validation. For example, it
-does not match the tree structure against a schema or confirm that entity
-references are valid. You should use a XML parser for this purpose instead.
-
-Once the tree is built, the tree itself or any of its subtrees can be
-serialized to text. The formatting of the text is customizable.
+xmlcreate can perform some basic validation to check that the resulting XML 
+is well-formed.
 
 ## Installation ##
 
@@ -45,33 +26,25 @@ The easiest way to install xmlcreate is using npm:
 npm install xmlcreate
 ```
 
-You can also build xmlcreate from source using npm, gulp, and typings: 
+You can also build xmlcreate from source using npm and gulp: 
 
 ```
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
 npm install
-gulp
+./node_modules/.bin/gulp
 ```
-
-You'll need to install gulp first if you don't have it:
-
-```
-npm install -g gulp
-```
-
-You can then copy the folder into your node_modules directory.
 
 The `default` target will build the production variant of xmlcreate, run all
 tests, and build the documentation.
 
 You can build the production variant without running tests using the target
-`prod`. You can also build the development version using the target `dev`. At
-the moment, the only difference between the two is that the development version
-includes source maps.
+`prod`. You can also build the development version using the target `dev`.
+The only difference between the two is that the development version includes 
+source maps.
 
 ## Usage ##
 
-The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/1.0.2/).
+The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.0/).
 
 You can also build the documentation using gulp:
 
@@ -83,38 +56,58 @@ gulp docs
 
 The following example illustrates the basic usage of xmlcreate:
 
-```javascript
-var xmlcreate = require("xmlcreate");
+```typescript
+import {document} from "xmlcreate";
 
-var document = xmlcreate.document("html");
-document
+const tree = document();
+tree
     .decl({encoding: "UTF-8"})
         .up()
-    .dtd("html", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd",
-         "-//W3C//DTD XHTML 1.0 Strict//EN")
+    .dtd({
+             name: "html",
+             pubId: "-//W3C//DTD XHTML 1.0 Strict//EN",
+             sysId: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+        })
         .up()
-    .root()
-        .attribute("xmlns", "http://www.w3.org/1999/xhtml")
+    .element({name: "root"})
+        .attribute({name: "xmlns"})
+            .text({charData: "http://www.w3.org/1999/xhtml"})
+                .up()
             .up()
-        .attribute("xml:lang", "en")
+        .attribute({name: "xml:lang"})
+            .text({charData: "en"})
+                .up()
             .up()
-        .attribute("lang", "en")
-            .up()
-        .element("head")
-            .element("title")
-                .charData("My page title")
+        .element({name: "head"})
+            .element({name: "title"})
+                .charData({charData: "My page title"})
                     .up()
                 .up()
             .up()
-        .element("body")
-            .element("h1")
-                .charData("Welcome!")
+        .element({name: "body"})
+            .element({name: "h1"})
+                .charData({charData: "Welcome!"})
                     .up()
                 .up()
-            .element("p")
-                .charData("This is some text on my website.");
+            .element({name: "p"})
+                .charData({charData: "This is some text on my website."})
+                    .up()
+                .up()
+        .element({name: "div"})
+            .element({name: "img"})
+                .attribute({name: "src"})
+                    .text({charData: "picture.png"})
+                        .up()
+                    .up()
+                .attribute({name: "alt"})
+                    .text({charData: "picture"})
+                        .up()
+                    .up()
+                .up()
+            .up()
+        .up();
 
-console.log(document.toString({doubleQuotes: true}));
+console.log(tree.toString({doubleQuotes: true}));
 ```
 
 This example produces the following XML:

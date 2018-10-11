@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,55 +15,71 @@
  */
 
 /**
- * Verifies that the specified string only contains characters permitted by the
- * XML specification.
- *
- * @param str The string to validate.
- *
- * @returns Whether the specified string only contains characters permitted by
- *          the XML specification.
+ * Returns true if the specified string only contains characters permitted by
+ * the XML specification.
  *
  * @private
  */
 export function validateChar(str: string): boolean {
-    const charRegex = "\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]|"
-                      + "[\\uE000-\\uFFFD]";
-    const surrogateCharRegex = "[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]";
+    for (let i = 0; i < str.length; i++) {
+        const firstChar = str.charCodeAt(i);
+        if (firstChar === 0x9 || firstChar === 0xA || firstChar === 0xD
+            || (firstChar >= 0x20 && firstChar <= 0xD7FF)
+            || (firstChar >= 0xE000 && firstChar <= 0xFFFD))
+        {
+            continue;
+        }
 
-    return new RegExp("^((" + charRegex + ")|(" + surrogateCharRegex + "))*$")
-        .test(str);
+        if (i + 1 === str.length) {
+            return false;
+        }
+
+        // UTF-16 surrogate characters
+        const secondChar = str.charCodeAt(i + 1);
+        if ((firstChar >= 0xD800 && firstChar <= 0xDBFF)
+            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
+        {
+            i++;
+            continue;
+        }
+
+        return false;
+    }
+
+    return true;
 }
 
 /**
- * Verifies that the specified string only contains a single character, and
+ * Returns true if the specified string only contains a single character, and
  * that this character is permitted by the XML specification.
- *
- * @param str The string to validate.
- *
- * @returns Whether the specified string only contains a single character, and
- *          that this character is permitted by the XML specification.
  *
  * @private
  */
 export function validateSingleChar(str: string): boolean {
-    if (str.length === 1) {
-        return new RegExp("^\\u0009|\\u000A|\\u000D|[\\u0020-\\uD7FF]|"
-                          + "[\\uE000-\\uFFFD]$").test(str);
-    } else if (str.length === 2) {
-        return new RegExp("^[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]$").test(str);
-    } else {
+    if (str.length === 0) {
         return false;
     }
+
+    const firstChar = str.charCodeAt(0);
+    if (str.length === 1) {
+        return (firstChar === 0x9 || firstChar === 0xA || firstChar === 0xD
+                || (firstChar >= 0x20 && firstChar <= 0xD7FF)
+                || (firstChar >= 0xE000 && firstChar <= 0xFFFD));
+    }
+
+    if (str.length !== 2) {
+        return false;
+    }
+
+    // UTF-16 surrogate characters
+    const secondChar = str.charCodeAt(1);
+    return ((firstChar >= 0xD800 && firstChar <= 0xDBFF)
+            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF));
 }
 
 /**
- * Verifies that the specified string only contains characters permitted by the
- * XML specification for names.
- *
- * @param str The string to validate.
- *
- * @returns Whether the specified string only contains characters permitted by
- *          the XML specification for names.
+ * Returns true if the specified string only contains characters permitted by
+ * the XML specification for names.
  *
  * @private
  */
@@ -72,36 +88,88 @@ export function validateName(str: string): boolean {
         return false;
     }
 
-    const nameStartChar = ":|[A-Z]|_|[a-z]|[\\u00C0-\\u00D6]|[\\u00D8-\\u00F6]"
-                          + "|[\\u00F8-\\u02FF]|[\\u0370-\\u037D]"
-                          + "|[\\u037F-\\u1FFF]|[\\u200C-\\u200D]"
-                          + "|[\\u2070-\\u218F]|[\\u2C00-\\u2FEF]"
-                          + "|[\\u3001-\\uD7FF]|[\\uF900-\\uFDCF]"
-                          + "|[\\uFDF0-\\uFFFD]";
-    const nameStartCharWithSurrogatePair = "[\\uD800-\\uDB7F][\\uDC00-\\uDFFF]";
-
-    const nameChar = nameStartChar + "|-|\\.|[0-9]|\\u00B7|[\\u0300-\\u036F]" +
-                     "|[\\u203F-\\u2040]";
-    const nameCharWithSurrogatePair = nameChar + "|" +
-                                      nameStartCharWithSurrogatePair;
-
-    if (new RegExp("^" + nameStartChar + "$").test(str.charAt(0))) {
-        if (str.length === 1) {
-            return true;
-        }
-        return new RegExp("^(" + nameCharWithSurrogatePair + ")+$")
-            .test(str.substr(1));
-    } else if (str.length >= 2) {
-        if (new RegExp("^" + nameStartCharWithSurrogatePair + "$")
-                .test(str.substr(0, 2)))
-        {
-            if (str.length === 2) {
-                return true;
-            }
-            return new RegExp("^(" + nameCharWithSurrogatePair + ")+$")
-                .test(str.substr(2));
-        }
+    const initialFirstChar = str.charCodeAt(0);
+    const initialFirstCharMatch = (
+        initialFirstChar === 0x3A
+        || initialFirstChar === 0x5F
+        || (initialFirstChar >= 0x41 && initialFirstChar <= 0x5A)
+        || (initialFirstChar >= 0x61 && initialFirstChar <= 0x7A)
+        || (initialFirstChar >= 0xC0 && initialFirstChar <= 0xD6)
+        || (initialFirstChar >= 0xD8 && initialFirstChar <= 0xF6)
+        || (initialFirstChar >= 0XF8 && initialFirstChar <= 0X2FF)
+        || (initialFirstChar >= 0x370 && initialFirstChar <= 0x37D)
+        || (initialFirstChar >= 0x37F && initialFirstChar <= 0X1FFF)
+        || (initialFirstChar >= 0x200C && initialFirstChar <= 0x200D)
+        || (initialFirstChar >= 0x2070 && initialFirstChar <= 0x218F)
+        || (initialFirstChar >= 0x2C00 && initialFirstChar <= 0x2FEF)
+        || (initialFirstChar >= 0x3001 && initialFirstChar <= 0xD7FF)
+        || (initialFirstChar >= 0xF900 && initialFirstChar <= 0xFDCF)
+        || (initialFirstChar >= 0xFDF0 && initialFirstChar <= 0xFFFD));
+    if (str.length === 1) {
+        return initialFirstCharMatch;
     }
 
-    return false;
+    // UTF-16 surrogate characters
+    const initialSecondChar = str.charCodeAt(1);
+    const initialSecondCharMatch = (
+        (initialFirstChar >= 0xD800 && initialFirstChar <= 0xDB7F)
+        && (initialSecondChar >= 0xDC00 && initialSecondChar <= 0xDFFF));
+    if (!initialFirstCharMatch && !initialSecondCharMatch) {
+        return false;
+    }
+
+    const start = initialSecondCharMatch ? 2 : 1;
+    for (let i = start; i < str.length; i++) {
+        const firstChar = str.charCodeAt(i);
+        if (firstChar === 0x3A
+            || firstChar === 0x5F
+            || firstChar === 0x2D
+            || firstChar === 0x2E
+            || firstChar === 0xB7
+            || (firstChar >= 0x30 && firstChar <= 0x39)
+            || (firstChar >= 0x41 && firstChar <= 0x5A)
+            || (firstChar >= 0x61 && firstChar <= 0x7A)
+            || (firstChar >= 0xC0 && firstChar <= 0xD6)
+            || (firstChar >= 0xD8 && firstChar <= 0xF6)
+            || (firstChar >= 0XF8 && firstChar <= 0X2FF)
+            || (firstChar >= 0x300 && firstChar <= 0x36F)
+            || (firstChar >= 0x370 && firstChar <= 0x37D)
+            || (firstChar >= 0x37F && firstChar <= 0X1FFF)
+            || (firstChar >= 0x200C && firstChar <= 0x200D)
+            || (firstChar >= 0x203F && firstChar <= 0x2040)
+            || (firstChar >= 0x2070 && firstChar <= 0x218F)
+            || (firstChar >= 0x2C00 && firstChar <= 0x2FEF)
+            || (firstChar >= 0x3001 && firstChar <= 0xD7FF)
+            || (firstChar >= 0xF900 && firstChar <= 0xFDCF)
+            || (firstChar >= 0xFDF0 && firstChar <= 0xFFFD))
+        {
+            continue;
+        }
+
+        if (i + 1 === str.length) {
+            return false;
+        }
+
+        // UTF-16 surrogate characters
+        const secondChar = str.charCodeAt(i + 1);
+        if ((firstChar >= 0xD800 && firstChar <= 0xDB7F)
+            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
+        {
+            i++;
+            continue;
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Returns true if the specified value is undefined.
+ *
+ * @private
+ */
+export function isUndefined(val: any): val is undefined {
+    return Object.prototype.toString.call(val) === "[object Undefined]";
 }

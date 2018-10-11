@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 import {assert} from "chai";
 import {
+    isUndefined,
     validateChar,
     validateName,
     validateSingleChar
@@ -22,8 +23,7 @@ import {
 
 describe("validate", () => {
     describe("#validateChar", () => {
-        it("should return false if the specified string contains" +
-           " characters not allowed in XML", () => {
+        it("invalid characters", () => {
             assert.isFalse(validateChar(String.fromCharCode(0x0000)));
             assert.isFalse(validateChar(String.fromCharCode(0x0008)));
             assert.isFalse(validateChar(String.fromCharCode(0x000B)));
@@ -75,8 +75,7 @@ describe("validate", () => {
                                         + String.fromCharCode(0xdc80)));
         });
 
-        it("should return true if the specified string contains no" +
-           " characters or only contains characters allowed in XML", () => {
+        it("valid characters", () => {
             assert.isTrue(validateChar(String.fromCharCode(0x9)));
             assert.isTrue(validateChar(String.fromCharCode(0xa)));
             assert.isTrue(validateChar(String.fromCharCode(0xd)));
@@ -113,9 +112,7 @@ describe("validate", () => {
     });
 
     describe("#validateSingleChar", () => {
-        it("should return false if the specified string contains more" +
-           " than one character or if that character is not allowed in" +
-           " XML", () => {
+        it("invalid characters", () => {
             assert.isFalse(validateSingleChar("ab"));
             assert.isFalse(validateSingleChar(String.fromCharCode(0x0001)));
             assert.isFalse(validateSingleChar("a" +
@@ -128,8 +125,7 @@ describe("validate", () => {
                                               String.fromCharCode(0xdc00)));
         });
 
-        it("should return true if the specified string contains a single" +
-           " character allowed in XML", () => {
+        it("valid characters", () => {
             assert.isTrue(validateSingleChar("a"));
             assert.isTrue(validateSingleChar("&"));
             assert.isTrue(validateSingleChar("<"));
@@ -139,8 +135,8 @@ describe("validate", () => {
     });
 
     describe("#validateName", () => {
-        it("should return false if the specified string contains characters" +
-           " not allowed in XML names", () => {
+        it("invalid characters", () => {
+            assert.isFalse(validateName(""));
             assert.isFalse(validateName(String.fromCharCode(0x0001)));
             assert.isFalse(validateName("."));
             assert.isFalse(validateName(String.fromCharCode(0xd800)));
@@ -176,8 +172,7 @@ describe("validate", () => {
                                         String.fromCharCode(0xdfff)));
         });
 
-        it("should return true if the specified value only contains" +
-           " characters allowed in XML names", () => {
+        it("valid characters", () => {
             assert.isTrue(validateName(":"));
             assert.isTrue(validateName("_abc"));
             assert.isTrue(validateName("abc-"));
@@ -194,6 +189,19 @@ describe("validate", () => {
                                        String.fromCharCode(0xdc00) + "abc" +
                                        String.fromCharCode(0xd800)
                                        + String.fromCharCode(0xdc00)));
+        });
+    });
+
+    describe("#isUndefined", () => {
+        it("undefined", () => {
+            assert.isTrue(isUndefined(undefined));
+        });
+
+        it("not undefined", () => {
+            assert.isFalse(isUndefined("test"));
+            assert.isFalse(isUndefined(3));
+            assert.isFalse(isUndefined(null));
+            assert.isFalse(isUndefined(true));
         });
     });
 });

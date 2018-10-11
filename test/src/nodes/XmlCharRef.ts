@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,128 +13,74 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {XmlCharRef} from "../../../lib/main";
+import XmlCharRef from "../../../lib/nodes/XmlCharRef";
 
 describe("XmlCharRef", () => {
-    describe("#constructor", () => {
-        it("should create an XmlCharRef node with the specified"
-           + " character value and representation", () => {
-            let node = new XmlCharRef("a");
-            assert.strictEqual(node.toString(), "&#97;");
-
-            node = new XmlCharRef("b", true);
-            assert.strictEqual(node.toString(), "&#x62;");
-
-            node = new XmlCharRef("c", false);
-            assert.strictEqual(node.toString(), "&#99;");
-        });
-    });
-
-    describe("#char", () => {
-        it("should return this node's character value", () => {
-            const node = new XmlCharRef("a");
-            assert.strictEqual(node.char, "a");
-        });
-
-        it("should set this node's character value to the specified"
-           + " value", () => {
-            const node = new XmlCharRef("a");
-            node.char = "b";
-            assert.strictEqual(node.char, "b");
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " string", () => {
-            const node = new XmlCharRef("a");
-            assert.throws((): void => node.char = undefined as any);
-            assert.throws((): void => node.char = null as any);
-            assert.throws((): void => node.char = 0 as any);
-            assert.throws((): void => node.char = new XmlCharRef("") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in XML", () => {
-            const node = new XmlCharRef("a");
-            assert.throws(() => node.char = String.fromCharCode(0x0001));
-        });
-
-        it("should throw an error if the specified value contains more than"
-           + " one character", () => {
-            const node = new XmlCharRef("a");
-            assert.throws(() => node.char = "bc");
-        });
-    });
-
-    describe("#hex", () => {
-        it("should return this node's hex value", () => {
-            const node = new XmlCharRef("a", false);
-            assert.isFalse(node.hex);
-        });
-
-        it("should set this node's hex value to the specified value", () => {
-            const node = new XmlCharRef("a", false);
-            node.hex = true;
-            assert.isTrue(node.hex);
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " boolean", () => {
-            const node = new XmlCharRef("a");
-            assert.throws((): void => node.hex = undefined as any);
-            assert.throws((): void => node.hex = null as any);
-            assert.throws((): void => node.hex = 0 as any);
-            assert.throws((): void => node.hex = "test" as any);
-            assert.throws((): void => node.hex = new XmlCharRef("") as any);
-        });
-    });
-
-    describe("#children", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharRef("a");
-            assert.throws(() => node.children());
-        });
-    });
-
-    describe("#insertChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharRef("a");
-            const childNode = new XmlCharRef("b");
-            assert.throws(() => node.insertChild(childNode));
-        });
-    });
-
-    describe("#removeChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharRef("a");
-            const childNode = new XmlCharRef("b");
-            assert.throws(() => node.removeChild(childNode));
-        });
-    });
-
-    describe("#removeChildAtIndex", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharRef("a");
-            assert.throws(() => node.removeChildAtIndex(0));
-        });
-    });
-
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            let node = new XmlCharRef("a");
-            assert.strictEqual(node.toString(), "&#97;");
-
-            node = new XmlCharRef(String.fromCharCode(0xdbff)
-                                  + String.fromCharCode(0xdc00));
-            assert.strictEqual(node.toString(), "&#1113088;");
-
-            node = new XmlCharRef("b", true);
-            assert.strictEqual(node.toString(), "&#x62;");
-
-            node = new XmlCharRef(String.fromCharCode(0xdbff)
-                                  + String.fromCharCode(0xdc00), true);
-            assert.strictEqual(node.toString(), "&#x10fc00;");
+        it("normal single character; default hex", () => {
+            assert.strictEqual(
+                new XmlCharRef(undefined, true, {
+                    char: "a"
+                    // hex: false
+                }).toString(),
+                "&#97;");
         });
+
+        it("normal single character; hex true", () => {
+            assert.strictEqual(
+                new XmlCharRef(undefined, true, {
+                    char: "b",
+                    hex: true
+                }).toString(),
+                "&#x62;");
+        });
+
+        it("normal single character; hex false", () => {
+            assert.strictEqual(
+                new XmlCharRef(undefined, true, {
+                    char: "c",
+                    hex: false
+                }).toString(),
+                "&#99;");
+        });
+
+        it("single character with surrogate pairs; hex false", () => {
+            assert.strictEqual(
+                new XmlCharRef(undefined, true, {
+                    char: String.fromCharCode(0xdbff)
+                          + String.fromCharCode(0xdc00)
+                }).toString(),
+                "&#1113088;");
+        });
+
+        it("single character not allowed in XML; hex false", () => {
+            assert.throws(
+                () => new XmlCharRef(undefined, true, {
+                    char: String.fromCharCode(0x0001)
+                }));
+            assert.doesNotThrow(
+                () => new XmlCharRef(undefined, false, {
+                    char: String.fromCharCode(0x0001)
+                }));
+        });
+
+        it("multiple characters; hex false", () => {
+            assert.throws(
+                () => new XmlCharRef(undefined, true, {
+                    char: "bc"
+                }));
+            assert.doesNotThrow(
+                () => new XmlCharRef(undefined, false, {
+                    char: "bc"
+                }));
+        });
+    });
+
+    it("#up", () => {
+        assert.strictEqual(
+            new XmlCharRef(undefined, false, {char: "a"}).up(),
+            undefined);
     });
 });

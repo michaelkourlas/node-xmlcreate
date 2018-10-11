@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,121 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {isString} from "../utils";
+
 import {validateChar} from "../validate";
-import XmlNode from "./XmlNode";
 
 /**
- * Represents an XML comment.
+ * The options used to create a new comment.
+ */
+export interface IXmlCommentOptions {
+    /**
+     * The content of the comment.
+     */
+    charData: string;
+}
+
+/**
+ * Represents a comment.
  *
- * An XML character reference is structured as follows, where `{content}` is
- * the text of the comment.
+ * A comment is structured as follows, where `{content}` is the text of the
+ * comment:
  *
  * ```xml
  * <!--{content}-->
  * ```
- *
- * The `{content}` value is a property of this node.
- *
- * XmlComment nodes cannot have any children.
  */
-export default class XmlComment extends XmlNode {
-    private _content: string;
+export default class XmlComment<Parent> {
+    private readonly _charData: string;
+    private readonly _parent: Parent;
 
-    /**
-     * Initializes a new instance of the {@link XmlComment} class.
-     *
-     * @param content The content of the comment.
-     */
-    constructor(content: string) {
-        super();
-        this.content = content;
-    }
-
-    /**
-     * Gets the content of the comment.
-     *
-     * @returns The content of the comment.
-     */
-    get content(): string {
-        return this._content;
-    }
-
-    /**
-     * Sets the content of the comment.
-     *
-     * @param content The content of the comment.
-     */
-    set content(content: string) {
-        if (!isString(content)) {
-            throw new TypeError("content should be a string");
-        } else if (!validateChar(content)) {
-            throw new Error("content should not contain characters"
-                            + " not allowed in XML");
-        } else if (!/^([^-]|-[^-])*$/.test(content)) {
-            throw new Error("content should not contain the string '--' or"
-                            + " end with '-'");
-        }
-        this._content = content;
-    }
-
-    /**
-     * Throws an exception since {@link XmlComment} nodes cannot have any
-     * children.
-     *
-     * @returns This method does not return.
-     */
-    public children(): XmlNode[] {
-        throw new Error("XmlComment nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlComment} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlCommentOptions)
     {
-        throw new Error("XmlComment nodes cannot have children");
+        if (validation && !validateChar(options.charData)) {
+            throw new Error("Comment content should not contain characters"
+                            + " not allowed in XML");
+        }
+        if (validation && !/^([^-]|-[^-])*$/.test(options.charData)) {
+            throw new Error("Comment content should not contain the string"
+                            + " '--' or end with '-'");
+        }
+        this._charData = options.charData;
+        this._parent = parent;
     }
 
     /**
-     * Throws an exception since {@link XmlComment} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns an XML string representation of this comment.
      */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlComment nodes cannot have children");
+    public toString(): string {
+        return "<!--" + this._charData + "-->";
     }
 
     /**
-     * Throws an exception since {@link XmlComment} nodes cannot have any
-     * children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns the parent of this comment.
      */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlComment nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        return "<!--" + this.content + "-->";
+    public up(): Parent {
+        return this._parent;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,87 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {XmlCharData} from "../../../lib/main";
+import XmlCharData from "../../../lib/nodes/XmlCharData";
 
 describe("XmlCharData", () => {
-    describe("#constructor", () => {
-        it("should create an XmlCharData node with the specified text", () => {
-            const node = new XmlCharData("abc");
-            assert.strictEqual(node.toString(), "abc");
-        });
-    });
-
-    describe("#text", () => {
-        it("should return this node's text", () => {
-            const node = new XmlCharData("abc");
-            assert.strictEqual(node.charData, "abc");
-        });
-
-        it("should set this node's text to the specified value", () => {
-            const node = new XmlCharData("abc");
-            node.charData = "123";
-            assert.strictEqual(node.charData, "123");
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " string", () => {
-            const node = new XmlCharData("abc");
-            assert.throws((): void => node.charData = undefined as any);
-            assert.throws((): void => node.charData = null as any);
-            assert.throws((): void => node.charData = 0 as any);
-            assert.throws((): void => node.charData =
-                new XmlCharData("") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in XML", () => {
-            const node = new XmlCharData("abc");
-            assert.throws(() => node.charData = "abc"
-                                                + String.fromCharCode(0x0001)
-                                                + "def");
-        });
-    });
-
-    describe("#children", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharData("a");
-            assert.throws(() => node.children());
-        });
-    });
-
-    describe("#insertChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharData("a");
-            const childNode = new XmlCharData("b");
-            assert.throws(() => node.insertChild(childNode));
-        });
-    });
-
-    describe("#removeChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharData("a");
-            const childNode = new XmlCharData("b");
-            assert.throws(() => node.removeChild(childNode));
-        });
-    });
-
-    describe("#removeChildAtIndex", () => {
-        it("should throw an error", () => {
-            const node = new XmlCharData("a");
-            assert.throws(() => node.removeChildAtIndex(0));
-        });
-    });
-
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            let node = new XmlCharData("abc");
-            assert.strictEqual(node.toString(), "abc");
-
-            node = new XmlCharData("<&a&b<c&<>]]>");
-            assert.strictEqual(node.toString(),
-                               "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]&gt;");
+        it("normal character data", () => {
+            assert.strictEqual(
+                new XmlCharData(undefined, true, {
+                    charData: "abc"
+                }).toString(),
+                "abc");
         });
+
+        it("character data with characters to be escaped", () => {
+            assert.strictEqual(
+                new XmlCharData(undefined, true, {
+                    charData: "<&a&b<c&<>]]>"
+                }).toString(),
+                "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]&gt;");
+        });
+
+        it("character data with characters not allowed in XML", () => {
+            assert.throws(
+                () => new XmlCharData(undefined, true, {
+                    charData: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlCharData(undefined, false, {
+                    charData: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
+        });
+    });
+
+    it("#up", () => {
+        assert.strictEqual(
+            new XmlCharData(undefined, false, {
+                charData: "a"
+            }).up(),
+            undefined);
     });
 });

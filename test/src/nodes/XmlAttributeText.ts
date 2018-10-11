@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,88 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {XmlAttributeText} from "../../../lib/main";
+import XmlAttribute from "../../../lib/nodes/XmlAttribute";
+import XmlAttributeText from "../../../lib/nodes/XmlAttributeText";
 
 describe("XmlAttributeText", () => {
-    describe("#constructor", () => {
-        it("should create an XmlAttributeText node with the specified"
-           + " text", () => {
-            const node = new XmlAttributeText("abc");
-            assert.strictEqual(node.toString(), "abc");
-        });
-    });
-
-    describe("#text", () => {
-        it("should return this node's text", () => {
-            const node = new XmlAttributeText("abc");
-            assert.strictEqual(node.text, "abc");
-        });
-
-        it("should set this node's text to the specified value", () => {
-            const node = new XmlAttributeText("abc");
-            node.text = "123";
-            assert.strictEqual(node.text, "123");
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " string", () => {
-            const node = new XmlAttributeText("abc");
-            assert.throws((): void => node.text = undefined as any);
-            assert.throws((): void => node.text = null as any);
-            assert.throws((): void => node.text = 0 as any);
-            assert.throws((): void => node.text =
-                new XmlAttributeText("") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in XML", () => {
-            const node = new XmlAttributeText("abc");
-            assert.throws(() => node.text = "abc"
-                                            + String.fromCharCode(0x0001)
-                                            + "def");
-        });
-    });
-
-    describe("#children", () => {
-        it("should throw an error", () => {
-            const node = new XmlAttributeText("a");
-            assert.throws(() => node.children());
-        });
-    });
-
-    describe("#insertChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlAttributeText("a");
-            const childNode = new XmlAttributeText("b");
-            assert.throws(() => node.insertChild(childNode));
-        });
-    });
-
-    describe("#removeChild", () => {
-        it("should throw an error", () => {
-            const node = new XmlAttributeText("a");
-            const childNode = new XmlAttributeText("b");
-            assert.throws(() => node.removeChild(childNode));
-        });
-    });
-
-    describe("#removeChildAtIndex", () => {
-        it("should throw an error", () => {
-            const node = new XmlAttributeText("a");
-            assert.throws(() => node.removeChildAtIndex(0));
-        });
-    });
-
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            let node = new XmlAttributeText("abc");
-            assert.strictEqual(node.toString(), "abc");
-
-            node = new XmlAttributeText("<&a&b<c&<>]]>");
-            assert.strictEqual(node.toString(),
-                               "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]>");
+        it("normal character data", () => {
+            assert.strictEqual(
+                new XmlAttributeText(undefined, true, {
+                    charData: "abc"
+                }).toString(),
+                "abc");
         });
+
+        it("character data with characters to be escaped", () => {
+            assert.strictEqual(
+                new XmlAttributeText(undefined, true, {
+                    charData: "&"
+                }).toString(),
+                "&amp;");
+            assert.strictEqual(
+                new XmlAttributeText(undefined, true, {
+                    charData: "<"
+                }).toString(),
+                "&lt;");
+            assert.strictEqual(
+                new XmlAttributeText(undefined, true, {
+                    charData: "<&a&b<c&<>]]>"
+                }).toString(),
+                "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]>");
+        });
+
+        it("character data with characters not allowed in XML", () => {
+            assert.throws(
+                () => new XmlAttributeText(undefined, true, {
+                    charData: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlAttributeText(undefined, false, {
+                    charData: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
+        });
+    });
+
+    it("#up", () => {
+        const parent = new XmlAttribute(undefined, false, {name: "a"});
+        const child = parent.text({charData: "b"});
+        assert.strictEqual(child.up(), parent);
     });
 });

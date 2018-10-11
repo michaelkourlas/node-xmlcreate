@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import XmlAttribute from "./nodes/XmlAttribute";
-import XmlAttributeText from "./nodes/XmlAttributeText";
-import XmlCdata from "./nodes/XmlCdata";
-import XmlCharData from "./nodes/XmlCharData";
-import XmlCharRef from "./nodes/XmlCharRef";
-import XmlComment from "./nodes/XmlComment";
-import XmlDecl from "./nodes/XmlDecl";
-import XmlDocument from "./nodes/XmlDocument";
-import XmlDtd from "./nodes/XmlDtd";
-import XmlDtdAttlist from "./nodes/XmlDtdAttlist";
-import XmlDtdElement from "./nodes/XmlDtdElement";
-import XmlDtdEntity from "./nodes/XmlDtdEntity";
-import XmlDtdNotation from "./nodes/XmlDtdNotation";
-import XmlDtdParamEntityRef from "./nodes/XmlDtdParamEntityRef";
-import XmlElement from "./nodes/XmlElement";
-import XmlEntityRef from "./nodes/XmlEntityRef";
-import XmlNode from "./nodes/XmlNode";
-import XmlProcInst from "./nodes/XmlProcInst";
 
-export {
-    XmlAttribute, XmlAttributeText, XmlCdata, XmlCharData, XmlCharRef,
-    XmlComment, XmlDecl, XmlDocument, XmlDtd, XmlDtdAttlist, XmlDtdElement,
-    XmlDtdEntity, XmlDtdNotation, XmlDtdParamEntityRef, XmlElement,
-    XmlEntityRef, XmlNode, XmlProcInst
-};
+import XmlDocument, {IXmlDocumentOptions} from "./nodes/XmlDocument";
 
 /**
- * Creates a new XML document.
- *
- * @param root The name of the root element of the document.
- *
- * @returns The new XML document.
+ * Returns a new XML document with the specified root element name.
  */
-export function document(root: string): XmlDocument {
-    return new XmlDocument(root);
+export function document(options: IXmlDocumentOptions = {}): XmlDocument {
+    return new XmlDocument(options);
 }

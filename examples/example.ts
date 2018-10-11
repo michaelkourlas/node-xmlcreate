@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-"use strict";
+import {document} from "../lib/main";
 
-var xmlcreate = require("../lib/main");
-
-var tree = xmlcreate.document();
+const tree = document();
 // @formatter:off
 tree
     .decl({encoding: "UTF-8"}).up()
@@ -49,4 +47,5 @@ tree
                         .text({charData: "picture"}).up().up().up().up().up();
 // @formatter:on
 
+// noinspection TsLint
 console.log(tree.toString({doubleQuotes: true}));

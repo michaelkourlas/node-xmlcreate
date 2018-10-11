@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,120 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {isString} from "../utils";
+
 import {validateChar} from "../validate";
-import XmlNode from "./XmlNode";
 
 /**
- * Represents an XML CDATA section.
+ * The options used to create a CDATA section.
+ */
+export interface IXmlCdataOptions {
+    /**
+     * The character data of the CDATA section.
+     */
+    charData: string;
+}
+
+/**
+ * Represents a CDATA section.
  *
- * An XML CDATA section is structured as follows, where `{data}` is the
+ * A CDATA section is structured as follows, where `{data}` is the
  * character data of the section:
  *
  * ```xml
  * <![CDATA[{data}]]>
  * ```
- *
- * The `{data}` value is a property of this node.
- *
- * XmlCdata nodes cannot have any children.
  */
-export default class XmlCdata extends XmlNode {
-    private _data: string;
+export default class XmlCdata<Parent> {
+    private readonly _charData: string;
+    private readonly _parent: Parent;
 
-    /**
-     * Initializes a new instance of the {@link XmlCdata} class.
-     *
-     * @param data The character data of the CDATA section.
-     */
-    constructor(data: string) {
-        super();
-        this.data = data;
-    }
-
-    /**
-     * Gets the character data of the CDATA section.
-     *
-     * @returns The character data of the CDATA section.
-     */
-    get data(): string {
-        return this._data;
-    }
-
-    /**
-     * Sets the character data of the CDATA section.
-     *
-     * @param data The character data of the CDATA section.
-     */
-    set data(data: string) {
-        if (!isString(data)) {
-            throw new TypeError("character data should be a string");
-        } else if (!validateChar(data)) {
-            throw new Error("character data should not contain characters not"
-                            + " allowed in XML");
-        } else if (/]]>/.test(data)) {
-            throw new Error("data should not contain the string ']]>'");
-        }
-        this._data = data;
-    }
-
-    /**
-     * Throws an exception since {@link XmlCdata} nodes cannot have any
-     * children.
-     *
-     * @returns This method does not return.
-     */
-    public children(): XmlNode[] {
-        throw new Error("XmlCdata nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlCdata} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlCdataOptions)
     {
-        throw new Error("XmlCdata nodes cannot have children");
+        if (validation && !validateChar(options.charData)) {
+            throw new Error("CDATA section should not contain characters"
+                            + " not allowed in XML");
+        }
+        if (validation && /]]>/.test(options.charData)) {
+            throw new Error("CDATA section should not contain the string"
+                            + " ']]>'");
+        }
+        this._charData = options.charData;
+        this._parent = parent;
     }
 
     /**
-     * Throws an exception since {@link XmlCdata} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns an XML string representation of this CDATA section.
      */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlCdata nodes cannot have children");
+    public toString(): string {
+        return "<![CDATA[" + this._charData + "]]>";
     }
 
     /**
-     * Throws an exception since {@link XmlCdata} nodes cannot have any
-     * children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns the parent of this CDATA section.
      */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlCdata nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        return "<![CDATA[" + this.data + "]]>";
+    public up(): Parent {
+        return this._parent;
     }
 }

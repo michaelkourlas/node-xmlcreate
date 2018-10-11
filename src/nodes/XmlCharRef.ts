@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {getCodePoint, isBoolean, isString} from "../utils";
-import {validateSingleChar} from "../validate";
-import XmlNode from "./XmlNode";
+
+import {isUndefined, validateSingleChar} from "../validate";
 
 /**
- * Represents an XML character reference.
+ * The options used to create a new character reference.
+ */
+export interface IXmlCharRefOptions {
+    /**
+     * The character to represent using the reference.
+     */
+    char: string;
+    /**
+     * Whether to use the hexadecimal or decimal representation for the
+     * reference. Defaults to false.
+     */
+    hex?: boolean;
+}
+
+/**
+ * Represents a character reference.
  *
- * An XML character reference is structured as follows, where `{dec}` is the
+ * A character reference is structured as follows, where `{dec}` is the
  * decimal representation code point corresponding to a particular Unicode
  * character:
  *
@@ -44,141 +57,62 @@ import XmlNode from "./XmlNode";
  * properties of this node; the former is the character to be represented while
  * the latter indicates whether the decimal or hexadecimal representation
  * should be used.
- *
- * XmlCharRef nodes cannot have any children.
  */
-export default class XmlCharRef extends XmlNode {
-    private _char: string;
-    private _hex: boolean;
+export default class XmlCharRef<Parent> {
+    private readonly _char: string;
+    private readonly _hex: boolean;
+    private readonly _parent: Parent;
 
-    /**
-     * Initializes a new instance of the {@link XmlCharRef} class.
-     *
-     * @param char The character to represent using the reference.
-     * @param hex Whether to use the hexadecimal or decimal representation for
-     *            the reference. If left undefined, decimal is the default.
-     */
-    constructor(char: string, hex: boolean = false) {
-        super();
-        this.char = char;
-        this.hex = hex;
-    }
-
-    /**
-     * Gets the character to represent using the reference.
-     *
-     * @returns The character to represent using the reference.
-     */
-    get char(): string {
-        return this._char;
-    }
-
-    /**
-     * Sets the character to represent using the reference.
-     *
-     * @param char The character to represent using the reference.
-     */
-    set char(char: string) {
-        if (!isString(char)) {
-            throw new TypeError("char should be a string");
-        } else if (!validateSingleChar(char)) {
-            throw new Error("char should contain a single character, and this"
-                            + " character should be allowed in XML");
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlCharRefOptions)
+    {
+        if (validation && !validateSingleChar(options.char)) {
+            throw new Error("Character reference should reference a single"
+                            + " character, and this character should be"
+                            + " allowed in XML");
         }
-        this._char = char;
-    }
-
-    /**
-     * Gets whether or not to use the hexadecimal or decimal representation for
-     * the reference.
-     *
-     * @returns Whether or not to use the hexadecimal or decimal representation
-     *          for the reference.
-     */
-    get hex(): boolean {
-        return this._hex;
-    }
-
-    /**
-     * Sets whether or not to use the hexadecimal or decimal representation for
-     * the reference.
-     *
-     * @param hex Whether or not to use the hexadecimal or decimal
-     *            representation for the reference.
-     */
-    set hex(hex: boolean) {
-        if (!isBoolean(hex)) {
-            throw new TypeError("hex should be a boolean");
-        }
-        this._hex = hex;
-    }
-
-    /**
-     * Throws an exception since {@link XmlCharRef} nodes cannot have any
-     * children.
-     *
-     * @returns This method does not return.
-     */
-    public children(): XmlNode[] {
-        throw new Error("XmlCharRef nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlCharRef} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
-        throw new Error("XmlCharRef nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlCharRef} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlCharRef nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlCharRef} nodes cannot have any
-     * children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlCharRef nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns {string} An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        let char: number;
-        if (this.char.length === 1) {
-            char = this.char.charCodeAt(0);
+        this._char = options.char;
+        if (!isUndefined(options.hex)) {
+            this._hex = options.hex;
         } else {
-            char = getCodePoint(this.char, 0);
+            this._hex = false;
+        }
+        this._parent = parent;
+    }
+
+    /**
+     * Returns an XML string representation of this character reference.
+     */
+    public toString(): string {
+        let char: number;
+        if (this._char.length === 1) {
+            char = this._char.charCodeAt(0);
+        } else {
+            const first = this._char.charCodeAt(0);
+            if (first >= 0xD800 && first <= 0xDBFF && this._char.length > 1) {
+                const second = this._char.charCodeAt(1);
+                if (second >= 0xDC00 && second <= 0xDFFF) {
+                    char = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+                } else {
+                    throw new Error("Character reference should reference"
+                                    + " a valid Unicode character");
+                }
+            } else {
+                char = first;
+            }
         }
 
-        if (this.hex) {
+        if (this._hex) {
             return "&#x" + char.toString(16) + ";";
         } else {
             return "&#" + char + ";";
         }
+    }
+
+    /**
+     * Returns the parent of this character reference.
+     */
+    public up(): Parent {
+        return this._parent;
     }
 }

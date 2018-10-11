@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {IStringOptions, StringOptions} from "../options";
-import {isArray, isString} from "../utils";
-import {validateName} from "../validate";
-import XmlAttribute from "./XmlAttribute";
-import XmlAttributeText from "./XmlAttributeText";
-import XmlCdata from "./XmlCdata";
-import XmlCharData from "./XmlCharData";
-import XmlCharRef from "./XmlCharRef";
-import XmlComment from "./XmlComment";
-import XmlEntityRef from "./XmlEntityRef";
-import XmlNode from "./XmlNode";
-import XmlProcInst from "./XmlProcInst";
+import {isUndefined, validateName} from "../validate";
+import {
+    default as XmlAttribute,
+    IXmlAttributeOptions as IXmlAttributeOptions
+} from "./XmlAttribute";
+import XmlCdata, {IXmlCdataOptions} from "./XmlCdata";
+import XmlCharData, {IXmlCharDataOptions} from "./XmlCharData";
+import XmlCharRef, {IXmlCharRefOptions} from "./XmlCharRef";
+import XmlComment, {IXmlCommentOptions} from "./XmlComment";
+import XmlEntityRef, {IXmlEntityRefOptions} from "./XmlEntityRef";
+import XmlProcInst, {IXmlProcInstOptions} from "./XmlProcInst";
+
+/**
+ * The options used to create a new element.
+ */
+export interface IXmlElementOptions {
+    /**
+     * The name of the element.
+     */
+    name: string;
+}
+
+type Child<Parent> = XmlAttribute<XmlElement<Parent>>
+    | XmlCdata<XmlElement<Parent>>
+    | XmlCharData<XmlElement<Parent>>
+    | XmlCharRef<XmlElement<Parent>>
+    | XmlComment<XmlElement<Parent>>
+    | XmlElement<XmlElement<Parent>>
+    | XmlEntityRef<XmlElement<Parent>>
+    | XmlProcInst<XmlElement<Parent>>;
 
 /**
  * Represents an XML element.
  *
- * A sample XML element is structured as follows, where `{name}` is the name
+ * A sample element is structured as follows, where `{name}` is the name
  * of the element:
  *
  * ```xml
@@ -40,310 +60,180 @@ import XmlProcInst from "./XmlProcInst";
  * </{name}></pre>
  * ```
  *
- * The `{name}` value is a property of the node, while the attributes and
- * children of the element (such as other elements, processing instructions,
- * and text) are children of this node.
+ * XML elements can have an unlimited number of attributes, CDATA sections,
+ * character references, comments, elements, entity references, processing
+ * instructions, and character data.
  *
- * XmlElement nodes can have an unlimited number of {@link XmlAttribute},
- * {@link XmlCdata}, {@link XmlCharRef}, {@link XmlComment},
- * {@link XmlElement}, {@link XmlEntityRef}, {@link XmlProcInst}, or
- * {@link XmlCharData} nodes as children.
+ * An element with no content will be represented using an empty element tag:
+ *
+ * ```xml
+ * <{name}/>
+ * ```
  */
-export default class XmlElement extends XmlNode {
-    private _name: string;
+export default class XmlElement<Parent> {
+    private readonly _attributeNames: string[];
+    private readonly _children: Array<Child<Parent>>;
+    private readonly _name: string;
+    private readonly _parent: Parent;
+    private readonly _validation: boolean;
 
-    /**
-     * Initializes a new instance of the {@link XmlElement} class.
-     *
-     * @param name The name of the element.
-     */
-    constructor(name: string) {
-        super();
-        this.name = name;
-    }
-
-    /**
-     * Gets the name of the element.
-     *
-     * @returns The name of the element.
-     */
-    get name(): string {
-        return this._name;
-    }
-
-    /**
-     * Sets the name of the element.
-     *
-     * @param name The name of the element.
-     */
-    set name(name: string) {
-        if (!isString(name)) {
-            throw new TypeError("name should be a string");
-        } else if (!validateName(name)) {
-            throw new Error("name should not contain characters not"
-                            + " allowed in XML names");
-        }
-        this._name = name;
-    }
-
-    /**
-     * Inserts an new attribute at the specified index. If no index is
-     * specified, the node is inserted at the end of this node's children.
-     *
-     * @param name The name of the attribute.
-     * @param value The value of the attribute. Strings are converted to
-     *        XmlAttributeText nodes.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns {XmlAttribute} The newly created attribute.
-     */
-    public attribute(name: string,
-                     value: string | XmlNode | Array<string | XmlNode>,
-                     index?: number): XmlAttribute
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlElementOptions)
     {
-        if (isString(value)) {
-            value = new XmlAttributeText(value);
-        } else if (isArray(value)) {
-            for (let i = 0; i < value.length; i++) {
-                if (isString(value[i])) {
-                    value[i] = new XmlAttributeText(value[i] as string);
-                }
-            }
+        this._attributeNames = [];
+        this._children = [];
+        if (validation && !validateName(options.name)) {
+            throw new Error("Element name should not contain characters"
+                            + " not allowed in XML names");
         }
+        this._name = options.name;
+        this._parent = parent;
+        this._validation = validation;
+    }
 
-        const attribute = new XmlAttribute(name, value as XmlNode | XmlNode[]);
-        this.insertChild(attribute, index);
+    /**
+     * Adds an attribute to this element and returns the new attribute.
+     */
+    public attribute(
+        options: IXmlAttributeOptions): XmlAttribute<XmlElement<Parent>>
+    {
+        if (this._validation && options.name in this._attributeNames) {
+            throw new Error(`Element already contains an attribute with`
+                            + ` name ${options.name}`);
+        }
+        const attribute = new XmlAttribute(this, this._validation, options);
+        this._children.push(attribute);
+        this._attributeNames.push(options.name);
         return attribute;
     }
 
     /**
-     * Returns an array containing all of the children of this node that are
-     * instances of {@link XmlAttribute}.
-     *
-     * @returns An array containing all of the children of this node that are
-     *          instances of {@link XmlAttribute}.
+     * Adds a CDATA section to this element and returns the new CDATA section.
      */
-    public attributes(): XmlAttribute[] {
-        return this._children.filter(
-            (node) => node instanceof XmlAttribute) as XmlAttribute[];
-    }
-
-    /**
-     * Inserts a new CDATA section at the specified index. If no index is
-     * specified, the node is inserted at the end of this node's children.
-     *
-     * @param content The data of the CDATA section.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this node's
-     *              children.
-     *
-     * @returns The newly created CDATA section.
-     */
-    public cdata(content: string, index?: number): XmlCdata {
-        const cdata = new XmlCdata(content);
-        this.insertChild(cdata, index);
+    public cdata(options: IXmlCdataOptions): XmlCdata<XmlElement<Parent>> {
+        const cdata = new XmlCdata(this, this._validation, options);
+        this._children.push(cdata);
         return cdata;
     }
 
     /**
-     * Inserts some character data at the specified index. If no index is
-     * specified, the node is inserted at the end of this node's children.
-     *
-     * @param charData Character data.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created text node.
+     * Adds character data to this element and returns the new character data.
      */
-    public charData(charData: string, index?: number): XmlCharData {
-        const charDataNode = new XmlCharData(charData);
-        this.insertChild(charDataNode, index);
+    public charData(
+        options: IXmlCharDataOptions): XmlCharData<XmlElement<Parent>>
+    {
+        const charDataNode = new XmlCharData(this, this._validation, options);
+        this._children.push(charDataNode);
         return charDataNode;
     }
 
     /**
-     * Inserts a new character reference at the specified index. If no index
-     * is specified, the node is inserted at the end of this node's children.
-     *
-     * @param char The character to represent using the reference.
-     * @param hex Whether to use the hexadecimal or decimal representation for
-     *            the reference. If left undefined, decimal is the default.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created character reference.
+     * Adds a character reference to this element and returns the new
+     * character reference.
      */
-    public charRef(char: string, hex?: boolean, index?: number): XmlCharRef {
-        const charRef = new XmlCharRef(char, hex);
-        this.insertChild(charRef, index);
+    public charRef(
+        options: IXmlCharRefOptions): XmlCharRef<XmlElement<Parent>>
+    {
+        const charRef = new XmlCharRef(this, this._validation, options);
+        this._children.push(charRef);
         return charRef;
     }
 
     /**
-     * Inserts a new comment at the specified index. If no index is specified,
-     * the node is inserted at the end of this node's children.
-     *
-     * @param content The data of the comment.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created comment.
+     * Adds a comment to this element and returns the new comment.
      */
-    public comment(content: string, index?: number): XmlComment {
-        const comment = new XmlComment(content);
-        this.insertChild(comment, index);
+    public comment(
+        options: IXmlCommentOptions): XmlComment<XmlElement<Parent>>
+    {
+        const comment = new XmlComment(this, this._validation, options);
+        this._children.push(comment);
         return comment;
     }
 
     /**
-     * Inserts a new element at the specified index. If no index is specified,
-     * the node is inserted at the end of this node's children.
-     *
-     * @param name The name of the element.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created element.
+     * Adds an element to this element and returns the new element.
      */
-    public element(name: string, index?: number): XmlElement {
-        const element = new XmlElement(name);
-        this.insertChild(element, index);
+    public element(
+        options: IXmlElementOptions): XmlElement<XmlElement<Parent>>
+    {
+        const element = new XmlElement(this, this._validation, options);
+        this._children.push(element);
         return element;
     }
 
     /**
-     * Inserts a new entity reference at the specified index. If no index is
-     * specified, the node is inserted at the end of this node's children.
-     *
-     * @param entity The entity to be referenced.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this
-     *              node's children.
-     *
-     * @returns The newly created entity reference.
+     * Adds an entity reference to this element and returns the new entity
+     * reference.
      */
-    public entityRef(entity: string, index?: number): XmlEntityRef {
-        const entityRef = new XmlEntityRef(entity);
-        this.insertChild(entityRef, index);
+    public entityRef(
+        options: IXmlEntityRefOptions): XmlEntityRef<XmlElement<Parent>>
+    {
+        const entityRef = new XmlEntityRef(this, this._validation, options);
+        this._children.push(entityRef);
         return entityRef;
     }
 
     /**
-     * Inserts the specified node into this node's children at the specified
-     * index. The node is not inserted if it is already present. If this node
-     * already has a parent, it is removed from that parent.
-     *
-     * Note that only {@link XmlAttribute}, {@link XmlCdata},
-     * {@link XmlCharRef}, {@link XmlComment}, {@link XmlElement},
-     * {@link XmlEntityRef}, {@link XmlProcInst}, or {@link XmlCharData} nodes
-     * can be inserted; otherwise, an exception will be thrown.
-     *
-     * @param node The node to insert.
-     * @param index The index at which to insert the node. Nodes at or after
-     *              the index are shifted to the right. If no index is
-     *              specified, the node is inserted at the end.
-     *
-     * @returns The node inserted into this node's children, or undefined if no
-     *          node was inserted.
+     * Adds a processing instruction to this element and returns the new
+     * processing instruction.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
-        if (!(node instanceof XmlAttribute
-              || node instanceof XmlCdata
-              || node instanceof XmlCharRef
-              || node instanceof XmlComment
-              || node instanceof XmlElement
-              || node instanceof XmlEntityRef
-              || node instanceof XmlProcInst
-              || node instanceof XmlCharData))
-        {
-            throw new TypeError("node should be an instance of XmlAttribute,"
-                                + " XmlCdata, XmlCharRef, XmlComment,"
-                                + " XmlElement, XmlEntityRef, XmlProcInst,"
-                                + " or XmlText");
-        }
-
-        if (node instanceof XmlAttribute) {
-            const attributes = this._children.filter(
-                (n) => n instanceof XmlAttribute) as XmlAttribute[];
-            for (const attribute of attributes) {
-                if (attribute.name === node.name) {
-                    throw new Error("element already contains an"
-                                    + " XmlAttribute object with name "
-                                    + node.name);
-                }
-            }
-        }
-
-        return super.insertChild(node, index);
-    }
-
-    /**
-     * Inserts a new processing instruction at the specified index. If no index
-     * is specified, the node is inserted at the end of this node's children.
-     *
-     * @param target The target of the processing instruction.
-     * @param content The data of the processing instruction, or undefined if
-     *                there is no target.
-     * @param index The index at which the node should be inserted. If no index
-     *              is specified, the node is inserted at the end of this node's
-     *              children.
-     *
-     * @returns The newly created processing instruction.
-     */
-    public procInst(target: string, content?: string,
-                    index?: number): XmlProcInst
+    public procInst(
+        options: IXmlProcInstOptions): XmlProcInst<XmlElement<Parent>>
     {
-        const procInst = new XmlProcInst(target, content);
-        this.insertChild(procInst, index);
+        const procInst = new XmlProcInst(this, this._validation, options);
+        this._children.push(procInst);
         return procInst;
     }
 
     /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
+     * Returns an XML string representation of this element using the specified
+     * options.
      */
     public toString(options: IStringOptions = {}) {
         const optionsObj = new StringOptions(options);
 
-        const attributes = this.attributes();
-        const nodes = this._children.filter(
-            (node) => attributes.indexOf(node as XmlAttribute) === -1);
-
         // Element tag start
         let str = "<" + this._name;
 
-        // Attributes
-        for (const attribute of attributes) {
-            str += " " + attribute.toString(options);
+        // Attributes and other nodes
+        const nodes: Array<Child<Parent>> = [];
+        for (const node of this._children) {
+            if (node instanceof XmlAttribute) {
+                str += " " + node.toString(options);
+            } else {
+                nodes.push(node);
+            }
         }
 
         // Child nodes
         if (nodes.length > 0) {
-            // Element non-empty tag end
-            str += ">";
+            let childStr = "";
 
             const indenter = (line: string) => optionsObj.indent + line;
             for (let i = 0; i < nodes.length; i++) {
                 const next = nodes[i];
-                let nextStr = next.toString(options);
+
+                let nextStr = "";
+                if (next instanceof XmlElement) {
+                    nextStr += next.toString(options);
+                } else {
+                    nextStr += next.toString();
+                }
+
                 const prev = i > 0 ? nodes[i - 1] : undefined;
+
+                // Skip empty nodes
+                if (next instanceof XmlCharData && next.toString() === "") {
+                    continue;
+                }
 
                 // Line break before child nodes unless all nodes, or at least
                 // the most recent two, are of type XmlCharacterReference,
                 // XmlEntityReference, or XmlCharData
                 if (optionsObj.pretty) {
-                    if (!allSameLineNodes(nodes)) {
-                        if (!(i > 0 && onSameLine(next, prev))) {
-                            str += optionsObj.newline;
+                    if (!this.allSameLineNodes(nodes)) {
+                        if (!(i > 0 && this.onSameLine(next, prev))) {
+                            childStr += optionsObj.newline;
                             nextStr = nextStr.split(optionsObj.newline)
                                              .map(indenter)
                                              .join(optionsObj.newline);
@@ -351,19 +241,24 @@ export default class XmlElement extends XmlNode {
                     }
                 }
 
-                str += nextStr;
+                childStr += nextStr;
             }
 
             // Line break before end tag unless all nodes are of type
             // XmlCharacterReference, XmlEntityReference, or XmlCharData
             if (optionsObj.pretty) {
-                if (!allSameLineNodes(nodes)) {
-                    str += optionsObj.newline;
+                if (!this.allSameLineNodes(nodes)) {
+                    childStr += optionsObj.newline;
                 }
             }
 
-            // Element end tag
-            str += "</" + this._name + ">";
+            if (childStr.length === 0) {
+                // Element empty tag end
+                str += "/>";
+            } else {
+                // Element start and end tags
+                str += ">" + childStr + "</" + this._name + ">";
+            }
         } else {
             // Element empty tag end
             str += "/>";
@@ -371,48 +266,41 @@ export default class XmlElement extends XmlNode {
 
         return str;
     }
-}
 
-/**
- * Returns true if the specified nodes are all of type {@link XmlCharRef},
- * {@link XmlEntityRef}, or {@link XmlCharData}.
- *
- * @param nodes The specified nodes.
- *
- * @returns Whether or not the specified nodes are all of type
- *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlCharData}.
- *
- * @private
- */
-function allSameLineNodes(nodes: XmlNode[]): boolean {
-    for (const node of nodes) {
-        if (!((node instanceof XmlCharRef
-               || node instanceof XmlEntityRef
-               || node instanceof XmlCharData)))
-        {
-            return false;
-        }
+    /**
+     * Returns the parent of this element.
+     */
+    public up(): Parent {
+        return this._parent;
     }
-    return true;
-}
 
-/**
- * Returns true if the specified nodes are all of type {@link XmlCharRef},
- * {@link XmlEntityRef}, or {@link XmlCharData}.
- *
- * @param prev The first specified node.
- * @param next The second specified node.
- *
- * @returns Whether or not the specified nodes are all of type
- *          {@link XmlCharRef}, {@link XmlEntityRef}, or {@link XmlCharData}.
- *
- * @private
- */
-function onSameLine(prev: XmlNode, next?: XmlNode): boolean {
-    return (prev instanceof XmlCharRef
-            || prev instanceof XmlEntityRef
-            || prev instanceof XmlCharData)
-           && (next instanceof XmlCharRef
-               || next instanceof XmlEntityRef
-               || next instanceof XmlCharData);
+    /**
+     * Returns true if the specified nodes are all character references,
+     * entity references, or character data.
+     */
+    private allSameLineNodes(nodes: Array<Child<Parent>>): boolean {
+        for (const node of nodes) {
+            if (!((node instanceof XmlCharRef
+                   || node instanceof XmlEntityRef
+                   || node instanceof XmlCharData)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the specified nodes are all character references,
+     * entity references, or character data.
+     */
+    private onSameLine(prev: Child<Parent>, next?: Child<Parent>): boolean {
+        return (prev instanceof XmlCharRef
+                || prev instanceof XmlEntityRef
+                || prev instanceof XmlCharData)
+               && (!isUndefined(next)
+               && (next instanceof XmlCharRef
+                   || next instanceof XmlEntityRef
+                   || next instanceof XmlCharData));
+    }
 }

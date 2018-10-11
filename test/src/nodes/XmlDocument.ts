@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,296 +13,543 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {
-    XmlComment,
-    XmlDecl,
-    XmlDocument,
-    XmlDtd,
-    XmlElement,
-    XmlNode,
-    XmlProcInst
-} from "../../../lib/main";
+import XmlComment from "../../../lib/nodes/XmlComment";
+import XmlDecl from "../../../lib/nodes/XmlDecl";
+import XmlDocument from "../../../lib/nodes/XmlDocument";
+import XmlDtd from "../../../lib/nodes/XmlDtd";
+import XmlElement from "../../../lib/nodes/XmlElement";
+import XmlProcInst from "../../../lib/nodes/XmlProcInst";
 
 describe("XmlDocument", () => {
-    describe("#constructor", () => {
-        it("should create an XmlDocument node with the specified root"
-           + " element name", () => {
-            const node = new XmlDocument("abc");
-            assert.strictEqual(node.toString(), "<abc/>");
-        });
-    });
-
-    describe("#comment", () => {
-        it("should add an XmlComment node to this node's children at the"
-           + " specified index with the specified comment text and return"
-           + " the newly added node", () => {
-            const node = new XmlDocument("abc");
-            assert.isTrue(node.comment("test") instanceof XmlComment);
-            assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
-            assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
-            assert.strictEqual(node.toString(), "<!--test2-->\n<!--test3-->"
-                                                + "\n<abc/>\n<!--test-->");
-        });
+    it("#comment", () => {
+        const node = new XmlDocument({});
+        assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+        assert.isTrue(node.comment({charData: "abc"}) instanceof XmlComment);
+        assert.isTrue(node.comment({charData: "def"}) instanceof XmlComment);
+        assert.isTrue(node.comment({charData: "ghi"}) instanceof XmlComment);
+        assert.strictEqual(node.toString(),
+                           "<root/>\n<!--abc-->\n<!--def-->\n<!--ghi-->");
     });
 
     describe("#decl", () => {
-        it("should add an XmlDecl node to the beginning of this node's"
-           + " children with the specified options and return the newly"
-           + " added node", () => {
-            let node = new XmlDocument("root");
-            node.comment("test");
-            assert.isTrue(node.decl({encoding: "UTF-8"}) instanceof XmlDecl);
-            assert.strictEqual(node.toString(), "<?xml version='1.0'"
-                                                + " encoding='UTF-8'?>"
-                                                + "\n<root/>\n<!--test-->");
+        it("as first child", () => {
+            let node = new XmlDocument({});
+            assert.isTrue(node.decl({}) instanceof XmlDecl);
+            assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+            assert.strictEqual(
+                node.toString(), "<?xml version='1.0'?>\n<root/>");
 
-            node = new XmlDocument("root");
-            node.comment("test", 0);
-            assert.isTrue(node.decl({standalone: "yes"}) instanceof XmlDecl);
-            assert.strictEqual(node.toString(), "<?xml version='1.0'"
-                                                + " standalone='yes'?>"
-                                                + "\n<!--test-->\n<root/>");
+            node = new XmlDocument({});
+            const declOptions = {
+                encoding: "UTF-16",
+                standalone: "yes",
+                version: "1.1"
+            };
+            assert.isTrue(node.decl(declOptions) instanceof XmlDecl);
+            assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+            assert.strictEqual(
+                node.toString(),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>"
+                + "\n<root/>");
+        });
 
-            node = new XmlDocument("root");
-            assert.isTrue(node.decl({version: "1.1"}) instanceof XmlDecl);
-            assert.strictEqual(node.toString(), "<?xml version='1.1'?>"
-                                                + "\n<root/>");
+        it("as not first child", () => {
+            assert.throws(() => {
+                const node = new XmlDocument({});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(node.decl({}) instanceof XmlDecl);
+            });
+
+            assert.doesNotThrow(() => {
+                const node = new XmlDocument({validation: false});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(node.decl({}) instanceof XmlDecl);
+            });
         });
     });
 
     describe("#dtd", () => {
-        it("should add an XmlDtd node to this node's children at the"
-           + " specified index with the specified options and return the newly"
-           + " added node", () => {
-            let node = new XmlDocument("root");
-            assert.isTrue(node.dtd("a", "b", "c", 0) instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE a PUBLIC \'c\' \'b\'>\n<root/>");
+        it("before root element", () => {
+            let node = new XmlDocument({});
+            assert.isTrue(
+                node.comment({charData: "abc"}) instanceof XmlComment);
+            assert.isTrue(node.dtd({name: "def"}) instanceof XmlDtd);
+            assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+            assert.strictEqual(
+                node.toString(), "<!--abc-->\n<!DOCTYPE def>\n<root/>");
 
-            node = new XmlDocument("root");
-            node.decl();
-            assert.isTrue(node.dtd("d", "e", undefined, 1) instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<?xml version='1.0'?>\n<!DOCTYPE d SYSTEM"
-                               + " \'e\'>\n<root/>");
-
-            node = new XmlDocument("root");
-            node.comment("cmt", 0);
-            node.comment("cmt2", 1);
-            node.decl();
-            assert.isTrue(node.dtd("d", "e", undefined, 2) instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<?xml version='1.0'?>\n<!--cmt-->\n"
-                               + "<!DOCTYPE d SYSTEM \'e\'>\n<!--cmt2-->"
-                               + "\n<root/>");
+            node = new XmlDocument({});
+            assert.isTrue(node.decl({}) instanceof XmlDecl);
+            assert.isTrue(
+                node.dtd({name: "abc", sysId: "def", pubId: "ghi"})
+                instanceof XmlDtd);
+            assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+            assert.strictEqual(
+                node.toString(),
+                "<?xml version='1.0'?>"
+                + "\n<!DOCTYPE abc PUBLIC 'ghi' 'def'>\n<root/>");
         });
 
-        it("should add an XmlDtd node to this node's children immediately"
-           + " after the XML declaration if one exists, or at the beginning"
-           + " if one does not, with the specified options and return the"
-           + " newly added node", () => {
-            let node = new XmlDocument("root");
-            assert.isTrue(node.dtd("a", "b", "c") instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE a PUBLIC \'c\' \'b\'>\n<root/>");
+        it("after root element", () => {
+            assert.throws(() => {
+                const node = new XmlDocument({});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(node.dtd({name: "def"}) instanceof XmlDtd);
+            });
 
-            node = new XmlDocument("root");
-            node.decl();
-            assert.isTrue(node.dtd("d", "e") instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<?xml version='1.0'?>\n<!DOCTYPE d SYSTEM"
-                               + " \'e\'>\n<root/>");
-
-            node = new XmlDocument("root");
-            assert.isTrue(node.dtd("f") instanceof XmlDtd);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE f>\n<root/>");
+            assert.doesNotThrow(() => {
+                const node = new XmlDocument({validation: false});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(node.dtd({name: "def"}) instanceof XmlDtd);
+            });
         });
     });
 
-    describe("#insertChild", () => {
-        it("should add the specified node to this node's children at the"
-           + " specified index", () => {
-            const commentNode = new XmlComment("comment");
-            const declNode = new XmlDecl();
-            const dtdNode = new XmlDtd("html");
-            const procInstNode = new XmlProcInst("target", "content");
-            const node = new XmlDocument("root");
-            node.insertChild(commentNode);
-            node.insertChild(declNode, 0);
-            node.insertChild(dtdNode, 1);
-            node.insertChild(procInstNode, 2);
-            assert.strictEqual(node.toString(),
-                               "<?xml version=\'1.0\'?>\n<!DOCTYPE html>\n"
-                               + "<?target content?>\n<root/>\n<!--comment-->");
+    describe("#element", () => {
+        it("single root element", () => {
+            const node = new XmlDocument({});
+            assert.isTrue(
+                node.element({name: "root"}) instanceof XmlElement);
+            assert.strictEqual(node.toString(), "<root/>");
         });
 
-        it("should throw an error if the specified node is not an"
-           + " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
-            const node = new XmlDocument("root");
-            assert.throws(() => node.insertChild(new XmlNode()));
-        });
+        it("multiple root elements", () => {
+            assert.throws(() => {
+                const node = new XmlDocument({});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(
+                    node.element({name: "root2"}) instanceof XmlElement);
+            });
 
-        it("should throw an error if the specified node is an XmlComment or"
-           + " XmlProcInst node being inserted before an existing XmlDecl"
-           + " node in this node's children", () => {
-            const node = new XmlDocument("root");
-            node.decl();
-            assert.throws(() => node.insertChild(new XmlComment("comment"), 0));
-            assert.throws(() => node.insertChild(new XmlProcInst("target",
-                "content"), 0));
-        });
-
-        it("should throw an error if the specified node is an XmlDecl node"
-           + " but this node's children already contains an XmlDecl"
-           + " node", () => {
-            const node = new XmlDocument("root");
-            node.decl();
-            assert.throws(() => node.insertChild(new XmlDecl()));
-        });
-
-        it("should throw an error if the specified node is an XmlDecl node"
-           + " and is not being inserted at the beginning of this node's"
-           + " children", () => {
-            const node = new XmlDocument("root");
-            assert.throws(() => node.insertChild(new XmlDecl(), 1));
-        });
-
-        it("should throw an error if the specified node is an XmlDtd node"
-           + " and is being inserted before an existing XmlDecl node in this"
-           + " node's children", () => {
-            const node = new XmlDocument("root");
-            node.decl();
-            assert.throws(() => node.insertChild(new XmlDtd("html"), 0));
-        });
-
-        it("should throw an error if the specified node is an XmlDtd node"
-           + " and is being inserted after an existing XmlElement node in"
-           + " this node's children", () => {
-            const node = new XmlDocument("root");
-            assert.throws(() => node.insertChild(new XmlDtd("html"), 1));
-        });
-
-        it("should throw an error if the specified node is an XmlDtd node"
-           + " but this node's children already contains an XmlDtd"
-           + " node", () => {
-            const node = new XmlDocument("root");
-            node.dtd("html");
-            assert.throws(() => node.insertChild(new XmlDtd("html")));
+            assert.doesNotThrow(() => {
+                const node = new XmlDocument({validation: false});
+                assert.isTrue(
+                    node.element({name: "root"}) instanceof XmlElement);
+                assert.isTrue(
+                    node.element({name: "root2"}) instanceof XmlElement);
+            });
         });
     });
 
-    describe("#procInst", () => {
-        it("should add an XmlProcInst node to this node's children at the"
-           + " specified index with the specified options and return the newly"
-           + " added node", () => {
-            const node = new XmlDocument("abc");
-            assert.isTrue(node.procInst("test",
-                                        "test1") instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test2",
-                                        "test3", 0) instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test4",
-                                        "test5", 1) instanceof XmlProcInst);
-            assert.strictEqual(node.toString(),
-                               "<?test2 test3?>\n<?test4 test5?>\n<abc/>"
-                               + "\n<?test test1?>");
-        });
-    });
-
-    describe("#removeChild", () => {
-        it("should throw an error if the specified node is an XmlElement"
-           + " node", () => {
-            const node = new XmlDocument("root");
-            assert.throws(() => node.removeChild(node.root()));
-        });
-
-        it("should remove the specified node from this node", () => {
-            const node = new XmlDocument("root");
-            const commentNode = node.comment("cmt");
-            assert.isTrue(node.removeChild(commentNode));
-        });
-    });
-
-    describe("#removeChildAtIndex", () => {
-        it("should throw an error if the node at the specified index is an"
-           + " XmlElement node", () => {
-            const node = new XmlDocument("root");
-            assert.throws(() => node.removeChildAtIndex(0));
-        });
-
-        it("should remove the node at the specified index from this"
-           + " node", () => {
-            const node = new XmlDocument("root");
-            const commentNode = node.comment("cmt");
-            assert.strictEqual(node.removeChildAtIndex(1), commentNode);
-        });
-    });
-
-    describe("#root", () => {
-        it("should return the root element of this document", () => {
-            const node = new XmlDocument("abc");
-            assert.isTrue(node.root() instanceof XmlElement);
-            assert.strictEqual((node.root()).name, "abc");
-        });
+    it("#procInst", () => {
+        const node = new XmlDocument({});
+        assert.isTrue(node.element({name: "root"}) instanceof XmlElement);
+        assert.isTrue(node.procInst({target: "abc"}) instanceof XmlProcInst);
+        assert.isTrue(node.procInst({target: "def", content: "ghi"})
+                      instanceof XmlProcInst);
+        assert.strictEqual(node.toString(),
+                           "<root/>\n<?abc?>\n<?def ghi?>");
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            const node = new XmlDocument("abc");
-            node.comment("comment1");
-            node.comment("comment2", 0);
-            node.decl({
-                          encoding: "UTF-8",
-                          standalone: "no",
-                          version: "1.1"
-                      });
-            node.dtd("html", "a", "b");
-            node.procInst("t", "c");
-            assert.strictEqual(node.toString(),
-                               "<?xml version='1.1' encoding='UTF-8'"
-                               + " standalone='no'?>\n<!DOCTYPE html PUBLIC"
-                               + " 'b' 'a'>\n<!--comment2-->\n<abc/>\n"
-                               + "<!--comment1-->\n<?t c?>");
+        function getXmlDocument(): XmlDocument {
+            const node = new XmlDocument({});
+            node.decl({encoding: "UTF-16", standalone: "yes", version: "1.1"});
+            // @formatter:off
+            node.dtd({name: "stop"})
+                .attlist({charData: "purpose type CDATA 'retire'"}).up()
+                .comment({charData: "rely bite-sized magic"}).up()
+                .element({charData: "noiseless EMPTY"}).up()
+                .entity({charData: "protective 'multiply'"}).up()
+                .notation({charData: "murky PUBLIC 'tested gratis'"}).up()
+                .paramEntityRef({name: "giddy"}).up()
+                .procInst({target: "pencil", content: "four design"}).up().up();
+            // @formatter:on
+            node.comment({charData: "reading sisters plate"});
+            node.procInst({target: "birthday"});
+            // @formatter:off
+            node
+                .element({name: "root"})
+                    .attribute({name: "overt"})
+                        .charRef({char: "v"}).up()
+                        .entityRef({name: "repair"}).up()
+                        .text({charData: "probable hospitable"}).up().up()
+                    .attribute({name: "stage"})
+                        .text({charData: ""}).up().up()
+                    .attribute({name: "shop"}).up()
+                    .element({name: "abacus"})
+                        .element({name: "windows"})
+                            .element({name: "fire"})
+                                .charData({charData: "blue"}).up().up()
+                            .element({name: "laughable"})
+                                .charData({charData: "hateful"}).up().up()
+                            .element({name: "ring"})
+                                .charData({charData: "terrific"}).up().up().up()
+                        .element({name: "plug"})
+                            .element({name: "utter"})
+                                .charData({charData: "wander"}).up().up()
+                            .element({name: "toys"})
+                                .charData({charData: "groan"}).up().up().up()
+                        .element({name: "powerful"})
+                            .element({name: "coal"})
+                                .charData({charData: "dear"}).up().up()
+                            .element({name: "warm"})
+                                .charData({charData: "impartial"}).up().up()
+                            .element({name: "wink"})
+                                .charData({charData: "twig"}).up().up()
+                            .element({name: "secret"})
+                                .charData({charData: "x"}).up().up().up().up()
+                    .element({name: "plant"})
+                        .comment({charData: "pin punch"}).up()
+                        .procInst({target: "arrogant", content: "sun rad"}).up()
+                        .entityRef({name: "functional"}).up()
+                        .charData({charData: "educated"}).up()
+                        .charRef({char: "w"}).up()
+                        .element({name: "thunder"}).up()
+                        .element({name: "berserk"})
+                            .charData({charData: ""}).up().up()
+                        .charData({charData: "route flaky"}).up()
+                        .entityRef({name: "ragged"}).up()
+                        .charRef({char: "q"}).up()
+                        .cdata({charData: "physical educated"}).up().up()
+                     .element({name: "baseball"})
+                        .charData({charData: "yawn"}).up()
+                        .entityRef({name: "jagged"}).up()
+                        .charRef({char: "g"}).up()
+                        .charData({charData: "camp"}).up()
+                        .charRef({char: "y"}).up()
+                        .entityRef({name: "tangible"}).up()
+                        .charData({charData: "squeamish"});
+            // @formatter:on
+            node.procInst({target: "abstracted", content: "hungry bath"});
+            node.comment({charData: "shoe"});
+
+            return node;
+        }
+
+        it("no root element; default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(() => {
+                const node = new XmlDocument({});
+                node.decl({});
+                node.dtd({name: "abc"});
+                node.comment({charData: "def"});
+                node.procInst({target: "ghi"});
+                node.comment({charData: "jkl"});
+                node.procInst({target: "mno"});
+                node.toString();
+            });
+
+            assert.doesNotThrow(() => {
+                const node = new XmlDocument({validation: false});
+                node.decl({});
+                node.dtd({name: "abc"});
+                node.comment({charData: "def"});
+                node.procInst({target: "ghi"});
+                node.comment({charData: "jkl"});
+                node.procInst({target: "mno"});
+                assert.strictEqual(
+                    node.toString(),
+                    "<?xml version='1.0'?>\n<!DOCTYPE abc>\n"
+                    + "<!--def-->\n<?ghi?>\n<!--jkl-->\n<?mno?>");
+            });
         });
 
-        it("should return a string that uses pretty printing depending on"
-           + " the specified options", () => {
-            const node = new XmlDocument("abc");
-            node.comment("comment1");
-            node.comment("comment2", 0);
-            node.decl({
-                          encoding: "UTF-8",
-                          standalone: "no",
-                          version: "1.1"
-                      });
-            node.dtd("html", "a", "b");
-            node.procInst("t", "c");
-            assert.strictEqual(node.toString({pretty: false}),
-                               "<?xml version='1.1' encoding='UTF-8'"
-                               + " standalone='no'?><!DOCTYPE html PUBLIC 'b'"
-                               + " 'a'><!--comment2--><abc/><!--comment1-->"
-                               + "<?t c?>");
+        it("root element and other children; default quotes; default pretty"
+           + " printing; default indentation; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString(),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\n    <!--rely bite-sized magic-->"
+                + "\n    <!ELEMENT noiseless EMPTY>"
+                + "\n    <!ENTITY protective 'multiply'>"
+                + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n    %giddy;\n    <?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
-        it("should return a string that uses a specific newline character"
-           + " depending on the specified options", () => {
-            const node = new XmlDocument("abc");
-            node.comment("comment1");
-            node.comment("comment2", 0);
-            node.decl({
-                          encoding: "UTF-8",
-                          standalone: "no",
-                          version: "1.1"
-                      });
-            node.dtd("html", "a", "b");
-            node.procInst("t", "c");
-            assert.strictEqual(node.toString({newline: "\r\n"}),
-                               "<?xml version='1.1' encoding='UTF-8'"
-                               + " standalone='no'?>\r\n<!DOCTYPE html"
-                               + " PUBLIC 'b' 'a'>\r\n<!--comment2-->"
-                               + "\r\n<abc/>\r\n<!--comment1-->\r\n<?t c?>");
+        it("root element and other children; single quotes; default pretty"
+           + " printing; default indentation; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({doubleQuotes: false}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\n    <!--rely bite-sized magic-->"
+                + "\n    <!ELEMENT noiseless EMPTY>"
+                + "\n    <!ENTITY protective 'multiply'>"
+                + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n    %giddy;\n    <?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
+        });
+
+        it("root element and other children; double quotes; default pretty"
+           + " printing; default indentation; default newline", () => {
+            const node = getXmlDocument();
+            /* tslint:disable:quotemark */
+            assert.strictEqual(
+                node.toString({doubleQuotes: true}),
+                '<?xml version="1.1" encoding="UTF-16" standalone="yes"?>\n'
+                + '<!DOCTYPE stop ['
+                + '\n    <!ATTLIST purpose type CDATA \'retire\'>'
+                + '\n    <!--rely bite-sized magic-->'
+                + '\n    <!ELEMENT noiseless EMPTY>'
+                + '\n    <!ENTITY protective \'multiply\'>'
+                + '\n    <!NOTATION murky PUBLIC \'tested gratis\'>'
+                + '\n    %giddy;\n    <?pencil four design?>\n]>'
+                + '\n<!--reading sisters plate-->\n<?birthday?>'
+                + '\n<root overt="&#118;&repair;probable hospitable"'
+                + ' stage="" shop="">\n    <abacus>\n        <windows>'
+                + '\n            <fire>blue</fire>'
+                + '\n            <laughable>hateful</laughable>'
+                + '\n            <ring>terrific</ring>\n        </windows>'
+                + '\n        <plug>\n            <utter>wander</utter>'
+                + '\n            <toys>groan</toys>\n        </plug>'
+                + '\n        <powerful>\n            <coal>dear</coal>'
+                + '\n            <warm>impartial</warm>'
+                + '\n            <wink>twig</wink>'
+                + '\n            <secret>x</secret>\n        </powerful>'
+                + '\n    </abacus>\n    <plant>\n        <!--pin punch-->'
+                + '\n        <?arrogant sun rad?>'
+                + '\n        &functional;educated&#119;\n        <thunder/>'
+                + '\n        <berserk/>\n        route flaky&ragged;&#113;'
+                + '\n        <![CDATA[physical educated]]>\n    </plant>'
+                + '\n    <baseball>yawn&jagged;&#103;camp&#121;'
+                + '&tangible;squeamish</baseball>\n</root>'
+                + '\n<?abstracted hungry bath?>\n<!--shoe-->');
+            /* tslint:enable:quotemark */
+        });
+
+        it("root element and other children; default quotes; pretty"
+           + " printing on; default indentation; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({pretty: true}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\n    <!--rely bite-sized magic-->"
+                + "\n    <!ELEMENT noiseless EMPTY>"
+                + "\n    <!ENTITY protective 'multiply'>"
+                + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n    %giddy;\n    <?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
+        });
+
+        it("root element and other children; default quotes; pretty"
+           + " printing off; default indentation; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({pretty: false}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>"
+                + "<!DOCTYPE stop [<!ATTLIST purpose type CDATA 'retire'>"
+                + "<!--rely bite-sized magic--><!ELEMENT noiseless EMPTY>"
+                + "<!ENTITY protective 'multiply'><!NOTATION murky PUBLIC"
+                + " 'tested gratis'>%giddy;<?pencil four design?>]>"
+                + "<!--reading sisters plate--><?birthday?>"
+                + "<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''><abacus><windows><fire>blue</fire>"
+                + "<laughable>hateful</laughable><ring>terrific</ring>"
+                + "</windows><plug><utter>wander</utter><toys>groan</toys>"
+                + "</plug><powerful><coal>dear</coal><warm>impartial</warm>"
+                + "<wink>twig</wink><secret>x</secret></powerful></abacus>"
+                + "<plant><!--pin punch--><?arrogant sun rad?>&functional;"
+                + "educated&#119;<thunder/><berserk/>route flaky&ragged;&#113;"
+                + "<![CDATA[physical educated]]></plant>"
+                + "<baseball>yawn&jagged;&#103;camp&#121;&tangible;squeamish"
+                + "</baseball></root><?abstracted hungry bath?><!--shoe-->");
+        });
+
+        it("root element and other children; default quotes; default pretty"
+           + " printing; indentation four spaces; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({indent: "    "}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\n    <!--rely bite-sized magic-->"
+                + "\n    <!ELEMENT noiseless EMPTY>"
+                + "\n    <!ENTITY protective 'multiply'>"
+                + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n    %giddy;\n    <?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
+        });
+
+        it("root element and other children; default quotes; default pretty"
+           + " printing; indentation tabs; default newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({indent: "\t"}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n\t<!ATTLIST purpose type CDATA 'retire'>"
+                + "\n\t<!--rely bite-sized magic-->"
+                + "\n\t<!ELEMENT noiseless EMPTY>"
+                + "\n\t<!ENTITY protective 'multiply'>"
+                + "\n\t<!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n\t%giddy;\n\t<?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n\t<abacus>\n\t\t<windows>"
+                + "\n\t\t\t<fire>blue</fire>"
+                + "\n\t\t\t<laughable>hateful</laughable>"
+                + "\n\t\t\t<ring>terrific</ring>\n\t\t</windows>"
+                + "\n\t\t<plug>\n\t\t\t<utter>wander</utter>"
+                + "\n\t\t\t<toys>groan</toys>\n\t\t</plug>"
+                + "\n\t\t<powerful>\n\t\t\t<coal>dear</coal>"
+                + "\n\t\t\t<warm>impartial</warm>"
+                + "\n\t\t\t<wink>twig</wink>"
+                + "\n\t\t\t<secret>x</secret>\n\t\t</powerful>"
+                + "\n\t</abacus>\n\t<plant>\n\t\t<!--pin punch-->"
+                + "\n\t\t<?arrogant sun rad?>"
+                + "\n\t\t&functional;educated&#119;\n\t\t<thunder/>"
+                + "\n\t\t<berserk/>\n\t\troute flaky&ragged;&#113;"
+                + "\n\t\t<![CDATA[physical educated]]>\n\t</plant>"
+                + "\n\t<baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
+        });
+
+        it("root element and other children; default quotes; default pretty"
+           + " printing; default indentation; \\n newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({newline: "\n"}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\n"
+                + "<!DOCTYPE stop [\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\n    <!--rely bite-sized magic-->"
+                + "\n    <!ELEMENT noiseless EMPTY>"
+                + "\n    <!ENTITY protective 'multiply'>"
+                + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\n    %giddy;\n    <?pencil four design?>\n]>"
+                + "\n<!--reading sisters plate-->\n<?birthday?>"
+                + "\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + "\n            <fire>blue</fire>"
+                + "\n            <laughable>hateful</laughable>"
+                + "\n            <ring>terrific</ring>\n        </windows>"
+                + "\n        <plug>\n            <utter>wander</utter>"
+                + "\n            <toys>groan</toys>\n        </plug>"
+                + "\n        <powerful>\n            <coal>dear</coal>"
+                + "\n            <warm>impartial</warm>"
+                + "\n            <wink>twig</wink>"
+                + "\n            <secret>x</secret>\n        </powerful>"
+                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
+                + "\n        <?arrogant sun rad?>"
+                + "\n        &functional;educated&#119;\n        <thunder/>"
+                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
+                + "\n        <![CDATA[physical educated]]>\n    </plant>"
+                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<?abstracted hungry bath?>\n<!--shoe-->");
+        });
+
+        it("root element and other children; default quotes; default pretty"
+           + " printing; default indentation; \\r\\n newline", () => {
+            const node = getXmlDocument();
+            assert.strictEqual(
+                node.toString({newline: "\r\n"}),
+                "<?xml version='1.1' encoding='UTF-16' standalone='yes'?>\r\n"
+                + "<!DOCTYPE stop ["
+                + "\r\n    <!ATTLIST purpose type CDATA 'retire'>"
+                + "\r\n    <!--rely bite-sized magic-->"
+                + "\r\n    <!ELEMENT noiseless EMPTY>"
+                + "\r\n    <!ENTITY protective 'multiply'>"
+                + "\r\n    <!NOTATION murky PUBLIC 'tested gratis'>"
+                + "\r\n    %giddy;\r\n    <?pencil four design?>\r\n]>"
+                + "\r\n<!--reading sisters plate-->\r\n<?birthday?>"
+                + "\r\n<root overt='&#118;&repair;probable hospitable'"
+                + " stage='' shop=''>\r\n    <abacus>\r\n        <windows>"
+                + "\r\n            <fire>blue</fire>"
+                + "\r\n            <laughable>hateful</laughable>"
+                + "\r\n            <ring>terrific</ring>\r\n        </windows>"
+                + "\r\n        <plug>\r\n            <utter>wander</utter>"
+                + "\r\n            <toys>groan</toys>\r\n        </plug>"
+                + "\r\n        <powerful>\r\n            <coal>dear</coal>"
+                + "\r\n            <warm>impartial</warm>"
+                + "\r\n            <wink>twig</wink>"
+                + "\r\n            <secret>x</secret>\r\n        </powerful>"
+                + "\r\n    </abacus>\r\n    <plant>\r\n        <!--pin punch-->"
+                + "\r\n        <?arrogant sun rad?>"
+                + "\r\n        &functional;educated&#119;\r\n        <thunder/>"
+                + "\r\n        <berserk/>\r\n        route flaky&ragged;&#113;"
+                + "\r\n        <![CDATA[physical educated]]>\r\n    </plant>"
+                + "\r\n    <baseball>yawn&jagged;&#103;camp&#121;"
+                + "&tangible;squeamish</baseball>\r\n</root>"
+                + "\r\n<?abstracted hungry bath?>\r\n<!--shoe-->");
         });
     });
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,414 +13,626 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {assert} from "chai";
-import {
-    XmlComment,
-    XmlDtd,
-    XmlDtdAttlist,
-    XmlDtdElement,
-    XmlDtdEntity,
-    XmlDtdNotation,
-    XmlDtdParamEntityRef,
-    XmlNode,
-    XmlProcInst
-} from "../../../lib/main";
+import XmlComment from "../../../lib/nodes/XmlComment";
+import XmlDtd from "../../../lib/nodes/XmlDtd";
+import XmlDtdAttlist from "../../../lib/nodes/XmlDtdAttlist";
+import XmlDtdElement from "../../../lib/nodes/XmlDtdElement";
+import XmlDtdEntity from "../../../lib/nodes/XmlDtdEntity";
+import XmlDtdNotation from "../../../lib/nodes/XmlDtdNotation";
+import XmlDtdParamEntityRef from "../../../lib/nodes/XmlDtdParamEntityRef";
+import XmlProcInst from "../../../lib/nodes/XmlProcInst";
 
 describe("XmlDtd", () => {
-    describe("#constructor", () => {
-        it("should create an XmlDtd node with the specified name, sysId,"
-           + " and pubId", () => {
-            let node = new XmlDtd("abc", "def", "ghi");
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc PUBLIC 'ghi'"
-                                                + " 'def'>");
-
-            node = new XmlDtd("abc", "def");
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc SYSTEM 'def'>");
-
-            node = new XmlDtd("abc");
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc>");
-        });
+    it("#attlist", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.attlist({charData: "test"})
+                      instanceof XmlDtdAttlist);
+        assert.isTrue(node.attlist({charData: "test2"})
+                      instanceof XmlDtdAttlist);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <!ATTLIST test>\n    <!ATTLIST test2>\n]>");
     });
 
-    describe("#name", () => {
-        it("should return this node's name", () => {
-            const node = new XmlDtd("abc");
-            assert.strictEqual(node.name, "abc");
-        });
-
-        it("should set this node's name to the specified value", () => {
-            const node = new XmlDtd("abc");
-            node.name = "def123";
-            assert.strictEqual(node.name, "def123");
-        });
-
-        it("should throw an error if the specified value is not a" +
-           " string", () => {
-            const node = new XmlDtd("abc");
-            assert.throws((): void => node.name = undefined as any);
-            assert.throws((): void => node.name = null as any);
-            assert.throws((): void => node.name = 0 as any);
-            assert.throws((): void => node.name = new XmlDtd("abc") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in XML names", () => {
-            const node = new XmlDtd("abc");
-            assert.throws(() => node.name = ".");
-        });
+    it("#comment", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.comment({charData: "test"}) instanceof XmlComment);
+        assert.isTrue(node.comment({charData: "test2"}) instanceof XmlComment);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <!--test-->\n    <!--test2-->\n]>");
     });
 
-    describe("#pubId", () => {
-        it("should return this node's pubId", () => {
-            const node = new XmlDtd("abc", "def", "ghi");
-            assert.strictEqual(node.pubId, "ghi");
-        });
-
-        it("should set this node's pubId to the specified value", () => {
-            const node = new XmlDtd("abc", "def");
-            node.pubId = "ghi";
-            assert.strictEqual(node.pubId, "ghi");
-            node.pubId = "azAz09-'()+,./:=?;!*#@$_% \r\n";
-            assert.strictEqual(node.pubId, "azAz09-'()+,./:=?;!*#@$_% \r\n");
-        });
-
-        it("should throw an error if the specified value is not a" +
-           " string or undefined", () => {
-            const node = new XmlDtd("abc", "def");
-            assert.throws((): void => node.pubId = null as any);
-            assert.throws((): void => node.pubId = 0 as any);
-            assert.throws((): void => node.pubId = new XmlDtd("abc") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in public identifiers", () => {
-            const node = new XmlDtd("abc", "def");
-            assert.throws(() => node.pubId = "~");
-            assert.throws(() => node.pubId = "~ab");
-            assert.throws(() => node.pubId = "ab~");
-            assert.throws(() => node.pubId = "a~b");
-            assert.throws(() => node.pubId = "a~b~~ab~a");
-        });
-
-        it("should throw an error if the specified value is undefined when"
-           + " sysId is undefined", () => {
-            const node = new XmlDtd("abc");
-            assert.throws(() => node.pubId = "def");
-        });
+    it("#element", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.element({charData: "test"})
+                      instanceof XmlDtdElement);
+        assert.isTrue(node.element({charData: "test2"})
+                      instanceof XmlDtdElement);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <!ELEMENT test>\n    <!ELEMENT test2>\n]>");
     });
 
-    describe("#sysId", () => {
-        it("should return this node's sysId", () => {
-            const node = new XmlDtd("abc", "def");
-            assert.strictEqual(node.sysId, "def");
-        });
-
-        it("should set this node's sysId to the specified value", () => {
-            const node = new XmlDtd("abc");
-            node.sysId = "def";
-            assert.strictEqual(node.sysId, "def");
-        });
-
-        it("should throw an error if the specified value is not a"
-           + " string or undefined", () => {
-            const node = new XmlDtd("abc");
-            assert.throws((): void => node.sysId = null as any);
-            assert.throws((): void => node.sysId = 0 as any);
-            assert.throws((): void => node.sysId = new XmlDtd("abc") as any);
-        });
-
-        it("should throw an error if the specified value contains characters"
-           + " not allowed in system identifiers", () => {
-            const node = new XmlDtd("abc");
-            assert.throws(() => node.sysId = "abc"
-                                             + String.fromCharCode(0x0001)
-                                             + "def");
-            assert.throws(() => node.sysId = "'\"");
-            assert.throws(() => node.sysId = "abc'abc\"abc");
-        });
-
-        it("should throw an error if the specified value is undefined when"
-           + " pubId is defined", () => {
-            const node = new XmlDtd("abc", "def", "ghi");
-            assert.throws((): void => node.sysId = undefined);
-        });
+    it("#entity", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.entity({charData: "test"}) instanceof XmlDtdEntity);
+        assert.isTrue(node.entity({charData: "test2"}) instanceof XmlDtdEntity);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <!ENTITY test>\n    <!ENTITY test2>\n]>");
     });
 
-    describe("#attlist", () => {
-        it("should add an XmlDtdAttlist node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.attlist("test") instanceof XmlDtdAttlist);
-            assert.isTrue(node.attlist("test2", 0) instanceof XmlDtdAttlist);
-            assert.isTrue(node.attlist("test3", 1) instanceof XmlDtdAttlist);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!ATTLIST test2>\n"
-                               + "    <!ATTLIST test3>\n"
-                               + "    <!ATTLIST test>\n]>");
-        });
+    it("#notation", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.notation({charData: "test"})
+                      instanceof XmlDtdNotation);
+        assert.isTrue(node.notation({charData: "test2"})
+                      instanceof XmlDtdNotation);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <!NOTATION test>\n    <!NOTATION test2>\n]>");
     });
 
-    describe("#comment", () => {
-        it("should add an XmlComment node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.comment("test") instanceof XmlComment);
-            assert.isTrue(node.comment("test2", 0) instanceof XmlComment);
-            assert.isTrue(node.comment("test3", 1) instanceof XmlComment);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!--test2-->\n"
-                               + "    <!--test3-->\n    <!--test-->\n]>");
-        });
+    it("#paramEntityRef", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.paramEntityRef({name: "test"})
+                      instanceof XmlDtdParamEntityRef);
+        assert.isTrue(node.paramEntityRef({name: "test2"})
+                      instanceof XmlDtdParamEntityRef);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    %test;\n    %test2;\n]>");
     });
 
-    describe("#element", () => {
-        it("should add an XmlDtdElement node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.element("test") instanceof XmlDtdElement);
-            assert.isTrue(node.element("test2", 0) instanceof XmlDtdElement);
-            assert.isTrue(node.element("test3", 1) instanceof XmlDtdElement);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!ELEMENT test2>\n"
-                               + "    <!ELEMENT test3>\n"
-                               + "    <!ELEMENT test>\n]>");
-        });
-    });
-
-    describe("#entity", () => {
-        it("should add an XmlDtdEntity node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.entity("test") instanceof XmlDtdEntity);
-            assert.isTrue(node.entity("test2", 0) instanceof XmlDtdEntity);
-            assert.isTrue(node.entity("test3", 1) instanceof XmlDtdEntity);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!ENTITY test2>\n"
-                               + "    <!ENTITY test3>\n    <!ENTITY test>\n]>");
-        });
-    });
-
-    describe("#insertChild", () => {
-        it("should add the specified node to this node's children at the"
-           + " specified index", () => {
-            const commentNode = new XmlComment("comment");
-            const attlistNode = new XmlDtdAttlist("attlist");
-            const elementNode = new XmlDtdElement("element");
-            const entityNode = new XmlDtdElement("entity");
-            const notationNode = new XmlDtdNotation("notation");
-            const paramEntityRefNode = new XmlDtdParamEntityRef("ref");
-            const procInstNode = new XmlProcInst("target", "content");
-            const node = new XmlDtd("abc");
-            node.insertChild(commentNode);
-            node.insertChild(procInstNode, 0);
-            node.insertChild(attlistNode, 1);
-            node.insertChild(elementNode, 2);
-            node.insertChild(entityNode, 3);
-            node.insertChild(notationNode, 4);
-            node.insertChild(paramEntityRefNode, 5);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <?target content?>\n"
-                               + "    <!ATTLIST attlist>\n"
-                               + "    <!ELEMENT element>\n"
-                               + "    <!ELEMENT entity>\n"
-                               + "    <!NOTATION notation>\n"
-                               + "    %ref;\n    <!--comment-->\n]>");
-        });
-
-        it("should throw an error if the specified node is not an"
-           + " XmlComment, XmlDecl, XmlDtd, or XmlProcInst node", () => {
-            const node = new XmlDtd("abc");
-            assert.throws(() => node.insertChild(new XmlNode()));
-        });
-    });
-
-    describe("#notation", () => {
-        it("should add an XmlDtdNotation node to this node's children at the"
-           + " specified index with the specified text and return"
-           + " the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.notation("test") instanceof XmlDtdNotation);
-            assert.isTrue(node.notation("test2", 0) instanceof XmlDtdNotation);
-            assert.isTrue(node.notation("test3", 1) instanceof XmlDtdNotation);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!NOTATION test2>\n"
-                               + "    <!NOTATION test3>\n"
-                               + "    <!NOTATION test>\n]>");
-        });
-    });
-
-    describe("#paramEntityRef", () => {
-        it("should add an XmlDtdParamEntityRef node to this node's children"
-           + " at the specified index with the specified text and"
-           + " return the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(
-                node.paramEntityRef("test") instanceof XmlDtdParamEntityRef);
-            assert.isTrue(node.paramEntityRef("test2", 0)
-                          instanceof XmlDtdParamEntityRef);
-            assert.isTrue(node.paramEntityRef("test3", 1)
-                          instanceof XmlDtdParamEntityRef);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    %test2;\n    %test3;\n"
-                               + "    %test;\n]>");
-        });
-    });
-
-    describe("#procInst", () => {
-        it("should add an XmlProcInst node to this node's children"
-           + " at the specified index with the specified text and"
-           + " return the newly added node", () => {
-            const node = new XmlDtd("abc");
-            assert.isTrue(node.procInst("test", "a") instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test2", "b", 0) instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test3", "c", 1) instanceof XmlProcInst);
-            assert.isTrue(node.procInst("test4") instanceof XmlProcInst);
-            assert.isTrue(
-                node.procInst("test5", undefined, 0) instanceof XmlProcInst);
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <?test5?>\n"
-                               + "    <?test2 b?>\n    <?test3 c?>\n"
-                               + "    <?test a?>\n    <?test4?>\n]>");
-        });
+    it("#procInst", () => {
+        const node = new XmlDtd(undefined, false, {name: "abc"});
+        assert.isTrue(node.procInst({target: "test", content: "a"})
+                      instanceof XmlProcInst);
+        assert.isTrue(node.procInst({target: "test2"})
+                      instanceof XmlProcInst);
+        assert.strictEqual(
+            node.toString(),
+            "<!DOCTYPE abc [\n    <?test a?>\n    <?test2?>\n]>");
     });
 
     describe("#toString", () => {
-        it("should return a string containing the XML string representation"
-           + " for this node", () => {
-            let node = new XmlDtd("abc");
-            assert.strictEqual(node.toString(), "<!DOCTYPE abc>");
+        it("normal name; normal sysId; normal pubId; no children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.strictEqual(
+                new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "ghi",
+                    sysId: "def"
+                }).toString(),
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def'>");
 
-            node = new XmlDtd("abc");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc [\n    <!ATTLIST test1>\n"
-                               + "    <!--test2-->\n    <!ELEMENT test3>\n"
-                               + "    <!ENTITY test4>\n    <!NOTATION test5>\n"
-                               + "    %test6;\n    <?test7 test8?>\n]>");
+            assert.strictEqual(
+                new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "azAz09-'()+,./:=?;!*#@$_% \n",
+                    sysId: "def"
+                }).toString({doubleQuotes: true}),
+                "<!DOCTYPE abc PUBLIC \"azAz09-'()+,./:=?;!*#@$_% \n\""
+                + " \"def\">");
 
-            node = new XmlDtd("abc", "def");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
+            assert.strictEqual(
+                new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "ghi",
+                    sysId: "\"def\""
+                }).toString(),
+                "<!DOCTYPE abc PUBLIC 'ghi' '\"def\"'>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString(),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; no pubId; no children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.strictEqual(
+                new XmlDtd(undefined, true, {
+                    name: "abc",
+                    sysId: "def"
+                }).toString(),
+                "<!DOCTYPE abc SYSTEM 'def'>");
+        });
+
+        it("normal name; normal sysId; no pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(node.toString(),
                                "<!DOCTYPE abc SYSTEM \'def\' [\n"
                                + "    <!ATTLIST test1>\n    <!--test2-->\n"
                                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                                + "    <!NOTATION test5>\n    %test6;\n"
                                + "    <?test7 test8?>\n]>");
-
-            node = new XmlDtd("abc", "def", "ghi");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
-                               + "    <!ATTLIST test1>\n    <!--test2-->\n"
-                               + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
-                               + "    <!NOTATION test5>\n    %test6;\n"
-                               + "    <?test7 test8?>\n]>");
         });
 
-        it("should return a string that uses pretty printing depending on"
-           + " the specified options", () => {
-            const node = new XmlDtd("abc");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString({pretty: false}),
-                               "<!DOCTYPE abc [<!ATTLIST test1><!--test2-->"
-                               + "<!ELEMENT test3><!ENTITY test4><!NOTATION"
-                               + " test5>%test6;<?test7 test8?>]>");
+        it("normal name; no sysId; no pubId; no children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.strictEqual(
+                new XmlDtd(undefined, true, {
+                    name: "abc"
+                }).toString(),
+                "<!DOCTYPE abc>");
         });
 
-        it("should return a string that uses a specific newline character"
-           + " depending on the specified options", () => {
-            const node = new XmlDtd("abc");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString({newline: "\r\n"}),
-                               "<!DOCTYPE abc [\r\n    <!ATTLIST test1>\r\n"
-                               + "    <!--test2-->\r\n    <!ELEMENT test3>\r\n"
-                               + "    <!ENTITY test4>\r\n"
-                               + "    <!NOTATION test5>\r\n"
-                               + "    %test6;\r\n    <?test7 test8?>\r\n]>");
+        it("normal name; no sysId; no pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {name: "abc"});
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString(),
+                "<!DOCTYPE abc [\n    <!ATTLIST test1>\n"
+                + "    <!--test2-->\n    <!ELEMENT test3>\n"
+                + "    <!ENTITY test4>\n    <!NOTATION test5>\n"
+                + "    %test6;\n    <?test7 test8?>\n]>");
         });
 
-        it("should return a string that uses a specific indent character"
-           + " depending on the specified options", () => {
-            const node = new XmlDtd("abc");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString({indent: "\t"}),
-                               "<!DOCTYPE abc [\n\t<!ATTLIST test1>\n\t"
-                               + "<!--test2-->\n\t<!ELEMENT test3>\n\t"
-                               + "<!ENTITY test4>\n\t<!NOTATION test5>"
-                               + "\n\t%test6;\n\t<?test7 test8?>\n]>");
+        it("name with characters not allowed in XML names;"
+           + " no sysId; no pubId; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "."
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "."
+                }));
         });
 
-        it("should return a string that uses a specified quotes"
-           + " character depending on the specified options", () => {
-            const node = new XmlDtd("abc", "def", "ghi");
-            node.attlist("test1");
-            node.comment("test2");
-            node.element("test3");
-            node.entity("test4");
-            node.notation("test5");
-            node.paramEntityRef("test6");
-            node.procInst("test7", "test8");
-            assert.strictEqual(node.toString({doubleQuotes: true}),
-                               "<!DOCTYPE abc PUBLIC \"ghi\" \"def\" [\n"
-                               + "    <!ATTLIST test1>\n    <!--test2-->\n"
-                               + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
-                               + "    <!NOTATION test5>\n    %test6;\n"
-                               + "    <?test7 test8?>\n]>");
+        it("normal name; normal sysId; pubId with characters not allowed in"
+           + " public identifiers; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "~",
+                    sysId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "~",
+                    sysId: "def"
+                }));
+
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "~ab",
+                    sysId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "~ab",
+                    sysId: "def"
+                }));
+
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "ab~",
+                    sysId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "ab~",
+                    sysId: "def"
+                }));
+
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "a~b",
+                    sysId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "a~b",
+                    sysId: "def"
+                }));
+
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "a~b~~ab~a",
+                    sysId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "a~b~~ab~a",
+                    sysId: "def"
+                }));
         });
 
-        it("should throw an error if the sysId or pubId are inconsistent"
-           + " with the quotes option", () => {
-            let node = new XmlDtd("abc", "'def'", "'ghi'");
-            assert.throws(() => node.toString());
+        it("normal name; sysId with characters not allowed in"
+           + " system identifiers; no pubId; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    sysId: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    sysId: "abc" + String.fromCharCode(0x0001) + "def"
+                }));
 
-            node = new XmlDtd("abc", "\"def\"", "ghi");
-            assert.throws(() => node.toString({doubleQuotes: true}));
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    sysId: "'\""
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    sysId: "'\""
+                }));
 
-            node = new XmlDtd("abc", "\"def\"", "'ghi'");
-            assert.throws(() => node.toString({doubleQuotes: false}));
-            assert.throws(() => node.toString({doubleQuotes: true}));
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    sysId: "abc'abc\"abc"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    sysId: "abc'abc\"abc"
+                }));
         });
+
+        it("normal name; no sysId; normal pubId; no children; default quotes;"
+           + " default pretty printing; default indentation;"
+           + " default newline", () => {
+            assert.throws(
+                () => new XmlDtd(undefined, true, {
+                    name: "abc",
+                    pubId: "def"
+                }));
+            assert.doesNotThrow(
+                () => new XmlDtd(undefined, false, {
+                    name: "abc",
+                    pubId: "def"
+                }));
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " single quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({doubleQuotes: false}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " double quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({doubleQuotes: true}),
+                "<!DOCTYPE abc PUBLIC \"ghi\" \"def\" [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; pretty printing on;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({pretty: true}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; pretty printing off;"
+           + " default indentation; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({pretty: false}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' ["
+                + "<!ATTLIST test1><!--test2-->"
+                + "<!ELEMENT test3><!ENTITY test4>"
+                + "<!NOTATION test5>%test6;"
+                + "<?test7 test8?>]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " indentation four spaces; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({indent: "    "}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " indentation tabs; default newline", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({indent: "\t"}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "\t<!ATTLIST test1>\n\t<!--test2-->\n"
+                + "\t<!ELEMENT test3>\n\t<!ENTITY test4>\n"
+                + "\t<!NOTATION test5>\n\t%test6;\n"
+                + "\t<?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; newline \\n", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({newline: "\n"}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                + "    <!ATTLIST test1>\n    <!--test2-->\n"
+                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
+                + "    <!NOTATION test5>\n    %test6;\n"
+                + "    <?test7 test8?>\n]>");
+        });
+
+        it("normal name; normal sysId; normal pubId; children;"
+           + " default quotes; default pretty printing;"
+           + " default indentation; newline \\r\\n", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc",
+                pubId: "ghi",
+                sysId: "def"
+            });
+            node.attlist({charData: "test1"});
+            node.comment({charData: "test2"});
+            node.element({charData: "test3"});
+            node.entity({charData: "test4"});
+            node.notation({charData: "test5"});
+            node.paramEntityRef({name: "test6"});
+            node.procInst({target: "test7", content: "test8"});
+            assert.strictEqual(
+                node.toString({newline: "\r\n"}),
+                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\r\n"
+                + "    <!ATTLIST test1>\r\n    <!--test2-->\r\n"
+                + "    <!ELEMENT test3>\r\n    <!ENTITY test4>\r\n"
+                + "    <!NOTATION test5>\r\n    %test6;\r\n"
+                + "    <?test7 test8?>\r\n]>");
+        });
+
+        it("normal name; sysId with single quotes; normal pubId; children;"
+           + " single quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(() => {
+                const node = new XmlDtd(undefined, true, {
+                    name: "test1",
+                    pubId: "test3",
+                    sysId: "'test2'"
+                });
+                node.toString({doubleQuotes: false});
+            });
+            assert.doesNotThrow(() => {
+                const node = new XmlDtd(undefined, false, {
+                    name: "test1",
+                    pubId: "test3",
+                    sysId: "'test2'"
+                });
+                node.toString({doubleQuotes: false});
+            });
+        });
+
+        it("normal name; sysId with double quotes; normal pubId; children;"
+           + " double quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(() => {
+                const node = new XmlDtd(undefined, true, {
+                    name: "test1",
+                    pubId: "test3",
+                    sysId: "\"test2\""
+                });
+                node.toString({doubleQuotes: true});
+            });
+            assert.doesNotThrow(() => {
+                const node = new XmlDtd(undefined, false, {
+                    name: "test1",
+                    pubId: "test3",
+                    sysId: "\"test2\""
+                });
+                node.toString({doubleQuotes: true});
+            });
+        });
+
+        it("normal name; normal sysId; pubId with single quotes; children;"
+           + " double quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(() => {
+                const node = new XmlDtd(undefined, true, {
+                    name: "test1",
+                    pubId: "'test2''",
+                    sysId: "test3"
+                });
+                node.toString({doubleQuotes: false});
+            });
+            assert.doesNotThrow(() => {
+                const node = new XmlDtd(undefined, false, {
+                    name: "test1",
+                    pubId: "'test2''",
+                    sysId: "test3"
+                });
+                node.toString({doubleQuotes: false});
+            });
+        });
+
+        it("normal name; normal sysId; pubId with double quotes; children;"
+           + " double quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
+            assert.throws(() => {
+                const node = new XmlDtd(undefined, true, {
+                    name: "test1",
+                    pubId: "\"test2\"",
+                    sysId: "test3"
+                });
+                node.toString({doubleQuotes: true});
+            });
+            assert.doesNotThrow(() => {
+                const node = new XmlDtd(undefined, false, {
+                    name: "test1",
+                    pubId: "\"test2\"",
+                    sysId: "test3"
+                });
+                node.toString({doubleQuotes: true});
+            });
+        });
+    });
+
+    it("#up", () => {
+        assert.strictEqual(
+            new XmlDtd(undefined, false, {
+                name: "a"
+            }).up(),
+            undefined);
     });
 });

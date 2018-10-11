@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,117 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {isString} from "../utils";
+
 import {validateName} from "../validate";
-import XmlNode from "./XmlNode";
 
 /**
- * Represents an XML parameter entity reference in a document type definition.
+ * The options used to create a new parameter entity reference.
+ */
+export interface IXmlDtdParamEntityRefOptions {
+    /**
+     * The name of the entity to be referenced.
+     */
+    name: string;
+}
+
+/**
+ * Represents a parameter entity reference in a document type definition.
  *
- * An XML parameter entity reference is structured as follows, where `{entity}`
+ * A parameter entity reference is structured as follows, where `{entity}`
  * is the name of the entity:
  *
  * ```xml
  * %{entity};
  * ```
- *
- * The `{entity}` value is a property of this node.
- *
- * XmlDtdParamEntityRef nodes cannot have any children.
  */
-export default class XmlDtdParamEntityRef extends XmlNode {
-    private _entity: string;
+export default class XmlDtdParamEntityRef<Parent> {
+    private readonly _name: string;
+    private readonly _parent: Parent;
 
-    /**
-     * Initializes a new instance of the {@link XmlDtdParamEntityRef} class.
-     *
-     * @param entity The entity to be referenced.
-     */
-    constructor(entity: string) {
-        super();
-        this.entity = entity;
-    }
-
-    /**
-     * Gets the entity to be referenced.
-     *
-     * @returns The entity to be referenced.
-     */
-    get entity(): string {
-        return this._entity;
-    }
-
-    /**
-     * Sets the entity to be referenced.
-     *
-     * @param entity The entity to be referenced.
-     */
-    set entity(entity: string) {
-        if (!isString(entity)) {
-            throw new TypeError("entity should be a string");
-        } else if (!validateName(entity)) {
-            throw new Error("entity should not contain characters"
-                            + " not allowed in XML names");
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlDtdParamEntityRefOptions)
+    {
+        if (validation && !validateName(options.name)) {
+            throw new Error("Parameter entity reference name should not"
+                            + " contain characters not allowed in XML names");
         }
-        this._entity = entity;
+        this._name = options.name;
+        this._parent = parent;
     }
 
     /**
-     * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
-     * any children.
-     *
-     * @returns This method does not return.
+     * Returns an XML string representation of this parameter entity reference.
      */
-    public children(): XmlNode[] {
-        throw new Error("XmlDtdParamEntityRef nodes cannot have children");
+    public toString(): string {
+        return "%" + this._name + ";";
     }
 
     /**
-     * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
-     * any children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns the parent of this parameter entity reference.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
-        throw new Error("XmlDtdParamEntityRef nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
-     * any children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlDtdParamEntityRef nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdParamEntityRef} nodes cannot have
-     * any children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlDtdParamEntityRef nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        return "%" + this.entity + ";";
+    public up(): Parent {
+        return this._parent;
     }
 }

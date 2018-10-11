@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,117 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {isString} from "../utils";
+
 import {validateChar} from "../validate";
-import XmlNode from "./XmlNode";
 
 /**
- * Represents an XML attribute-list declaration in a document type definition.
+ * The options used to create a new attribute-list declaration.
+ */
+export interface IXmlDtdAttlistOptions {
+    /**
+     * The text of the declaration.
+     */
+    charData: string;
+}
+
+/**
+ * Represents an attribute-list declaration in a document type definition.
  *
- * An XML attribute-list declaration is structured as follows, where `{text}`
+ * An attribute-list declaration is structured as follows, where `{text}`
  * is the text of the declaration:
  *
  * ```xml
  * <!ATTLIST {text}>
  * ```
- *
- * The `{text}` value is a property of this node.
- *
- * XmlDtdAttlist nodes cannot have any children.
  */
-export default class XmlDtdAttlist extends XmlNode {
-    private _text: string;
+export default class XmlDtdAttlist<Parent> {
+    private readonly _parent: Parent;
+    private readonly _charData: string;
 
-    /**
-     * Initializes a new instance of the {@link XmlDtdAttlist} class.
-     *
-     * @param text The text associated with the XML attribute-list declaration.
-     */
-    constructor(text: string) {
-        super();
-        this.text = text;
-    }
-
-    /**
-     * Gets the text associated with the XML attribute-list declaration.
-     *
-     * @return The text associated with the XML attribute-list declaration.
-     */
-    get text(): string {
-        return this._text;
-    }
-
-    /**
-     * Sets the text associated with the XML attribute-list declaration.
-     *
-     * @param text The text associated with the XML attribute-list declaration.
-     */
-    set text(text: string) {
-        if (!isString(text)) {
-            throw new TypeError("text should be a string");
-        } else if (!validateChar(text)) {
-            throw new Error("data should not contain characters"
-                            + " not allowed in XML");
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlDtdAttlistOptions)
+    {
+        if (validation && !validateChar(options.charData)) {
+            throw new Error("Attribute-list declaration should not contain"
+                            + " characters not allowed in XML");
         }
-        this._text = text;
+        this._charData = options.charData;
+        this._parent = parent;
     }
 
     /**
-     * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
-     * children.
-     *
-     * @returns This method does not return.
+     * Returns an XML string representation of this entity declaration.
      */
-    public children(): XmlNode[] {
-        throw new Error("XmlDtdAttlist nodes cannot have children");
+    public toString(): string {
+        return "<!ATTLIST " + this._charData + ">";
     }
 
     /**
-     * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns the parent of this entity declaration.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
-        throw new Error("XmlDtdAttlist nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlDtdAttlist nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdAttlist} nodes cannot have any
-     * children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlDtdAttlist nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        return "<!ATTLIST " + this.text + ">";
+    public up(): Parent {
+        return this._parent;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 Michael Kourlas
+ * Copyright (C) 2016-2018 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,117 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {IStringOptions} from "../options";
-import {isString} from "../utils";
+
 import {validateChar} from "../validate";
-import XmlNode from "./XmlNode";
 
 /**
- * Represents an XML notation declaration in a document type definition.
+ * The options used to create a new notation declaration.
+ */
+export interface IXmlDtdNotationOptions {
+    /**
+     * The text of the declaration.
+     */
+    charData: string;
+}
+
+/**
+ * Represents a notation declaration in a document type definition.
  *
- * An XML notation declaration is structured as follows, where `{text}` is the
+ * A notation declaration is structured as follows, where `{text}` is the
  * text of the declaration:
  *
  * ```xml
  * <!NOTATION {text}>
  * ```
- *
- * The `{text}` value is a property of this node.
- *
- * XmlDtdNotation nodes cannot have any children.
  */
-export default class XmlDtdNotation extends XmlNode {
-    private _text: string;
+export default class XmlDtdNotation<Parent> {
+    private readonly _parent: Parent;
+    private readonly _charData: string;
 
-    /**
-     * Initializes a new instance of the {@link XmlDtdNotation} class.
-     *
-     * @param text The text associated with the XML notation declaration.
-     */
-    constructor(text: string) {
-        super();
-        this.text = text;
-    }
-
-    /**
-     * Gets the text associated with the XML notation declaration.
-     *
-     * @return The text associated with the XML notation declaration.
-     */
-    get text(): string {
-        return this._text;
-    }
-
-    /**
-     * Sets the text associated with the XML notation declaration.
-     *
-     * @param text The text associated with the XML notation declaration.
-     */
-    set text(text: string) {
-        if (!isString(text)) {
-            throw new TypeError("text should be a string");
-        } else if (!validateChar(text)) {
-            throw new Error("data should not contain characters"
-                            + " not allowed in XML");
+    constructor(parent: Parent, validation: boolean,
+                options: IXmlDtdNotationOptions)
+    {
+        if (validation && !validateChar(options.charData)) {
+            throw new Error("XML notation declaration should not contain"
+                            + " characters not allowed in XML");
         }
-        this._text = text;
+        this._charData = options.charData;
+        this._parent = parent;
     }
 
     /**
-     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any
-     * children.
-     *
-     * @returns This method does not return.
+     * Returns an XML string representation of this notation declaration.
      */
-    public children(): XmlNode[] {
-        throw new Error("XmlDtdNotation nodes cannot have children");
+    public toString(): string {
+        return "<!NOTATION " + this._charData + ">";
     }
 
     /**
-     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
+     * Returns the parent of this notation declaration.
      */
-    public insertChild(node: XmlNode, index?: number): XmlNode | undefined {
-        throw new Error("XmlDtdNotation nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any
-     * children.
-     *
-     * @param node This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChild(node: XmlNode): boolean {
-        throw new Error("XmlDtdNotation nodes cannot have children");
-    }
-
-    /**
-     * Throws an exception since {@link XmlDtdNotation} nodes cannot have any
-     * children.
-     *
-     * @param index This parameter is unused.
-     *
-     * @returns This method does not return.
-     */
-    public removeChildAtIndex(index: number): XmlNode {
-        throw new Error("XmlDtdNotation nodes cannot have children");
-    }
-
-    /**
-     * Returns an XML string representation of this node.
-     *
-     * @param options Formatting options for the string representation.
-     *
-     * @returns An XML string representation of this node.
-     */
-    public toString(options: IStringOptions = {}): string {
-        return "<!NOTATION " + this.text + ">";
+    public up(): Parent {
+        return this._parent;
     }
 }
