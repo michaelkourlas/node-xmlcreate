@@ -103,4 +103,4 @@ gulp.task("docs", gulp.series(gulp.parallel("prod", "clean-docs"), function() {
                .pipe(typedoc(docOptions));
 }));
 
-gulp.task("default", gulp.parallel("prod", "test-prod", "docs"));
+gulp.task("default", gulp.series("test-prod", "docs"));
