@@ -25,7 +25,7 @@ tree
              pubId: "-//W3C//DTD XHTML 1.0 Strict//EN",
              sysId: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
          }).up()
-    .element({name: "root"})
+    .element({name: "html"})
         .attribute({name: "xmlns"})
             .text({charData: "http://www.w3.org/1999/xhtml"}).up().up()
         .attribute({name: "xml:lang"})
@@ -44,7 +44,8 @@ tree
                     .attribute({name: "src"})
                         .text({charData: "picture.png"}).up().up()
                     .attribute({name: "alt"})
-                        .text({charData: "picture"}).up().up().up().up().up();
+                        .text({charData: "picture"})
+                            .up().up().up().up().up().up();
 // @formatter:on
 
 // noinspection TsLint

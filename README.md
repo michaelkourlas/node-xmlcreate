@@ -54,7 +54,7 @@ gulp docs
 
 ## Examples ##
 
-The following example illustrates the basic usage of xmlcreate:
+The following TypeScript example illustrates the basic usage of xmlcreate:
 
 ```typescript
 import {document} from "xmlcreate";
@@ -69,7 +69,7 @@ tree
              sysId: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
         })
         .up()
-    .element({name: "root"})
+    .element({name: "html"})
         .attribute({name: "xmlns"})
             .text({charData: "http://www.w3.org/1999/xhtml"})
                 .up()
@@ -100,12 +100,7 @@ tree
                         .up()
                     .up()
                 .attribute({name: "alt"})
-                    .text({charData: "picture"})
-                        .up()
-                    .up()
-                .up()
-            .up()
-        .up();
+                    .text({charData: "picture"}).up().up().up().up().up();
 
 console.log(tree.toString({doubleQuotes: true}));
 ```
@@ -126,7 +121,7 @@ This example produces the following XML:
 </html>
 ```
 
-Additional examples can be found in examples/example.js.
+A JavaScript version of this example can be found in the examples directory.
 
 ## Tests ##
 
