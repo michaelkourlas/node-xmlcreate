@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {isUndefined, validateSingleChar} from "../validate";
 
 /**
@@ -59,31 +60,61 @@ export interface IXmlCharRefOptions {
  * should be used.
  */
 export default class XmlCharRef<Parent> {
-    private readonly _char: string;
-    private readonly _hex: boolean;
+    private readonly _validation: boolean;
     private readonly _parent: Parent;
+    private _char!: string;
+    private _hex: boolean = false;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlCharRefOptions)
     {
-        if (validation && !validateSingleChar(options.char)) {
-            throw new Error("Character reference should reference a single"
-                            + " character, and this character should be"
-                            + " allowed in XML");
-        }
-        this._char = options.char;
-        if (!isUndefined(options.hex)) {
-            this._hex = options.hex;
-        } else {
-            this._hex = false;
-        }
+        this._validation = validation;
         this._parent = parent;
+        this.char = options.char;
+        if (!isUndefined(options.hex)) {
+            this.hex = options.hex;
+        }
+    }
+
+    /**
+     * Gets the character of this character reference.
+     */
+    public get char() {
+        return this._char;
+    }
+
+    /**
+     * Sets the character of this character reference.
+     */
+    public set char(char: string) {
+        if (this._validation && !validateSingleChar(char)) {
+            throw new Error(`${getContext(this.up())}: character reference`
+                            + ` "${char}" should reference a single character,`
+                            + " and this character should be allowed in XML");
+        }
+        this._char = char;
+    }
+
+    /**
+     * Gets whether the decimal or hexadecimal representation should be used
+     * for this character reference.
+     */
+    public get hex() {
+        return this._hex;
+    }
+
+    /**
+     * Sets whether the decimal or hexadecimal representation should be used
+     * for this character reference.
+     */
+    public set hex(hex: boolean) {
+        this._hex = hex;
     }
 
     /**
      * Returns an XML string representation of this character reference.
      */
-    public toString(): string {
+    public toString() {
         let char: number;
         if (this._char.length === 1) {
             char = this._char.charCodeAt(0);
@@ -94,8 +125,9 @@ export default class XmlCharRef<Parent> {
                 if (second >= 0xDC00 && second <= 0xDFFF) {
                     char = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
                 } else {
-                    throw new Error("Character reference should reference"
-                                    + " a valid Unicode character");
+                    throw new Error(`${getContext(this.up())}: character`
+                                    + ` reference "${this.char}" should`
+                                    + " reference a valid Unicode character");
                 }
             } else {
                 char = first;
@@ -112,7 +144,7 @@ export default class XmlCharRef<Parent> {
     /**
      * Returns the parent of this character reference.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

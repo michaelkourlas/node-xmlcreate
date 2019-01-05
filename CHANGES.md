@@ -1,6 +1,12 @@
 ## 2.0.0 ##
 
-* API rewrite
+* API rewrite and simplification
+* Add option to use self-closing tags if an element is empty
+* Stop indenting multi-line strings
+* Add option to automatically fix strings that are not valid XML in certain
+  cases
+* More detailed error messages
+* Other bug fixes
 
 ## 1.0.2 ##
 

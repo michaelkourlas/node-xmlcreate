@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {IStringOptions, StringOptions} from "../options";
-import {isUndefined, validateName} from "../validate";
+import {fixName, isUndefined, validateName} from "../validate";
 import {
     default as XmlAttribute,
     IXmlAttributeOptions as IXmlAttributeOptions
@@ -35,8 +36,31 @@ export interface IXmlElementOptions {
      * The name of the element.
      */
     name: string;
+    /**
+     * Whether to replace any invalid characters in the name of the element
+     * with the Unicode replacement character. By default, this is disabled.
+     */
+    replaceInvalidCharsInName?: boolean;
+    /**
+     * Use a self-closing tag if this element is empty.
+     *
+     * For example, use:
+     * ```xml
+     * <element/>
+     * ```
+     * instead of:
+     * ```xml
+     * <element></element>
+     * ```
+     *
+     * By default, this is enabled.
+     */
+    useSelfClosingTagIfEmpty?: boolean;
 }
 
+/**
+ * @private
+ */
 type Child<Parent> = XmlAttribute<XmlElement<Parent>>
     | XmlCdata<XmlElement<Parent>>
     | XmlCharData<XmlElement<Parent>>
@@ -71,35 +95,73 @@ type Child<Parent> = XmlAttribute<XmlElement<Parent>>
  * ```
  */
 export default class XmlElement<Parent> {
-    private readonly _attributeNames: string[];
-    private readonly _children: Array<Child<Parent>>;
-    private readonly _name: string;
-    private readonly _parent: Parent;
     private readonly _validation: boolean;
+    private readonly _children: Array<Child<Parent>>;
+    private readonly _attributeNames: string[];
+    private readonly _parent: Parent;
+    private readonly _replaceInvalidCharsInName: boolean;
+    private readonly _useSelfClosingTagIfEmpty: boolean;
+    private _name!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlElementOptions)
     {
-        this._attributeNames = [];
-        this._children = [];
-        if (validation && !validateName(options.name)) {
-            throw new Error("Element name should not contain characters"
-                            + " not allowed in XML names");
-        }
-        this._name = options.name;
-        this._parent = parent;
         this._validation = validation;
+        if (!isUndefined(options.replaceInvalidCharsInName)) {
+            this._replaceInvalidCharsInName = options.replaceInvalidCharsInName;
+        } else {
+            this._replaceInvalidCharsInName = false;
+        }
+        if (!isUndefined(options.useSelfClosingTagIfEmpty)) {
+            this._useSelfClosingTagIfEmpty = options.useSelfClosingTagIfEmpty;
+        } else {
+            this._useSelfClosingTagIfEmpty = true;
+        }
+        this._children = [];
+        this._attributeNames = [];
+        this._parent = parent;
+
+        this.name = options.name;
+    }
+
+    /**
+     * Gets the name of this element.
+     */
+    public get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of this element.
+     */
+    public set name(name: string) {
+        if (this._replaceInvalidCharsInName) {
+            name = fixName(name);
+            if (name.length === 0) {
+                throw new Error(`${getContext(this.up())}: element name should`
+                                + " not be empty");
+            }
+        } else if (this._validation && !validateName(name)) {
+            if (name.length === 0) {
+                throw new Error(`${getContext(this.up())}: element name should`
+                                + " not be empty");
+            } else {
+                throw new Error(`${getContext(this.up())}: element name`
+                                + ` "${name}" should not contain characters not`
+                                + " allowed in XML names");
+            }
+        }
+        this._name = name;
     }
 
     /**
      * Adds an attribute to this element and returns the new attribute.
      */
-    public attribute(
-        options: IXmlAttributeOptions): XmlAttribute<XmlElement<Parent>>
-    {
+    public attribute(options: IXmlAttributeOptions) {
         if (this._validation && options.name in this._attributeNames) {
-            throw new Error(`Element already contains an attribute with`
-                            + ` name ${options.name}`);
+            throw new Error(`${getContext(this.up())}: element "${this.name}"`
+                            + " already contains an attribute with the"
+                            + ` name "${options.name}"`);
         }
         const attribute = new XmlAttribute(this, this._validation, options);
         this._children.push(attribute);
@@ -110,7 +172,7 @@ export default class XmlElement<Parent> {
     /**
      * Adds a CDATA section to this element and returns the new CDATA section.
      */
-    public cdata(options: IXmlCdataOptions): XmlCdata<XmlElement<Parent>> {
+    public cdata(options: IXmlCdataOptions) {
         const cdata = new XmlCdata(this, this._validation, options);
         this._children.push(cdata);
         return cdata;
@@ -119,9 +181,7 @@ export default class XmlElement<Parent> {
     /**
      * Adds character data to this element and returns the new character data.
      */
-    public charData(
-        options: IXmlCharDataOptions): XmlCharData<XmlElement<Parent>>
-    {
+    public charData(options: IXmlCharDataOptions) {
         const charDataNode = new XmlCharData(this, this._validation, options);
         this._children.push(charDataNode);
         return charDataNode;
@@ -131,9 +191,7 @@ export default class XmlElement<Parent> {
      * Adds a character reference to this element and returns the new
      * character reference.
      */
-    public charRef(
-        options: IXmlCharRefOptions): XmlCharRef<XmlElement<Parent>>
-    {
+    public charRef(options: IXmlCharRefOptions) {
         const charRef = new XmlCharRef(this, this._validation, options);
         this._children.push(charRef);
         return charRef;
@@ -142,9 +200,7 @@ export default class XmlElement<Parent> {
     /**
      * Adds a comment to this element and returns the new comment.
      */
-    public comment(
-        options: IXmlCommentOptions): XmlComment<XmlElement<Parent>>
-    {
+    public comment(options: IXmlCommentOptions) {
         const comment = new XmlComment(this, this._validation, options);
         this._children.push(comment);
         return comment;
@@ -153,9 +209,7 @@ export default class XmlElement<Parent> {
     /**
      * Adds an element to this element and returns the new element.
      */
-    public element(
-        options: IXmlElementOptions): XmlElement<XmlElement<Parent>>
-    {
+    public element(options: IXmlElementOptions) {
         const element = new XmlElement(this, this._validation, options);
         this._children.push(element);
         return element;
@@ -165,9 +219,7 @@ export default class XmlElement<Parent> {
      * Adds an entity reference to this element and returns the new entity
      * reference.
      */
-    public entityRef(
-        options: IXmlEntityRefOptions): XmlEntityRef<XmlElement<Parent>>
-    {
+    public entityRef(options: IXmlEntityRefOptions) {
         const entityRef = new XmlEntityRef(this, this._validation, options);
         this._children.push(entityRef);
         return entityRef;
@@ -177,9 +229,7 @@ export default class XmlElement<Parent> {
      * Adds a processing instruction to this element and returns the new
      * processing instruction.
      */
-    public procInst(
-        options: IXmlProcInstOptions): XmlProcInst<XmlElement<Parent>>
-    {
+    public procInst(options: IXmlProcInstOptions) {
         const procInst = new XmlProcInst(this, this._validation, options);
         this._children.push(procInst);
         return procInst;
@@ -190,7 +240,24 @@ export default class XmlElement<Parent> {
      * options.
      */
     public toString(options: IStringOptions = {}) {
+        return this.toStringWithIndent(options, "");
+    }
+
+    /**
+     * Returns the parent of this element.
+     */
+    public up() {
+        return this._parent;
+    }
+
+    /**
+     * Returns an XML string representation of this element using the specified
+     * options and initial indent.
+     */
+    private toStringWithIndent(options: IStringOptions, indent: string) {
         const optionsObj = new StringOptions(options);
+
+        const newIndent = indent + optionsObj.indent;
 
         // Element tag start
         let str = "<" + this._name;
@@ -209,13 +276,13 @@ export default class XmlElement<Parent> {
         if (nodes.length > 0) {
             let childStr = "";
 
-            const indenter = (line: string) => optionsObj.indent + line;
             for (let i = 0; i < nodes.length; i++) {
                 const next = nodes[i];
 
                 let nextStr = "";
                 if (next instanceof XmlElement) {
-                    nextStr += next.toString(options);
+                    nextStr += next.toStringWithIndent(
+                        optionsObj, newIndent);
                 } else {
                     nextStr += next.toString();
                 }
@@ -233,10 +300,7 @@ export default class XmlElement<Parent> {
                 if (optionsObj.pretty) {
                     if (!this.allSameLineNodes(nodes)) {
                         if (!(i > 0 && this.onSameLine(next, prev))) {
-                            childStr += optionsObj.newline;
-                            nextStr = nextStr.split(optionsObj.newline)
-                                             .map(indenter)
-                                             .join(optionsObj.newline);
+                            nextStr = optionsObj.newline + newIndent + nextStr;
                         }
                     }
                 }
@@ -248,11 +312,11 @@ export default class XmlElement<Parent> {
             // XmlCharacterReference, XmlEntityReference, or XmlCharData
             if (optionsObj.pretty) {
                 if (!this.allSameLineNodes(nodes)) {
-                    childStr += optionsObj.newline;
+                    childStr += optionsObj.newline + indent;
                 }
             }
 
-            if (childStr.length === 0) {
+            if (childStr.length === 0 && this._useSelfClosingTagIfEmpty) {
                 // Element empty tag end
                 str += "/>";
             } else {
@@ -268,17 +332,10 @@ export default class XmlElement<Parent> {
     }
 
     /**
-     * Returns the parent of this element.
-     */
-    public up(): Parent {
-        return this._parent;
-    }
-
-    /**
      * Returns true if the specified nodes are all character references,
      * entity references, or character data.
      */
-    private allSameLineNodes(nodes: Array<Child<Parent>>): boolean {
+    private allSameLineNodes(nodes: Array<Child<Parent>>) {
         for (const node of nodes) {
             if (!((node instanceof XmlCharRef
                    || node instanceof XmlEntityRef
@@ -294,7 +351,7 @@ export default class XmlElement<Parent> {
      * Returns true if the specified nodes are all character references,
      * entity references, or character data.
      */
-    private onSameLine(prev: Child<Parent>, next?: Child<Parent>): boolean {
+    private onSameLine(prev: Child<Parent>, next?: Child<Parent>) {
         return (prev instanceof XmlCharRef
                 || prev instanceof XmlEntityRef
                 || prev instanceof XmlCharData)

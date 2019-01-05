@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {escapeDoubleQuotes, escapeSingleQuotes} from "../escape";
 import {IStringOptions, StringOptions} from "../options";
-import {validateName} from "../validate";
+import {fixName, isUndefined, validateName} from "../validate";
 import XmlAttributeText, {IXmlAttributeTextOptions} from "./XmlAttributeText";
 import XmlCharRef, {IXmlCharRefOptions} from "./XmlCharRef";
 import XmlEntityRef, {IXmlEntityRefOptions} from "./XmlEntityRef";
@@ -29,8 +30,16 @@ export interface IXmlAttributeOptions {
      * The name of the attribute.
      */
     name: string;
+    /**
+     * Whether to replace any invalid characters in the name of the attribute
+     * with the Unicode replacement character. By default, this is disabled.
+     */
+    replaceInvalidCharsInName?: boolean;
 }
 
+/**
+ * @private
+ */
 type Child<Parent> = XmlAttributeText<XmlAttribute<Parent>>
     | XmlCharRef<XmlAttribute<Parent>>
     | XmlEntityRef<XmlAttribute<Parent>>;
@@ -54,29 +63,60 @@ type Child<Parent> = XmlAttributeText<XmlAttribute<Parent>>
  */
 export default class XmlAttribute<Parent> {
     private readonly _children: Array<Child<Parent>>;
-    private readonly _name: string;
+    private readonly _replaceInvalidCharsInName: boolean;
     private readonly _parent: Parent;
     private readonly _validation: boolean;
+    private _name!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlAttributeOptions)
     {
-        this._children = [];
-        if (validation && !validateName(options.name)) {
-            throw new Error("Attribute name should not contain characters"
-                            + " not allowed in XML names");
-        }
-        this._name = options.name;
-        this._parent = parent;
         this._validation = validation;
+        if (!isUndefined(options.replaceInvalidCharsInName)) {
+            this._replaceInvalidCharsInName = options.replaceInvalidCharsInName;
+        } else {
+            this._replaceInvalidCharsInName = false;
+        }
+        this._children = [];
+        this._parent = parent;
+        this.name = options.name;
+    }
+
+    /**
+     * Gets the name of this attribute.
+     */
+    public get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of this attribute.
+     */
+    public set name(name: string) {
+        if (this._replaceInvalidCharsInName) {
+            name = fixName(name);
+            if (name.length === 0) {
+                throw new Error(`${getContext(this.up())}: attribute name`
+                                + " should not be empty");
+            }
+        } else if (this._validation && !validateName(name)) {
+            if (name.length === 0) {
+                throw new Error(`${getContext(this.up())}: attribute name`
+                                + " should not be empty");
+            } else {
+                throw new Error(`${getContext(this.up())}: attribute name`
+                                + ` "${name}" should not contain characters not`
+                                + " allowed in XML names");
+            }
+        }
+        this._name = name;
     }
 
     /**
      * Adds a character reference to this attribute and returns the new
      * character reference.
      */
-    public charRef(
-        options: IXmlCharRefOptions): XmlCharRef<XmlAttribute<Parent>>
+    public charRef(options: IXmlCharRefOptions)
     {
         const charRef = new XmlCharRef(this, this._validation, options);
         this._children.push(charRef);
@@ -87,8 +127,7 @@ export default class XmlAttribute<Parent> {
      * Adds an entity reference to this attribute and returns the new entity
      * reference.
      */
-    public entityRef(
-        options: IXmlEntityRefOptions): XmlEntityRef<XmlAttribute<Parent>>
+    public entityRef(options: IXmlEntityRefOptions)
     {
         const charRef = new XmlEntityRef(this, this._validation, options);
         this._children.push(charRef);
@@ -98,9 +137,7 @@ export default class XmlAttribute<Parent> {
     /**
      * Adds attribute text to this attribute and returns the new text.
      */
-    public text(
-        options: IXmlAttributeTextOptions)
-        : XmlAttributeText<XmlAttribute<Parent>>
+    public text(options: IXmlAttributeTextOptions)
     {
         const textNode = new XmlAttributeText(this, this._validation, options);
         this._children.push(textNode);
@@ -110,7 +147,7 @@ export default class XmlAttribute<Parent> {
     /**
      * Returns an XML string representation of this attribute.
      */
-    public toString(options: IStringOptions = {}): string {
+    public toString(options: IStringOptions = {}) {
         const optionsObj = new StringOptions(options);
 
         const quote = optionsObj.doubleQuotes ? "\"" : "'";
@@ -129,7 +166,7 @@ export default class XmlAttribute<Parent> {
     /**
      * Returns the parent of this attribute.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {escapeAmpersands, escapeLeftAngleBrackets} from "../escape";
-import {validateChar} from "../validate";
+import {fixChar, isUndefined, validateChar} from "../validate";
 
 /**
  * The options used to create attribute text.
@@ -25,6 +26,11 @@ export interface IXmlAttributeTextOptions {
      * The attribute text.
      */
     charData: string;
+    /**
+     * Whether to replace any invalid characters in the attribute text with the
+     * Unicode replacement character. By default, this is disabled.
+     */
+    replaceInvalidCharsInCharData?: boolean;
 }
 
 /**
@@ -34,24 +40,50 @@ export interface IXmlAttributeTextOptions {
  * bracket (`<`), are all automatically escaped.
  */
 export default class XmlAttributeText<Parent> {
+    private readonly _replaceInvalidCharsInCharData: boolean;
     private readonly _parent: Parent;
-    private readonly _charData: string;
+    private readonly _validation: boolean;
+    private _charData!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlAttributeTextOptions)
     {
-        this._parent = parent;
-        if (validation && !validateChar(options.charData)) {
-            throw new Error("Attribute text should not contain characters"
-                            + " not allowed in XML");
+        this._validation = validation;
+        if (!isUndefined(options.replaceInvalidCharsInCharData)) {
+            this._replaceInvalidCharsInCharData = (
+                options.replaceInvalidCharsInCharData);
+        } else {
+            this._replaceInvalidCharsInCharData = false;
         }
-        this._charData = options.charData;
+        this._parent = parent;
+        this.charData = options.charData;
+    }
+
+    /**
+     * Gets this attribute text.
+     */
+    public get charData() {
+        return this._charData;
+    }
+
+    /**
+     * Sets this attribute text.
+     */
+    public set charData(charData: string) {
+        if (this._replaceInvalidCharsInCharData) {
+            charData = fixChar(charData);
+        } else if (this._validation && !validateChar(charData)) {
+            throw new Error(`${getContext(this.up())}: attribute text`
+                            + ` "${charData}" should not contain characters not`
+                            + " allowed in XML");
+        }
+        this._charData = charData;
     }
 
     /**
      * Returns an XML string representation of this attribute text.
      */
-    public toString(): string {
+    public toString() {
         let str = this._charData;
         str = escapeAmpersands(str);
         str = escapeLeftAngleBrackets(str);
@@ -61,7 +93,7 @@ export default class XmlAttributeText<Parent> {
     /**
      * Returns the parent of this attribute text.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

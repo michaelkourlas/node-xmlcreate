@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -167,56 +167,22 @@ describe("XmlDocument", () => {
             // @formatter:off
             node
                 .element({name: "root"})
-                    .attribute({name: "overt"})
-                        .charRef({char: "v"}).up()
-                        .entityRef({name: "repair"}).up()
-                        .text({charData: "probable hospitable"}).up().up()
-                    .attribute({name: "stage"})
-                        .text({charData: ""}).up().up()
-                    .attribute({name: "shop"}).up()
-                    .element({name: "abacus"})
-                        .element({name: "windows"})
-                            .element({name: "fire"})
-                                .charData({charData: "blue"}).up().up()
-                            .element({name: "laughable"})
-                                .charData({charData: "hateful"}).up().up()
-                            .element({name: "ring"})
-                                .charData({charData: "terrific"}).up().up().up()
-                        .element({name: "plug"})
-                            .element({name: "utter"})
-                                .charData({charData: "wander"}).up().up()
-                            .element({name: "toys"})
-                                .charData({charData: "groan"}).up().up().up()
-                        .element({name: "powerful"})
-                            .element({name: "coal"})
-                                .charData({charData: "dear"}).up().up()
-                            .element({name: "warm"})
-                                .charData({charData: "impartial"}).up().up()
-                            .element({name: "wink"})
-                                .charData({charData: "twig"}).up().up()
-                            .element({name: "secret"})
-                                .charData({charData: "x"}).up().up().up().up()
-                    .element({name: "plant"})
-                        .comment({charData: "pin punch"}).up()
-                        .procInst({target: "arrogant", content: "sun rad"}).up()
-                        .entityRef({name: "functional"}).up()
-                        .charData({charData: "educated"}).up()
-                        .charRef({char: "w"}).up()
-                        .element({name: "thunder"}).up()
-                        .element({name: "berserk"})
-                            .charData({charData: ""}).up().up()
-                        .charData({charData: "route flaky"}).up()
-                        .entityRef({name: "ragged"}).up()
-                        .charRef({char: "q"}).up()
-                        .cdata({charData: "physical educated"}).up().up()
-                     .element({name: "baseball"})
-                        .charData({charData: "yawn"}).up()
-                        .entityRef({name: "jagged"}).up()
-                        .charRef({char: "g"}).up()
-                        .charData({charData: "camp"}).up()
-                        .charRef({char: "y"}).up()
-                        .entityRef({name: "tangible"}).up()
-                        .charData({charData: "squeamish"});
+                    .attribute({name: "att"})
+                        .text({charData: "text"}).up().up()
+                    .element({name: "ele"})
+                        .comment({charData: "cmt"}).up()
+                        .element({name: "subele"})
+                            .element({name: "subsubele"})
+                                .charData({charData: "subsubelecd"}).up().up()
+                            .element({name: "subsubele2"})
+                                .charData({charData: "subsubelecd"})
+                                    .up().up().up()
+                        .procInst({target: "proc", content: "cont"}).up()
+                        .entityRef({name: "ent"}).up().up()
+                    .element({name: "ele2"})
+                        .charData({charData: "cha"}).up()
+                        .charRef({char: "c"}).up()
+                        .cdata({charData: "cda"});
             // @formatter:on
             node.procInst({target: "abstracted", content: "hungry bath"});
             node.comment({charData: "shoe"});
@@ -265,24 +231,13 @@ describe("XmlDocument", () => {
                 + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n    %giddy;\n    <?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
-                + "\n            <fire>blue</fire>"
-                + "\n            <laughable>hateful</laughable>"
-                + "\n            <ring>terrific</ring>\n        </windows>"
-                + "\n        <plug>\n            <utter>wander</utter>"
-                + "\n            <toys>groan</toys>\n        </plug>"
-                + "\n        <powerful>\n            <coal>dear</coal>"
-                + "\n            <warm>impartial</warm>"
-                + "\n            <wink>twig</wink>"
-                + "\n            <secret>x</secret>\n        </powerful>"
-                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
-                + "\n        <?arrogant sun rad?>"
-                + "\n        &functional;educated&#119;\n        <thunder/>"
-                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
-                + "\n        <![CDATA[physical educated]]>\n    </plant>"
-                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n    <ele>\n        <!--cmt-->"
+                + "\n        <subele>"
+                + "\n            <subsubele>subsubelecd</subsubele>"
+                + "\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\n        </subele>\n        <?proc cont?>\n        &ent;"
+                + "\n    </ele>\n    <ele2>\n        cha&#99;"
+                + "\n        <![CDATA[cda]]>\n    </ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -299,24 +254,13 @@ describe("XmlDocument", () => {
                 + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n    %giddy;\n    <?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
-                + "\n            <fire>blue</fire>"
-                + "\n            <laughable>hateful</laughable>"
-                + "\n            <ring>terrific</ring>\n        </windows>"
-                + "\n        <plug>\n            <utter>wander</utter>"
-                + "\n            <toys>groan</toys>\n        </plug>"
-                + "\n        <powerful>\n            <coal>dear</coal>"
-                + "\n            <warm>impartial</warm>"
-                + "\n            <wink>twig</wink>"
-                + "\n            <secret>x</secret>\n        </powerful>"
-                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
-                + "\n        <?arrogant sun rad?>"
-                + "\n        &functional;educated&#119;\n        <thunder/>"
-                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
-                + "\n        <![CDATA[physical educated]]>\n    </plant>"
-                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n    <ele>\n        <!--cmt-->"
+                + "\n        <subele>"
+                + "\n            <subsubele>subsubelecd</subsubele>"
+                + "\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\n        </subele>\n        <?proc cont?>\n        &ent;"
+                + "\n    </ele>\n    <ele2>\n        cha&#99;"
+                + "\n        <![CDATA[cda]]>\n    </ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -335,24 +279,13 @@ describe("XmlDocument", () => {
                 + '\n    <!NOTATION murky PUBLIC \'tested gratis\'>'
                 + '\n    %giddy;\n    <?pencil four design?>\n]>'
                 + '\n<!--reading sisters plate-->\n<?birthday?>'
-                + '\n<root overt="&#118;&repair;probable hospitable"'
-                + ' stage="" shop="">\n    <abacus>\n        <windows>'
-                + '\n            <fire>blue</fire>'
-                + '\n            <laughable>hateful</laughable>'
-                + '\n            <ring>terrific</ring>\n        </windows>'
-                + '\n        <plug>\n            <utter>wander</utter>'
-                + '\n            <toys>groan</toys>\n        </plug>'
-                + '\n        <powerful>\n            <coal>dear</coal>'
-                + '\n            <warm>impartial</warm>'
-                + '\n            <wink>twig</wink>'
-                + '\n            <secret>x</secret>\n        </powerful>'
-                + '\n    </abacus>\n    <plant>\n        <!--pin punch-->'
-                + '\n        <?arrogant sun rad?>'
-                + '\n        &functional;educated&#119;\n        <thunder/>'
-                + '\n        <berserk/>\n        route flaky&ragged;&#113;'
-                + '\n        <![CDATA[physical educated]]>\n    </plant>'
-                + '\n    <baseball>yawn&jagged;&#103;camp&#121;'
-                + '&tangible;squeamish</baseball>\n</root>'
+                + '\n<root att="text">\n    <ele>\n        <!--cmt-->'
+                + '\n        <subele>'
+                + '\n            <subsubele>subsubelecd</subsubele>'
+                + '\n            <subsubele2>subsubelecd</subsubele2>'
+                + '\n        </subele>\n        <?proc cont?>\n        &ent;'
+                + '\n    </ele>\n    <ele2>\n        cha&#99;'
+                + '\n        <![CDATA[cda]]>\n    </ele2>\n</root>'
                 + '\n<?abstracted hungry bath?>\n<!--shoe-->');
             /* tslint:enable:quotemark */
         });
@@ -370,24 +303,13 @@ describe("XmlDocument", () => {
                 + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n    %giddy;\n    <?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
-                + "\n            <fire>blue</fire>"
-                + "\n            <laughable>hateful</laughable>"
-                + "\n            <ring>terrific</ring>\n        </windows>"
-                + "\n        <plug>\n            <utter>wander</utter>"
-                + "\n            <toys>groan</toys>\n        </plug>"
-                + "\n        <powerful>\n            <coal>dear</coal>"
-                + "\n            <warm>impartial</warm>"
-                + "\n            <wink>twig</wink>"
-                + "\n            <secret>x</secret>\n        </powerful>"
-                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
-                + "\n        <?arrogant sun rad?>"
-                + "\n        &functional;educated&#119;\n        <thunder/>"
-                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
-                + "\n        <![CDATA[physical educated]]>\n    </plant>"
-                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n    <ele>\n        <!--cmt-->"
+                + "\n        <subele>"
+                + "\n            <subsubele>subsubelecd</subsubele>"
+                + "\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\n        </subele>\n        <?proc cont?>\n        &ent;"
+                + "\n    </ele>\n    <ele2>\n        cha&#99;"
+                + "\n        <![CDATA[cda]]>\n    </ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -402,17 +324,11 @@ describe("XmlDocument", () => {
                 + "<!ENTITY protective 'multiply'><!NOTATION murky PUBLIC"
                 + " 'tested gratis'>%giddy;<?pencil four design?>]>"
                 + "<!--reading sisters plate--><?birthday?>"
-                + "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''><abacus><windows><fire>blue</fire>"
-                + "<laughable>hateful</laughable><ring>terrific</ring>"
-                + "</windows><plug><utter>wander</utter><toys>groan</toys>"
-                + "</plug><powerful><coal>dear</coal><warm>impartial</warm>"
-                + "<wink>twig</wink><secret>x</secret></powerful></abacus>"
-                + "<plant><!--pin punch--><?arrogant sun rad?>&functional;"
-                + "educated&#119;<thunder/><berserk/>route flaky&ragged;&#113;"
-                + "<![CDATA[physical educated]]></plant>"
-                + "<baseball>yawn&jagged;&#103;camp&#121;&tangible;squeamish"
-                + "</baseball></root><?abstracted hungry bath?><!--shoe-->");
+                + "<root att=\'text\'><ele><!--cmt--><subele><subsubele>"
+                + "subsubelecd</subsubele><subsubele2>subsubelecd</subsubele2>"
+                + "</subele><?proc cont?>&ent;</ele><ele2>cha&#99;"
+                + "<![CDATA[cda]]></ele2></root><?abstracted hungry bath?>"
+                + "<!--shoe-->");
         });
 
         it("root element and other children; default quotes; default pretty"
@@ -428,24 +344,13 @@ describe("XmlDocument", () => {
                 + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n    %giddy;\n    <?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
-                + "\n            <fire>blue</fire>"
-                + "\n            <laughable>hateful</laughable>"
-                + "\n            <ring>terrific</ring>\n        </windows>"
-                + "\n        <plug>\n            <utter>wander</utter>"
-                + "\n            <toys>groan</toys>\n        </plug>"
-                + "\n        <powerful>\n            <coal>dear</coal>"
-                + "\n            <warm>impartial</warm>"
-                + "\n            <wink>twig</wink>"
-                + "\n            <secret>x</secret>\n        </powerful>"
-                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
-                + "\n        <?arrogant sun rad?>"
-                + "\n        &functional;educated&#119;\n        <thunder/>"
-                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
-                + "\n        <![CDATA[physical educated]]>\n    </plant>"
-                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n    <ele>\n        <!--cmt-->"
+                + "\n        <subele>"
+                + "\n            <subsubele>subsubelecd</subsubele>"
+                + "\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\n        </subele>\n        <?proc cont?>\n        &ent;"
+                + "\n    </ele>\n    <ele2>\n        cha&#99;"
+                + "\n        <![CDATA[cda]]>\n    </ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -462,24 +367,13 @@ describe("XmlDocument", () => {
                 + "\n\t<!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n\t%giddy;\n\t<?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n\t<abacus>\n\t\t<windows>"
-                + "\n\t\t\t<fire>blue</fire>"
-                + "\n\t\t\t<laughable>hateful</laughable>"
-                + "\n\t\t\t<ring>terrific</ring>\n\t\t</windows>"
-                + "\n\t\t<plug>\n\t\t\t<utter>wander</utter>"
-                + "\n\t\t\t<toys>groan</toys>\n\t\t</plug>"
-                + "\n\t\t<powerful>\n\t\t\t<coal>dear</coal>"
-                + "\n\t\t\t<warm>impartial</warm>"
-                + "\n\t\t\t<wink>twig</wink>"
-                + "\n\t\t\t<secret>x</secret>\n\t\t</powerful>"
-                + "\n\t</abacus>\n\t<plant>\n\t\t<!--pin punch-->"
-                + "\n\t\t<?arrogant sun rad?>"
-                + "\n\t\t&functional;educated&#119;\n\t\t<thunder/>"
-                + "\n\t\t<berserk/>\n\t\troute flaky&ragged;&#113;"
-                + "\n\t\t<![CDATA[physical educated]]>\n\t</plant>"
-                + "\n\t<baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n\t<ele>\n\t\t<!--cmt-->"
+                + "\n\t\t<subele>"
+                + "\n\t\t\t<subsubele>subsubelecd</subsubele>"
+                + "\n\t\t\t<subsubele2>subsubelecd</subsubele2>"
+                + "\n\t\t</subele>\n\t\t<?proc cont?>\n\t\t&ent;"
+                + "\n\t</ele>\n\t<ele2>\n\t\tcha&#99;"
+                + "\n\t\t<![CDATA[cda]]>\n\t</ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -496,24 +390,13 @@ describe("XmlDocument", () => {
                 + "\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\n    %giddy;\n    <?pencil four design?>\n]>"
                 + "\n<!--reading sisters plate-->\n<?birthday?>"
-                + "\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
-                + "\n            <fire>blue</fire>"
-                + "\n            <laughable>hateful</laughable>"
-                + "\n            <ring>terrific</ring>\n        </windows>"
-                + "\n        <plug>\n            <utter>wander</utter>"
-                + "\n            <toys>groan</toys>\n        </plug>"
-                + "\n        <powerful>\n            <coal>dear</coal>"
-                + "\n            <warm>impartial</warm>"
-                + "\n            <wink>twig</wink>"
-                + "\n            <secret>x</secret>\n        </powerful>"
-                + "\n    </abacus>\n    <plant>\n        <!--pin punch-->"
-                + "\n        <?arrogant sun rad?>"
-                + "\n        &functional;educated&#119;\n        <thunder/>"
-                + "\n        <berserk/>\n        route flaky&ragged;&#113;"
-                + "\n        <![CDATA[physical educated]]>\n    </plant>"
-                + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>"
+                + "\n<root att=\'text\'>\n    <ele>\n        <!--cmt-->"
+                + "\n        <subele>"
+                + "\n            <subsubele>subsubelecd</subsubele>"
+                + "\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\n        </subele>\n        <?proc cont?>\n        &ent;"
+                + "\n    </ele>\n    <ele2>\n        cha&#99;"
+                + "\n        <![CDATA[cda]]>\n    </ele2>\n</root>"
                 + "\n<?abstracted hungry bath?>\n<!--shoe-->");
         });
 
@@ -531,24 +414,14 @@ describe("XmlDocument", () => {
                 + "\r\n    <!NOTATION murky PUBLIC 'tested gratis'>"
                 + "\r\n    %giddy;\r\n    <?pencil four design?>\r\n]>"
                 + "\r\n<!--reading sisters plate-->\r\n<?birthday?>"
-                + "\r\n<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\r\n    <abacus>\r\n        <windows>"
-                + "\r\n            <fire>blue</fire>"
-                + "\r\n            <laughable>hateful</laughable>"
-                + "\r\n            <ring>terrific</ring>\r\n        </windows>"
-                + "\r\n        <plug>\r\n            <utter>wander</utter>"
-                + "\r\n            <toys>groan</toys>\r\n        </plug>"
-                + "\r\n        <powerful>\r\n            <coal>dear</coal>"
-                + "\r\n            <warm>impartial</warm>"
-                + "\r\n            <wink>twig</wink>"
-                + "\r\n            <secret>x</secret>\r\n        </powerful>"
-                + "\r\n    </abacus>\r\n    <plant>\r\n        <!--pin punch-->"
-                + "\r\n        <?arrogant sun rad?>"
-                + "\r\n        &functional;educated&#119;\r\n        <thunder/>"
-                + "\r\n        <berserk/>\r\n        route flaky&ragged;&#113;"
-                + "\r\n        <![CDATA[physical educated]]>\r\n    </plant>"
-                + "\r\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\r\n</root>"
+                + "\r\n<root att=\'text\'>\r\n    <ele>\r\n        <!--cmt-->"
+                + "\r\n        <subele>"
+                + "\r\n            <subsubele>subsubelecd</subsubele>"
+                + "\r\n            <subsubele2>subsubelecd</subsubele2>"
+                + "\r\n        </subele>\r\n        <?proc cont?>"
+                + "\r\n        &ent;"
+                + "\r\n    </ele>\r\n    <ele2>\r\n        cha&#99;"
+                + "\r\n        <![CDATA[cda]]>\r\n    </ele2>\r\n</root>"
                 + "\r\n<?abstracted hungry bath?>\r\n<!--shoe-->");
         });
     });

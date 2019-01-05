@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,25 @@ import {assert} from "chai";
 import XmlCharData from "../../../lib/nodes/XmlCharData";
 
 describe("XmlCharData", () => {
+    describe("#charData", () => {
+        it("get", () => {
+            const node = new XmlCharData(undefined, true, {
+                charData: "abc"
+            });
+            assert.strictEqual(node.charData, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlCharData(undefined, true, {
+                charData: "abc"
+            });
+            node.charData = "def";
+            assert.strictEqual(node.charData, "def");
+        });
+    });
+
     describe("#toString", () => {
-        it("normal character data", () => {
+        it("normal character data; default replace invalid chars", () => {
             assert.strictEqual(
                 new XmlCharData(undefined, true, {
                     charData: "abc"
@@ -27,7 +44,8 @@ describe("XmlCharData", () => {
                 "abc");
         });
 
-        it("character data with characters to be escaped", () => {
+        it("character data with characters to be escaped; default replace"
+           + " invalid chars", () => {
             assert.strictEqual(
                 new XmlCharData(undefined, true, {
                     charData: "<&a&b<c&<>]]>"
@@ -35,15 +53,64 @@ describe("XmlCharData", () => {
                 "&lt;&amp;a&amp;b&lt;c&amp;&lt;>]]&gt;");
         });
 
-        it("character data with characters not allowed in XML", () => {
+        it("character data with characters not allowed in XML; default replace"
+           + " invalid chars", () => {
             assert.throws(
                 () => new XmlCharData(undefined, true, {
                     charData: "abc" + String.fromCharCode(0x0001) + "def"
                 }));
             assert.doesNotThrow(
-                () => new XmlCharData(undefined, false, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
+                () => {
+                    assert.strictEqual(
+                        new XmlCharData(undefined, false, {
+                            charData: "abc" + String.fromCharCode(0x0001)
+                                      + "def"
+                        }).toString(),
+                        "abc\u0001def");
+                });
+        });
+
+        it("character data with characters not allowed in XML; do not replace"
+           + " invalid chars", () => {
+            assert.throws(
+                () => new XmlCharData(undefined, true, {
+                    charData: "abc" + String.fromCharCode(0x0001) + "def",
+                    replaceInvalidCharsInCharData: false
                 }));
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlCharData(undefined, false, {
+                            charData: "abc" + String.fromCharCode(0x0001)
+                                      + "def",
+                            replaceInvalidCharsInCharData: false
+                        }).toString(),
+                        "abc\u0001def");
+                });
+        });
+
+        it("character data with characters not allowed in XML; replace"
+           + " invalid chars", () => {
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlCharData(undefined, true, {
+                            charData: "abc" + String.fromCharCode(0x0001)
+                                      + "def",
+                            replaceInvalidCharsInCharData: true
+                        }).toString(),
+                        "abc\uFFFDdef");
+                });
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlCharData(undefined, false, {
+                            charData: "abc" + String.fromCharCode(0x0001)
+                                      + "def",
+                            replaceInvalidCharsInCharData: true
+                        }).toString(),
+                        "abc\uFFFDdef");
+                });
         });
     });
 

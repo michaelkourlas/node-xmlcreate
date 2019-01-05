@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {
     escapeAmpersands,
     escapeLeftAngleBrackets,
     escapeRightAngleBracketsInCdataTerminator
 } from "../escape";
-import {validateChar} from "../validate";
+import {fixChar, isUndefined, validateChar} from "../validate";
 
 /**
  * The options used to create new character data.
@@ -29,6 +30,11 @@ export interface IXmlCharDataOptions {
      * The character data.
      */
     charData: string;
+    /**
+     * Whether to replace any invalid characters in the character data with the
+     * Unicode replacement character. By default, this is disabled.
+     */
+    replaceInvalidCharsInCharData?: boolean;
 }
 
 /**
@@ -39,24 +45,50 @@ export interface IXmlCharDataOptions {
  * string `]]>`, are all automatically escaped.
  */
 export default class XmlCharData<Parent> {
-    private readonly _charData: string;
+    private readonly _replaceInvalidCharsInCharData: boolean;
     private readonly _parent: Parent;
+    private readonly _validation: boolean;
+    private _charData!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlCharDataOptions)
     {
-        if (validation && !validateChar(options.charData)) {
-            throw new Error("Character data should not contain characters"
-                            + " not allowed in XML");
+        this._validation = validation;
+        if (!isUndefined(options.replaceInvalidCharsInCharData)) {
+            this._replaceInvalidCharsInCharData = (
+                options.replaceInvalidCharsInCharData);
+        } else {
+            this._replaceInvalidCharsInCharData = false;
         }
-        this._charData = options.charData;
         this._parent = parent;
+        this.charData = options.charData;
+    }
+
+    /**
+     * Gets the text of this character data.
+     */
+    public get charData() {
+        return this._charData;
+    }
+
+    /**
+     * Sets the text of this character data.
+     */
+    public set charData(charData: string) {
+        if (this._replaceInvalidCharsInCharData) {
+            charData = fixChar(charData);
+        } else if (this._validation && !validateChar(charData)) {
+            throw new Error(`${getContext(this.up())}: character data`
+                            + `"${charData}" should not contain characters not`
+                            + " allowed in XML");
+        }
+        this._charData = charData;
     }
 
     /**
      * Returns an XML string representation of this character data.
      */
-    public toString(): string {
+    public toString() {
         let str = this._charData;
         str = escapeAmpersands(str);
         str = escapeLeftAngleBrackets(str);
@@ -67,7 +99,7 @@ export default class XmlCharData<Parent> {
     /**
      * Returns the parent of this character data.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

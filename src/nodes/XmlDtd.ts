@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {IStringOptions, StringOptions} from "../options";
 import {isUndefined, validateChar, validateName} from "../validate";
 import XmlComment, {IXmlCommentOptions} from "./XmlComment";
@@ -46,6 +47,9 @@ export interface IXmlDtdOptions {
     pubId?: string;
 }
 
+/**
+ * @private
+ */
 type Child<Parent> = XmlComment<XmlDtd<Parent>>
     | XmlDtdAttlist<XmlDtd<Parent>>
     | XmlDtdElement<XmlDtd<Parent>>
@@ -74,57 +78,104 @@ type Child<Parent> = XmlComment<XmlDtd<Parent>>
  */
 export default class XmlDtd<Parent> {
     private readonly _children: Array<Child<Parent>>;
-    private readonly _name: string;
     private readonly _parent: Parent;
-    private readonly _pubId?: string;
-    private readonly _sysId?: string;
+    private _name!: string;
     private readonly _validation: boolean;
+    private _pubId: string | undefined = undefined;
+    private _sysId: string | undefined = undefined;
 
     constructor(parent: Parent, validation: boolean, options: IXmlDtdOptions) {
+        this._validation = validation;
         this._children = [];
         this._parent = parent;
-        if (validation && !validateName(options.name)) {
-            throw new Error("DTD name should not contain characters not"
-                            + " allowed in XML names");
+        this.name = options.name;
+        if (!isUndefined(options.sysId)) {
+            this.sysId = options.sysId;
         }
-        this._name = options.name;
         if (!isUndefined(options.pubId)) {
-            const regex =
-                /^(\u0020|\u000D|\u000A|[a-zA-Z0-9]|[-'()+,./:=?;!*#@$_%])*$/;
-            if (validation && !regex.test(options.pubId)) {
-                throw new Error("DTD public identifier should not contain"
+            this.pubId = options.pubId;
+        }
+    }
+
+    /**
+     * Gets the name of the DTD.
+     */
+    public get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of the DTD.
+     */
+    public set name(name: string) {
+        if (this._validation && !validateName(name)) {
+            throw new Error(`${getContext(this.up())}: DTD name "${name}"`
+                            + " should not contain characters not allowed in"
+                            + " XML names");
+        }
+        this._name = name;
+    }
+
+    /**
+     * Gets the public identifier of the DTD.
+     */
+    public get pubId() {
+        return this._pubId;
+    }
+
+    /**
+     * Sets the public identifier of the DTD.
+     */
+    public set pubId(pubId: string | undefined) {
+        if (!isUndefined(pubId)) {
+            if (this._validation && !validatePubId(pubId)) {
+                throw new Error(`${getContext(this.up())}: DTD public`
+                                + ` identifier "${pubId}" should not contain`
                                 + " characters not allowed in public"
                                 + " identifiers");
             }
-            if (validation && isUndefined(options.sysId)) {
-                throw new Error("DTD public identifier should not be"
-                                + " defined if system identifier is undefined");
+            if (this._validation && isUndefined(this._sysId)) {
+                throw new Error(`${getContext(this.up())}: DTD public`
+                                + ` identifier "${pubId}" should not be defined`
+                                + " if system identifier is undefined");
             }
         }
-        this._pubId = options.pubId;
-        if (!isUndefined(options.sysId)) {
-            if (validation && !validateChar(options.sysId)) {
-                throw new Error("DTD system identifier should not contain"
+        this._pubId = pubId;
+    }
+
+    /**
+     * Gets the system identifier of the DTD.
+     */
+    public get sysId() {
+        return this._sysId;
+    }
+
+    /**
+     * Sets the system identifier of the DTD.
+     */
+    public set sysId(sysId: string | undefined) {
+        if (!isUndefined(sysId)) {
+            if (this._validation && !validateChar(sysId)) {
+                throw new Error(`${getContext(this.up())}: DTD system`
+                                + ` identifier "${sysId}" should not contain`
                                 + " characters not allowed in XML");
-            } else if (validation
-                       && options.sysId.indexOf("'") !== -1
-                       && options.sysId.indexOf("\"") !== -1)
+            } else if (this._validation
+                       && sysId.indexOf("'") !== -1
+                       && sysId.indexOf("\"") !== -1)
             {
-                throw new Error("DTD system identifier should not contain"
+                throw new Error(`${getContext(this.up())}: DTD system`
+                                + ` identifier "${sysId}" should not contain`
                                 + " both single quotes and double quotes");
             }
         }
-        this._sysId = options.sysId;
-        this._validation = validation;
+        this._sysId = sysId;
     }
 
     /**
      * Adds an attribute-list declaration to this document type declaration
      * and returns the new attribute-list declaration.
      */
-    public attlist(
-        options: IXmlDtdAttlistOptions): XmlDtdAttlist<XmlDtd<Parent>>
-    {
+    public attlist(options: IXmlDtdAttlistOptions) {
         const attlist = new XmlDtdAttlist(this, this._validation, options);
         this._children.push(attlist);
         return attlist;
@@ -134,7 +185,7 @@ export default class XmlDtd<Parent> {
      * Adds a comment to this document type declaration and returns the
      * new comment.
      */
-    public comment(options: IXmlCommentOptions): XmlComment<XmlDtd<Parent>> {
+    public comment(options: IXmlCommentOptions) {
         const comment = new XmlComment(this, this._validation, options);
         this._children.push(comment);
         return comment;
@@ -144,9 +195,7 @@ export default class XmlDtd<Parent> {
      * Adds an element declaration to this document type declaration
      * and returns the new element declaration.
      */
-    public element(
-        options: IXmlDtdElementOptions): XmlDtdElement<XmlDtd<Parent>>
-    {
+    public element(options: IXmlDtdElementOptions) {
         const element = new XmlDtdElement(this, this._validation, options);
         this._children.push(element);
         return element;
@@ -156,7 +205,7 @@ export default class XmlDtd<Parent> {
      * Adds an entity declaration to this document type declaration
      * and returns the new entity declaration.
      */
-    public entity(options: IXmlDtdEntityOptions): XmlDtdEntity<XmlDtd<Parent>> {
+    public entity(options: IXmlDtdEntityOptions) {
         const entity = new XmlDtdEntity(this, this._validation, options);
         this._children.push(entity);
         return entity;
@@ -166,9 +215,7 @@ export default class XmlDtd<Parent> {
      * Adds a notation declaration to this document type declaration
      * and returns the new notation declaration.
      */
-    public notation(
-        options: IXmlDtdNotationOptions): XmlDtdNotation<XmlDtd<Parent>>
-    {
+    public notation(options: IXmlDtdNotationOptions) {
         const notation = new XmlDtdNotation(this, this._validation, options);
         this._children.push(notation);
         return notation;
@@ -178,10 +225,7 @@ export default class XmlDtd<Parent> {
      * Adds a parameter entity reference to this document type declaration
      * and returns the new parameter entity reference.
      */
-    public paramEntityRef(
-        options: IXmlDtdParamEntityRefOptions)
-        : XmlDtdParamEntityRef<XmlDtd<Parent>>
-    {
+    public paramEntityRef(options: IXmlDtdParamEntityRefOptions) {
         const paramEntity = new XmlDtdParamEntityRef(this, this._validation,
                                                      options);
         this._children.push(paramEntity);
@@ -192,7 +236,7 @@ export default class XmlDtd<Parent> {
      * Adds a processing instruction to this document type declaration
      * and returns the new processing instruction.
      */
-    public procInst(options: IXmlProcInstOptions): XmlProcInst<XmlDtd<Parent>> {
+    public procInst(options: IXmlProcInstOptions) {
         const procInst = new XmlProcInst(this, this._validation, options);
         this._children.push(procInst);
         return procInst;
@@ -201,7 +245,7 @@ export default class XmlDtd<Parent> {
     /**
      * Returns an XML string representation of this document type declaration.
      */
-    public toString(options: IStringOptions = {}): string {
+    public toString(options: IStringOptions = {}) {
         const optionsObj = new StringOptions(options);
 
         let str = "<!DOCTYPE " + this._name;
@@ -212,7 +256,8 @@ export default class XmlDtd<Parent> {
             }
         } else {
             if (isUndefined(this._sysId)) {
-                throw new Error("this._sysId is undefined");
+                throw new Error(`${getContext(this.up())}: DTD system`
+                                + " identifier is not undefined");
             }
 
             str += " ";
@@ -242,7 +287,7 @@ export default class XmlDtd<Parent> {
     /**
      * Returns the parent of this attribute.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 
@@ -251,24 +296,61 @@ export default class XmlDtd<Parent> {
      * to an existing string.
      */
     private appendId(type: string, value: string, str: string,
-                     options: StringOptions): string
+                     options: StringOptions)
     {
         str += type + " ";
         if (options.doubleQuotes) {
             if (this._validation && value.indexOf("\"") !== -1) {
-                throw new Error("doubleQuotes option inconsistent with"
-                                + " system identifier or public identifier"
-                                + " in DTD");
+                throw new Error(`${getContext(this.up())}: doubleQuotes option`
+                                + " inconsistent with DTD system identifier or"
+                                + " public identifier");
             }
             str += "\"" + value + "\"";
         } else {
             if (this._validation && value.indexOf("'") !== -1) {
-                throw new Error("doubleQuotes option inconsistent with"
-                                + " system identifier or public identifier"
-                                + " in DTD");
+                throw new Error(`${getContext(this)}: doubleQuotes option`
+                                + " inconsistent with DTD system identifier or"
+                                + " public identifier");
             }
             str += "'" + value + "'";
         }
         return str;
     }
+}
+
+/**
+ * Returns true if the specified public identifier only contains characters
+ * permitted by the XML specification.
+ *
+ * @private
+ */
+export function validatePubId(str: string) {
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        if (char === 0xA
+            || char === 0xD
+            || char === 0x20
+            || char === 0x21
+            || (char >= 0x23 && char <= 0x25)
+            || (char >= 0x27 && char <= 0x2F)
+            || (char >= 0x30 && char <= 0x39)
+            || char === 0x3A
+            || char === 0x3B
+            || char === 0x3D
+            || char === 0x3F
+            || (char >= 0x40 && char <= 0x5A)
+            || char === 0x5F
+            || (char >= 0x61 && char <= 0x7A))
+        {
+            continue;
+        }
+
+        if (i + 1 === str.length) {
+            return false;
+        }
+
+        return false;
+    }
+
+    return true;
 }

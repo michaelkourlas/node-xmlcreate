@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,6 +65,23 @@ describe("XmlDtd", () => {
             "<!DOCTYPE abc [\n    <!ENTITY test>\n    <!ENTITY test2>\n]>");
     });
 
+    describe("#name", () => {
+        it("get", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc"
+            });
+            assert.strictEqual(node.name, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "abc"
+            });
+            node.name = "def";
+            assert.strictEqual(node.name, "def");
+        });
+    });
+
     it("#notation", () => {
         const node = new XmlDtd(undefined, false, {name: "abc"});
         assert.isTrue(node.notation({charData: "test"})
@@ -87,6 +104,27 @@ describe("XmlDtd", () => {
             "<!DOCTYPE abc [\n    %test;\n    %test2;\n]>");
     });
 
+    describe("#pubId", () => {
+        it("get", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "a",
+                pubId: "abc",
+                sysId: "b"
+            });
+            assert.strictEqual(node.pubId, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "a",
+                pubId: "abc",
+                sysId: "b"
+            });
+            node.pubId = "def";
+            assert.strictEqual(node.pubId, "def");
+        });
+    });
+
     it("#procInst", () => {
         const node = new XmlDtd(undefined, false, {name: "abc"});
         assert.isTrue(node.procInst({target: "test", content: "a"})
@@ -96,6 +134,25 @@ describe("XmlDtd", () => {
         assert.strictEqual(
             node.toString(),
             "<!DOCTYPE abc [\n    <?test a?>\n    <?test2?>\n]>");
+    });
+
+    describe("#sysId", () => {
+        it("get", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "a",
+                sysId: "abc"
+            });
+            assert.strictEqual(node.sysId, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlDtd(undefined, true, {
+                name: "a",
+                sysId: "abc"
+            });
+            node.sysId = "def";
+            assert.strictEqual(node.sysId, "def");
+        });
     });
 
     describe("#toString", () => {

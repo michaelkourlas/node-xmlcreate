@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {IStringOptions, StringOptions} from "../options";
 import {isUndefined} from "../validate";
 
@@ -51,42 +52,89 @@ export interface IXmlDeclOptions {
  * ```
  */
 export default class XmlDecl<Parent> {
-    private readonly _encoding?: string;
-    private readonly _standalone?: string;
-    private readonly _version: string;
+    private readonly _validation: boolean;
+    private _encoding!: string | undefined;
     private readonly _parent: Parent;
+    private _standalone!: string | undefined;
+    private _version: string = "1.0";
 
     constructor(parent: Parent, validation: boolean, options: IXmlDeclOptions) {
-        if (validation && !isUndefined(options.encoding)) {
-            if (!/^[A-Za-z][A-Za-z0-9._-]*$/.test(options.encoding)) {
-                throw new Error("Declaration encoding attribute should be a"
+        this._validation = validation;
+        this._parent = parent;
+        this.encoding = options.encoding;
+        this.standalone = options.standalone;
+        if (!isUndefined(options.version)) {
+            this.version = options.version;
+        }
+    }
+
+    /**
+     * Gets the encoding associated with this declaration.
+     */
+    public get encoding() {
+        return this._encoding;
+    }
+
+    /**
+     * Sets the encoding associated with this declaration.
+     */
+    public set encoding(encoding: string | undefined) {
+        if (this._validation && !isUndefined(encoding)) {
+            if (!validateEncoding(encoding)) {
+                throw new Error(`${getContext(this.up())}: declaration`
+                                + ` encoding attribute ${encoding} should be a`
                                 + " valid encoding");
             }
         }
-        this._encoding = options.encoding;
-        this._parent = parent;
-        if (validation && !isUndefined(options.standalone)) {
-            if (!/^(yes|no)$/.test(options.standalone)) {
-                throw new Error("Declaration standalone attribute should be"
-                                + " the string 'yes' or the string 'no'");
+        this._encoding = encoding;
+    }
+
+    /**
+     * Gets the value of the standalone attribute associated with this
+     * declaration.
+     */
+    public get standalone() {
+        return this._standalone;
+    }
+
+    /**
+     * Sets the value of the standalone attribute associated with this
+     * declaration.
+     */
+    public set standalone(standalone: string | undefined) {
+        if (this._validation && !isUndefined(standalone)) {
+            if (standalone !== "yes" && standalone !== "no") {
+                throw new Error(`${getContext(this.up())}: declaration`
+                                + ` standalone attribute ${standalone} should`
+                                + " be the string 'yes' or the string 'no'");
             }
         }
-        this._standalone = options.standalone;
-        if (validation && !isUndefined(options.version)) {
-            if (!/^1\.[0-9]+$/.test(options.version)) {
-                throw new Error("Declaration version attribute should be a"
-                                + " valid XML version");
-            }
+        this._standalone = standalone;
+    }
+
+    /**
+     * Gets the XML version associated with this declaration.
+     */
+    public get version() {
+        return this._version;
+    }
+
+    /**
+     * Sets the XML version associated with this declaration.
+     */
+    public set version(version: string) {
+        if (this._validation && !validateVersion(version)) {
+            throw new Error(`${getContext(this.up())}: declaration version`
+                            + ` attribute ${version} should be a valid XML`
+                            + " version");
         }
-        this._version = !isUndefined(options.version)
-                        ? options.version
-                        : "1.0";
+        this._version = version;
     }
 
     /**
      * Returns an XML string representation of this declaration.
      */
-    public toString(options: IStringOptions = {}): string {
+    public toString(options: IStringOptions = {}) {
         const optionsObj = new StringOptions(options);
 
         const quote = optionsObj.doubleQuotes ? '"' : "'";
@@ -104,7 +152,62 @@ export default class XmlDecl<Parent> {
     /**
      * Returns the parent of this declaration.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
+}
+
+/**
+ * Returns true if the specified encoding only contains characters permitted by
+ * the XML specification.
+ *
+ * @private
+ */
+function validateEncoding(str: string) {
+    if (str.length === 0) {
+        return false;
+    }
+
+    const initialChar = str.charCodeAt(0);
+    if (!((initialChar >= 0x41 && initialChar <= 0x5A)
+          || (initialChar >= 0x61 && initialChar <= 0x7A)))
+    {
+        return false;
+    }
+
+    for (let i = 1; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        if (char === 0x5F
+            || char === 0x2D
+            || char === 0x2E
+            || (char >= 0x30 && char <= 0x39)
+            || (char >= 0x41 && char <= 0x5A)
+            || (char >= 0x61 && char <= 0x7A))
+        {
+            continue;
+        }
+
+        if (i + 1 === str.length) {
+            return false;
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Returns true if the specified version only contains characters permitted by
+ * the XML specification.
+ *
+ * @private
+ */
+function validateVersion(str: string) {
+    for (let i = 0; i <= 9; i++) {
+        if (str === "1." + i) {
+            return true;
+        }
+    }
+    return false;
 }

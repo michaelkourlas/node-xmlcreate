@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {isUndefined, validateChar, validateName} from "../validate";
 
 /**
@@ -43,39 +44,74 @@ export interface IXmlProcInstOptions {
  * ```
  */
 export default class XmlProcInst<Parent> {
-    private readonly _content?: string;
+    private readonly _validation: boolean;
     private readonly _parent: Parent;
-    private readonly _target: string;
+    private _content!: string | undefined;
+    private _target!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlProcInstOptions)
     {
-        if (!isUndefined(options.content)) {
-            if (validation && !validateChar(options.content)) {
-                throw new Error("Processing instruction content should"
+        this._validation = validation;
+        this._parent = parent;
+        this.content = options.content;
+        this.target = options.target;
+    }
+
+    /**
+     * Gets the content of this processing instruction.
+     */
+    public get content() {
+        return this._content;
+    }
+
+    /**
+     * Sets the content of this processing instruction.
+     */
+    public set content(content: string | undefined) {
+        if (!isUndefined(content)) {
+            if (this._validation && !validateChar(content)) {
+                throw new Error(`${getContext(this.up())}: processing`
+                                + ` instruction content "${content}" should`
                                 + " not contain characters not allowed in XML");
-            } else if (validation && /\?>/.test(options.content)) {
-                throw new Error("Processing instruction content should"
+            } else if (this._validation && content.indexOf("?>") !== -1) {
+                throw new Error(`${getContext(this.up())}: processing`
+                                + ` instruction content "${content}" should`
                                 + " not contain the string '?>'");
             }
         }
-        this._content = options.content;
-        this._parent = parent;
-        if (validation && !validateName(options.target)) {
-            throw new Error("Processing instruction target should not"
-                            + " contain characters not allowed in XML names");
+        this._content = content;
+    }
+
+    /**
+     * Gets the target of this processing instruction.
+     */
+    public get target() {
+        return this._target;
+    }
+
+    /**
+     * Sets the content of this processing instruction.
+     */
+    public set target(target: string) {
+        if (this._validation && !validateName(target)) {
+            throw new Error(`${getContext(this.up())}: processing`
+                            + ` instruction target "${target}" should`
+                            + " not contain characters not allowed in XML"
+                            + " names");
         }
-        if (validation && options.target === "xml") {
-            throw new Error("Processing instruction target should not be"
-                            + " the string 'xml'");
+        if (this._validation && target === "xml") {
+            throw new Error(`${getContext(this.up())}: processing`
+                            + ` instruction target "${target}" should`
+                            + " not be the string 'xml'");
         }
-        this._target = options.target;
+        this._target = target;
     }
 
     /**
      * Returns an XML string representation of this processing instruction.
      */
-    public toString(): string {
+    public toString() {
         if (isUndefined(this._content)) {
             return "<?" + this._target + "?>";
         } else {
@@ -86,7 +122,7 @@ export default class XmlProcInst<Parent> {
     /**
      * Returns the parent of this processing instruction.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

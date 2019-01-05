@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,23 @@ import {assert} from "chai";
 import XmlDtdParamEntityRef from "../../../lib/nodes/XmlDtdParamEntityRef";
 
 describe("XmlDtdParamEntityRef", () => {
+    describe("#name", () => {
+        it("get", () => {
+            const node = new XmlDtdParamEntityRef(undefined, true, {
+                name: "abc"
+            });
+            assert.strictEqual(node.name, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlDtdParamEntityRef(undefined, true, {
+                name: "abc"
+            });
+            node.name = "def";
+            assert.strictEqual(node.name, "def");
+        });
+    });
+
     describe("#toString", () => {
         it("normal character data",
            () => {

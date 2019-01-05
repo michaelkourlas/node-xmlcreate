@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {validateChar} from "../validate";
+import {getContext} from "../error";
+import {fixChar, isUndefined, validateChar} from "../validate";
 
 /**
  * The options used to create a CDATA section.
@@ -24,6 +25,12 @@ export interface IXmlCdataOptions {
      * The character data of the CDATA section.
      */
     charData: string;
+    /**
+     * Whether to replace any invalid characters in the character data of the
+     * CDATA section with the Unicode replacement character. By default, this
+     * is disabled.
+     */
+    replaceInvalidCharsInCharData?: boolean;
 }
 
 /**
@@ -37,35 +44,64 @@ export interface IXmlCdataOptions {
  * ```
  */
 export default class XmlCdata<Parent> {
-    private readonly _charData: string;
+    private readonly _replaceInvalidCharsInCharData: boolean;
     private readonly _parent: Parent;
+    private readonly _validation: boolean;
+    private _charData!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlCdataOptions)
     {
-        if (validation && !validateChar(options.charData)) {
-            throw new Error("CDATA section should not contain characters"
+        this._validation = validation;
+        if (!isUndefined(options.replaceInvalidCharsInCharData)) {
+            this._replaceInvalidCharsInCharData = (
+                options.replaceInvalidCharsInCharData);
+        } else {
+            this._replaceInvalidCharsInCharData = false;
+        }
+        this._parent = parent;
+        this.charData = options.charData;
+    }
+
+    /**
+     * Gets the character data of this CDATA section.
+     */
+    public get charData() {
+        return this._charData;
+    }
+
+    /**
+     * Sets the character data of this CDATA section.
+     */
+    public set charData(charData: string) {
+        if (this._replaceInvalidCharsInCharData) {
+            charData = fixChar(charData);
+        } else if (this._validation && !validateChar(charData)) {
+            throw new Error(`${getContext(this.up())}: CDATA section`
+                            + ` "${charData}" should not contain characters`
                             + " not allowed in XML");
         }
-        if (validation && /]]>/.test(options.charData)) {
-            throw new Error("CDATA section should not contain the string"
+        if (this._replaceInvalidCharsInCharData) {
+            charData = charData.replace("]]>", "\uFFFD\uFFFD\uFFFD");
+        } else if (this._validation && charData.indexOf("]]>") !== -1) {
+            throw new Error(`${getContext(this.up())}: CDATA section`
+                            + ` "${charData}" should not contain the string`
                             + " ']]>'");
         }
-        this._charData = options.charData;
-        this._parent = parent;
+        this._charData = charData;
     }
 
     /**
      * Returns an XML string representation of this CDATA section.
      */
-    public toString(): string {
+    public toString() {
         return "<![CDATA[" + this._charData + "]]>";
     }
 
     /**
      * Returns the parent of this CDATA section.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

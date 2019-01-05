@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2018 Michael Kourlas
+ * Copyright (C) 2018-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,6 +71,19 @@ describe("XmlElement", () => {
         assert.strictEqual(node.toString(), "<abc>&def;</abc>");
     });
 
+    describe("#name", () => {
+        it("get", () => {
+            const node = new XmlElement(undefined, true, {name: "abc"});
+            assert.strictEqual(node.name, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlElement(undefined, true, {name: "abc"});
+            node.name = "def";
+            assert.strictEqual(node.name, "def");
+        });
+    });
+
     it("#procInst", () => {
         const node = new XmlElement(undefined, true, {name: "abc"});
         assert.isTrue(node.procInst({target: "def", content: "ghi"})
@@ -125,59 +138,136 @@ describe("XmlElement", () => {
                     .entityRef({name: "ragged"}).up()
                     .charRef({char: "q"}).up()
                     .cdata({charData: "physical educated"}).up().up()
-                 .element({name: "baseball"})
+                .element({name: "baseball"})
                     .charData({charData: "yawn"}).up()
                     .entityRef({name: "jagged"}).up()
                     .charRef({char: "g"}).up()
                     .charData({charData: "camp"}).up()
                     .charRef({char: "y"}).up()
                     .entityRef({name: "tangible"}).up()
-                    .charData({charData: "squeamish"});
+                    .charData({charData: "squeamish"}).up().up()
+                .element({name: "multilineone"})
+                    .charData({charData: "first line\nsecond line"}).up().up()
+                .element({name: "multilinetwo"})
+                    .element({name: "indented"})
+                        .charData({charData: "third line\nfourth line"})
+                            .up().up()
+                    .charData({charData: "fifth line"});
             // @formatter:on
 
             return node;
         }
 
-        it("normal name; no attributes; no children; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " no children; default quotes; default pretty printing;"
+           + " default indentation; default newline", () => {
             const node = new XmlElement(undefined, true, {name: "abc"});
             assert.strictEqual(node.toString(), "<abc/>");
         });
 
-        it("name with characters not allowed in XML names; no attributes;"
-           + " no children; default quotes; default pretty printing;"
-           + " default indentation; default newline", () => {
+        it("name with characters not allowed in XML names; default replace"
+           + " invalid chars; no attributes; no children; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
             assert.throws(
                 () => new XmlElement(undefined, true, {
                     name: "."
                 }));
             assert.doesNotThrow(
-                () => new XmlElement(undefined, false, {
-                    name: "."
-                }));
+                () => {
+                    assert.strictEqual(
+                        new XmlElement(undefined, false, {
+                            name: "."
+                        }).toString(),
+                        "<./>");
+                });
         });
 
-        it("normal name; attributes; no children; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("name with characters not allowed in XML names; do not replace"
+           + " invalid chars; no attributes; no children; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            assert.throws(
+                () => new XmlElement(undefined, true, {
+                    name: ".",
+                    replaceInvalidCharsInName: false
+                }));
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlElement(undefined, false, {
+                            name: ".",
+                            replaceInvalidCharsInName: false
+                        }).toString(),
+                        "<./>");
+                });
+        });
+
+        it("name with characters not allowed in XML names; replace"
+           + " invalid chars; no attributes; no children; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlElement(undefined, true, {
+                            name: ".",
+                            replaceInvalidCharsInName: true
+                        }).toString(),
+                        "<\uFFFD/>");
+                });
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlElement(undefined, false, {
+                            name: ".",
+                            replaceInvalidCharsInName: true
+                        }).toString(),
+                        "<\uFFFD/>");
+                });
+        });
+
+        it("normal name; default replace invalid chars; attributes; no"
+           + " children; default quotes; default pretty printing; default"
+           + " indentation; default newline", () => {
             const node = new XmlElement(undefined, true, {name: "abc"});
             node.attribute({name: "def"}).text({charData: "ghi"});
             node.attribute({name: "jkl"}).text({charData: "mno"});
             assert.strictEqual(node.toString(), "<abc def='ghi' jkl='mno'/>");
         });
 
-        it("normal name; no attributes; single empty child; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes; single"
+           + " empty child; default quotes; default pretty printing; default"
+           + " indentation; default newline", () => {
             const node = new XmlElement(undefined, true, {name: "abc"});
             node.charData({charData: ""});
             assert.strictEqual(node.toString(), "<abc/>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes; single"
+           + " empty child with self-closing tag enabled; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            const node = new XmlElement(
+                undefined, true, {name: "abc", useSelfClosingTagIfEmpty: true});
+            node.charData({charData: ""});
+            assert.strictEqual(node.toString(), "<abc/>");
+        });
+
+        it("normal name; default replace invalid chars; no attributes; single"
+           + " empty child with self-closing tag disabled; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            const node = new XmlElement(
+                undefined, true,
+                {name: "abc", useSelfClosingTagIfEmpty: false});
+            node.charData({charData: ""});
+            assert.strictEqual(node.toString(), "<abc></abc>");
+        });
+
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; default pretty printing; default"
+           + " indentation; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString(),
@@ -198,12 +288,16 @@ describe("XmlElement", () => {
                 + "\n        <berserk/>\n        route flaky&ragged;&#113;"
                 + "\n        <![CDATA[physical educated]]>\n    </plant>"
                 + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\n    <multilinetwo>\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\n        fifth line\n    </multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; single quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; single quotes; default pretty printing; default"
+           + " indentation; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({doubleQuotes: false}),
@@ -224,12 +318,16 @@ describe("XmlElement", () => {
                 + "\n        <berserk/>\n        route flaky&ragged;&#113;"
                 + "\n        <![CDATA[physical educated]]>\n    </plant>"
                 + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\n    <multilinetwo>\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\n        fifth line\n    </multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; double quotes;"
-           + " default pretty printing; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; double quotes; default pretty printing; default"
+           + " indentation; default newline", () => {
             const node = getElement();
             /* tslint:disable:quotemark */
             assert.strictEqual(
@@ -251,13 +349,17 @@ describe("XmlElement", () => {
                 + '\n        <berserk/>\n        route flaky&ragged;&#113;'
                 + '\n        <![CDATA[physical educated]]>\n    </plant>'
                 + '\n    <baseball>yawn&jagged;&#103;camp&#121;'
-                + '&tangible;squeamish</baseball>\n</root>');
+                + '&tangible;squeamish</baseball>'
+                + '\n    <multilineone>first line\nsecond line</multilineone>'
+                + '\n    <multilinetwo>\n        <indented>'
+                + 'third line\nfourth line</indented>'
+                + '\n        fifth line\n    </multilinetwo>\n</root>');
             /* tslint:enable:quotemark */
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " pretty printing on; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; pretty printing on; default"
+           + " indentation; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({pretty: true}),
@@ -278,12 +380,16 @@ describe("XmlElement", () => {
                 + "\n        <berserk/>\n        route flaky&ragged;&#113;"
                 + "\n        <![CDATA[physical educated]]>\n    </plant>"
                 + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\n    <multilinetwo>\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\n        fifth line\n    </multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " pretty printing off; default indentation;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; pretty printing off; default"
+           + " indentation; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({pretty: false}),
@@ -304,12 +410,15 @@ describe("XmlElement", () => {
                 + "<berserk/>route flaky&ragged;&#113;"
                 + "<![CDATA[physical educated]]></plant>"
                 + "<baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball></root>");
+                + "&tangible;squeamish</baseball>"
+                + "<multilineone>first line\nsecond line</multilineone>"
+                + "<multilinetwo><indented>third line\nfourth line</indented>"
+                + "fifth line</multilinetwo></root>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " default pretty printing; indentation four spaces;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; default pretty printing; indentation"
+           + " four spaces; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({indent: "    "}),
@@ -330,12 +439,16 @@ describe("XmlElement", () => {
                 + "\n        <berserk/>\n        route flaky&ragged;&#113;"
                 + "\n        <![CDATA[physical educated]]>\n    </plant>"
                 + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\n    <multilinetwo>\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\n        fifth line\n    </multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " default pretty printing; indentation tabs;"
-           + " default newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; default pretty printing; indentation"
+           + " tabs; default newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({indent: "\t"}),
@@ -356,12 +469,16 @@ describe("XmlElement", () => {
                 + "\n\t\t<berserk/>\n\t\troute flaky&ragged;&#113;"
                 + "\n\t\t<![CDATA[physical educated]]>\n\t</plant>"
                 + "\n\t<baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n\t<multilineone>first line\nsecond line</multilineone>"
+                + "\n\t<multilinetwo>\n\t\t<indented>"
+                + "third line\nfourth line</indented>"
+                + "\n\t\tfifth line\n\t</multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " \\n newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; default pretty printing; default"
+           + " indentation; \\n newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({newline: "\n"}),
@@ -382,12 +499,16 @@ describe("XmlElement", () => {
                 + "\n        <berserk/>\n        route flaky&ragged;&#113;"
                 + "\n        <![CDATA[physical educated]]>\n    </plant>"
                 + "\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\n    <multilinetwo>\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\n        fifth line\n    </multilinetwo>\n</root>");
         });
 
-        it("normal name; no attributes; children; default quotes;"
-           + " default pretty printing; default indentation;"
-           + " \\r\\n newline", () => {
+        it("normal name; default replace invalid chars; no attributes;"
+           + " children; default quotes; default pretty printing; default"
+           + " indentation; \\r\\n newline", () => {
             const node = getElement();
             assert.strictEqual(
                 node.toString({newline: "\r\n"}),
@@ -408,7 +529,11 @@ describe("XmlElement", () => {
                 + "\r\n        <berserk/>\r\n        route flaky&ragged;&#113;"
                 + "\r\n        <![CDATA[physical educated]]>\r\n    </plant>"
                 + "\r\n    <baseball>yawn&jagged;&#103;camp&#121;"
-                + "&tangible;squeamish</baseball>\r\n</root>");
+                + "&tangible;squeamish</baseball>"
+                + "\r\n    <multilineone>first line\nsecond line</multilineone>"
+                + "\r\n    <multilinetwo>\r\n        <indented>"
+                + "third line\nfourth line</indented>"
+                + "\r\n        fifth line\r\n    </multilinetwo>\r\n</root>");
         });
     });
 });

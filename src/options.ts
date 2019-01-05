@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ export class StringOptions implements IStringOptions {
     public newline: string = "\n";
     public pretty: boolean = true;
 
-    constructor(options: IStringOptions = {}) {
+    constructor(options: IStringOptions) {
         if (!isUndefined(options.doubleQuotes)) {
             this.doubleQuotes = options.doubleQuotes;
         }

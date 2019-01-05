@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,23 @@ import {assert} from "chai";
 import XmlDtdAttlist from "../../../lib/nodes/XmlDtdAttlist";
 
 describe("XmlDtdAttlist", () => {
+    describe("#charData", () => {
+        it("get", () => {
+            const node = new XmlDtdAttlist(undefined, true, {
+                charData: "abc"
+            });
+            assert.strictEqual(node.charData, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlDtdAttlist(undefined, true, {
+                charData: "abc"
+            });
+            node.charData = "def";
+            assert.strictEqual(node.charData, "def");
+        });
+    });
+
     describe("#toString", () => {
         it("normal character data",
            () => {

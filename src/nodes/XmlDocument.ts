@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,9 @@ export interface IXmlDocumentOptions {
     validation?: boolean;
 }
 
+/**
+ * @private
+ */
 type Child = XmlComment<XmlDocument>
     | XmlDecl<XmlDocument>
     | XmlDtd<XmlDocument>
@@ -85,7 +88,7 @@ export default class XmlDocument {
     /**
      * Adds a comment to this document and returns the new comment.
      */
-    public comment(options: IXmlCommentOptions): XmlComment<XmlDocument> {
+    public comment(options: IXmlCommentOptions) {
         const comment = new XmlComment(this, this._validation, options);
         this._children.push(comment);
         return comment;
@@ -94,10 +97,10 @@ export default class XmlDocument {
     /**
      * Adds a declaration to this document and returns the new declaration.
      */
-    public decl(options: IXmlDeclOptions = {}): XmlDecl<XmlDocument> {
+    public decl(options: IXmlDeclOptions = {}) {
         if (this._validation && this._children.length !== 0) {
-            throw new Error("Declaration must be the first child in a"
-                            + " document");
+            throw new Error("in XML document: declaration must be the first"
+                            + " child");
         }
 
         const declaration = new XmlDecl(this, this._validation, options);
@@ -109,12 +112,12 @@ export default class XmlDocument {
      * Adds a document type definition to this document and returns the new
      * document type definition.
      */
-    public dtd(options: IXmlDtdOptions): XmlDtd<XmlDocument> {
+    public dtd(options: IXmlDtdOptions) {
         const filteredChildren = this._children.filter((value) => {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 0) {
-            throw new Error("Document type definition must precede the root"
+            throw new Error("in XML document: DTD must precede the root"
                             + " element");
         }
 
@@ -126,12 +129,13 @@ export default class XmlDocument {
     /**
      * Adds the root element to this document and returns the element.
      */
-    public element(options: IXmlElementOptions): XmlElement<XmlDocument> {
+    public element(options: IXmlElementOptions) {
         const filteredChildren = this._children.filter((value) => {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 0) {
-            throw new Error("Document may only contain one root element");
+            throw new Error("in XML document: only one root element is"
+                            + " permitted");
         }
 
         const element = new XmlElement(this, this._validation, options);
@@ -143,7 +147,7 @@ export default class XmlDocument {
      * Adds a processing instruction to this document and returns the new
      * processing instruction.
      */
-    public procInst(options: IXmlProcInstOptions): XmlProcInst<XmlDocument> {
+    public procInst(options: IXmlProcInstOptions) {
         const procInst = new XmlProcInst(this, this._validation, options);
         this._children.push(procInst);
         return procInst;
@@ -153,12 +157,13 @@ export default class XmlDocument {
      * Returns an XML string representation of this document using the
      * specified options.
      */
-    public toString(options: IStringOptions = {}): string {
+    public toString(options: IStringOptions = {}) {
         const filteredChildren = this._children.filter((value) => {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 1) {
-            throw new Error("Document must contain exactly one root element");
+            throw new Error("in XML document: no more than one root element"
+                            + " is permitted");
         }
 
         const optionsObj = new StringOptions(options);

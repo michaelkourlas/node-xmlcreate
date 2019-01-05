@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,38 @@ import {assert} from "chai";
 import XmlProcInst from "../../../lib/nodes/XmlProcInst";
 
 describe("XmlProcInst", () => {
+    describe("#content", () => {
+        it("get", () => {
+            const node = new XmlProcInst(undefined, true, {
+                content: "abc",
+                target: "xyz"
+            });
+            assert.strictEqual(node.content, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlProcInst(undefined, true, {
+                content: "abc",
+                target: "xyz"
+            });
+            node.content = "def";
+            assert.strictEqual(node.content, "def");
+        });
+    });
+
+    describe("#target", () => {
+        it("get", () => {
+            const node = new XmlProcInst(undefined, true, {target: "abc"});
+            assert.strictEqual(node.target, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlProcInst(undefined, true, {target: "abc"});
+            node.target = "def";
+            assert.strictEqual(node.target, "def");
+        });
+    });
+
     describe("#toString", () => {
         it("normal target; no content", () => {
             assert.strictEqual(

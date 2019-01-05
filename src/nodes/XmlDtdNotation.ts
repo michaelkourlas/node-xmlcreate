@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {validateChar} from "../validate";
 
 /**
@@ -37,31 +38,48 @@ export interface IXmlDtdNotationOptions {
  * ```
  */
 export default class XmlDtdNotation<Parent> {
+    private readonly _validation: boolean;
     private readonly _parent: Parent;
-    private readonly _charData: string;
+    private _charData!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlDtdNotationOptions)
     {
-        if (validation && !validateChar(options.charData)) {
-            throw new Error("XML notation declaration should not contain"
-                            + " characters not allowed in XML");
-        }
-        this._charData = options.charData;
+        this._validation = validation;
         this._parent = parent;
+        this.charData = options.charData;
+    }
+
+    /**
+     * Gets the text of this notation declaration.
+     */
+    public get charData() {
+        return this._charData;
+    }
+
+    /**
+     * Sets the text of this notation declaration.
+     */
+    public set charData(charData: string) {
+        if (this._validation && !validateChar(charData)) {
+            throw new Error(`${getContext(this.up())}: notation declaration`
+                            + ` "${charData}" should not contain characters`
+                            + " not allowed in XML");
+        }
+        this._charData = charData;
     }
 
     /**
      * Returns an XML string representation of this notation declaration.
      */
-    public toString(): string {
+    public toString() {
         return "<!NOTATION " + this._charData + ">";
     }
 
     /**
      * Returns the parent of this notation declaration.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {getContext} from "../error";
 import {validateName} from "../validate";
 
 /**
@@ -37,31 +38,48 @@ export interface IXmlEntityRefOptions {
  * ```
  */
 export default class XmlEntityRef<Parent> {
-    private readonly _name: string;
+    private readonly _validation: boolean;
     private readonly _parent: Parent;
+    private _name!: string;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlEntityRefOptions)
     {
-        if (validation && !validateName(options.name)) {
-            throw new Error("Entity reference name should not contain"
-                            + " characters not allowed in XML names");
-        }
-        this._name = options.name;
+        this._validation = validation;
         this._parent = parent;
+        this.name = options.name;
+    }
+
+    /**
+     * Gets the name of this entity reference.
+     */
+    public get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name of this entity reference.
+     */
+    public set name(name: string) {
+        if (this._validation && !validateName(name)) {
+            throw new Error(`${getContext(this.up())}: entity reference name`
+                            + ` "${name}" should not contain characters not`
+                            + " allowed in XML names");
+        }
+        this._name = name;
     }
 
     /**
      * Returns an XML string representation of this entity reference.
      */
-    public toString(): string {
+    public toString() {
         return "&" + this._name + ";";
     }
 
     /**
      * Returns the parent of this entity reference.
      */
-    public up(): Parent {
+    public up() {
         return this._parent;
     }
 }

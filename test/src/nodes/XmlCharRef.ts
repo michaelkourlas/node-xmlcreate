@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,42 @@ import {assert} from "chai";
 import XmlCharRef from "../../../lib/nodes/XmlCharRef";
 
 describe("XmlCharRef", () => {
+    describe("#char", () => {
+        it("get", () => {
+            const node = new XmlCharRef(undefined, true, {
+                char: "a"
+            });
+            assert.strictEqual(node.char, "a");
+        });
+
+        it("set", () => {
+            const node = new XmlCharRef(undefined, true, {
+                char: "a"
+            });
+            node.char = "b";
+            assert.strictEqual(node.char, "b");
+        });
+    });
+
+    describe("#hex", () => {
+        it("get", () => {
+            const node = new XmlCharRef(undefined, true, {
+                char: "a",
+                hex: true
+            });
+            assert.strictEqual(node.hex, true);
+        });
+
+        it("set", () => {
+            const node = new XmlCharRef(undefined, true, {
+                char: "a",
+                hex: true
+            });
+            node.hex = false;
+            assert.strictEqual(node.hex, false);
+        });
+    });
+
     describe("#toString", () => {
         it("normal single character; default hex", () => {
             assert.strictEqual(
@@ -61,9 +97,13 @@ describe("XmlCharRef", () => {
                     char: String.fromCharCode(0x0001)
                 }));
             assert.doesNotThrow(
-                () => new XmlCharRef(undefined, false, {
-                    char: String.fromCharCode(0x0001)
-                }));
+                () => {
+                    assert.strictEqual(
+                        new XmlCharRef(undefined, false, {
+                            char: String.fromCharCode(0x0001)
+                        }).toString(),
+                        "&#1;");
+                });
         });
 
         it("multiple characters; hex false", () => {
@@ -72,9 +112,13 @@ describe("XmlCharRef", () => {
                     char: "bc"
                 }));
             assert.doesNotThrow(
-                () => new XmlCharRef(undefined, false, {
-                    char: "bc"
-                }));
+                () => {
+                    assert.strictEqual(
+                        new XmlCharRef(undefined, false, {
+                            char: "bc"
+                        }).toString(),
+                        "&#98;");
+                });
         });
     });
 

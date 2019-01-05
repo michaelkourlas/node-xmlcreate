@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016-2018 Michael Kourlas
+ * Copyright (C) 2016-2019 Michael Kourlas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,19 @@ describe("XmlAttribute", () => {
         assert.strictEqual(node.toString(), "abc='&def;&ghi;&jkl;'");
     });
 
+    describe("#name", () => {
+        it("get", () => {
+            const node = new XmlAttribute(undefined, true, {name: "abc"});
+            assert.strictEqual(node.name, "abc");
+        });
+
+        it("set", () => {
+            const node = new XmlAttribute(undefined, true, {name: "abc"});
+            node.name = "def";
+            assert.strictEqual(node.name, "def");
+        });
+    });
+
     it("#text", () => {
         const node = new XmlAttribute(undefined, true, {name: "abc"});
         assert.isTrue(node.text({charData: "def"}) instanceof XmlAttributeText);
@@ -52,7 +65,8 @@ describe("XmlAttribute", () => {
     });
 
     describe("#toString", () => {
-        it("normal name; no children; default quotes", () => {
+        it("normal name; default replace invalid chars; no children; default"
+           + " quotes", () => {
             assert.strictEqual(
                 new XmlAttribute(undefined, true, {
                     name: "abc"
@@ -60,19 +74,68 @@ describe("XmlAttribute", () => {
                 "abc=''");
         });
 
-        it("name with characters not allowed in XML names; no children;"
-           + " default quotes", () => {
+        it("name with characters not allowed in XML names; default replace"
+           + " invalid chars; no children; default quotes", () => {
             assert.throws(
                 () => new XmlAttribute(undefined, true, {
                     name: "."
                 }));
             assert.doesNotThrow(
-                () => new XmlAttribute(undefined, false, {
-                    name: "."
-                }));
+                () => {
+                    assert.strictEqual(
+                        new XmlAttribute(undefined, false, {
+                            name: "."
+                        }).toString(),
+                        ".=''"
+                    );
+                });
         });
 
-        it("normal name; children; default quotes", () => {
+        it("name with characters not allowed in XML names; do not replace"
+           + " invalid chars; no children; default quotes", () => {
+            assert.throws(
+                () => new XmlAttribute(undefined, true, {
+                    name: ".",
+                    replaceInvalidCharsInName: false
+                }));
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlAttribute(undefined, false, {
+                            name: ".",
+                            replaceInvalidCharsInName: false
+                        }).toString(),
+                        ".=''"
+                    );
+                });
+        });
+
+        it("name with characters not allowed in XML names; replace invalid"
+           + " chars; no children; default quotes", () => {
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlAttribute(undefined, true, {
+                            name: ".",
+                            replaceInvalidCharsInName: true
+                        }).toString(),
+                        "\uFFFD=''"
+                    );
+                });
+            assert.doesNotThrow(
+                () => {
+                    assert.strictEqual(
+                        new XmlAttribute(undefined, false, {
+                            name: ".",
+                            replaceInvalidCharsInName: true
+                        }).toString(),
+                        "\uFFFD=''"
+                    );
+                });
+        });
+
+        it("normal name; default replace invalid chars; children; default"
+           + " quotes", () => {
             const node = new XmlAttribute(undefined, true, {name: "a"});
             node.text({charData: "bbb"});
             node.entityRef({name: "c"});
@@ -84,7 +147,8 @@ describe("XmlAttribute", () => {
                                "a='bbb&c;&#100;&#101;&fff;g'");
         });
 
-        it("normal name; children; single quotes", () => {
+        it("normal name; default replace invalid chars; children; single"
+           + " quotes", () => {
             const node = new XmlAttribute(undefined, true, {name: "abc"});
             node.text({charData: "bbb"});
             node.entityRef({name: "c"});
@@ -98,7 +162,8 @@ describe("XmlAttribute", () => {
                 "abc='bbb&c;&#100;&#101;&fff;g&apos;hello&apos;'");
         });
 
-        it("normal name; children; double quotes", () => {
+        it("normal name; default replace invalid chars; children; double"
+           + " quotes", () => {
             const node = new XmlAttribute(undefined, true, {name: "abc"});
             node.text({charData: "bbb"});
             node.entityRef({name: "c"});
