@@ -23,18 +23,20 @@ import {isUndefined} from "../validate";
  */
 export interface IXmlDeclOptions {
     /**
-     * The encoding attribute to be included in the declaration. By default,
-     * no encoding attribute is included.
+     * The encoding attribute to be included in the declaration. If defined,
+     * this value must be a valid encoding. By default, no encoding attribute
+     * is included.
      */
     encoding?: string;
     /**
      * The value of the standalone attribute to be included in the declaration.
-     * This value must be "yes" or "no". By default, no standalone attribute is
-     * included.
+     * If defined, this value must be "yes" or "no". By default, no standalone
+     * attribute is included.
      */
     standalone?: string;
     /**
-     * The XML version to be included in the declaration. Defaults to "1.0".
+     * The XML version to be included in the declaration. If defined, this
+     * value must be a valid XML version number. Defaults to "1.0".
      */
     version?: string;
 }

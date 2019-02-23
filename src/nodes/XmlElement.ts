@@ -42,7 +42,7 @@ export interface IXmlElementOptions {
      */
     replaceInvalidCharsInName?: boolean;
     /**
-     * Use a self-closing tag if this element is empty.
+     * Whether to use a self-closing tag if this element is empty.
      *
      * For example, use:
      * ```xml

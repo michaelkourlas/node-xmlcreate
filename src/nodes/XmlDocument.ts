@@ -27,7 +27,8 @@ import XmlProcInst, {IXmlProcInstOptions} from "./XmlProcInst";
  */
 export interface IXmlDocumentOptions {
     /**
-     * Whether to throw an exception if document validation fails.
+     * Whether to throw an exception if basic XML validation fails while
+     * building the document.
      */
     validation?: boolean;
 }

@@ -35,7 +35,7 @@ export {default as XmlEntityRef} from "./nodes/XmlEntityRef";
 export {default as XmlProcInst} from "./nodes/XmlProcInst";
 
 /**
- * Returns a new XML document with the specified root element name.
+ * Returns a new XML document with the specified options.
  */
 export function document(options: IXmlDocumentOptions = {}): XmlDocument {
     return new XmlDocument(options);

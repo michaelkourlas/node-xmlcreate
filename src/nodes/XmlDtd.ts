@@ -33,16 +33,18 @@ import XmlProcInst, {IXmlProcInstOptions} from "./XmlProcInst";
  */
 export interface IXmlDtdOptions {
     /**
-     * The name of the attribute.
+     * The name of the DTD.
      */
     name: string;
     /**
-     * The system identifier of the DTD, excluding quotation marks.
+     * The system identifier of the DTD, excluding quotation marks. By default,
+     * no system identifier is included.
      */
     sysId?: string;
     /**
      * The public identifier of the DTD, excluding quotation marks. If a public
      * identifier is provided, a system identifier must be provided as well.
+     * By default, no public identifier is included.
      */
     pubId?: string;
 }
