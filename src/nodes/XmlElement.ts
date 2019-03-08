@@ -158,7 +158,9 @@ export default class XmlElement<Parent> {
      * Adds an attribute to this element and returns the new attribute.
      */
     public attribute(options: IXmlAttributeOptions) {
-        if (this._validation && options.name in this._attributeNames) {
+        if (this._validation
+            && this._attributeNames.indexOf(options.name) !== -1)
+        {
             throw new Error(`${getContext(this.up())}: element "${this.name}"`
                             + " already contains an attribute with the"
                             + ` name "${options.name}"`);

@@ -103,6 +103,7 @@ describe("XmlElement", () => {
                 .attribute({name: "stage"})
                     .text({charData: ""}).up().up()
                 .attribute({name: "shop"}).up()
+                .attribute({name: "length"}).up()
                 .element({name: "abacus"})
                     .element({name: "windows"})
                         .element({name: "fire"})
@@ -272,7 +273,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString(),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + " stage='' shop='' length=''>\n    <abacus>"
+                + "\n        <windows>"
                 + "\n            <fire>blue</fire>"
                 + "\n            <laughable>hateful</laughable>"
                 + "\n            <ring>terrific</ring>\n        </windows>"
@@ -302,7 +304,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({doubleQuotes: false}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + " stage='' shop='' length=''>"
+                + "\n    <abacus>\n        <windows>"
                 + "\n            <fire>blue</fire>"
                 + "\n            <laughable>hateful</laughable>"
                 + "\n            <ring>terrific</ring>\n        </windows>"
@@ -333,7 +336,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({doubleQuotes: true}),
                 '<root overt="&#118;&repair;probable hospitable"'
-                + ' stage="" shop="">\n    <abacus>\n        <windows>'
+                + ' stage="" shop="" length="">'
+                + '\n    <abacus>\n        <windows>'
                 + '\n            <fire>blue</fire>'
                 + '\n            <laughable>hateful</laughable>'
                 + '\n            <ring>terrific</ring>\n        </windows>'
@@ -364,7 +368,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({pretty: true}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + " stage='' shop='' length=''>"
+                + "\n    <abacus>\n        <windows>"
                 + "\n            <fire>blue</fire>"
                 + "\n            <laughable>hateful</laughable>"
                 + "\n            <ring>terrific</ring>\n        </windows>"
@@ -394,7 +399,7 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({pretty: false}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''><abacus><windows>"
+                + " stage='' shop='' length=''><abacus><windows>"
                 + "<fire>blue</fire>"
                 + "<laughable>hateful</laughable>"
                 + "<ring>terrific</ring></windows>"
@@ -423,7 +428,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({indent: "    "}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + " stage='' shop='' length=''>"
+                + "\n    <abacus>\n        <windows>"
                 + "\n            <fire>blue</fire>"
                 + "\n            <laughable>hateful</laughable>"
                 + "\n            <ring>terrific</ring>\n        </windows>"
@@ -453,7 +459,7 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({indent: "\t"}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n\t<abacus>\n\t\t<windows>"
+                + " stage='' shop='' length=''>\n\t<abacus>\n\t\t<windows>"
                 + "\n\t\t\t<fire>blue</fire>"
                 + "\n\t\t\t<laughable>hateful</laughable>"
                 + "\n\t\t\t<ring>terrific</ring>\n\t\t</windows>"
@@ -483,7 +489,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({newline: "\n"}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\n    <abacus>\n        <windows>"
+                + " stage='' shop='' length=''>"
+                + "\n    <abacus>\n        <windows>"
                 + "\n            <fire>blue</fire>"
                 + "\n            <laughable>hateful</laughable>"
                 + "\n            <ring>terrific</ring>\n        </windows>"
@@ -513,7 +520,8 @@ describe("XmlElement", () => {
             assert.strictEqual(
                 node.toString({newline: "\r\n"}),
                 "<root overt='&#118;&repair;probable hospitable'"
-                + " stage='' shop=''>\r\n    <abacus>\r\n        <windows>"
+                + " stage='' shop='' length=''>"
+                + "\r\n    <abacus>\r\n        <windows>"
                 + "\r\n            <fire>blue</fire>"
                 + "\r\n            <laughable>hateful</laughable>"
                 + "\r\n            <ring>terrific</ring>\r\n        </windows>"
