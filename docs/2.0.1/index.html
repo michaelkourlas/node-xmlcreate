@@ -1,0 +1,405 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>xmlcreate</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">xmlcreate</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> xmlcreate</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="xmlcreate">xmlcreate</h1>
+				<p><a href="https://travis-ci.org/michaelkourlas/node-xmlcreate"><img src="https://travis-ci.org/michaelkourlas/node-xmlcreate.svg?branch=master" alt="Build Status"></a>
+				<a href="https://badge.fury.io/js/xmlcreate"><img src="https://badge.fury.io/js/xmlcreate.svg" alt="npm version"></a></p>
+				<h2 id="overview">Overview</h2>
+				<p>xmlcreate is a Node.js module that can be used to build XML using a simple API.</p>
+				<h2 id="features">Features</h2>
+				<p>xmlcreate allows you to use a series of chained function calls to build an XML
+				tree.</p>
+				<p>Once the tree is built, it can be serialized to text. The formatting of the
+				text is customizable.</p>
+				<p>xmlcreate can perform some basic validation to check that the resulting XML
+				is well-formed.</p>
+				<h2 id="installation">Installation</h2>
+				<p>The easiest way to install xmlcreate is using npm:</p>
+				<pre><code>npm <span class="hljs-keyword">install</span> xmlcreate</code></pre><p>You can also build xmlcreate from source using npm and gulp: </p>
+				<pre><code>git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/michaelkourlas/<span class="hljs-keyword">node</span><span class="hljs-title">-xmlcreate</span>.git
+npm install
+./node_modules/.bin/gulp</code></pre><p>The <code>default</code> target will build the production variant of xmlcreate, run all
+				tests, and build the documentation.</p>
+				<p>You can build the production variant without running tests using the target
+					<code>prod</code>. You can also build the development version using the target <code>dev</code>.
+					The only difference between the two is that the development version includes
+				source maps.</p>
+				<h2 id="usage">Usage</h2>
+				<p>The documentation for the current version is available <a href="http://www.kourlas.com/node-xmlcreate/docs/2.0.1/">here</a>.</p>
+				<p>You can also build the documentation using gulp:</p>
+				<pre><code><span class="hljs-attribute">gulp docs</span></code></pre><h2 id="examples">Examples</h2>
+				<p>The following TypeScript example illustrates the basic usage of xmlcreate:</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {<span class="hljs-built_in">document</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">"xmlcreate"</span>;
+
+<span class="hljs-keyword">const</span> tree = <span class="hljs-built_in">document</span>();
+tree
+    .decl({encoding: <span class="hljs-string">"UTF-8"</span>})
+        .up()
+    .dtd({
+             name: <span class="hljs-string">"html"</span>,
+             pubId: <span class="hljs-string">"-//W3C//DTD XHTML 1.0 Strict//EN"</span>,
+             sysId: <span class="hljs-string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span>
+        })
+        .up()
+    .element({name: <span class="hljs-string">"html"</span>})
+        .attribute({name: <span class="hljs-string">"xmlns"</span>})
+            .text({charData: <span class="hljs-string">"http://www.w3.org/1999/xhtml"</span>})
+                .up()
+            .up()
+        .attribute({name: <span class="hljs-string">"xml:lang"</span>})
+            .text({charData: <span class="hljs-string">"en"</span>})
+                .up()
+            .up()
+        .element({name: <span class="hljs-string">"head"</span>})
+            .element({name: <span class="hljs-string">"title"</span>})
+                .charData({charData: <span class="hljs-string">"My page title"</span>})
+                    .up()
+                .up()
+            .up()
+        .element({name: <span class="hljs-string">"body"</span>})
+            .element({name: <span class="hljs-string">"h1"</span>})
+                .charData({charData: <span class="hljs-string">"Welcome!"</span>})
+                    .up()
+                .up()
+            .element({name: <span class="hljs-string">"p"</span>})
+                .charData({charData: <span class="hljs-string">"This is some text on my website."</span>})
+                    .up()
+                .up()
+        .element({name: <span class="hljs-string">"div"</span>})
+            .element({name: <span class="hljs-string">"img"</span>})
+                .attribute({name: <span class="hljs-string">"src"</span>})
+                    .text({charData: <span class="hljs-string">"picture.png"</span>})
+                        .up()
+                    .up()
+                .attribute({name: <span class="hljs-string">"alt"</span>})
+                    .text({charData: <span class="hljs-string">"picture"</span>}).up().up().up().up().up();
+
+<span class="hljs-built_in">console</span>.log(tree.toString({doubleQuotes: <span class="hljs-literal">true</span>}));</code></pre>
+				<p>This example produces the following XML:</p>
+				<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.w3.org/1999/xhtml"</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">"en"</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My page title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is some text on my website.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+				<p>A JavaScript version of this example can be found in the examples directory.</p>
+				<h2 id="tests">Tests</h2>
+				<p>xmlcreate includes a set of tests to verify core functionality. You can run
+				the tests using gulp:</p>
+				<pre><code>gulp <span class="hljs-built_in">test</span></code></pre><p>The <code>test</code> target builds the production variant of xmlcreate before running
+					the tests. The <code>test-prod</code> target does the same thing, while the <code>test-dev</code>
+				target builds the development variant first instead.</p>
+				<h2 id="license">License</h2>
+				<p>xmlcreate is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.
+				Please see the LICENSE.md file for more information.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-is-private">
+						<a href="classes/stringoptions.html" class="tsd-kind-icon">String<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlattribute.html" class="tsd-kind-icon">Xml<wbr>Attribute</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlattributetext.html" class="tsd-kind-icon">Xml<wbr>Attribute<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlcdata.html" class="tsd-kind-icon">Xml<wbr>Cdata</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlchardata.html" class="tsd-kind-icon">Xml<wbr>Char<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlcharref.html" class="tsd-kind-icon">Xml<wbr>Char<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlcomment.html" class="tsd-kind-icon">Xml<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldecl.html" class="tsd-kind-icon">Xml<wbr>Decl</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/xmldocument.html" class="tsd-kind-icon">Xml<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtd.html" class="tsd-kind-icon">Xml<wbr>Dtd</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtdattlist.html" class="tsd-kind-icon">Xml<wbr>Dtd<wbr>Attlist</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtdelement.html" class="tsd-kind-icon">Xml<wbr>Dtd<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtdentity.html" class="tsd-kind-icon">Xml<wbr>Dtd<wbr>Entity</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtdnotation.html" class="tsd-kind-icon">Xml<wbr>Dtd<wbr>Notation</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmldtdparamentityref.html" class="tsd-kind-icon">Xml<wbr>Dtd<wbr>Param<wbr>Entity<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlelement.html" class="tsd-kind-icon">Xml<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlentityref.html" class="tsd-kind-icon">Xml<wbr>Entity<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/xmlprocinst.html" class="tsd-kind-icon">Xml<wbr>Proc<wbr>Inst</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/istringoptions.html" class="tsd-kind-icon">IString<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlattributeoptions.html" class="tsd-kind-icon">IXml<wbr>Attribute<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlattributetextoptions.html" class="tsd-kind-icon">IXml<wbr>Attribute<wbr>Text<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlcdataoptions.html" class="tsd-kind-icon">IXml<wbr>Cdata<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlchardataoptions.html" class="tsd-kind-icon">IXml<wbr>Char<wbr>Data<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlcharrefoptions.html" class="tsd-kind-icon">IXml<wbr>Char<wbr>Ref<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlcommentoptions.html" class="tsd-kind-icon">IXml<wbr>Comment<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldecloptions.html" class="tsd-kind-icon">IXml<wbr>Decl<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldocumentoptions.html" class="tsd-kind-icon">IXml<wbr>Document<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdattlistoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Attlist<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdelementoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Element<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdentityoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Entity<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdnotationoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Notation<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmldtdparamentityrefoptions.html" class="tsd-kind-icon">IXml<wbr>Dtd<wbr>Param<wbr>Entity<wbr>Ref<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlelementoptions.html" class="tsd-kind-icon">IXml<wbr>Element<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlentityrefoptions.html" class="tsd-kind-icon">IXml<wbr>Entity<wbr>Ref<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ixmlprocinstoptions.html" class="tsd-kind-icon">IXml<wbr>Proc<wbr>Inst<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-private tsd-is-not-exported">
+						<a href="globals.html#child" class="tsd-kind-icon">Child</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#document" class="tsd-kind-icon">document</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escapeampersands" class="tsd-kind-icon">escape<wbr>Ampersands</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escapedoublequotes" class="tsd-kind-icon">escape<wbr>Double<wbr>Quotes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escapeleftanglebrackets" class="tsd-kind-icon">escape<wbr>Left<wbr>Angle<wbr>Brackets</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escaperightanglebracketsincdataterminator" class="tsd-kind-icon">escape<wbr>Right<wbr>Angle<wbr>Brackets<wbr>InCdata<wbr>Terminator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#escapesinglequotes" class="tsd-kind-icon">escape<wbr>Single<wbr>Quotes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#fixchar" class="tsd-kind-icon">fix<wbr>Char</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#fixname" class="tsd-kind-icon">fix<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#getcontext" class="tsd-kind-icon">get<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#isundefined" class="tsd-kind-icon">is<wbr>Undefined</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#validatechar" class="tsd-kind-icon">validate<wbr>Char</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private tsd-is-not-exported">
+						<a href="globals.html#validateencoding" class="tsd-kind-icon">validate<wbr>Encoding</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#validatename" class="tsd-kind-icon">validate<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#validatepubid" class="tsd-kind-icon">validate<wbr>Pub<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="globals.html#validatesinglechar" class="tsd-kind-icon">validate<wbr>Single<wbr>Char</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private tsd-is-not-exported">
+						<a href="globals.html#validateversion" class="tsd-kind-icon">validate<wbr>Version</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
