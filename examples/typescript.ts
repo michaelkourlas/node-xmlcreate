@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/* tslint:disable:no-console */
-
 import {document} from "../lib/main";
 
 const tree = document();
