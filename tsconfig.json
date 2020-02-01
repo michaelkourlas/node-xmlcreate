@@ -14,10 +14,14 @@
     "noUnusedParameters": true,
     "outDir": "lib",
     "strict": true,
-    "target": "es5"
+    "target": "es5",
+    "types": []
   },
-  "include": [
-    "src/*",
-    "src/**/*"
+  "exclude": [
+    "docs",
+    "examples",
+    "lib",
+    "node_modules",
+    "test"
   ]
 }
