@@ -24,7 +24,7 @@ import XmlElement from "./nodes/XmlElement";
  *
  * @private
  */
-export function getContext(obj: any): string {
+export function getContext(obj: unknown): string {
     if (obj instanceof XmlAttribute) {
         return getContext(obj.up()) + ` > attribute "${obj.name}"`;
     } else if (obj instanceof XmlDocument) {

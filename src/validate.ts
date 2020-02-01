@@ -313,6 +313,6 @@ export function fixName(str: string): string {
  *
  * @private
  */
-export function isUndefined(val: any): val is undefined {
+export function isUndefined(val: unknown): val is undefined {
     return Object.prototype.toString.call(val) === "[object Undefined]";
 }

@@ -63,7 +63,7 @@ export default class XmlCharRef<Parent> {
     private readonly _validation: boolean;
     private readonly _parent: Parent;
     private _char!: string;
-    private _hex: boolean = false;
+    private _hex = false;
 
     constructor(parent: Parent, validation: boolean,
                 options: IXmlCharRefOptions)

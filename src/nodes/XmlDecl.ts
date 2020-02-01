@@ -58,7 +58,7 @@ export default class XmlDecl<Parent> {
     private _encoding!: string | undefined;
     private readonly _parent: Parent;
     private _standalone!: string | undefined;
-    private _version: string = "1.0";
+    private _version = "1.0";
 
     constructor(parent: Parent, validation: boolean, options: IXmlDeclOptions) {
         this._validation = validation;

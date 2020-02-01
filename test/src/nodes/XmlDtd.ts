@@ -202,7 +202,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString(),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "    <!ATTLIST test1>\n    <!--test2-->\n"
                 + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                 + "    <!NOTATION test5>\n    %test6;\n"
@@ -235,7 +235,7 @@ describe("XmlDtd", () => {
             node.paramEntityRef({name: "test6"});
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(node.toString(),
-                               "<!DOCTYPE abc SYSTEM \'def\' [\n"
+                               "<!DOCTYPE abc SYSTEM 'def' [\n"
                                + "    <!ATTLIST test1>\n    <!--test2-->\n"
                                + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                                + "    <!NOTATION test5>\n    %test6;\n"
@@ -425,7 +425,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({doubleQuotes: false}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "    <!ATTLIST test1>\n    <!--test2-->\n"
                 + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                 + "    <!NOTATION test5>\n    %test6;\n"
@@ -473,7 +473,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({pretty: true}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "    <!ATTLIST test1>\n    <!--test2-->\n"
                 + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                 + "    <!NOTATION test5>\n    %test6;\n"
@@ -497,7 +497,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({pretty: false}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' ["
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' ["
                 + "<!ATTLIST test1><!--test2-->"
                 + "<!ELEMENT test3><!ENTITY test4>"
                 + "<!NOTATION test5>%test6;"
@@ -521,7 +521,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({indent: "    "}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "    <!ATTLIST test1>\n    <!--test2-->\n"
                 + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                 + "    <!NOTATION test5>\n    %test6;\n"
@@ -545,7 +545,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({indent: "\t"}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "\t<!ATTLIST test1>\n\t<!--test2-->\n"
                 + "\t<!ELEMENT test3>\n\t<!ENTITY test4>\n"
                 + "\t<!NOTATION test5>\n\t%test6;\n"
@@ -569,7 +569,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({newline: "\n"}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\n"
                 + "    <!ATTLIST test1>\n    <!--test2-->\n"
                 + "    <!ELEMENT test3>\n    <!ENTITY test4>\n"
                 + "    <!NOTATION test5>\n    %test6;\n"
@@ -593,7 +593,7 @@ describe("XmlDtd", () => {
             node.procInst({target: "test7", content: "test8"});
             assert.strictEqual(
                 node.toString({newline: "\r\n"}),
-                "<!DOCTYPE abc PUBLIC \'ghi\' \'def\' [\r\n"
+                "<!DOCTYPE abc PUBLIC 'ghi' 'def' [\r\n"
                 + "    <!ATTLIST test1>\r\n    <!--test2-->\r\n"
                 + "    <!ELEMENT test3>\r\n    <!ENTITY test4>\r\n"
                 + "    <!NOTATION test5>\r\n    %test6;\r\n"

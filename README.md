@@ -26,30 +26,30 @@ The easiest way to install xmlcreate is using npm:
 npm install xmlcreate
 ```
 
-You can also build xmlcreate from source using npm and gulp: 
+You can also build xmlcreate from source using npm: 
 
 ```
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
 npm install
-./node_modules/.bin/gulp
+npm run-script build
 ```
 
-The `default` target will build the production variant of xmlcreate, run all
+The `build` script will build the production variant of xmlcreate, run all
 tests, and build the documentation.
 
-You can build the production variant without running tests using the target
-`prod`. You can also build the development version using the target `dev`.
+You can build the production variant without running tests using the script
+`prod`. You can also build the development version using the script `dev`.
 The only difference between the two is that the development version includes 
 source maps.
 
 ## Usage ##
 
-The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.1/).
+The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.2/).
 
-You can also build the documentation using gulp:
+You can also build the documentation using npm:
 
 ```
-gulp docs
+npm run-script docs
 ```
 
 ## Examples ##
@@ -126,15 +126,15 @@ A JavaScript version of this example can be found in the examples directory.
 ## Tests ##
 
 xmlcreate includes a set of tests to verify core functionality. You can run
-the tests using gulp:
+the tests using npm:
 
 ```
-gulp test
+npm run-script test
 ```
 
-The `test` target builds the production variant of xmlcreate before running
-the tests. The `test-prod` target does the same thing, while the `test-dev`
-target builds the development variant first instead.
+The `test` script builds the production variant of xmlcreate before running
+the tests. The `test-prod` script does the same thing, while the `test-dev`
+script builds the development variant first instead.
 
 ## License ##
 

@@ -1,3 +1,9 @@
+## 2.0.2 ##
+
+* Update dependencies
+* Use ESLint instead of TSLint
+* Use npm instead of gulp
+
 ## 2.0.1 ##
 
 * Bug fixes

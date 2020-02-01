@@ -49,10 +49,10 @@ export interface IStringOptions {
  * @private
  */
 export class StringOptions implements IStringOptions {
-    public doubleQuotes: boolean = false;
-    public indent: string = "    ";
-    public newline: string = "\n";
-    public pretty: boolean = true;
+    public doubleQuotes = false;
+    public indent = "    ";
+    public newline = "\n";
+    public pretty = true;
 
     constructor(options: IStringOptions) {
         if (!isUndefined(options.doubleQuotes)) {
