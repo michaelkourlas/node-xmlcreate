@@ -37,7 +37,6 @@
     "docs": "npm run-script clean-docs && typedoc --mode file --module commonjs --out docs --target es5 --tsconfig tsconfig.json",
     "lint": "eslint . --ext .ts",
     "prod": "npm run-script clean && npm run-script lint && tsc -p tsconfig.json",
-    "test": "npm run-script test-prod",
     "test-dev": "npm run-script clean-test && tsc -p test/tsconfig.json --sourceMap && mocha test/lib",
     "test-prod": "npm run-script clean-test && tsc -p test/tsconfig.json && mocha test/lib"
   },

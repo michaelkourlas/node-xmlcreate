@@ -129,12 +129,11 @@ xmlcreate includes a set of tests to verify core functionality. You can run
 the tests using npm:
 
 ```
-npm run-script test
+npm run-script test-prod
 ```
 
-The `test` script builds the production variant of xmlcreate before running
-the tests. The `test-prod` script does the same thing, while the `test-dev`
-script builds the development variant first instead.
+The only difference between the `test-prod` and `test-dev` scripts is that the 
+development version includes source maps.
 
 ## License ##
 
