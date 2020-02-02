@@ -267,7 +267,6 @@ describe("XmlDocument", () => {
         it("root element and other children; double quotes; default pretty"
            + " printing; default indentation; default newline", () => {
             const node = getXmlDocument();
-            /* tslint:disable:quotemark */
             assert.strictEqual(
                 node.toString({doubleQuotes: true}),
                 '<?xml version="1.1" encoding="UTF-16" standalone="yes"?>\n'
@@ -287,7 +286,6 @@ describe("XmlDocument", () => {
                 + '\n    </ele>\n    <ele2>\n        cha&#99;'
                 + '\n        <![CDATA[cda]]>\n    </ele2>\n</root>'
                 + '\n<?abstracted hungry bath?>\n<!--shoe-->');
-            /* tslint:enable:quotemark */
         });
 
         it("root element and other children; default quotes; pretty"

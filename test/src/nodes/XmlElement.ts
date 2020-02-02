@@ -332,7 +332,6 @@ describe("XmlElement", () => {
            + " children; double quotes; default pretty printing; default"
            + " indentation; default newline", () => {
             const node = getElement();
-            /* tslint:disable:quotemark */
             assert.strictEqual(
                 node.toString({doubleQuotes: true}),
                 '<root overt="&#118;&repair;probable hospitable"'
@@ -358,7 +357,6 @@ describe("XmlElement", () => {
                 + '\n    <multilinetwo>\n        <indented>'
                 + 'third line\nfourth line</indented>'
                 + '\n        fifth line\n    </multilinetwo>\n</root>');
-            /* tslint:enable:quotemark */
         });
 
         it("normal name; default replace invalid chars; no attributes;"
