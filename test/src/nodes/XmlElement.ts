@@ -266,6 +266,25 @@ describe("XmlElement", () => {
             assert.strictEqual(node.toString(), "<abc></abc>");
         });
 
+        it("normal name; default replace invalid chars; no attributes; no"
+           + " children with self-closing tag enabled; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            const node = new XmlElement(
+                undefined, true, {name: "abc", useSelfClosingTagIfEmpty: true});
+            assert.strictEqual(node.toString(), "<abc/>");
+        });
+
+        it("normal name; default replace invalid chars; no attributes; no"
+           + " children with self-closing tag disabled; default quotes;"
+           + " default pretty printing; default indentation; default"
+           + " newline", () => {
+            const node = new XmlElement(
+                undefined, true,
+                {name: "abc", useSelfClosingTagIfEmpty: false});
+            assert.strictEqual(node.toString(), "<abc></abc>");
+        });
+
         it("normal name; default replace invalid chars; no attributes;"
            + " children; default quotes; default pretty printing; default"
            + " indentation; default newline", () => {
