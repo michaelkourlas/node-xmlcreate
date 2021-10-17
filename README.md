@@ -9,13 +9,13 @@ xmlcreate is a Node.js module that can be used to build XML using a simple API.
 
 ## Features ##
 
-xmlcreate allows you to use a series of chained function calls to build an XML 
+xmlcreate allows you to use a series of chained function calls to build an XML
 tree.
 
-Once the tree is built, it can be serialized to text. The formatting of the 
+Once the tree is built, it can be serialized to text. The formatting of the
 text is customizable.
 
-xmlcreate can perform some basic validation to check that the resulting XML 
+xmlcreate can perform some basic validation to check that the resulting XML
 is well-formed.
 
 ## Installation ##
@@ -26,7 +26,7 @@ The easiest way to install xmlcreate is using npm:
 npm install xmlcreate
 ```
 
-You can also build xmlcreate from source using npm: 
+You can also build xmlcreate from source using npm:
 
 ```
 git clone https://github.com/michaelkourlas/node-xmlcreate.git
@@ -39,7 +39,7 @@ tests, and build the documentation.
 
 You can build the production variant without running tests using the script
 `prod`. You can also build the development version using the script `dev`.
-The only difference between the two is that the development version includes 
+The only difference between the two is that the development version includes
 source maps.
 
 ## Usage ##
@@ -132,10 +132,10 @@ the tests using npm:
 npm run-script test-prod
 ```
 
-The only difference between the `test-prod` and `test-dev` scripts is that the 
+The only difference between the `test-prod` and `test-dev` scripts is that the
 development version includes source maps.
 
 ## License ##
 
-xmlcreate is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0). 
-Please see the LICENSE.md file for more information.
+xmlcreate is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+Please see the LICENSE file for more information.
