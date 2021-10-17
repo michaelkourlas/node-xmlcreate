@@ -322,9 +322,12 @@ export default class XmlElement<Parent> {
                 // Element start and end tags
                 str += ">" + childStr + "</" + this._name + ">";
             }
-        } else {
+        } else if (this._useSelfClosingTagIfEmpty) {
             // Element empty tag end
             str += "/>";
+        } else {
+            // Element start and end tags
+            str += "></" + this._name + ">";
         }
 
         return str;
