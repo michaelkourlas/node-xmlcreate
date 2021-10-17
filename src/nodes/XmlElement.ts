@@ -58,9 +58,6 @@ export interface IXmlElementOptions {
     useSelfClosingTagIfEmpty?: boolean;
 }
 
-/**
- * @private
- */
 type Child<Parent> = XmlAttribute<XmlElement<Parent>>
     | XmlCdata<XmlElement<Parent>>
     | XmlCharData<XmlElement<Parent>>

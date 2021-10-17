@@ -17,8 +17,6 @@
 /**
  * Returns true if the specified string only contains characters permitted by
  * the XML specification.
- *
- * @private
  */
 export function validateChar(str: string): boolean {
     for (let i = 0; i < str.length; i++) {
@@ -53,8 +51,6 @@ export function validateChar(str: string): boolean {
  * Returns a version of the specified string that only contains characters
  * permitted by the XML specification, with invalid characters replaced
  * by the replacement character U+FFFD.
- *
- * @private
  */
 export function fixChar(str: string): string {
     let newStr = "";
@@ -92,8 +88,6 @@ export function fixChar(str: string): string {
 /**
  * Returns true if the specified string only contains a single character, and
  * that this character is permitted by the XML specification.
- *
- * @private
  */
 export function validateSingleChar(str: string): boolean {
     if (str.length === 0) {
@@ -120,8 +114,6 @@ export function validateSingleChar(str: string): boolean {
 /**
  * Returns true if the specified string only contains characters permitted by
  * the XML specification for names.
- *
- * @private
  */
 export function validateName(str: string): boolean {
     if (str.length === 0) {
@@ -209,8 +201,6 @@ export function validateName(str: string): boolean {
  * Returns a version of the specified string that only contains characters
  * permitted by the XML specification for names, with invalid characters
  * replaced by the replacement character U+FFFD.
- *
- * @private
  */
 export function fixName(str: string): string {
     let newStr = "";
@@ -310,8 +300,6 @@ export function fixName(str: string): string {
 
 /**
  * Returns true if the specified value is undefined.
- *
- * @private
  */
 export function isUndefined(val: unknown): val is undefined {
     return Object.prototype.toString.call(val) === "[object Undefined]";

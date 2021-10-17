@@ -16,23 +16,24 @@
 
 import XmlDocument, {IXmlDocumentOptions} from "./nodes/XmlDocument";
 
-export {default as XmlAttribute} from "./nodes/XmlAttribute";
-export {default as XmlAttributeText} from "./nodes/XmlAttributeText";
-export {default as XmlCdata} from "./nodes/XmlCdata";
-export {default as XmlCharData} from "./nodes/XmlCharData";
-export {default as XmlCharRef} from "./nodes/XmlCharRef";
-export {default as XmlComment} from "./nodes/XmlComment";
-export {default as XmlDecl} from "./nodes/XmlDecl";
-export {default as XmlDocument} from "./nodes/XmlDocument";
-export {default as XmlDtd} from "./nodes/XmlDtd";
-export {default as XmlDtdAttlist} from "./nodes/XmlDtdAttlist";
-export {default as XmlDtdElement} from "./nodes/XmlDtdElement";
-export {default as XmlDtdEntity} from "./nodes/XmlDtdEntity";
-export {default as XmlDtdNotation} from "./nodes/XmlDtdNotation";
-export {default as XmlDtdParamEntityRef} from "./nodes/XmlDtdParamEntityRef";
-export {default as XmlElement} from "./nodes/XmlElement";
-export {default as XmlEntityRef} from "./nodes/XmlEntityRef";
-export {default as XmlProcInst} from "./nodes/XmlProcInst";
+export {default as XmlAttribute, IXmlAttributeOptions} from "./nodes/XmlAttribute";
+export {default as XmlAttributeText, IXmlAttributeTextOptions} from "./nodes/XmlAttributeText";
+export {default as XmlCdata, IXmlCdataOptions} from "./nodes/XmlCdata";
+export {default as XmlCharData, IXmlCharDataOptions} from "./nodes/XmlCharData";
+export {default as XmlCharRef, IXmlCharRefOptions} from "./nodes/XmlCharRef";
+export {default as XmlComment, IXmlCommentOptions} from "./nodes/XmlComment";
+export {default as XmlDecl, IXmlDeclOptions} from "./nodes/XmlDecl";
+export {default as XmlDocument, IXmlDocumentOptions} from "./nodes/XmlDocument";
+export {default as XmlDtd, IXmlDtdOptions} from "./nodes/XmlDtd";
+export {default as XmlDtdAttlist, IXmlDtdAttlistOptions} from "./nodes/XmlDtdAttlist";
+export {default as XmlDtdElement, IXmlDtdElementOptions} from "./nodes/XmlDtdElement";
+export {default as XmlDtdEntity, IXmlDtdEntityOptions} from "./nodes/XmlDtdEntity";
+export {default as XmlDtdNotation, IXmlDtdNotationOptions} from "./nodes/XmlDtdNotation";
+export {default as XmlDtdParamEntityRef, IXmlDtdParamEntityRefOptions} from "./nodes/XmlDtdParamEntityRef";
+export {default as XmlElement, IXmlElementOptions} from "./nodes/XmlElement";
+export {default as XmlEntityRef, IXmlEntityRefOptions} from "./nodes/XmlEntityRef";
+export {default as XmlProcInst, IXmlProcInstOptions} from "./nodes/XmlProcInst";
+export {IStringOptions} from "./options"
 
 /**
  * Returns a new XML document with the specified options.

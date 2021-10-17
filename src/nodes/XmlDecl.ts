@@ -162,8 +162,6 @@ export default class XmlDecl<Parent> {
 /**
  * Returns true if the specified encoding only contains characters permitted by
  * the XML specification.
- *
- * @private
  */
 function validateEncoding(str: string) {
     if (str.length === 0) {
@@ -202,8 +200,6 @@ function validateEncoding(str: string) {
 /**
  * Returns true if the specified version only contains characters permitted by
  * the XML specification.
- *
- * @private
  */
 function validateVersion(str: string) {
     for (let i = 0; i <= 9; i++) {

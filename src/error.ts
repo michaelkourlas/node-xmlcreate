@@ -21,8 +21,6 @@ import XmlElement from "./nodes/XmlElement";
 
 /**
  * Returns a context string for the specified node, for use in error messages.
- *
- * @private
  */
 export function getContext(obj: unknown): string {
     if (obj instanceof XmlAttribute) {

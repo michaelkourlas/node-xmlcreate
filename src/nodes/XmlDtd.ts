@@ -49,9 +49,6 @@ export interface IXmlDtdOptions {
     pubId?: string;
 }
 
-/**
- * @private
- */
 type Child<Parent> = XmlComment<XmlDtd<Parent>>
     | XmlDtdAttlist<XmlDtd<Parent>>
     | XmlDtdElement<XmlDtd<Parent>>
@@ -323,8 +320,6 @@ export default class XmlDtd<Parent> {
 /**
  * Returns true if the specified public identifier only contains characters
  * permitted by the XML specification.
- *
- * @private
  */
 export function validatePubId(str: string) {
     for (let i = 0; i < str.length; i++) {

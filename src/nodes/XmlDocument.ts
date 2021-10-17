@@ -33,9 +33,6 @@ export interface IXmlDocumentOptions {
     validation?: boolean;
 }
 
-/**
- * @private
- */
 type Child = XmlComment<XmlDocument>
     | XmlDecl<XmlDocument>
     | XmlDtd<XmlDocument>

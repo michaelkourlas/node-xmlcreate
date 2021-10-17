@@ -16,8 +16,6 @@
 
 /**
  * Replaces ampersands (&) with the appropriate XML character reference.
- *
- * @private
  */
 export function escapeAmpersands(str: string): string {
     return str.replace(/&/g, "&amp;");
@@ -26,8 +24,6 @@ export function escapeAmpersands(str: string): string {
 /**
  * Replaces left angle brackets (&lt;) with the appropriate XML character
  * reference.
- *
- * @private
  */
 export function escapeLeftAngleBrackets(str: string): string {
     return str.replace(/</g, "&lt;");
@@ -36,8 +32,6 @@ export function escapeLeftAngleBrackets(str: string): string {
 /**
  * Replaces right angle brackets (&gt;) with the appropriate XML character
  * reference when part of the string "]]>".
- *
- * @private
  */
 export function escapeRightAngleBracketsInCdataTerminator(str: string): string {
     return str.replace(/]]>/g, "]]&gt;");
@@ -45,8 +39,6 @@ export function escapeRightAngleBracketsInCdataTerminator(str: string): string {
 
 /**
  * Replaces single quotes (") with the appropriate XML character reference.
- *
- * @private
  */
 export function escapeSingleQuotes(str: string): string {
     return str.replace(/'/g, "&apos;");
@@ -54,8 +46,6 @@ export function escapeSingleQuotes(str: string): string {
 
 /**
  * Replaces double quotes (") with the appropriate XML character reference.
- *
- * @private
  */
 export function escapeDoubleQuotes(str: string): string {
     return str.replace(/"/g, "&quot;");

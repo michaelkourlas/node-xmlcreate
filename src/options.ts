@@ -45,8 +45,6 @@ export interface IStringOptions {
 /**
  * Implementation of the IStringOptions interface used to provide default
  * values to fields.
- *
- * @private
  */
 export class StringOptions implements IStringOptions {
     public doubleQuotes = false;

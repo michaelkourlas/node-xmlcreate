@@ -37,9 +37,6 @@ export interface IXmlAttributeOptions {
     replaceInvalidCharsInName?: boolean;
 }
 
-/**
- * @private
- */
 type Child<Parent> = XmlAttributeText<XmlAttribute<Parent>>
     | XmlCharRef<XmlAttribute<Parent>>
     | XmlEntityRef<XmlAttribute<Parent>>;
