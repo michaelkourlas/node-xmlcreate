@@ -1,3 +1,8 @@
+## 2.0.4 ##
+
+* Update dependencies
+* Bug fixes
+
 ## 2.0.3 ##
 
 * Bug fixes
