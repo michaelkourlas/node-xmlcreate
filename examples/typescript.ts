@@ -17,7 +17,7 @@
 import {document} from "../lib/main";
 
 const tree = document();
-// @formatter:off
+// prettier-ignore
 tree
     .decl({encoding: "UTF-8"}).up()
     .dtd({
@@ -46,6 +46,5 @@ tree
                     .attribute({name: "alt"})
                         .text({charData: "picture"})
                             .up().up().up().up().up().up();
-// @formatter:on
 
 console.log(tree.toString({doubleQuotes: true}));

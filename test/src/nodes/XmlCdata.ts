@@ -22,14 +22,14 @@ describe("XmlCdata", () => {
     describe("#charData", () => {
         it("get", () => {
             const node = new XmlCdata(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             assert.strictEqual(node.charData, "abc");
         });
 
         it("set", () => {
             const node = new XmlCdata(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             node.charData = "def";
             assert.strictEqual(node.charData, "def");
@@ -40,272 +40,311 @@ describe("XmlCdata", () => {
         it("normal character data; default replace invalid chars", () => {
             assert.strictEqual(
                 new XmlCdata(undefined, true, {
-                    charData: "abc"
+                    charData: "abc",
                 }).toString(),
-                "<![CDATA[abc]]>");
+                "<![CDATA[abc]]>"
+            );
 
             assert.strictEqual(
                 new XmlCdata(undefined, true, {
-                    charData: "]]a]>bc>"
+                    charData: "]]a]>bc>",
                 }).toString(),
-                "<![CDATA[]]a]>bc>]]>");
+                "<![CDATA[]]a]>bc>]]>"
+            );
         });
 
-        it("character data with string ']]>'; default replace invalid"
-           + " chars", () => {
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "]]>"
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "]]>"
-                        }).toString(),
-                        "<![CDATA[]]>]]>");
-                });
-
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc]]>123"
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "abc]]>123"
-                        }).toString(),
-                        "<![CDATA[abc]]>123]]>");
-                });
-
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "]]>abc123"
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "]]>abc123"
-                        }).toString(),
-                        "<![CDATA[]]>abc123]]>");
-                });
-
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc123]]>"
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "abc123]]>"
-                        }).toString(),
-                        "<![CDATA[abc123]]>]]>");
-                });
-        });
-
-        it("character data with string ']]>'; do not replace invalid"
-           + " chars", () => {
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "]]>",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with string ']]>'; default replace invalid" +
+                " chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "]]>",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
                             charData: "]]>",
-                            replaceInvalidCharsInCharData: false
                         }).toString(),
-                        "<![CDATA[]]>]]>");
+                        "<![CDATA[]]>]]>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc]]>123",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "abc]]>123",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
                             charData: "abc]]>123",
-                            replaceInvalidCharsInCharData: false
                         }).toString(),
-                        "<![CDATA[abc]]>123]]>");
+                        "<![CDATA[abc]]>123]]>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "]]>abc123",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "]]>abc123",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
                             charData: "]]>abc123",
-                            replaceInvalidCharsInCharData: false
                         }).toString(),
-                        "<![CDATA[]]>abc123]]>");
+                        "<![CDATA[]]>abc123]]>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc123]]>",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "abc123]]>",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
                             charData: "abc123]]>",
-                            replaceInvalidCharsInCharData: false
                         }).toString(),
-                        "<![CDATA[abc123]]>]]>");
+                        "<![CDATA[abc123]]>]]>"
+                    );
                 });
-        });
+            }
+        );
+
+        it(
+            "character data with string ']]>'; do not replace invalid" +
+                " chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "]]>",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
+                    assert.strictEqual(
+                        new XmlCdata(undefined, false, {
+                            charData: "]]>",
+                            replaceInvalidCharsInCharData: false,
+                        }).toString(),
+                        "<![CDATA[]]>]]>"
+                    );
+                });
+
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "abc]]>123",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
+                    assert.strictEqual(
+                        new XmlCdata(undefined, false, {
+                            charData: "abc]]>123",
+                            replaceInvalidCharsInCharData: false,
+                        }).toString(),
+                        "<![CDATA[abc]]>123]]>"
+                    );
+                });
+
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "]]>abc123",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
+                    assert.strictEqual(
+                        new XmlCdata(undefined, false, {
+                            charData: "]]>abc123",
+                            replaceInvalidCharsInCharData: false,
+                        }).toString(),
+                        "<![CDATA[]]>abc123]]>"
+                    );
+                });
+
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData: "abc123]]>",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
+                    assert.strictEqual(
+                        new XmlCdata(undefined, false, {
+                            charData: "abc123]]>",
+                            replaceInvalidCharsInCharData: false,
+                        }).toString(),
+                        "<![CDATA[abc123]]>]]>"
+                    );
+                });
+            }
+        );
 
         it("character data with string ']]>'; replace invalid chars", () => {
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, true, {
-                            charData: "]]>",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[\uFFFD\uFFFD\uFFFD]]>");
-                });
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "]]>",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[\uFFFD\uFFFD\uFFFD]]>");
-                });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, true, {
+                        charData: "]]>",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[\uFFFD\uFFFD\uFFFD]]>"
+                );
+            });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, false, {
+                        charData: "]]>",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[\uFFFD\uFFFD\uFFFD]]>"
+                );
+            });
 
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, true, {
-                            charData: "abc]]>123",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[abc\uFFFD\uFFFD\uFFFD123]]>");
-                });
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "abc]]>123",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[abc\uFFFD\uFFFD\uFFFD123]]>");
-                });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, true, {
+                        charData: "abc]]>123",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[abc\uFFFD\uFFFD\uFFFD123]]>"
+                );
+            });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, false, {
+                        charData: "abc]]>123",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[abc\uFFFD\uFFFD\uFFFD123]]>"
+                );
+            });
 
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, true, {
-                            charData: "]]>abc123",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[\uFFFD\uFFFD\uFFFDabc123]]>");
-                });
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "]]>abc123",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[\uFFFD\uFFFD\uFFFDabc123]]>");
-                });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, true, {
+                        charData: "]]>abc123",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[\uFFFD\uFFFD\uFFFDabc123]]>"
+                );
+            });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, false, {
+                        charData: "]]>abc123",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[\uFFFD\uFFFD\uFFFDabc123]]>"
+                );
+            });
 
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, true, {
-                            charData: "abc123]]>",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[abc123\uFFFD\uFFFD\uFFFD]]>");
-                });
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCdata(undefined, false, {
-                            charData: "abc123]]>",
-                            replaceInvalidCharsInCharData: true
-                        }).toString(),
-                        "<![CDATA[abc123\uFFFD\uFFFD\uFFFD]]>");
-                });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, true, {
+                        charData: "abc123]]>",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[abc123\uFFFD\uFFFD\uFFFD]]>"
+                );
+            });
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCdata(undefined, false, {
+                        charData: "abc123]]>",
+                        replaceInvalidCharsInCharData: true,
+                    }).toString(),
+                    "<![CDATA[abc123\uFFFD\uFFFD\uFFFD]]>"
+                );
+            });
         });
 
-        it("character data with characters not allowed in XML; default replace"
-           + " invalid chars", () => {
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; default" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def"
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
                         }).toString(),
-                        "<![CDATA[abc\u0001def]]>");
+                        "<![CDATA[abc\u0001def]]>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in XML; do not replace"
-           + " invalid chars", () => {
-            assert.throws(
-                () => new XmlCdata(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; do not" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlCdata(undefined, true, {
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: false
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
-                        "<![CDATA[abc\u0001def]]>");
+                        "<![CDATA[abc\u0001def]]>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in XML; replace"
-           + " invalid chars", () => {
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; replace" +
+                " invalid chars",
+            () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, true, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: true
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
-                        "<![CDATA[abc\uFFFDdef]]>");
+                        "<![CDATA[abc\uFFFDdef]]>"
+                    );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlCdata(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: true
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
-                        "<![CDATA[abc\uFFFDdef]]>");
+                        "<![CDATA[abc\uFFFDdef]]>"
+                    );
                 });
-        });
+            }
+        );
     });
 
     it("#up", () => {

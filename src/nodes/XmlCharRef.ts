@@ -65,9 +65,11 @@ export default class XmlCharRef<Parent> {
     private _char!: string;
     private _hex = false;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlCharRefOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlCharRefOptions
+    ) {
         this._validation = validation;
         this._parent = parent;
         this.char = options.char;
@@ -88,9 +90,11 @@ export default class XmlCharRef<Parent> {
      */
     public set char(char: string) {
         if (this._validation && !validateSingleChar(char)) {
-            throw new Error(`${getContext(this.up())}: character reference`
-                            + ` "${char}" should reference a single character,`
-                            + " and this character should be allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: character reference` +
+                    ` "${char}" should reference a single character,` +
+                    " and this character should be allowed in XML"
+            );
         }
         this._char = char;
     }
@@ -120,14 +124,16 @@ export default class XmlCharRef<Parent> {
             char = this._char.charCodeAt(0);
         } else {
             const first = this._char.charCodeAt(0);
-            if (first >= 0xD800 && first <= 0xDBFF && this._char.length > 1) {
+            if (first >= 0xd800 && first <= 0xdbff && this._char.length > 1) {
                 const second = this._char.charCodeAt(1);
-                if (second >= 0xDC00 && second <= 0xDFFF) {
-                    char = (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+                if (second >= 0xdc00 && second <= 0xdfff) {
+                    char = (first - 0xd800) * 0x400 + second - 0xdc00 + 0x10000;
                 } else {
-                    throw new Error(`${getContext(this.up())}: character`
-                                    + ` reference "${this.char}" should`
-                                    + " reference a valid Unicode character");
+                    throw new Error(
+                        `${getContext(this.up())}: character` +
+                            ` reference "${this.char}" should` +
+                            " reference a valid Unicode character"
+                    );
                 }
             } else {
                 char = first;

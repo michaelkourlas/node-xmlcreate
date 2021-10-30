@@ -21,14 +21,14 @@ describe("XmlComment", () => {
     describe("#charData", () => {
         it("get", () => {
             const node = new XmlComment(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             assert.strictEqual(node.charData, "abc");
         });
 
         it("set", () => {
             const node = new XmlComment(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             node.charData = "def";
             assert.strictEqual(node.charData, "def");
@@ -39,347 +39,374 @@ describe("XmlComment", () => {
         it("normal character data; default replace invalid chars", () => {
             assert.strictEqual(
                 new XmlComment(undefined, true, {
-                    charData: "abc"
+                    charData: "abc",
                 }).toString(),
-                "<!--abc-->");
+                "<!--abc-->"
+            );
 
             assert.strictEqual(
                 new XmlComment(undefined, true, {
-                    charData: "-a-bc"
+                    charData: "-a-bc",
                 }).toString(),
-                "<!---a-bc-->");
+                "<!---a-bc-->"
+            );
         });
 
-        it("character data with characters not allowed in XML; default"
-           + " replace invalid chars", () => {
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; default" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def"
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
                         }).toString(),
-                        "<!--abc\u0001def-->");
+                        "<!--abc\u0001def-->"
+                    );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in XML; do not"
-           + " replace invalid chars", () => {
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; do not" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: false
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
-                        "<!--abc\u0001def-->");
+                        "<!--abc\u0001def-->"
+                    );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in XML; replace invalid"
-           + " chars", () => {
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in XML; replace" +
+                " invalid chars",
+            () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: true
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
-                        "<!--abc\uFFFDdef-->");
+                        "<!--abc\uFFFDdef-->"
+                    );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abc" + String.fromCharCode(0x0001)
-                                      + "def",
-                            replaceInvalidCharsInCharData: true
+                            charData:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
-                        "<!--abc\uFFFDdef-->");
+                        "<!--abc\uFFFDdef-->"
+                    );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in comments; default"
-           + " replace invalid chars", () => {
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "--"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in comments; default" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "--",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "--"
+                            charData: "--",
                         }).toString(),
                         "<!------>"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abc--def"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abc--def",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abc--def"
+                            charData: "abc--def",
                         }).toString(),
                         "<!--abc--def-->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "--abcdef"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "--abcdef",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "--abcdef"
+                            charData: "--abcdef",
                         }).toString(),
                         "<!----abcdef-->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abcdef--"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abcdef--",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abcdef--"
+                            charData: "abcdef--",
                         }).toString(),
                         "<!--abcdef---->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abcdef-"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abcdef-",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
-                            charData: "abcdef-"
+                            charData: "abcdef-",
                         }).toString(),
                         "<!--abcdef--->"
                     );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in comments; do not"
-           + " replace invalid chars", () => {
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "--",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in comments; do not" +
+                " replace invalid chars",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "--",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "--",
-                            replaceInvalidCharsInCharData: false
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
                         "<!------>"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abc--def",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abc--def",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abc--def",
-                            replaceInvalidCharsInCharData: false
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
                         "<!--abc--def-->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "--abcdef",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "--abcdef",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "--abcdef",
-                            replaceInvalidCharsInCharData: false
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
                         "<!----abcdef-->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abcdef--",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abcdef--",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abcdef--",
-                            replaceInvalidCharsInCharData: false
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
                         "<!--abcdef---->"
                     );
                 });
 
-            assert.throws(
-                () => new XmlComment(undefined, true, {
-                    charData: "abcdef-",
-                    replaceInvalidCharsInCharData: false
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlComment(undefined, true, {
+                            charData: "abcdef-",
+                            replaceInvalidCharsInCharData: false,
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abcdef-",
-                            replaceInvalidCharsInCharData: false
+                            replaceInvalidCharsInCharData: false,
                         }).toString(),
                         "<!--abcdef--->"
                     );
                 });
-        });
+            }
+        );
 
-        it("character data with characters not allowed in comments; replace"
-           + " invalid chars", () => {
-            assert.doesNotThrow(
-                () => {
+        it(
+            "character data with characters not allowed in comments; replace" +
+                " invalid chars",
+            () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
                             charData: "--",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--\uFFFD\uFFFD-->"
                     );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "--",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--\uFFFD\uFFFD-->"
                     );
                 });
 
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
                             charData: "abc--def",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abc\uFFFD\uFFFDdef-->"
                     );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abc--def",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abc\uFFFD\uFFFDdef-->"
                     );
                 });
 
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
                             charData: "--abcdef",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--\uFFFD\uFFFDabcdef-->"
                     );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "--abcdef",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--\uFFFD\uFFFDabcdef-->"
                     );
                 });
 
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
                             charData: "abcdef--",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abcdef\uFFFD\uFFFD-->"
                     );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abcdef--",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abcdef\uFFFD\uFFFD-->"
                     );
                 });
 
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, true, {
                             charData: "abcdef-",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abcdef\uFFFD-->"
                     );
                 });
-            assert.doesNotThrow(
-                () => {
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlComment(undefined, false, {
                             charData: "abcdef-",
-                            replaceInvalidCharsInCharData: true
+                            replaceInvalidCharsInCharData: true,
                         }).toString(),
                         "<!--abcdef\uFFFD-->"
                     );
                 });
-        });
+            }
+        );
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlComment(undefined, false, {
-                charData: "a"
+                charData: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });

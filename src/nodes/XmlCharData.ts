@@ -18,7 +18,7 @@ import {getContext} from "../error";
 import {
     escapeAmpersands,
     escapeLeftAngleBrackets,
-    escapeRightAngleBracketsInCdataTerminator
+    escapeRightAngleBracketsInCdataTerminator,
 } from "../escape";
 import {fixChar, isUndefined, validateChar} from "../validate";
 
@@ -50,13 +50,15 @@ export default class XmlCharData<Parent> {
     private readonly _validation: boolean;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlCharDataOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlCharDataOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInCharData)) {
-            this._replaceInvalidCharsInCharData = (
-                options.replaceInvalidCharsInCharData);
+            this._replaceInvalidCharsInCharData =
+                options.replaceInvalidCharsInCharData;
         } else {
             this._replaceInvalidCharsInCharData = false;
         }
@@ -78,9 +80,11 @@ export default class XmlCharData<Parent> {
         if (this._replaceInvalidCharsInCharData) {
             charData = fixChar(charData);
         } else if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: character data`
-                            + `"${charData}" should not contain characters not`
-                            + " allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: character data` +
+                    `"${charData}" should not contain characters not` +
+                    " allowed in XML"
+            );
         }
         this._charData = charData;
     }

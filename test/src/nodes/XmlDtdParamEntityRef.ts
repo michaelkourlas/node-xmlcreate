@@ -21,14 +21,14 @@ describe("XmlDtdParamEntityRef", () => {
     describe("#name", () => {
         it("get", () => {
             const node = new XmlDtdParamEntityRef(undefined, true, {
-                name: "abc"
+                name: "abc",
             });
             assert.strictEqual(node.name, "abc");
         });
 
         it("set", () => {
             const node = new XmlDtdParamEntityRef(undefined, true, {
-                name: "abc"
+                name: "abc",
             });
             node.name = "def";
             assert.strictEqual(node.name, "def");
@@ -36,32 +36,37 @@ describe("XmlDtdParamEntityRef", () => {
     });
 
     describe("#toString", () => {
-        it("normal character data",
-           () => {
-               assert.strictEqual(
-                   new XmlDtdParamEntityRef(undefined, true, {
-                       name: "abc"
-                   }).toString(),
-                   "%abc;");
-           });
+        it("normal character data", () => {
+            assert.strictEqual(
+                new XmlDtdParamEntityRef(undefined, true, {
+                    name: "abc",
+                }).toString(),
+                "%abc;"
+            );
+        });
 
         it("character data with characters not allowed in XML names", () => {
             assert.throws(
-                () => new XmlDtdParamEntityRef(undefined, true, {
-                    name: "."
-                }));
+                () =>
+                    new XmlDtdParamEntityRef(undefined, true, {
+                        name: ".",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlDtdParamEntityRef(undefined, false, {
-                    name: "."
-                }));
+                () =>
+                    new XmlDtdParamEntityRef(undefined, false, {
+                        name: ".",
+                    })
+            );
         });
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlDtdParamEntityRef(undefined, false, {
-                name: "a"
+                name: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });

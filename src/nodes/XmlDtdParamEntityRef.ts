@@ -42,9 +42,11 @@ export default class XmlDtdParamEntityRef<Parent> {
     private readonly _parent: Parent;
     private _name!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlDtdParamEntityRefOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlDtdParamEntityRefOptions
+    ) {
         this._validation = validation;
         this._parent = parent;
         this.name = options.name;
@@ -62,9 +64,11 @@ export default class XmlDtdParamEntityRef<Parent> {
      */
     public set name(name: string) {
         if (this._validation && !validateName(name)) {
-            throw new Error(`${getContext(this.up())}: parameter entity`
-                            + ` reference name "${name}" should not contain`
-                            + " characters not allowed in XML names");
+            throw new Error(
+                `${getContext(this.up())}: parameter entity` +
+                    ` reference name "${name}" should not contain` +
+                    " characters not allowed in XML names"
+            );
         }
         this._name = name;
     }

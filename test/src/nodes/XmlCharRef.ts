@@ -21,14 +21,14 @@ describe("XmlCharRef", () => {
     describe("#char", () => {
         it("get", () => {
             const node = new XmlCharRef(undefined, true, {
-                char: "a"
+                char: "a",
             });
             assert.strictEqual(node.char, "a");
         });
 
         it("set", () => {
             const node = new XmlCharRef(undefined, true, {
-                char: "a"
+                char: "a",
             });
             node.char = "b";
             assert.strictEqual(node.char, "b");
@@ -39,7 +39,7 @@ describe("XmlCharRef", () => {
         it("get", () => {
             const node = new XmlCharRef(undefined, true, {
                 char: "a",
-                hex: true
+                hex: true,
             });
             assert.strictEqual(node.hex, true);
         });
@@ -47,7 +47,7 @@ describe("XmlCharRef", () => {
         it("set", () => {
             const node = new XmlCharRef(undefined, true, {
                 char: "a",
-                hex: true
+                hex: true,
             });
             node.hex = false;
             assert.strictEqual(node.hex, false);
@@ -58,73 +58,83 @@ describe("XmlCharRef", () => {
         it("normal single character; default hex", () => {
             assert.strictEqual(
                 new XmlCharRef(undefined, true, {
-                    char: "a"
+                    char: "a",
                     // hex: false
                 }).toString(),
-                "&#97;");
+                "&#97;"
+            );
         });
 
         it("normal single character; hex true", () => {
             assert.strictEqual(
                 new XmlCharRef(undefined, true, {
                     char: "b",
-                    hex: true
+                    hex: true,
                 }).toString(),
-                "&#x62;");
+                "&#x62;"
+            );
         });
 
         it("normal single character; hex false", () => {
             assert.strictEqual(
                 new XmlCharRef(undefined, true, {
                     char: "c",
-                    hex: false
+                    hex: false,
                 }).toString(),
-                "&#99;");
+                "&#99;"
+            );
         });
 
         it("single character with surrogate pairs; hex false", () => {
             assert.strictEqual(
                 new XmlCharRef(undefined, true, {
-                    char: String.fromCharCode(0xdbff)
-                          + String.fromCharCode(0xdc00)
+                    char:
+                        String.fromCharCode(0xdbff) +
+                        String.fromCharCode(0xdc00),
                 }).toString(),
-                "&#1113088;");
+                "&#1113088;"
+            );
         });
 
         it("single character not allowed in XML; hex false", () => {
             assert.throws(
-                () => new XmlCharRef(undefined, true, {
-                    char: String.fromCharCode(0x0001)
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCharRef(undefined, false, {
-                            char: String.fromCharCode(0x0001)
-                        }).toString(),
-                        "&#1;");
-                });
+                () =>
+                    new XmlCharRef(undefined, true, {
+                        char: String.fromCharCode(0x0001),
+                    })
+            );
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCharRef(undefined, false, {
+                        char: String.fromCharCode(0x0001),
+                    }).toString(),
+                    "&#1;"
+                );
+            });
         });
 
         it("multiple characters; hex false", () => {
             assert.throws(
-                () => new XmlCharRef(undefined, true, {
-                    char: "bc"
-                }));
-            assert.doesNotThrow(
-                () => {
-                    assert.strictEqual(
-                        new XmlCharRef(undefined, false, {
-                            char: "bc"
-                        }).toString(),
-                        "&#98;");
-                });
+                () =>
+                    new XmlCharRef(undefined, true, {
+                        char: "bc",
+                    })
+            );
+            assert.doesNotThrow(() => {
+                assert.strictEqual(
+                    new XmlCharRef(undefined, false, {
+                        char: "bc",
+                    }).toString(),
+                    "&#98;"
+                );
+            });
         });
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlCharRef(undefined, false, {char: "a"}).up(),
-            undefined);
+            undefined
+        );
     });
 });

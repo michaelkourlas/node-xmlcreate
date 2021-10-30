@@ -24,7 +24,7 @@ describe("options", () => {
                 doubleQuotes: false,
                 indent: "    ",
                 newline: "\n",
-                pretty: true
+                pretty: true,
             };
             assert.deepEqual(new StringOptions(options), options);
         });
@@ -34,7 +34,7 @@ describe("options", () => {
                 doubleQuotes: true,
                 indent: "\t",
                 newline: "\r\n",
-                pretty: false
+                pretty: false,
             };
             assert.deepEqual(new StringOptions(options), options);
         });
@@ -45,7 +45,7 @@ describe("options", () => {
                 doubleQuotes: false,
                 indent: "    ",
                 newline: "\n",
-                pretty: true
+                pretty: true,
             });
         });
     });

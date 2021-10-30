@@ -83,9 +83,11 @@ export default class XmlDecl<Parent> {
     public set encoding(encoding: string | undefined) {
         if (this._validation && !isUndefined(encoding)) {
             if (!validateEncoding(encoding)) {
-                throw new Error(`${getContext(this.up())}: declaration`
-                                + ` encoding attribute ${encoding} should be a`
-                                + " valid encoding");
+                throw new Error(
+                    `${getContext(this.up())}: declaration` +
+                        ` encoding attribute ${encoding} should be a` +
+                        " valid encoding"
+                );
             }
         }
         this._encoding = encoding;
@@ -106,9 +108,11 @@ export default class XmlDecl<Parent> {
     public set standalone(standalone: string | undefined) {
         if (this._validation && !isUndefined(standalone)) {
             if (standalone !== "yes" && standalone !== "no") {
-                throw new Error(`${getContext(this.up())}: declaration`
-                                + ` standalone attribute ${standalone} should`
-                                + " be the string 'yes' or the string 'no'");
+                throw new Error(
+                    `${getContext(this.up())}: declaration` +
+                        ` standalone attribute ${standalone} should` +
+                        " be the string 'yes' or the string 'no'"
+                );
             }
         }
         this._standalone = standalone;
@@ -126,9 +130,11 @@ export default class XmlDecl<Parent> {
      */
     public set version(version: string) {
         if (this._validation && !validateVersion(version)) {
-            throw new Error(`${getContext(this.up())}: declaration version`
-                            + ` attribute ${version} should be a valid XML`
-                            + " version");
+            throw new Error(
+                `${getContext(this.up())}: declaration version` +
+                    ` attribute ${version} should be a valid XML` +
+                    " version"
+            );
         }
         this._version = version;
     }
@@ -169,21 +175,25 @@ function validateEncoding(str: string) {
     }
 
     const initialChar = str.charCodeAt(0);
-    if (!((initialChar >= 0x41 && initialChar <= 0x5A)
-          || (initialChar >= 0x61 && initialChar <= 0x7A)))
-    {
+    if (
+        !(
+            (initialChar >= 0x41 && initialChar <= 0x5a) ||
+            (initialChar >= 0x61 && initialChar <= 0x7a)
+        )
+    ) {
         return false;
     }
 
     for (let i = 1; i < str.length; i++) {
         const char = str.charCodeAt(i);
-        if (char === 0x5F
-            || char === 0x2D
-            || char === 0x2E
-            || (char >= 0x30 && char <= 0x39)
-            || (char >= 0x41 && char <= 0x5A)
-            || (char >= 0x61 && char <= 0x7A))
-        {
+        if (
+            char === 0x5f ||
+            char === 0x2d ||
+            char === 0x2e ||
+            (char >= 0x30 && char <= 0x39) ||
+            (char >= 0x41 && char <= 0x5a) ||
+            (char >= 0x61 && char <= 0x7a)
+        ) {
             continue;
         }
 

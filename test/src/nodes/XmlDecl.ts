@@ -45,274 +45,344 @@ describe("XmlDecl", () => {
     });
 
     describe("#toString", () => {
-        it("default encoding; default standalone; default version;"
-           + " default quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {}).toString(),
-                "<?xml version='1.0'?>");
-        });
+        it(
+            "default encoding; default standalone; default version;" +
+                " default quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {}).toString(),
+                    "<?xml version='1.0'?>"
+                );
+            }
+        );
 
-        it("normal encoding; default standalone; default version;"
-           + " default quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    encoding: "UTF-8"
-                }).toString(),
-                "<?xml version='1.0' encoding='UTF-8'?>");
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    encoding: "UTF-16"
-                }).toString(),
-                "<?xml version='1.0' encoding='UTF-16'?>");
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    encoding: "u.-_16"
-                }).toString(),
-                "<?xml version='1.0' encoding='u.-_16'?>");
-        });
+        it(
+            "normal encoding; default standalone; default version;" +
+                " default quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        encoding: "UTF-8",
+                    }).toString(),
+                    "<?xml version='1.0' encoding='UTF-8'?>"
+                );
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        encoding: "UTF-16",
+                    }).toString(),
+                    "<?xml version='1.0' encoding='UTF-16'?>"
+                );
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        encoding: "u.-_16",
+                    }).toString(),
+                    "<?xml version='1.0' encoding='u.-_16'?>"
+                );
+            }
+        );
 
-        it("default encoding; normal standalone; default version;"
-           + " default quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    standalone: "yes"
-                }).toString(),
-                "<?xml version='1.0' standalone='yes'?>");
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    standalone: "no"
-                }).toString(),
-                "<?xml version='1.0' standalone='no'?>");
-        });
+        it(
+            "default encoding; normal standalone; default version;" +
+                " default quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        standalone: "yes",
+                    }).toString(),
+                    "<?xml version='1.0' standalone='yes'?>"
+                );
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        standalone: "no",
+                    }).toString(),
+                    "<?xml version='1.0' standalone='no'?>"
+                );
+            }
+        );
 
-        it("default encoding; default standalone; normal version;"
-           + " default quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    version: "1.0"
-                }).toString(),
-                "<?xml version='1.0'?>");
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    version: "1.1"
-                }).toString(),
-                "<?xml version='1.1'?>");
-        });
+        it(
+            "default encoding; default standalone; normal version;" +
+                " default quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        version: "1.0",
+                    }).toString(),
+                    "<?xml version='1.0'?>"
+                );
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        version: "1.1",
+                    }).toString(),
+                    "<?xml version='1.1'?>"
+                );
+            }
+        );
 
-        it("empty encoding; default standalone; default version;"
-           + " default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: ""
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "empty encoding; default standalone; default version;" +
+                " default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: "",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: ""
+                            encoding: "",
                         }).toString(),
-                        "<?xml version='1.0' encoding=''?>");
+                        "<?xml version='1.0' encoding=''?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("encoding with characters not allowed in XML encodings; default"
-           + " standalone; default version; default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: "UTF-16$"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "encoding with characters not allowed in XML encodings; default" +
+                " standalone; default version; default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: "UTF-16$",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: "UTF-16$"
+                            encoding: "UTF-16$",
                         }).toString(),
-                        "<?xml version='1.0' encoding='UTF-16$'?>");
+                        "<?xml version='1.0' encoding='UTF-16$'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: "9UTF-16"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: "9UTF-16",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: "9UTF-16"
+                            encoding: "9UTF-16",
                         }).toString(),
-                        "<?xml version='1.0' encoding='9UTF-16'?>");
+                        "<?xml version='1.0' encoding='9UTF-16'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: "-UTF-16"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: "-UTF-16",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: "-UTF-16"
+                            encoding: "-UTF-16",
                         }).toString(),
-                        "<?xml version='1.0' encoding='-UTF-16'?>");
+                        "<?xml version='1.0' encoding='-UTF-16'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: "_UTF-16"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: "_UTF-16",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: "_UTF-16"
+                            encoding: "_UTF-16",
                         }).toString(),
-                        "<?xml version='1.0' encoding='_UTF-16'?>");
+                        "<?xml version='1.0' encoding='_UTF-16'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    encoding: ".UTF-16"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            encoding: ".UTF-16",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            encoding: ".UTF-16"
+                            encoding: ".UTF-16",
                         }).toString(),
-                        "<?xml version='1.0' encoding='.UTF-16'?>");
+                        "<?xml version='1.0' encoding='.UTF-16'?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("default encoding; empty standalone; default version;"
-           + " default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    standalone: ""
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "default encoding; empty standalone; default version;" +
+                " default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            standalone: "",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            standalone: ""
+                            standalone: "",
                         }).toString(),
-                        "<?xml version='1.0' standalone=''?>");
+                        "<?xml version='1.0' standalone=''?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("default encoding; standalone with characters not allowed in"
-           + " attribute; default version; default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    standalone: "maybe"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "default encoding; standalone with characters not allowed in" +
+                " attribute; default version; default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            standalone: "maybe",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            standalone: "maybe"
+                            standalone: "maybe",
                         }).toString(),
-                        "<?xml version='1.0' standalone='maybe'?>");
+                        "<?xml version='1.0' standalone='maybe'?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("default encoding; default standalone; empty version;"
-           + " default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    version: ""
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "default encoding; default standalone; empty version;" +
+                " default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            version: "",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            version: ""
+                            version: "",
                         }).toString(),
-                        "<?xml version=''?>");
+                        "<?xml version=''?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("default encoding; default standalone; version with characters"
-           + " not allowed in attribute; default quotes", () => {
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    version: "1"
-                }));
-            assert.doesNotThrow(
-                () => {
+        it(
+            "default encoding; default standalone; version with characters" +
+                " not allowed in attribute; default quotes",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            version: "1",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            version: "1"
+                            version: "1",
                         }).toString(),
-                        "<?xml version='1'?>");
+                        "<?xml version='1'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    version: "1."
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            version: "1.",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            version: "1."
+                            version: "1.",
                         }).toString(),
-                        "<?xml version='1.'?>");
+                        "<?xml version='1.'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    version: "1.2a"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            version: "1.2a",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            version: "1.2a"
+                            version: "1.2a",
                         }).toString(),
-                        "<?xml version='1.2a'?>");
+                        "<?xml version='1.2a'?>"
+                    );
                 });
 
-            assert.throws(
-                () => new XmlDecl(undefined, true, {
-                    version: "2.0"
-                }));
-            assert.doesNotThrow(
-                () => {
+                assert.throws(
+                    () =>
+                        new XmlDecl(undefined, true, {
+                            version: "2.0",
+                        })
+                );
+                assert.doesNotThrow(() => {
                     assert.strictEqual(
                         new XmlDecl(undefined, false, {
-                            version: "2.0"
+                            version: "2.0",
                         }).toString(),
-                        "<?xml version='2.0'?>");
+                        "<?xml version='2.0'?>"
+                    );
                 });
-        });
+            }
+        );
 
-        it("normal encoding; normal standalone; normal version;"
-           + " single quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    encoding: "UTF-8",
-                    standalone: "yes"
-                }).toString({doubleQuotes: false}),
-                "<?xml version='1.0' encoding='UTF-8'"
-                + " standalone='yes'?>");
-        });
+        it(
+            "normal encoding; normal standalone; normal version;" +
+                " single quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        encoding: "UTF-8",
+                        standalone: "yes",
+                    }).toString({doubleQuotes: false}),
+                    "<?xml version='1.0' encoding='UTF-8'" +
+                        " standalone='yes'?>"
+                );
+            }
+        );
 
-        it("normal encoding; normal standalone; normal version;"
-           + " double quotes", () => {
-            assert.strictEqual(
-                new XmlDecl(undefined, true, {
-                    encoding: "UTF-8",
-                    standalone: "yes"
-                }).toString({doubleQuotes: true}),
-                "<?xml version=\"1.0\" encoding=\"UTF-8\""
-                + " standalone=\"yes\"?>");
-        });
+        it(
+            "normal encoding; normal standalone; normal version;" +
+                " double quotes",
+            () => {
+                assert.strictEqual(
+                    new XmlDecl(undefined, true, {
+                        encoding: "UTF-8",
+                        standalone: "yes",
+                    }).toString({doubleQuotes: true}),
+                    '<?xml version="1.0" encoding="UTF-8"' +
+                        ' standalone="yes"?>'
+                );
+            }
+        );
     });
 
     it("#up", () => {
-        assert.strictEqual(
-            new XmlDecl(undefined, false, {}).up(),
-            undefined);
+        assert.strictEqual(new XmlDecl(undefined, false, {}).up(), undefined);
     });
 
     describe("#version", () => {

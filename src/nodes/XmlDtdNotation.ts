@@ -42,9 +42,11 @@ export default class XmlDtdNotation<Parent> {
     private readonly _parent: Parent;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlDtdNotationOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlDtdNotationOptions
+    ) {
         this._validation = validation;
         this._parent = parent;
         this.charData = options.charData;
@@ -62,9 +64,11 @@ export default class XmlDtdNotation<Parent> {
      */
     public set charData(charData: string) {
         if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: notation declaration`
-                            + ` "${charData}" should not contain characters`
-                            + " not allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: notation declaration` +
+                    ` "${charData}" should not contain characters` +
+                    " not allowed in XML"
+            );
         }
         this._charData = charData;
     }

@@ -48,13 +48,15 @@ export default class XmlComment<Parent> {
     private readonly _validation: boolean;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlCommentOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlCommentOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInCharData)) {
-            this._replaceInvalidCharsInCharData = (
-                options.replaceInvalidCharsInCharData);
+            this._replaceInvalidCharsInCharData =
+                options.replaceInvalidCharsInCharData;
         } else {
             this._replaceInvalidCharsInCharData = false;
         }
@@ -76,27 +78,34 @@ export default class XmlComment<Parent> {
         if (this._replaceInvalidCharsInCharData) {
             charData = fixChar(charData);
         } else if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: comment content`
-                            + ` "${charData}" should not contain characters`
-                            + " not allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: comment content` +
+                    ` "${charData}" should not contain characters` +
+                    " not allowed in XML"
+            );
         }
         if (this._replaceInvalidCharsInCharData) {
             charData = charData.replace("--", "\uFFFD\uFFFD");
         } else if (this._validation && charData.indexOf("--") !== -1) {
-            throw new Error(`${getContext(this.up())}: comment content`
-                            + ` "${charData}" should not contain the string`
-                            + " '--'");
+            throw new Error(
+                `${getContext(this.up())}: comment content` +
+                    ` "${charData}" should not contain the string` +
+                    " '--'"
+            );
         }
         if (this._replaceInvalidCharsInCharData) {
             if (charData.lastIndexOf("-") === charData.length - 1) {
                 charData = charData.substr(0, charData.length - 1) + "\uFFFD";
             }
-        } else if (this._validation
-                   && charData.lastIndexOf("-") === charData.length - 1)
-        {
-            throw new Error(`${getContext(this.up())}: comment content`
-                            + ` "${charData}" should not end with the string`
-                            + " '-'");
+        } else if (
+            this._validation &&
+            charData.lastIndexOf("-") === charData.length - 1
+        ) {
+            throw new Error(
+                `${getContext(this.up())}: comment content` +
+                    ` "${charData}" should not end with the string` +
+                    " '-'"
+            );
         }
         this._charData = charData;
     }

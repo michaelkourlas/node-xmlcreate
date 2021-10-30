@@ -42,9 +42,11 @@ export default class XmlDtdEntity<Parent> {
     private readonly _parent: Parent;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlDtdEntityOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlDtdEntityOptions
+    ) {
         this._validation = validation;
         this._parent = parent;
         this.charData = options.charData;
@@ -62,9 +64,11 @@ export default class XmlDtdEntity<Parent> {
      */
     public set charData(charData: string) {
         if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: entity declaration`
-                            + ` "${charData}" should not contain characters`
-                            + " not allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: entity declaration` +
+                    ` "${charData}" should not contain characters` +
+                    " not allowed in XML"
+            );
         }
         this._charData = charData;
     }

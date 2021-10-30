@@ -21,14 +21,14 @@ describe("XmlDtdAttlist", () => {
     describe("#charData", () => {
         it("get", () => {
             const node = new XmlDtdAttlist(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             assert.strictEqual(node.charData, "abc");
         });
 
         it("set", () => {
             const node = new XmlDtdAttlist(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             node.charData = "def";
             assert.strictEqual(node.charData, "def");
@@ -36,32 +36,37 @@ describe("XmlDtdAttlist", () => {
     });
 
     describe("#toString", () => {
-        it("normal character data",
-           () => {
-               assert.strictEqual(
-                   new XmlDtdAttlist(undefined, true, {
-                       charData: "abc"
-                   }).toString(),
-                   "<!ATTLIST abc>");
-           });
+        it("normal character data", () => {
+            assert.strictEqual(
+                new XmlDtdAttlist(undefined, true, {
+                    charData: "abc",
+                }).toString(),
+                "<!ATTLIST abc>"
+            );
+        });
 
         it("character data with characters not allowed in XML", () => {
             assert.throws(
-                () => new XmlDtdAttlist(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlDtdAttlist(undefined, true, {
+                        charData: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlDtdAttlist(undefined, false, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlDtdAttlist(undefined, false, {
+                        charData: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
         });
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlDtdAttlist(undefined, false, {
-                charData: "a"
+                charData: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });

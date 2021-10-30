@@ -32,7 +32,8 @@ export function getContext(obj: unknown): string {
     } else if (obj instanceof XmlElement) {
         return getContext(obj.up()) + ` > element "${obj.name}"`;
     } else {
-        throw new Error("Unrecognized object of type "
-                        + Object.prototype.toString.call(obj));
+        throw new Error(
+            "Unrecognized object of type " + Object.prototype.toString.call(obj)
+        );
     }
 }

@@ -24,7 +24,7 @@ import XmlDtdEntity, {IXmlDtdEntityOptions} from "./XmlDtdEntity";
 import XmlDtdNotation, {IXmlDtdNotationOptions} from "./XmlDtdNotation";
 import {
     default as XmlDtdParamEntityRef,
-    IXmlDtdParamEntityRefOptions
+    IXmlDtdParamEntityRefOptions,
 } from "./XmlDtdParamEntityRef";
 import XmlProcInst, {IXmlProcInstOptions} from "./XmlProcInst";
 
@@ -49,7 +49,8 @@ export interface IXmlDtdOptions {
     pubId?: string;
 }
 
-type Child<Parent> = XmlComment<XmlDtd<Parent>>
+type Child<Parent> =
+    | XmlComment<XmlDtd<Parent>>
     | XmlDtdAttlist<XmlDtd<Parent>>
     | XmlDtdElement<XmlDtd<Parent>>
     | XmlDtdEntity<XmlDtd<Parent>>
@@ -108,9 +109,11 @@ export default class XmlDtd<Parent> {
      */
     public set name(name: string) {
         if (this._validation && !validateName(name)) {
-            throw new Error(`${getContext(this.up())}: DTD name "${name}"`
-                            + " should not contain characters not allowed in"
-                            + " XML names");
+            throw new Error(
+                `${getContext(this.up())}: DTD name "${name}"` +
+                    " should not contain characters not allowed in" +
+                    " XML names"
+            );
         }
         this._name = name;
     }
@@ -128,15 +131,19 @@ export default class XmlDtd<Parent> {
     public set pubId(pubId: string | undefined) {
         if (!isUndefined(pubId)) {
             if (this._validation && !validatePubId(pubId)) {
-                throw new Error(`${getContext(this.up())}: DTD public`
-                                + ` identifier "${pubId}" should not contain`
-                                + " characters not allowed in public"
-                                + " identifiers");
+                throw new Error(
+                    `${getContext(this.up())}: DTD public` +
+                        ` identifier "${pubId}" should not contain` +
+                        " characters not allowed in public" +
+                        " identifiers"
+                );
             }
             if (this._validation && isUndefined(this._sysId)) {
-                throw new Error(`${getContext(this.up())}: DTD public`
-                                + ` identifier "${pubId}" should not be defined`
-                                + " if system identifier is undefined");
+                throw new Error(
+                    `${getContext(this.up())}: DTD public` +
+                        ` identifier "${pubId}" should not be defined` +
+                        " if system identifier is undefined"
+                );
             }
         }
         this._pubId = pubId;
@@ -155,16 +162,21 @@ export default class XmlDtd<Parent> {
     public set sysId(sysId: string | undefined) {
         if (!isUndefined(sysId)) {
             if (this._validation && !validateChar(sysId)) {
-                throw new Error(`${getContext(this.up())}: DTD system`
-                                + ` identifier "${sysId}" should not contain`
-                                + " characters not allowed in XML");
-            } else if (this._validation
-                       && sysId.indexOf("'") !== -1
-                       && sysId.indexOf("\"") !== -1)
-            {
-                throw new Error(`${getContext(this.up())}: DTD system`
-                                + ` identifier "${sysId}" should not contain`
-                                + " both single quotes and double quotes");
+                throw new Error(
+                    `${getContext(this.up())}: DTD system` +
+                        ` identifier "${sysId}" should not contain` +
+                        " characters not allowed in XML"
+                );
+            } else if (
+                this._validation &&
+                sysId.indexOf("'") !== -1 &&
+                sysId.indexOf('"') !== -1
+            ) {
+                throw new Error(
+                    `${getContext(this.up())}: DTD system` +
+                        ` identifier "${sysId}" should not contain` +
+                        " both single quotes and double quotes"
+                );
             }
         }
         this._sysId = sysId;
@@ -225,8 +237,11 @@ export default class XmlDtd<Parent> {
      * and returns the new parameter entity reference.
      */
     public paramEntityRef(options: IXmlDtdParamEntityRefOptions) {
-        const paramEntity = new XmlDtdParamEntityRef(this, this._validation,
-                                                     options);
+        const paramEntity = new XmlDtdParamEntityRef(
+            this,
+            this._validation,
+            options
+        );
         this._children.push(paramEntity);
         return paramEntity;
     }
@@ -255,8 +270,10 @@ export default class XmlDtd<Parent> {
             }
         } else {
             if (isUndefined(this._sysId)) {
-                throw new Error(`${getContext(this.up())}: DTD system`
-                                + " identifier is not undefined");
+                throw new Error(
+                    `${getContext(this.up())}: DTD system` +
+                        " identifier is not undefined"
+                );
             }
 
             str += " ";
@@ -294,22 +311,29 @@ export default class XmlDtd<Parent> {
      * Appends the XML string representation of a public or system identifier
      * to an existing string.
      */
-    private appendId(type: string, value: string, str: string,
-                     options: StringOptions)
-    {
+    private appendId(
+        type: string,
+        value: string,
+        str: string,
+        options: StringOptions
+    ) {
         str += type + " ";
         if (options.doubleQuotes) {
-            if (this._validation && value.indexOf("\"") !== -1) {
-                throw new Error(`${getContext(this.up())}: doubleQuotes option`
-                                + " inconsistent with DTD system identifier or"
-                                + " public identifier");
+            if (this._validation && value.indexOf('"') !== -1) {
+                throw new Error(
+                    `${getContext(this.up())}: doubleQuotes option` +
+                        " inconsistent with DTD system identifier or" +
+                        " public identifier"
+                );
             }
-            str += "\"" + value + "\"";
+            str += '"' + value + '"';
         } else {
             if (this._validation && value.indexOf("'") !== -1) {
-                throw new Error(`${getContext(this)}: doubleQuotes option`
-                                + " inconsistent with DTD system identifier or"
-                                + " public identifier");
+                throw new Error(
+                    `${getContext(this)}: doubleQuotes option` +
+                        " inconsistent with DTD system identifier or" +
+                        " public identifier"
+                );
             }
             str += "'" + value + "'";
         }
@@ -324,21 +348,22 @@ export default class XmlDtd<Parent> {
 export function validatePubId(str: string) {
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
-        if (char === 0xA
-            || char === 0xD
-            || char === 0x20
-            || char === 0x21
-            || (char >= 0x23 && char <= 0x25)
-            || (char >= 0x27 && char <= 0x2F)
-            || (char >= 0x30 && char <= 0x39)
-            || char === 0x3A
-            || char === 0x3B
-            || char === 0x3D
-            || char === 0x3F
-            || (char >= 0x40 && char <= 0x5A)
-            || char === 0x5F
-            || (char >= 0x61 && char <= 0x7A))
-        {
+        if (
+            char === 0xa ||
+            char === 0xd ||
+            char === 0x20 ||
+            char === 0x21 ||
+            (char >= 0x23 && char <= 0x25) ||
+            (char >= 0x27 && char <= 0x2f) ||
+            (char >= 0x30 && char <= 0x39) ||
+            char === 0x3a ||
+            char === 0x3b ||
+            char === 0x3d ||
+            char === 0x3f ||
+            (char >= 0x40 && char <= 0x5a) ||
+            char === 0x5f ||
+            (char >= 0x61 && char <= 0x7a)
+        ) {
             continue;
         }
 

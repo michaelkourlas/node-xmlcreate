@@ -19,7 +19,7 @@ import {IStringOptions, StringOptions} from "../options";
 import {fixName, isUndefined, validateName} from "../validate";
 import {
     default as XmlAttribute,
-    IXmlAttributeOptions as IXmlAttributeOptions
+    IXmlAttributeOptions as IXmlAttributeOptions,
 } from "./XmlAttribute";
 import XmlCdata, {IXmlCdataOptions} from "./XmlCdata";
 import XmlCharData, {IXmlCharDataOptions} from "./XmlCharData";
@@ -58,7 +58,8 @@ export interface IXmlElementOptions {
     useSelfClosingTagIfEmpty?: boolean;
 }
 
-type Child<Parent> = XmlAttribute<XmlElement<Parent>>
+type Child<Parent> =
+    | XmlAttribute<XmlElement<Parent>>
     | XmlCdata<XmlElement<Parent>>
     | XmlCharData<XmlElement<Parent>>
     | XmlCharRef<XmlElement<Parent>>
@@ -100,9 +101,11 @@ export default class XmlElement<Parent> {
     private readonly _useSelfClosingTagIfEmpty: boolean;
     private _name!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlElementOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlElementOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInName)) {
             this._replaceInvalidCharsInName = options.replaceInvalidCharsInName;
@@ -135,17 +138,23 @@ export default class XmlElement<Parent> {
         if (this._replaceInvalidCharsInName) {
             name = fixName(name);
             if (name.length === 0) {
-                throw new Error(`${getContext(this.up())}: element name should`
-                                + " not be empty");
+                throw new Error(
+                    `${getContext(this.up())}: element name should` +
+                        " not be empty"
+                );
             }
         } else if (this._validation && !validateName(name)) {
             if (name.length === 0) {
-                throw new Error(`${getContext(this.up())}: element name should`
-                                + " not be empty");
+                throw new Error(
+                    `${getContext(this.up())}: element name should` +
+                        " not be empty"
+                );
             } else {
-                throw new Error(`${getContext(this.up())}: element name`
-                                + ` "${name}" should not contain characters not`
-                                + " allowed in XML names");
+                throw new Error(
+                    `${getContext(this.up())}: element name` +
+                        ` "${name}" should not contain characters not` +
+                        " allowed in XML names"
+                );
             }
         }
         this._name = name;
@@ -155,12 +164,15 @@ export default class XmlElement<Parent> {
      * Adds an attribute to this element and returns the new attribute.
      */
     public attribute(options: IXmlAttributeOptions) {
-        if (this._validation
-            && this._attributeNames.indexOf(options.name) !== -1)
-        {
-            throw new Error(`${getContext(this.up())}: element "${this.name}"`
-                            + " already contains an attribute with the"
-                            + ` name "${options.name}"`);
+        if (
+            this._validation &&
+            this._attributeNames.indexOf(options.name) !== -1
+        ) {
+            throw new Error(
+                `${getContext(this.up())}: element "${this.name}"` +
+                    " already contains an attribute with the" +
+                    ` name "${options.name}"`
+            );
         }
         const attribute = new XmlAttribute(this, this._validation, options);
         this._children.push(attribute);
@@ -280,8 +292,7 @@ export default class XmlElement<Parent> {
 
                 let nextStr = "";
                 if (next instanceof XmlElement) {
-                    nextStr += next.toStringWithIndent(
-                        optionsObj, newIndent);
+                    nextStr += next.toStringWithIndent(optionsObj, newIndent);
                 } else {
                     nextStr += next.toString();
                 }
@@ -339,10 +350,13 @@ export default class XmlElement<Parent> {
      */
     private allSameLineNodes(nodes: Array<Child<Parent>>) {
         for (const node of nodes) {
-            if (!((node instanceof XmlCharRef
-                   || node instanceof XmlEntityRef
-                   || node instanceof XmlCharData)))
-            {
+            if (
+                !(
+                    node instanceof XmlCharRef ||
+                    node instanceof XmlEntityRef ||
+                    node instanceof XmlCharData
+                )
+            ) {
                 return false;
             }
         }
@@ -354,12 +368,14 @@ export default class XmlElement<Parent> {
      * entity references, or character data.
      */
     private onSameLine(prev: Child<Parent>, next?: Child<Parent>) {
-        return (prev instanceof XmlCharRef
-                || prev instanceof XmlEntityRef
-                || prev instanceof XmlCharData)
-               && (!isUndefined(next)
-               && (next instanceof XmlCharRef
-                   || next instanceof XmlEntityRef
-                   || next instanceof XmlCharData));
+        return (
+            (prev instanceof XmlCharRef ||
+                prev instanceof XmlEntityRef ||
+                prev instanceof XmlCharData) &&
+            !isUndefined(next) &&
+            (next instanceof XmlCharRef ||
+                next instanceof XmlEntityRef ||
+                next instanceof XmlCharData)
+        );
     }
 }

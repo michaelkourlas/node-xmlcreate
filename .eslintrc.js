@@ -18,29 +18,27 @@
 
 module.exports = {
     env: {
-        node: true
+        node: true,
     },
     root: true,
-    parser: '@typescript-eslint/parser',
-    plugins: [
-        '@typescript-eslint'
-    ],
+    parser: "@typescript-eslint/parser",
+    plugins: ["@typescript-eslint"],
     extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended'
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
     ],
     rules: {
         // Maximum line length of 80
-        'max-len': ['error', {'code': 80}],
+        "max-len": ["error", {code: 80}],
 
         // Too late to change this, since interfaces are part of the public API
-        '@typescript-eslint/interface-name-prefix': 0,
+        "@typescript-eslint/interface-name-prefix": 0,
 
         // Too much noise
-        '@typescript-eslint/explicit-function-return-type': 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
 
         // Allow private functions at bottom of file
-        '@typescript-eslint/no-use-before-define': 0
-    }
+        "@typescript-eslint/no-use-before-define": 0,
+    },
 };

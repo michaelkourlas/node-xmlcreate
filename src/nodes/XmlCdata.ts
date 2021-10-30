@@ -49,13 +49,15 @@ export default class XmlCdata<Parent> {
     private readonly _validation: boolean;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlCdataOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlCdataOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInCharData)) {
-            this._replaceInvalidCharsInCharData = (
-                options.replaceInvalidCharsInCharData);
+            this._replaceInvalidCharsInCharData =
+                options.replaceInvalidCharsInCharData;
         } else {
             this._replaceInvalidCharsInCharData = false;
         }
@@ -77,16 +79,20 @@ export default class XmlCdata<Parent> {
         if (this._replaceInvalidCharsInCharData) {
             charData = fixChar(charData);
         } else if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: CDATA section`
-                            + ` "${charData}" should not contain characters`
-                            + " not allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: CDATA section` +
+                    ` "${charData}" should not contain characters` +
+                    " not allowed in XML"
+            );
         }
         if (this._replaceInvalidCharsInCharData) {
             charData = charData.replace("]]>", "\uFFFD\uFFFD\uFFFD");
         } else if (this._validation && charData.indexOf("]]>") !== -1) {
-            throw new Error(`${getContext(this.up())}: CDATA section`
-                            + ` "${charData}" should not contain the string`
-                            + " ']]>'");
+            throw new Error(
+                `${getContext(this.up())}: CDATA section` +
+                    ` "${charData}" should not contain the string` +
+                    " ']]>'"
+            );
         }
         this._charData = charData;
     }

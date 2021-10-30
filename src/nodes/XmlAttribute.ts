@@ -37,7 +37,8 @@ export interface IXmlAttributeOptions {
     replaceInvalidCharsInName?: boolean;
 }
 
-type Child<Parent> = XmlAttributeText<XmlAttribute<Parent>>
+type Child<Parent> =
+    | XmlAttributeText<XmlAttribute<Parent>>
     | XmlCharRef<XmlAttribute<Parent>>
     | XmlEntityRef<XmlAttribute<Parent>>;
 
@@ -65,9 +66,11 @@ export default class XmlAttribute<Parent> {
     private readonly _validation: boolean;
     private _name!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlAttributeOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlAttributeOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInName)) {
             this._replaceInvalidCharsInName = options.replaceInvalidCharsInName;
@@ -93,17 +96,23 @@ export default class XmlAttribute<Parent> {
         if (this._replaceInvalidCharsInName) {
             name = fixName(name);
             if (name.length === 0) {
-                throw new Error(`${getContext(this.up())}: attribute name`
-                                + " should not be empty");
+                throw new Error(
+                    `${getContext(this.up())}: attribute name` +
+                        " should not be empty"
+                );
             }
         } else if (this._validation && !validateName(name)) {
             if (name.length === 0) {
-                throw new Error(`${getContext(this.up())}: attribute name`
-                                + " should not be empty");
+                throw new Error(
+                    `${getContext(this.up())}: attribute name` +
+                        " should not be empty"
+                );
             } else {
-                throw new Error(`${getContext(this.up())}: attribute name`
-                                + ` "${name}" should not contain characters not`
-                                + " allowed in XML names");
+                throw new Error(
+                    `${getContext(this.up())}: attribute name` +
+                        ` "${name}" should not contain characters not` +
+                        " allowed in XML names"
+                );
             }
         }
         this._name = name;
@@ -113,8 +122,7 @@ export default class XmlAttribute<Parent> {
      * Adds a character reference to this attribute and returns the new
      * character reference.
      */
-    public charRef(options: IXmlCharRefOptions)
-    {
+    public charRef(options: IXmlCharRefOptions) {
         const charRef = new XmlCharRef(this, this._validation, options);
         this._children.push(charRef);
         return charRef;
@@ -124,8 +132,7 @@ export default class XmlAttribute<Parent> {
      * Adds an entity reference to this attribute and returns the new entity
      * reference.
      */
-    public entityRef(options: IXmlEntityRefOptions)
-    {
+    public entityRef(options: IXmlEntityRefOptions) {
         const charRef = new XmlEntityRef(this, this._validation, options);
         this._children.push(charRef);
         return charRef;
@@ -134,8 +141,7 @@ export default class XmlAttribute<Parent> {
     /**
      * Adds attribute text to this attribute and returns the new text.
      */
-    public text(options: IXmlAttributeTextOptions)
-    {
+    public text(options: IXmlAttributeTextOptions) {
         const textNode = new XmlAttributeText(this, this._validation, options);
         this._children.push(textNode);
         return textNode;
@@ -147,7 +153,7 @@ export default class XmlAttribute<Parent> {
     public toString(options: IStringOptions = {}) {
         const optionsObj = new StringOptions(options);
 
-        const quote = optionsObj.doubleQuotes ? "\"" : "'";
+        const quote = optionsObj.doubleQuotes ? '"' : "'";
         let str = this._name + "=" + quote;
         for (const child of this._children) {
             if (optionsObj.doubleQuotes) {

@@ -35,28 +35,34 @@ describe("XmlEntityRef", () => {
         it("normal name", () => {
             assert.strictEqual(
                 new XmlEntityRef(undefined, true, {
-                    name: "abc"
+                    name: "abc",
                 }).toString(),
-                "&abc;");
+                "&abc;"
+            );
         });
 
         it("name with characters not allowed in XML names", () => {
             assert.throws(
-                () => new XmlEntityRef(undefined, true, {
-                    name: "."
-                }));
+                () =>
+                    new XmlEntityRef(undefined, true, {
+                        name: ".",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlEntityRef(undefined, false, {
-                    name: "."
-                }));
+                () =>
+                    new XmlEntityRef(undefined, false, {
+                        name: ".",
+                    })
+            );
         });
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlEntityRef(undefined, false, {
-                name: "a"
+                name: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });

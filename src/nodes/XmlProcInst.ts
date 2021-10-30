@@ -49,9 +49,11 @@ export default class XmlProcInst<Parent> {
     private _content!: string | undefined;
     private _target!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlProcInstOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlProcInstOptions
+    ) {
         this._validation = validation;
         this._parent = parent;
         this.content = options.content;
@@ -71,13 +73,17 @@ export default class XmlProcInst<Parent> {
     public set content(content: string | undefined) {
         if (!isUndefined(content)) {
             if (this._validation && !validateChar(content)) {
-                throw new Error(`${getContext(this.up())}: processing`
-                                + ` instruction content "${content}" should`
-                                + " not contain characters not allowed in XML");
+                throw new Error(
+                    `${getContext(this.up())}: processing` +
+                        ` instruction content "${content}" should` +
+                        " not contain characters not allowed in XML"
+                );
             } else if (this._validation && content.indexOf("?>") !== -1) {
-                throw new Error(`${getContext(this.up())}: processing`
-                                + ` instruction content "${content}" should`
-                                + " not contain the string '?>'");
+                throw new Error(
+                    `${getContext(this.up())}: processing` +
+                        ` instruction content "${content}" should` +
+                        " not contain the string '?>'"
+                );
             }
         }
         this._content = content;
@@ -95,15 +101,19 @@ export default class XmlProcInst<Parent> {
      */
     public set target(target: string) {
         if (this._validation && !validateName(target)) {
-            throw new Error(`${getContext(this.up())}: processing`
-                            + ` instruction target "${target}" should`
-                            + " not contain characters not allowed in XML"
-                            + " names");
+            throw new Error(
+                `${getContext(this.up())}: processing` +
+                    ` instruction target "${target}" should` +
+                    " not contain characters not allowed in XML" +
+                    " names"
+            );
         }
         if (this._validation && target === "xml") {
-            throw new Error(`${getContext(this.up())}: processing`
-                            + ` instruction target "${target}" should`
-                            + " not be the string 'xml'");
+            throw new Error(
+                `${getContext(this.up())}: processing` +
+                    ` instruction target "${target}" should` +
+                    " not be the string 'xml'"
+            );
         }
         this._target = target;
     }

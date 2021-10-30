@@ -45,13 +45,15 @@ export default class XmlAttributeText<Parent> {
     private readonly _validation: boolean;
     private _charData!: string;
 
-    constructor(parent: Parent, validation: boolean,
-                options: IXmlAttributeTextOptions)
-    {
+    constructor(
+        parent: Parent,
+        validation: boolean,
+        options: IXmlAttributeTextOptions
+    ) {
         this._validation = validation;
         if (!isUndefined(options.replaceInvalidCharsInCharData)) {
-            this._replaceInvalidCharsInCharData = (
-                options.replaceInvalidCharsInCharData);
+            this._replaceInvalidCharsInCharData =
+                options.replaceInvalidCharsInCharData;
         } else {
             this._replaceInvalidCharsInCharData = false;
         }
@@ -73,9 +75,11 @@ export default class XmlAttributeText<Parent> {
         if (this._replaceInvalidCharsInCharData) {
             charData = fixChar(charData);
         } else if (this._validation && !validateChar(charData)) {
-            throw new Error(`${getContext(this.up())}: attribute text`
-                            + ` "${charData}" should not contain characters not`
-                            + " allowed in XML");
+            throw new Error(
+                `${getContext(this.up())}: attribute text` +
+                    ` "${charData}" should not contain characters not` +
+                    " allowed in XML"
+            );
         }
         this._charData = charData;
     }

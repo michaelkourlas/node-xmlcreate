@@ -21,10 +21,13 @@
 export function validateChar(str: string): boolean {
     for (let i = 0; i < str.length; i++) {
         const firstChar = str.charCodeAt(i);
-        if (firstChar === 0x9 || firstChar === 0xA || firstChar === 0xD
-            || (firstChar >= 0x20 && firstChar <= 0xD7FF)
-            || (firstChar >= 0xE000 && firstChar <= 0xFFFD))
-        {
+        if (
+            firstChar === 0x9 ||
+            firstChar === 0xa ||
+            firstChar === 0xd ||
+            (firstChar >= 0x20 && firstChar <= 0xd7ff) ||
+            (firstChar >= 0xe000 && firstChar <= 0xfffd)
+        ) {
             continue;
         }
 
@@ -34,9 +37,12 @@ export function validateChar(str: string): boolean {
 
         // UTF-16 surrogate characters
         const secondChar = str.charCodeAt(i + 1);
-        if ((firstChar >= 0xD800 && firstChar <= 0xDBFF)
-            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
-        {
+        if (
+            firstChar >= 0xd800 &&
+            firstChar <= 0xdbff &&
+            secondChar >= 0xdc00 &&
+            secondChar <= 0xdfff
+        ) {
             i++;
             continue;
         }
@@ -56,10 +62,13 @@ export function fixChar(str: string): string {
     let newStr = "";
     for (let i = 0; i < str.length; i++) {
         const firstChar = str.charCodeAt(i);
-        if (firstChar === 0x9 || firstChar === 0xA || firstChar === 0xD
-            || (firstChar >= 0x20 && firstChar <= 0xD7FF)
-            || (firstChar >= 0xE000 && firstChar <= 0xFFFD))
-        {
+        if (
+            firstChar === 0x9 ||
+            firstChar === 0xa ||
+            firstChar === 0xd ||
+            (firstChar >= 0x20 && firstChar <= 0xd7ff) ||
+            (firstChar >= 0xe000 && firstChar <= 0xfffd)
+        ) {
             newStr += str[i];
             continue;
         }
@@ -71,9 +80,12 @@ export function fixChar(str: string): string {
 
         // UTF-16 surrogate characters
         const secondChar = str.charCodeAt(i + 1);
-        if ((firstChar >= 0xD800 && firstChar <= 0xDBFF)
-            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
-        {
+        if (
+            firstChar >= 0xd800 &&
+            firstChar <= 0xdbff &&
+            secondChar >= 0xdc00 &&
+            secondChar <= 0xdfff
+        ) {
             newStr += str[i] + str[i + 1];
             i++;
             continue;
@@ -96,9 +108,13 @@ export function validateSingleChar(str: string): boolean {
 
     const firstChar = str.charCodeAt(0);
     if (str.length === 1) {
-        return (firstChar === 0x9 || firstChar === 0xA || firstChar === 0xD
-                || (firstChar >= 0x20 && firstChar <= 0xD7FF)
-                || (firstChar >= 0xE000 && firstChar <= 0xFFFD));
+        return (
+            firstChar === 0x9 ||
+            firstChar === 0xa ||
+            firstChar === 0xd ||
+            (firstChar >= 0x20 && firstChar <= 0xd7ff) ||
+            (firstChar >= 0xe000 && firstChar <= 0xfffd)
+        );
     }
 
     if (str.length !== 2) {
@@ -107,8 +123,12 @@ export function validateSingleChar(str: string): boolean {
 
     // UTF-16 surrogate characters
     const secondChar = str.charCodeAt(1);
-    return ((firstChar >= 0xD800 && firstChar <= 0xDBFF)
-            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF));
+    return (
+        firstChar >= 0xd800 &&
+        firstChar <= 0xdbff &&
+        secondChar >= 0xdc00 &&
+        secondChar <= 0xdfff
+    );
 }
 
 /**
@@ -121,31 +141,33 @@ export function validateName(str: string): boolean {
     }
 
     const initialFirstChar = str.charCodeAt(0);
-    const initialFirstCharMatch = (
-        initialFirstChar === 0x3A
-        || initialFirstChar === 0x5F
-        || (initialFirstChar >= 0x41 && initialFirstChar <= 0x5A)
-        || (initialFirstChar >= 0x61 && initialFirstChar <= 0x7A)
-        || (initialFirstChar >= 0xC0 && initialFirstChar <= 0xD6)
-        || (initialFirstChar >= 0xD8 && initialFirstChar <= 0xF6)
-        || (initialFirstChar >= 0XF8 && initialFirstChar <= 0X2FF)
-        || (initialFirstChar >= 0x370 && initialFirstChar <= 0x37D)
-        || (initialFirstChar >= 0x37F && initialFirstChar <= 0X1FFF)
-        || (initialFirstChar >= 0x200C && initialFirstChar <= 0x200D)
-        || (initialFirstChar >= 0x2070 && initialFirstChar <= 0x218F)
-        || (initialFirstChar >= 0x2C00 && initialFirstChar <= 0x2FEF)
-        || (initialFirstChar >= 0x3001 && initialFirstChar <= 0xD7FF)
-        || (initialFirstChar >= 0xF900 && initialFirstChar <= 0xFDCF)
-        || (initialFirstChar >= 0xFDF0 && initialFirstChar <= 0xFFFD));
+    const initialFirstCharMatch =
+        initialFirstChar === 0x3a ||
+        initialFirstChar === 0x5f ||
+        (initialFirstChar >= 0x41 && initialFirstChar <= 0x5a) ||
+        (initialFirstChar >= 0x61 && initialFirstChar <= 0x7a) ||
+        (initialFirstChar >= 0xc0 && initialFirstChar <= 0xd6) ||
+        (initialFirstChar >= 0xd8 && initialFirstChar <= 0xf6) ||
+        (initialFirstChar >= 0xf8 && initialFirstChar <= 0x2ff) ||
+        (initialFirstChar >= 0x370 && initialFirstChar <= 0x37d) ||
+        (initialFirstChar >= 0x37f && initialFirstChar <= 0x1fff) ||
+        (initialFirstChar >= 0x200c && initialFirstChar <= 0x200d) ||
+        (initialFirstChar >= 0x2070 && initialFirstChar <= 0x218f) ||
+        (initialFirstChar >= 0x2c00 && initialFirstChar <= 0x2fef) ||
+        (initialFirstChar >= 0x3001 && initialFirstChar <= 0xd7ff) ||
+        (initialFirstChar >= 0xf900 && initialFirstChar <= 0xfdcf) ||
+        (initialFirstChar >= 0xfdf0 && initialFirstChar <= 0xfffd);
     if (str.length === 1) {
         return initialFirstCharMatch;
     }
 
     // UTF-16 surrogate characters
     const initialSecondChar = str.charCodeAt(1);
-    const initialSecondCharMatch = (
-        (initialFirstChar >= 0xD800 && initialFirstChar <= 0xDB7F)
-        && (initialSecondChar >= 0xDC00 && initialSecondChar <= 0xDFFF));
+    const initialSecondCharMatch =
+        initialFirstChar >= 0xd800 &&
+        initialFirstChar <= 0xdb7f &&
+        initialSecondChar >= 0xdc00 &&
+        initialSecondChar <= 0xdfff;
     if (!initialFirstCharMatch && !initialSecondCharMatch) {
         return false;
     }
@@ -153,28 +175,29 @@ export function validateName(str: string): boolean {
     const start = initialSecondCharMatch ? 2 : 1;
     for (let i = start; i < str.length; i++) {
         const firstChar = str.charCodeAt(i);
-        if (firstChar === 0x3A
-            || firstChar === 0x5F
-            || firstChar === 0x2D
-            || firstChar === 0x2E
-            || firstChar === 0xB7
-            || (firstChar >= 0x30 && firstChar <= 0x39)
-            || (firstChar >= 0x41 && firstChar <= 0x5A)
-            || (firstChar >= 0x61 && firstChar <= 0x7A)
-            || (firstChar >= 0xC0 && firstChar <= 0xD6)
-            || (firstChar >= 0xD8 && firstChar <= 0xF6)
-            || (firstChar >= 0XF8 && firstChar <= 0X2FF)
-            || (firstChar >= 0x300 && firstChar <= 0x36F)
-            || (firstChar >= 0x370 && firstChar <= 0x37D)
-            || (firstChar >= 0x37F && firstChar <= 0X1FFF)
-            || (firstChar >= 0x200C && firstChar <= 0x200D)
-            || (firstChar >= 0x203F && firstChar <= 0x2040)
-            || (firstChar >= 0x2070 && firstChar <= 0x218F)
-            || (firstChar >= 0x2C00 && firstChar <= 0x2FEF)
-            || (firstChar >= 0x3001 && firstChar <= 0xD7FF)
-            || (firstChar >= 0xF900 && firstChar <= 0xFDCF)
-            || (firstChar >= 0xFDF0 && firstChar <= 0xFFFD))
-        {
+        if (
+            firstChar === 0x3a ||
+            firstChar === 0x5f ||
+            firstChar === 0x2d ||
+            firstChar === 0x2e ||
+            firstChar === 0xb7 ||
+            (firstChar >= 0x30 && firstChar <= 0x39) ||
+            (firstChar >= 0x41 && firstChar <= 0x5a) ||
+            (firstChar >= 0x61 && firstChar <= 0x7a) ||
+            (firstChar >= 0xc0 && firstChar <= 0xd6) ||
+            (firstChar >= 0xd8 && firstChar <= 0xf6) ||
+            (firstChar >= 0xf8 && firstChar <= 0x2ff) ||
+            (firstChar >= 0x300 && firstChar <= 0x36f) ||
+            (firstChar >= 0x370 && firstChar <= 0x37d) ||
+            (firstChar >= 0x37f && firstChar <= 0x1fff) ||
+            (firstChar >= 0x200c && firstChar <= 0x200d) ||
+            (firstChar >= 0x203f && firstChar <= 0x2040) ||
+            (firstChar >= 0x2070 && firstChar <= 0x218f) ||
+            (firstChar >= 0x2c00 && firstChar <= 0x2fef) ||
+            (firstChar >= 0x3001 && firstChar <= 0xd7ff) ||
+            (firstChar >= 0xf900 && firstChar <= 0xfdcf) ||
+            (firstChar >= 0xfdf0 && firstChar <= 0xfffd)
+        ) {
             continue;
         }
 
@@ -184,9 +207,12 @@ export function validateName(str: string): boolean {
 
         // UTF-16 surrogate characters
         const secondChar = str.charCodeAt(i + 1);
-        if ((firstChar >= 0xD800 && firstChar <= 0xDB7F)
-            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
-        {
+        if (
+            firstChar >= 0xd800 &&
+            firstChar <= 0xdb7f &&
+            secondChar >= 0xdc00 &&
+            secondChar <= 0xdfff
+        ) {
             i++;
             continue;
         }
@@ -210,22 +236,22 @@ export function fixName(str: string): string {
     }
 
     const initialFirstChar = str.charCodeAt(0);
-    const initialFirstCharMatch = (
-        initialFirstChar === 0x3A
-        || initialFirstChar === 0x5F
-        || (initialFirstChar >= 0x41 && initialFirstChar <= 0x5A)
-        || (initialFirstChar >= 0x61 && initialFirstChar <= 0x7A)
-        || (initialFirstChar >= 0xC0 && initialFirstChar <= 0xD6)
-        || (initialFirstChar >= 0xD8 && initialFirstChar <= 0xF6)
-        || (initialFirstChar >= 0XF8 && initialFirstChar <= 0X2FF)
-        || (initialFirstChar >= 0x370 && initialFirstChar <= 0x37D)
-        || (initialFirstChar >= 0x37F && initialFirstChar <= 0X1FFF)
-        || (initialFirstChar >= 0x200C && initialFirstChar <= 0x200D)
-        || (initialFirstChar >= 0x2070 && initialFirstChar <= 0x218F)
-        || (initialFirstChar >= 0x2C00 && initialFirstChar <= 0x2FEF)
-        || (initialFirstChar >= 0x3001 && initialFirstChar <= 0xD7FF)
-        || (initialFirstChar >= 0xF900 && initialFirstChar <= 0xFDCF)
-        || (initialFirstChar >= 0xFDF0 && initialFirstChar <= 0xFFFD));
+    const initialFirstCharMatch =
+        initialFirstChar === 0x3a ||
+        initialFirstChar === 0x5f ||
+        (initialFirstChar >= 0x41 && initialFirstChar <= 0x5a) ||
+        (initialFirstChar >= 0x61 && initialFirstChar <= 0x7a) ||
+        (initialFirstChar >= 0xc0 && initialFirstChar <= 0xd6) ||
+        (initialFirstChar >= 0xd8 && initialFirstChar <= 0xf6) ||
+        (initialFirstChar >= 0xf8 && initialFirstChar <= 0x2ff) ||
+        (initialFirstChar >= 0x370 && initialFirstChar <= 0x37d) ||
+        (initialFirstChar >= 0x37f && initialFirstChar <= 0x1fff) ||
+        (initialFirstChar >= 0x200c && initialFirstChar <= 0x200d) ||
+        (initialFirstChar >= 0x2070 && initialFirstChar <= 0x218f) ||
+        (initialFirstChar >= 0x2c00 && initialFirstChar <= 0x2fef) ||
+        (initialFirstChar >= 0x3001 && initialFirstChar <= 0xd7ff) ||
+        (initialFirstChar >= 0xf900 && initialFirstChar <= 0xfdcf) ||
+        (initialFirstChar >= 0xfdf0 && initialFirstChar <= 0xfffd);
     if (str.length === 1) {
         if (initialFirstCharMatch) {
             newStr = str[0];
@@ -237,9 +263,11 @@ export function fixName(str: string): string {
 
     // UTF-16 surrogate characters
     const initialSecondChar = str.charCodeAt(1);
-    const initialSecondCharMatch = (
-        (initialFirstChar >= 0xD800 && initialFirstChar <= 0xDB7F)
-        && (initialSecondChar >= 0xDC00 && initialSecondChar <= 0xDFFF));
+    const initialSecondCharMatch =
+        initialFirstChar >= 0xd800 &&
+        initialFirstChar <= 0xdb7f &&
+        initialSecondChar >= 0xdc00 &&
+        initialSecondChar <= 0xdfff;
     if (initialSecondCharMatch) {
         newStr = str[0] + str[1];
     } else if (initialFirstCharMatch) {
@@ -251,28 +279,29 @@ export function fixName(str: string): string {
     const start = initialSecondCharMatch ? 2 : 1;
     for (let i = start; i < str.length; i++) {
         const firstChar = str.charCodeAt(i);
-        if (firstChar === 0x3A
-            || firstChar === 0x5F
-            || firstChar === 0x2D
-            || firstChar === 0x2E
-            || firstChar === 0xB7
-            || (firstChar >= 0x30 && firstChar <= 0x39)
-            || (firstChar >= 0x41 && firstChar <= 0x5A)
-            || (firstChar >= 0x61 && firstChar <= 0x7A)
-            || (firstChar >= 0xC0 && firstChar <= 0xD6)
-            || (firstChar >= 0xD8 && firstChar <= 0xF6)
-            || (firstChar >= 0XF8 && firstChar <= 0X2FF)
-            || (firstChar >= 0x300 && firstChar <= 0x36F)
-            || (firstChar >= 0x370 && firstChar <= 0x37D)
-            || (firstChar >= 0x37F && firstChar <= 0X1FFF)
-            || (firstChar >= 0x200C && firstChar <= 0x200D)
-            || (firstChar >= 0x203F && firstChar <= 0x2040)
-            || (firstChar >= 0x2070 && firstChar <= 0x218F)
-            || (firstChar >= 0x2C00 && firstChar <= 0x2FEF)
-            || (firstChar >= 0x3001 && firstChar <= 0xD7FF)
-            || (firstChar >= 0xF900 && firstChar <= 0xFDCF)
-            || (firstChar >= 0xFDF0 && firstChar <= 0xFFFD))
-        {
+        if (
+            firstChar === 0x3a ||
+            firstChar === 0x5f ||
+            firstChar === 0x2d ||
+            firstChar === 0x2e ||
+            firstChar === 0xb7 ||
+            (firstChar >= 0x30 && firstChar <= 0x39) ||
+            (firstChar >= 0x41 && firstChar <= 0x5a) ||
+            (firstChar >= 0x61 && firstChar <= 0x7a) ||
+            (firstChar >= 0xc0 && firstChar <= 0xd6) ||
+            (firstChar >= 0xd8 && firstChar <= 0xf6) ||
+            (firstChar >= 0xf8 && firstChar <= 0x2ff) ||
+            (firstChar >= 0x300 && firstChar <= 0x36f) ||
+            (firstChar >= 0x370 && firstChar <= 0x37d) ||
+            (firstChar >= 0x37f && firstChar <= 0x1fff) ||
+            (firstChar >= 0x200c && firstChar <= 0x200d) ||
+            (firstChar >= 0x203f && firstChar <= 0x2040) ||
+            (firstChar >= 0x2070 && firstChar <= 0x218f) ||
+            (firstChar >= 0x2c00 && firstChar <= 0x2fef) ||
+            (firstChar >= 0x3001 && firstChar <= 0xd7ff) ||
+            (firstChar >= 0xf900 && firstChar <= 0xfdcf) ||
+            (firstChar >= 0xfdf0 && firstChar <= 0xfffd)
+        ) {
             newStr += str[i];
             continue;
         }
@@ -284,9 +313,12 @@ export function fixName(str: string): string {
 
         // UTF-16 surrogate characters
         const secondChar = str.charCodeAt(i + 1);
-        if ((firstChar >= 0xD800 && firstChar <= 0xDB7F)
-            && (secondChar >= 0xDC00 && secondChar <= 0xDFFF))
-        {
+        if (
+            firstChar >= 0xd800 &&
+            firstChar <= 0xdb7f &&
+            secondChar >= 0xdc00 &&
+            secondChar <= 0xdfff
+        ) {
             newStr += str[i] + str[i + 1];
             i++;
             continue;

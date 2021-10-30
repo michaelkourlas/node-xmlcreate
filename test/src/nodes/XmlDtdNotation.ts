@@ -21,14 +21,14 @@ describe("XmlDtdNotation", () => {
     describe("#charData", () => {
         it("get", () => {
             const node = new XmlDtdNotation(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             assert.strictEqual(node.charData, "abc");
         });
 
         it("set", () => {
             const node = new XmlDtdNotation(undefined, true, {
-                charData: "abc"
+                charData: "abc",
             });
             node.charData = "def";
             assert.strictEqual(node.charData, "def");
@@ -36,32 +36,37 @@ describe("XmlDtdNotation", () => {
     });
 
     describe("#toString", () => {
-        it("normal character data",
-           () => {
-               assert.strictEqual(
-                   new XmlDtdNotation(undefined, true, {
-                       charData: "abc"
-                   }).toString(),
-                   "<!NOTATION abc>");
-           });
+        it("normal character data", () => {
+            assert.strictEqual(
+                new XmlDtdNotation(undefined, true, {
+                    charData: "abc",
+                }).toString(),
+                "<!NOTATION abc>"
+            );
+        });
 
         it("character data with characters not allowed in XML", () => {
             assert.throws(
-                () => new XmlDtdNotation(undefined, true, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlDtdNotation(undefined, true, {
+                        charData: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlDtdNotation(undefined, false, {
-                    charData: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlDtdNotation(undefined, false, {
+                        charData: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
         });
     });
 
     it("#up", () => {
         assert.strictEqual(
             new XmlDtdNotation(undefined, false, {
-                charData: "a"
+                charData: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });

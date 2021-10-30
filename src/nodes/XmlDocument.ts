@@ -33,7 +33,8 @@ export interface IXmlDocumentOptions {
     validation?: boolean;
 }
 
-type Child = XmlComment<XmlDocument>
+type Child =
+    | XmlComment<XmlDocument>
     | XmlDecl<XmlDocument>
     | XmlDtd<XmlDocument>
     | XmlElement<XmlDocument>
@@ -79,8 +80,8 @@ export default class XmlDocument {
     constructor(options: IXmlDocumentOptions) {
         this._children = [];
         this._validation = !isUndefined(options.validation)
-                           ? options.validation
-                           : true;
+            ? options.validation
+            : true;
     }
 
     /**
@@ -97,8 +98,9 @@ export default class XmlDocument {
      */
     public decl(options: IXmlDeclOptions = {}) {
         if (this._validation && this._children.length !== 0) {
-            throw new Error("in XML document: declaration must be the first"
-                            + " child");
+            throw new Error(
+                "in XML document: declaration must be the first" + " child"
+            );
         }
 
         const declaration = new XmlDecl(this, this._validation, options);
@@ -115,8 +117,9 @@ export default class XmlDocument {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 0) {
-            throw new Error("in XML document: DTD must precede the root"
-                            + " element");
+            throw new Error(
+                "in XML document: DTD must precede the root" + " element"
+            );
         }
 
         const dtd = new XmlDtd(this, this._validation, options);
@@ -132,8 +135,9 @@ export default class XmlDocument {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 0) {
-            throw new Error("in XML document: only one root element is"
-                            + " permitted");
+            throw new Error(
+                "in XML document: only one root element is" + " permitted"
+            );
         }
 
         const element = new XmlElement(this, this._validation, options);
@@ -160,18 +164,21 @@ export default class XmlDocument {
             return value instanceof XmlElement;
         });
         if (this._validation && filteredChildren.length !== 1) {
-            throw new Error("in XML document: no more than one root element"
-                            + " is permitted");
+            throw new Error(
+                "in XML document: no more than one root element" +
+                    " is permitted"
+            );
         }
 
         const optionsObj = new StringOptions(options);
 
         let str = "";
         for (const node of this._children) {
-            if (node instanceof XmlDecl
-                || node instanceof XmlDtd
-                || node instanceof XmlElement)
-            {
+            if (
+                node instanceof XmlDecl ||
+                node instanceof XmlDtd ||
+                node instanceof XmlElement
+            ) {
                 str += node.toString(options);
             } else {
                 str += node.toString();

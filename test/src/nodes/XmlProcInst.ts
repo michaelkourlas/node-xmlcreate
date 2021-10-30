@@ -22,7 +22,7 @@ describe("XmlProcInst", () => {
         it("get", () => {
             const node = new XmlProcInst(undefined, true, {
                 content: "abc",
-                target: "xyz"
+                target: "xyz",
             });
             assert.strictEqual(node.content, "abc");
         });
@@ -30,7 +30,7 @@ describe("XmlProcInst", () => {
         it("set", () => {
             const node = new XmlProcInst(undefined, true, {
                 content: "abc",
-                target: "xyz"
+                target: "xyz",
             });
             node.content = "def";
             assert.strictEqual(node.content, "def");
@@ -54,113 +54,149 @@ describe("XmlProcInst", () => {
         it("normal target; no content", () => {
             assert.strictEqual(
                 new XmlProcInst(undefined, true, {
-                    target: "abc"
+                    target: "abc",
                 }).toString(),
-                "<?abc?>");
+                "<?abc?>"
+            );
 
             assert.strictEqual(
                 new XmlProcInst(undefined, true, {
-                    target: "xmxlxmmlmxlxmx"
+                    target: "xmxlxmmlmxlxmx",
                 }).toString(),
-                "<?xmxlxmmlmxlxmx?>");
+                "<?xmxlxmmlmxlxmx?>"
+            );
         });
 
         it("normal target; normal content", () => {
             assert.strictEqual(
                 new XmlProcInst(undefined, true, {
                     content: "def",
-                    target: "abc"
+                    target: "abc",
                 }).toString(),
-                "<?abc def?>");
+                "<?abc def?>"
+            );
 
             assert.strictEqual(
                 new XmlProcInst(undefined, true, {
                     content: "?a?b??c>>?",
-                    target: "abc"
+                    target: "abc",
                 }).toString(),
-                "<?abc ?a?b??c>>??>");
+                "<?abc ?a?b??c>>??>"
+            );
         });
 
         it("target with characters not allowed in XML; no content", () => {
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    target: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        target: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    target: "abc" + String.fromCharCode(0x0001) + "def"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        target: "abc" + String.fromCharCode(0x0001) + "def",
+                    })
+            );
         });
 
         it("target 'xml'; no content", () => {
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    target: "xml"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        target: "xml",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    target: "xml"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        target: "xml",
+                    })
+            );
         });
 
-        it("normal target; content with characters not allowed in"
-           + " XML", () => {
-            assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    content: "abc" + String.fromCharCode(0x0001) + "def",
-                    target: "abc"
-                }));
-            assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    content: "abc" + String.fromCharCode(0x0001) + "def",
-                    target: "abc"
-                }));
-        });
+        it(
+            "normal target; content with characters not allowed in" + " XML",
+            () => {
+                assert.throws(
+                    () =>
+                        new XmlProcInst(undefined, true, {
+                            content:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            target: "abc",
+                        })
+                );
+                assert.doesNotThrow(
+                    () =>
+                        new XmlProcInst(undefined, false, {
+                            content:
+                                "abc" + String.fromCharCode(0x0001) + "def",
+                            target: "abc",
+                        })
+                );
+            }
+        );
 
         it("normal target; content containing the string '?>'", () => {
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    content: "?>",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        content: "?>",
+                        target: "abc",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    content: "?>",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        content: "?>",
+                        target: "abc",
+                    })
+            );
 
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    content: "abc?>123",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        content: "abc?>123",
+                        target: "abc",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    content: "abc?>123",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        content: "abc?>123",
+                        target: "abc",
+                    })
+            );
 
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    content: "?>abc123",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        content: "?>abc123",
+                        target: "abc",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    content: "?>abc123",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        content: "?>abc123",
+                        target: "abc",
+                    })
+            );
 
             assert.throws(
-                () => new XmlProcInst(undefined, true, {
-                    content: "abc123?>",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, true, {
+                        content: "abc123?>",
+                        target: "abc",
+                    })
+            );
             assert.doesNotThrow(
-                () => new XmlProcInst(undefined, false, {
-                    content: "abc123?>",
-                    target: "abc"
-                }));
+                () =>
+                    new XmlProcInst(undefined, false, {
+                        content: "abc123?>",
+                        target: "abc",
+                    })
+            );
         });
     });
 
@@ -168,8 +204,9 @@ describe("XmlProcInst", () => {
         assert.strictEqual(
             new XmlProcInst(undefined, false, {
                 content: "a",
-                target: "a"
+                target: "a",
             }).up(),
-            undefined);
+            undefined
+        );
     });
 });
