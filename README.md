@@ -44,7 +44,7 @@ source maps.
 
 ## Usage ##
 
-The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.3/).
+The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.4/).
 
 You can also build the documentation using npm:
 
