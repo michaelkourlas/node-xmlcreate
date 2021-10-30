@@ -1,27 +1,18 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "es5",
-      "es2015.symbol"
-    ],
-    "module": "commonjs",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "lib",
-    "strict": true,
-    "target": "es5",
-    "types": []
-  },
-  "exclude": [
-    "docs",
-    "examples",
-    "lib",
-    "node_modules",
-    "test"
-  ]
+    "compilerOptions": {
+        "declaration": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["es5", "es2015.symbol"],
+        "module": "commonjs",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": "lib",
+        "strict": true,
+        "target": "es5",
+        "types": []
+    },
+    "exclude": ["docs", "examples", "lib", "node_modules", "test"]
 }
