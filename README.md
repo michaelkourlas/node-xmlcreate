@@ -1,13 +1,13 @@
-# xmlcreate #
+# xmlcreate
 
 [![Node.js CI](https://github.com/michaelkourlas/node-xmlcreate/actions/workflows/node.js.yml/badge.svg)](https://github.com/michaelkourlas/node-xmlcreate/actions/workflows/node.js.yml)
 [![npm version](https://badge.fury.io/js/xmlcreate.svg)](https://badge.fury.io/js/xmlcreate)
 
-## Overview ##
+## Overview
 
 xmlcreate is a Node.js module that can be used to build XML using a simple API.
 
-## Features ##
+## Features
 
 xmlcreate allows you to use a series of chained function calls to build an XML
 tree.
@@ -18,7 +18,7 @@ text is customizable.
 xmlcreate can perform some basic validation to check that the resulting XML
 is well-formed.
 
-## Installation ##
+## Installation
 
 The easiest way to install xmlcreate is using npm:
 
@@ -42,7 +42,7 @@ You can build the production variant without running tests using the script
 The only difference between the two is that the development version includes
 source maps.
 
-## Usage ##
+## Usage
 
 The documentation for the current version is available [here](http://www.kourlas.com/node-xmlcreate/docs/2.0.4/).
 
@@ -52,7 +52,7 @@ You can also build the documentation using npm:
 npm run-script docs
 ```
 
-## Examples ##
+## Examples
 
 The following TypeScript example illustrates the basic usage of xmlcreate:
 
@@ -60,6 +60,7 @@ The following TypeScript example illustrates the basic usage of xmlcreate:
 import {document} from "xmlcreate";
 
 const tree = document();
+// prettier-ignore
 tree
     .decl({encoding: "UTF-8"})
         .up()
@@ -123,7 +124,7 @@ This example produces the following XML:
 
 A JavaScript version of this example can be found in the examples directory.
 
-## Tests ##
+## Tests
 
 xmlcreate includes a set of tests to verify core functionality. You can run
 the tests using npm:
@@ -135,7 +136,7 @@ npm run-script test-prod
 The only difference between the `test-prod` and `test-dev` scripts is that the
 development version includes source maps.
 
-## License ##
+## License
 
 xmlcreate is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 Please see the LICENSE file for more information.
