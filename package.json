@@ -33,10 +33,11 @@
         "clean": "rimraf lib",
         "clean-docs": "rimraf docs",
         "clean-test": "rimraf test/lib",
-        "dev": "npm run-script clean && npm run-script lint && tsc -p tsconfig.json --sourceMap",
+        "dev": "npm run-script clean && npm run-script format && npm run-script lint && tsc -p tsconfig.json --sourceMap",
         "docs": "npm run-script clean-docs && typedoc --out docs --excludePrivate src/main.ts",
+        "format": "prettier --write .",
         "lint": "eslint . --ext .ts",
-        "prod": "npm run-script clean && npm run-script lint && tsc -p tsconfig.json",
+        "prod": "npm run-script clean && npm run-script format && npm run-script lint && tsc -p tsconfig.json",
         "test-dev": "npm run-script clean-test && tsc -p test/tsconfig.json --sourceMap && mocha --recursive test/lib",
         "test-prod": "npm run-script clean-test && tsc -p test/tsconfig.json && mocha --recursive test/lib"
     },
@@ -48,6 +49,7 @@
         "chai": "^4.3.4",
         "eslint": "^8.1.0",
         "mocha": "^9.1.3",
+        "prettier": "^2.4.1",
         "rimraf": "^3.0.2",
         "typedoc": "^0.22.7",
         "typescript": "^4.4.4"
